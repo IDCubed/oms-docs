@@ -1,0 +1,9 @@
+*.log
+*.pot
+*.pyc
+*.swp
+*.swo
+build/
+_build/
+dist/
+*egg*
