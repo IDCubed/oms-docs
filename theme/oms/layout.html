@@ -23,8 +23,8 @@
     {%- set css_files = css_files + ['_static/css/main.css'] %}
 
     {%- set script_files =
-    ['//code.jquery.com/jquery-1.10.1.min.js']
-    + ['//fonts.googleapis.com/css?family=Cabin:400,700,400italic']
+    ['https://code.jquery.com/jquery-1.10.1.min.js']
+    + ['https://fonts.googleapis.com/css?family=Cabin:400,700,400italic']
     %}
 
     {#
@@ -70,7 +70,7 @@
             </div>
 
             <div class="brand-logo">
-                <a href="http://wiki.idhypercubed.org" title="OMS Wiki Home"><img src="{{ pathto('_static/img/oms-top-logo.png', 1) }}" alt="OMS/logo"></a>
+                <a href="http://wiki.idhypercubed.org" title="OMS Wiki Home"><img src="{{ pathto('_static/img/logo.png', 1) }}" alt="OMS/logo"></a>
             </div>
         </div>
     </div>
@@ -115,7 +115,7 @@
                 {% block body %}{% endblock %}
             </section>
 
-            <div class="pull-right"><a href="https://github.com/IDCubed/oms-docs/blob/{{ current_version }}/sources/{{ pagename }}.rst" title="edit this article">Edit this article on GitHub</a></div>
+            {#<div class="pull-right"><a href="https://github.com/IDCubed/oms-docs/blob/{{ current_version }}/sources/{{ pagename }}.rst" title="edit this article">Edit this article on GitHub</a></div>#}
         </div>
     </div>
 </div>

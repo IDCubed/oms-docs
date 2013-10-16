@@ -2,8 +2,6 @@
 :description: An overview of the OMS Documentation
 :keywords: OMS, Open Mustard Seed, TCF, concepts, explanation
 
-.. image:: http://isis.idhypercubed.org:9000/_static/img/mustardseed_composite_3.png
-
 .. _overview:
 
 Open Mustard Seed Trusted Compute Framework
