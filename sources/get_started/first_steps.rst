@@ -92,15 +92,15 @@ you plan to hack on a specific OMS component, such as the OMS Portal or Private
 Trusted Compute Cell (Registry), or Virtual Resource Controller, use the direct
 links listed below.
 
-In general, the best place to start is with the :ref:`OMS Virtual Resource
-Controller (VRC) <deploy_vrc>` - this is a generic component that can be used to
-deploy and maintain nearly any host/app from new VMs to additional OMS apps on
-those VMs. The VRC can even be used to deploy an entire :ref:`Trust Network
-<trust_network>`.
+.. In general, the best place to start is with the :ref:`OMS Virtual Resource
+.. Controller (VRC) <deploy_vrc>` - this is a generic component that can be used to
+.. deploy and maintain nearly any host/app from new VMs to additional OMS apps on
+.. those VMs. The VRC can even be used to deploy an entire :ref:`Trust Network
+.. <trust_network>`.
 
-There are different types of Trusted Compute Cell (TCC) for different purposes.
-If you already have a VRC, you could also start with either the :ref:`OMS Portal
-Registry <deploy_portal>`, or :ref:`OMS Private Registry <deploy_private_tcc>`.
+.. There are different types of Trusted Compute Cell (TCC) for different purposes.
+.. If you already have a VRC, you could also start with either the :ref:`OMS Portal
+.. Registry <deploy_portal>`, or :ref:`OMS Private Registry <deploy_private_tcc>`.
 
 
 Customizing OMS-Kickstart
