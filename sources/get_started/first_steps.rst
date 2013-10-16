@@ -52,11 +52,27 @@ behalf, and we are now ready to run the kickstart script.
 Run the Script
 ~~~~~~~~~~~~~~
 
-Run the script with: ``python kickstart-oms.py -H -c example.yaml``
+Given the details of how SSH and long-running processes work, it is best to run
+the kickstart from within an instance of tmux, so first start tmux with:
+``tmux``. A full tmux tutorial is beyond the scope of this document, but here
+are a few helpful details:
 
-Now, go grab a fresh beverage and/or entertain yourself for 10 minutes or so.
-Once complete, the VM ought to be completely setup and ready for either
-additional webapp deployments or for you to start hacking away!
+* If you lose your connection to the VM, you can simply login again and run
+  ``tmux att``.
+* Commands are prefixed with a modifier, ``Ctrl+b`` by default.
+* You can separate from a running instance, to reattach later, with:
+  ``Ctrl+b+d``.
+* Create a new window with ``Ctrl+b+c`` (*create*), and switch between with
+  ``p``, ``n``, and ``l``, for *previous*, *next* and *last*, respectively.
+* Exit tmux by closing all open windows (exit the shell with ``exit``).
+
+
+With tmux open, run the script with: ``python kickstart-oms.py -H -c
+example.yaml``
+
+You are now good to go grab a fresh beverage and/or entertain yourself for 10
+minutes or so. Once complete, the VM ought to be completely setup and ready for
+either additional webapp deployments or for you to start hacking away!
 
 
 What has this just done?
@@ -77,8 +93,14 @@ The kickstart script has:
   details, such as cloning the entire OMS source code to ``/var/oms/src/`` and
   installing both the oms-deploy and oms-admin python pacakge.
 
+.. todo::
+
+    All git repositories have been checked out with the ``qa-develop`` branch,
+    and you may need to update the active revision depending on what you need
+    to do.
+
 At this point, you have *everything* needed to either hack on OMS code, or to
-deploy more OMS.
+deploy additional OMS components.
 
 
 Where to go from here?
@@ -91,6 +113,10 @@ hacking, and you ought to jump over to the :ref:`OMS Tutorials <tutorials>`. If
 you plan to hack on a specific OMS component, such as the OMS Portal or Private
 Trusted Compute Cell (Registry), or Virtual Resource Controller, use the direct
 links listed below.
+
+The :ref:`OMS Private Registry <deploy_private_tcc>` is intended for individual
+use, where as the :ref:`OMS Portal Registry <deploy_portal>` is intended for
+organizations looking to provide Private TCCs to other users.
 
 .. In general, the best place to start is with the :ref:`OMS Virtual Resource
 .. Controller (VRC) <deploy_vrc>` - this is a generic component that can be used to
