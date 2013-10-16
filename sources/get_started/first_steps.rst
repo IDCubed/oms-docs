@@ -103,6 +103,80 @@ At this point, you have *everything* needed to either hack on OMS code, or to
 deploy additional OMS components.
 
 
+Domain and SSL Setup
+--------------------
+
+While the details of these steps may vary slightly depending on your environment
+(eg, running OMS in the cloud versus in a local virtualbox VM), let's take one
+final step before deploying additional OMS components.
+
+If running OMS in the cloud, it is best to setup hosts running OMS with both a
+domain and an SSL certificate, and if running multiple hosts, a wildcard SSL
+certificate in particular.
+
+You will want to update ``/etc/nginx/sites-available/default`` to correct the
+domain (replace ``localhost`` with your domain, eg: ``host.domain.tld``), as
+well as the SSL configuration. Once complete, the vhost config ought to include
+the following, replacing ``HOST.DOMAIN.TLD`` with the value for your domain:
+
+.. code::
+
+   server {
+
+       listen  443 default ssl;
+       listen  80;
+
+       ssl_certificate      /etc/nginx/ssl/DOMAIN.TLD.crt;
+       ssl_certificate_key  /etc/nginx/ssl/DOMAIN.TLD.key;
+
+       ssl_ciphers RC4:HIGH:!aNULL:!MD5;
+       ssl_prefer_server_ciphers on;
+       ssl_session_cache shared:SSL:10m;
+       ssl_session_timeout 10m;
+
+       server_name  HOST.DOMAIN.TLD;
+
+       root /var/www/default/;
+       index  index.html;
+
+       include /etc/nginx/proxy.conf;
+
+       if ($ssl_protocol = "") {
+           rewrite ^ https://$server_name$request_uri? permanent;
+       }
+
+       include /etc/nginx/conf.d/default/*.location;
+
+       #* This will deny access to any hidden file (beginning with a .period)
+       location ~ /\. { deny  all; }
+
+   }
+
+
+Alternatively, if the SSL certificate configuration included above does not
+match the files you have on hand, the following may be simpler for the format
+of the certificates you have:
+
+.. code::
+
+   server {
+
+       ...
+
+       ssl_certificate /etc/ssl/DOMAIN_TLD/chained_ca.crt;
+       ssl_certificate_key /etc/ssl/DOMAIN_TLD/server.pem;
+       ssl_client_certificate /etc/ssl/DOMAIN_TLD/ca.crt;
+
+       ...
+   }
+
+
+After updating, test the changes with ``nginx -t``, and if nginx confirms the
+updates are acceptable, reload the nginx config with ``nginx -s reload``.
+
+You will also need to open the SSL port in the firewall: ``ufw allow 443``.
+
+
 Where to go from here?
 ----------------------
 
