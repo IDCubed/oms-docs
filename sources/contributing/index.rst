@@ -12,3 +12,4 @@ Contributing
 
    contributing
    devenvironment
+   documentation
