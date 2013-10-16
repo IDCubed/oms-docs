@@ -188,9 +188,10 @@ you plan to hack on a specific OMS component, such as the OMS Portal or Private
 Trusted Compute Cell (Registry), or Virtual Resource Controller, use the direct
 links listed below.
 
-The :ref:`OMS Private Registry <deploy_private_tcc>` is intended for individual
-use, where as the :ref:`OMS Portal Registry <deploy_portal>` is intended for
-organizations looking to provide Private TCCs to other users.
+The :ref:`OMS Private Trusted Compute Cell (TCC) <deploy_private_tcc>` is
+intended for individual use, where as the :ref:`OMS Portal Registry
+<deploy_portal>` is intended for organizations looking to provide Private TCCs
+to other users.
 
 .. In general, the best place to start is with the :ref:`OMS Virtual Resource
 .. Controller (VRC) <deploy_vrc>` - this is a generic component that can be used to
