@@ -8,6 +8,7 @@
     <meta name="keywords" content="{{ meta['keywords'] if meta }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
     {%- set url_root = pathto('', 1) %}
     {%- if url_root == '#' %}{% set url_root = '' %}{% endif %}
 
@@ -51,6 +52,8 @@
     <link rel="shortcut icon" href="{{ pathto('_static/favicon.png', 1) }}"/>
     {%- block extrahead %}{% endblock %}
 
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -76,17 +79,19 @@
     </div>
 </div>
 
+<div class="titlebar">
 <div class="container">
     <div class="row">
-        <div class="span12 titlebar">
-            <div class="pull-right" id="fork-us" style="margin-top: 16px; margin-right: 16px;">
-                <a  href="https://github.com/IDCubed/oms-docs/blob/master/docs/sources/{{ pagename }}.rst"><img src="{{ pathto('_static/img/fork-us.png', 1) }}"> Edit this page on Github</a>
+        <div class="span12">
+            <div class="pull-right" id="fork-us">
+                <a  href="https://github.com/IDCubed/oms-docs/blob/master/docs/sources/{{ pagename }}.rst"><i class="icon-code-fork icon-large"></i>&nbsp; Edit this page on Github</a>
             </div>
             <h1 class="pageheader">
                 documentation
             </h1>
         </div>
     </div>
+</div>
 </div>
 <div class="container">
 
@@ -124,11 +129,9 @@
 </div> <!-- end wrap for pushing footer -->
 
 <div id="footer">
-    <div class="footer-landscape">
-        <div class="footer-landscape-image">
             <!-- footer -->
             <div class="container">
-                <div class="row footer">
+                <div class="row">
                     <div class="span12 tbox">
                         <div class="tbox">
                             <p>Open Mustard Seed is an open source project, sponsored by  <a href="http://www.idcubed.org">IDCubed</a>, under the <a href="https://github.com/IDCubed/oms-core/blob/master/LICENSE" title="ID3 licence, hosted in the Github repository">ID3 MIT license</a></p>
@@ -156,9 +159,9 @@
                     </div>
                 </div>
             </div>
-        </div>
+
         <!-- end of footer -->
-    </div>
+
 </div>
 
 
