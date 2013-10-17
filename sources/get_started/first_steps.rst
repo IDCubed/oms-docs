@@ -59,10 +59,10 @@ are a few helpful details:
 
 * If you lose your connection to the VM, you can simply login again and run
   ``tmux att``.
-* Commands are prefixed with a modifier, ``Ctrl+b`` by default.
+* Commands are prefixed with a modifier, ``Ctrl-b`` by default.
 * You can separate from a running instance, to reattach later, with:
-  ``Ctrl+b+d``.
-* Create a new window with ``Ctrl+b+c`` (*create*), and switch between with
+  ``Ctrl-b,d``.
+* Create a new window with ``Ctrl-b,c`` (*create*), and switch between with
   ``p``, ``n``, and ``l``, for *previous*, *next* and *last*, respectively.
 * Exit tmux by closing all open windows (exit the shell with ``exit``).
 
