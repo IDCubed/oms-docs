@@ -13,8 +13,9 @@ What to do? where to go?
    :maxdepth: 1
 
    Initial Deployment <first_steps>
-   Virtual Resource Controller <vrc>
-   Trust Network <trust_network>
-   Trusted Compute Cells <tcc>
    Portal Registry <portal>
    Private TCC <private_tcc>
+
+.. Virtual Resource Controller <vrc>
+   Trust Network <trust_network>
+   Trusted Compute Cells <tcc>
