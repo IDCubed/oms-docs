@@ -178,6 +178,17 @@ And a python block may look like:
        print('hello world')
   ```
 
+### Tables
+
+Tables require some-what specific formatting, but are very easy to write. There
+are two styles, [detailed in this overview](http://sphinx-doc.org/rest.html#tables).
+
+The file ``sources/tutorials/gps_demo.rst`` has a good example of a large table
+that is both readable and easy to maintain.
+
+The primary requirements are that the directive lines (the ===) match up with
+the widths of text in each column.
+
 
 ## Editing THIS readme.md
 
