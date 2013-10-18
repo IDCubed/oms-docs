@@ -31,7 +31,7 @@ files if you view them in their *raw* state, which you can do through the github
 UI (using button in the top right of the page).
 
 .. _the kickstart script: https://github.com/IDCubed/oms-kickstart/blob/qa-develop/kickstart-oms.py
-.. _the external config: https://github.com/IDCubed/oms-kickstart/blob/qa-develop/example.yaml
+.. _the external config: https://github.com/IDCubed/oms-kickstart/blob/master/release.yaml
 
 Create an SSH Key
 ~~~~~~~~~~~~~~~~~
