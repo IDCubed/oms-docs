@@ -177,6 +177,20 @@ updates are acceptable, reload the nginx config with ``nginx -s reload``.
 You will also need to open the SSL port in the firewall: ``ufw allow 443``.
 
 
+.. note::
+
+   Some SSL configuration may require that you concatenate the CA and host
+   certificates. EG, you may need run run cat similar to:
+
+     cat /path/to/ca.crt >> /etc/nginx/ssl/HOST.DOMAIN.TLD.crt
+
+
+.. note::
+
+   TABs deployed via an OMS manifest should have ``enable_ssl: True`` when using
+   SSL on an OMS host.
+
+
 Where to go from here?
 ----------------------
 
