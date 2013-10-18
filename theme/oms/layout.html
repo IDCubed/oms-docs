@@ -26,6 +26,7 @@
     {%- set script_files =
     ['https://code.jquery.com/jquery-1.10.1.min.js']
     + ['https://fonts.googleapis.com/css?family=Cabin:400,700,400italic']
+    + ['_static/js/bootstrap.min.js']
     %}
 
     {#
@@ -59,22 +60,33 @@
 <body>
 
 <div id="wrap">
-<div class="navbar navbar-fixed-top ">
+<div class="navbar navbar-fixed-top">
     <div class="navbar-oms">
         <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
 
-            <div style="float: right" class="pull-right">
-                <ul class="nav">
+
+                <a class="brand" href="http://wiki.idhypercubed.org" title="OMS Wiki Home">
+                    <img src="{{ pathto('_static/img/logo.png', 1) }}" alt="OMS/logo">
+                </a>
+
+
+            <div class="nav-collapse collapse">
+
+                <ul class="nav pull-right">
                     <li id="nav-introduction"><a href="http://wiki.idhypercubed.org/" title="OMS Wiki Home">Home</a></li>
                     <li id="nav-documentation" class="active"><a href="http://docs.openmustardseed.org/en/latest/">Documentation</a></li>
                     <li id="nav-about-id3"><a href="http://www.idcubed.org/about/vision-mission/" title="IDCubed">About ID3</a></li>
                     <li id="nav-blog"><a href="http://www.idcubed.org/" title="IDCubed Blog">ID3 Blog</a></li>
                 </ul>
+
             </div>
 
-            <div class="brand-logo">
-                <a href="http://wiki.idhypercubed.org" title="OMS Wiki Home"><img src="{{ pathto('_static/img/logo.png', 1) }}" alt="OMS/logo"></a>
-            </div>
+
         </div>
     </div>
 </div>
@@ -87,7 +99,7 @@
                 <a  href="https://github.com/IDCubed/oms-docs/blob/master/docs/sources/{{ pagename }}.rst"><i class="icon-code-fork icon-large"></i>&nbsp; Edit this page on Github</a>
             </div>
             <h1 class="pageheader">
-                documentation
+                OMS Documentation
             </h1>
         </div>
     </div>
@@ -97,18 +109,18 @@
 
     <!-- Docs nav
      ================================================== -->
-    <div class="row main-row">
+    <div class="row">
 
-        <div class="span3 sidebar bs-docs-sidebar">
-           <!-- <div class="page-title" >
-                <h4>DOCUMENTATION</h4>
-            </div>-->
-            
+        <div class="span3">
+            <div class="sidebar bs-docs-sidebar">
+
+
             {{ toctree(collapse=False, maxdepth=3) }}
 	    <form>
-	      <input type="text" id="st-search-input" class="st-search-input span3" style="width:160px;" />
+	      <input type="text" id="st-search-input" class="st-search-input"/>
           <div id="st-results-container"></div>
 	    </form>
+        </div>
         </div>
 
         <!-- body block -->
@@ -137,7 +149,7 @@
                             <p>Open Mustard Seed is an open source project, sponsored by  <a href="http://www.idcubed.org">IDCubed</a>, under the <a href="https://github.com/IDCubed/oms-core/blob/master/LICENSE" title="ID3 licence, hosted in the Github repository">ID3 MIT license</a></p>
                         </div>
 
-                        <div class="tbox version-flyer ">
+                        <div class="tbox version-flyer hidden-phone">
                             <div class="content">
                                 <small>Current version:</small>
                                 <ul class="inline">
