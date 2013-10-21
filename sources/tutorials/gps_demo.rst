@@ -1,5 +1,5 @@
 :title: GPS Demo Tutorial
-:description: How to use and hack on the GPS Demo App
+:description: How to use and hack on the GPS Demo app
 :keywords: gps demo, examples, tutorials, oms app, django,
 
 
@@ -11,59 +11,64 @@ GPS Demo Tutorial
 The GPS Proximity Service uses an Android application called Funf Journal to
 collect GPS data from a user's phone. It utilizes a computational sandbox to
 compare the real-time GPS data with a preset value, reporting whether or not the
-user is within a prespecified distance from the preset GPS value.
+user is within a pre-specified distance from the preset GPS value.
+
 
 Deploy GPS Demo
 ---------------
 
 .. include:: tutorial_setup.inc
 
-The manifests for the GPSDemo can be found in the oms-core module repository,
+The manifests for the GPS Demo can be found in the oms-core module repository,
 included in ``/var/oms/src/oms-core/manifests``. There is a manifest for the
-backend and separate manifest for the UI, ``GPSDemo.yaml`` and
-``GPSDemoUI.yaml``, respectively.
+backend (``GPSDemo.yaml``) and a separate manifest for the UI
+(``GPSDemoUI.yaml``).
 
 
 Edit the manifest
 ~~~~~~~~~~~~~~~~~
 
-Update ACCESS_TOKEN with the access token created at the OpenID Connect server.
+Update ``ACCESS_TOKEN`` with the access token created at the OpenID Connect
+server.
 
 .. note:: we need something that describes how to retrieve this token from OIDC
 
-The URL endpoints that appear in the manifest must be updated to referece the
-correct host. For example, each app in the GPS TAB contains a django setting,
-``TOKENSCOPE_ENDPOINT``, embedded in the manifest. This setting is used to
+The URL endpoints that appear in the manifest must be updated to reference the
+correct host. For example, each app in the GPS Demo TAB contains a setting,
+``TOKENSCOPE_ENDPOINT``, embedded in the manifest. This endpoint is used to
 validate access tokens at the OpenID Connect server.
 
-There are other URLs/endpoints, update each of the following with correct base
-URL based on how your OMS host was deployed (either with/without SSL and DNS).
+There are other URLs/endpoints that you should update with the correct base URL
+based on how your OMS host was deployed (either with/without SSL and DNS):
 
 ============================   =================================================
 Setting Key                    Description
 ============================   =================================================
 **PDS**
-``LOCATION_ENDPOINT``          location endpoint on the PDS, used for self-testing.
-**Resource**
-``PDS_SERVER_URL``             URL of the PDS server.
-``LOCATION_ENDPOINT``          location endpoint on the Resource Server, used
-                               for self-testing.
+``LOCATION_ENDPOINT``          location endpoint on the PDS, used for
+                               self-testing.
 **Connector**
-``LOCATION_ENDPOINT``          location endpoint on the Resource Server.
+``LOCATION_ENDPOINT``          location endpoint on the PDS.
 ``CONFIG_ENDPOINT``            endpoint containing the Funf Journal
                                configuration.
 ``UPLOAD_ENDPOINT``            endpoint for uploading SQLite databases with
-                               location data, used by Funf Journal
+                               location data.
+``FUNF_CONFIG_ENDPOINT``       endpoint containing the Funf Journal
+                               configuration (used by Funf Journal). Forward
+                               slashes should be escaped with `\\`.
+``FUNF_UPLOAD_ENDPOINT``       endpoint for uploading SQLite databases with
+                               location data (used by Funf Journal). Forward
+                               slashes should be escaped with `\\`.
 **Proximity**
-``LOCATION_ENDPOINT``          location endpoint on the Resource Server.
-``PROXIMITY_ENDPOINT``         endpoint to determine proximity by comparing the
-                               current location to the reference location.
+``LOCATION_ENDPOINT``          location endpoint on the PDS.
 ``CLIENT_LOCATION_ENDPOINT``   endpoint containing the reference location for
                                determining proximity.
+``PROXIMITY_ENDPOINT``         endpoint to determine proximity by comparing the
+                               current location to the reference location.
 **Test**
 ``CONFIG_ENDPOINT``            endpoint containing the Funf Journal
                                configuration.
-``PDS_LOCATION_ENDPOINT``      location endpoint on the PDS.
+``LOCATION_ENDPOINT``          location endpoint on the PDS.
 ``CLIENT_LOCATION_ENDPOINT``   endpoint containing the reference location for
                                determining proximity.
 ``PROXIMITY_ENDPOINT``         endpoint to determine proximity by comparing the
@@ -84,9 +89,9 @@ Open the manifests for editing:
 Deploy!
 ~~~~~~~
 
-When ready, deploy the GPS Demo TAB with the oms command line utility. First the
-GPS Backend - this would include the PDS, the Funf Android Connector, a
-Proximity app, and a Test Suite:
+When ready, deploy the GPS Demo TAB with the ``oms`` command line utility.
+Start with the GPS backend, which includes the PDS, the Funf Journal Connector,
+the Proximity app, and a test suite:
 
 .. code:: bash
 
@@ -95,7 +100,7 @@ Proximity app, and a Test Suite:
    No hosts found. Please specify (single) host string for connection: localhost
 
 
-Now deploy the UI, this ought to be a lot faster:
+Now deploy the UI (this ought to be a lot faster than the backend deployment):
 
 .. code:: bash
 
@@ -104,18 +109,17 @@ Now deploy the UI, this ought to be a lot faster:
    No hosts found. Please specify (single) host string for connection: localhost
 
 
-Once deployed, you ought to be able to view the GPS Demo WebUI with your browser
-pointed at https://HOST.DOMAIN.TLD/GPSUI/ - and update accordingly if using SSL
-and/or DNS.
+Once deployed, you ought to be able to view the GPS Demo Web UI with your
+browser pointed at https://HOST.DOMAIN.TLD/GPSUI/ (update accordingly if using
+SSL and/or DNS).
 
-You will have just deployed 5 apps as part of the GPSDemo TAB! The GPSDemo
+You will have just deployed 4 apps as part of the GPS Demo TAB! The GPS Demo
 application should now be operational on the server side. It only needs to be
 connected to an Android device running Funf Journal.
 
 
-Linking to the Funf Journal Android Application
+Linking to the Funf Journal Android application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 
 Perform the following steps:
 
@@ -125,62 +129,61 @@ Perform the following steps:
 * Click the phone's menu button and select ``Link to Server``.
 * Click the checkbox to delegate control to a server.
 * Fill in the ``Configuration URL`` box with the URL of the Funf Journal
-  Connector's configuration endpoint. With SSL and DNS setup:
+  Connector's configuration endpoint. With SSL and DNS set up:
   https://HOST.DOMAIN.TLD/Connector/c/.
 * Press ``Save``.
 
 .. _Funf Journal: https://play.google.com/store/apps/details?id=edu.mit.media.funf.journal
 
 
-Setting the Reference Point
+Setting the reference point
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Now you just need add a reference point to compare your location to. Create a
-file named reference.json with the latitude and longitude of the reference
-location, along with latitude/longitude ranges from that location. For example:
+Now you just need to add a reference point to compare your location to. Create
+a file named ``reference.json`` with the latitude and longitude of the
+reference location, along with the allowed distance (in km) from that location.
+For example:
 
 .. code:: json
 
    {
     "latitude": 42.40483967,
     "longitude": -71.12860532,
-    "latitude_range": 1.0,
-    "longitude_range": 1.0
+    "radius": 10.0
    }
 
 
-Finally, POST it to the Proximity sandbox, update the URL accordingly:
+Finally, POST it to the Proximity app, updating the URL accordingly:
 
 .. code:: bash
 
    curl -i -H "Authorization: Bearer INSERT_TOKEN_HERE" -X POST --data @reference.json -H "Content-Type: application/json" https://HOST.DOMAIN.TLD/Proximity/api/v1/clientlocation/
 
 
-Verifying the GPSDemo installation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Verifying the GPS Demo installation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To verify the installation of GPSDemo, you can check a few of the endpoints.
+To verify the installation of GPS Demo, you can check a few of the endpoints.
 
 First, make sure that your reference location was stored correctly:
 
 .. code:: bash
 
-   curl -i -H "Authorization: Bearer INSERT_TOKEN_HERE" https://HOSTNAME/Proximity/api/v1/clientlocation/
+   curl -i -H "Authorization: Bearer INSERT_TOKEN_HERE" https://HOST.DOMAIN.TLD/Proximity/api/v1/clientlocation/
 
 
-You should see a JSON-formatted response with information in reference.json that
-you POSTed above.
+You should see a JSON-formatted response with the same information as in
+``reference.json`` above.
 
 Next, make sure that Funf Journal is uploading your data correctly:
 
 .. code:: bash
 
-   curl -i -H "Authorization: Bearer INSERT_TOKEN_HERE" https://HOSTNAME/Resource/api/v1/location/
-   curl -i -H "Authorization: Bearer INSERT_TOKEN_HERE" https://HOSTNAME/PDS/api/v1/location/
+   curl -i -H "Authorization: Bearer INSERT_TOKEN_HERE" https://HOST.DOMAIN.TLD/PDS/api/v1/location/
 
 
 For each of these commands, you should see a JSON-formatted response with one or
-more "objects" corresponding to your location at a given point in time.
+more "objects" corresponding to your location at a point in time.
 
 
 Checking proximity
@@ -191,7 +194,7 @@ within the radius from the reference location:
 
 .. code:: bash
 
-   curl -i -H "Authorization: Bearer INSERT_TOKEN_HERE" https://HOSTNAME/Proximity/proximity/
+   curl -i -H "Authorization: Bearer INSERT_TOKEN_HERE" https://HOST.DOMAIN.TLD/Proximity/proximity/
 
 
 The response body should look like this if you're close to the reference point:
@@ -201,14 +204,11 @@ The response body should look like this if you're close to the reference point:
    {"are_proximate": true}
 
 
-..or if you aren't:
+... or if you aren't:
 
 .. code:: json
 
    {"are_proximate": false}
-
-
-.. note:: is this really the end? not another step?
 
 
 Using the UI
