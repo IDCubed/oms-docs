@@ -43,17 +43,36 @@ Alternatively, for small changes and typo's you might want to use GitHub's built
 in file editor. It allows you to preview your changes right online. Please be
 careful to avoid creating many commits when working with the Github editor, we
 may ask you to squash your commits (or do it for you) before merging your
-updates.
+updates to qa-develop.
 
 
-### Additional Notes
+### Documentation Conventions
 
-* Please wrap all lines at 80 characters, except where a long URL overflows
-* Please remove additional whitespace, at end of lines, tabs in empty lines, etc
+Please make note of the following conventions maintained throughout oms-docs:
+
+* Wrap all lines at 80 characters, except where a long URL overflows
+* Remove additional whitespace, at end of lines, tabs in empty lines, etc. With
+  vim this is as easy as running the command: ``:%s/ $//``. Git will also flag
+  lines ending with white space as RED within a diff, and can even be configured
+  to ignore white space when making commits.
+* Convert tabs to spaces, it keeps everyone on the same page.
+* Leave two empty lines between ending a section and starting a new one, as well
+  as before starting a code block, and leave one empty line below a heading.
 * Keep each commit focused on one type of contextual update, and linked to a
   ticket, just like with our source code.
 * Follow existing/established conventions as much as possible, consistency makes
   it easy for others to get involved.
+* Please refer to the section on ReST formatting and Sphinx directives included
+  below.
+* If you have many link references that originate from the same base URL, such
+  as many sections from the same RFC document, use the ``extlinks`` sphinx
+  extension.
+
+Note that the majority of the existing conventions carry over from our existing
+source code and established documentation practices within various open source
+communities. Additionally, many text editors will assist in wrapping at 80
+characters, provide syntax highlighting, and ensuring tabs don't sneak in to
+replace spaces.
 
 
 ## Using Sphinx and ReST
@@ -105,9 +124,9 @@ leave ``sources/new_section/index.rst`` with just a ``toctree`` directive like:
 See also [this bit about document and section titles and headers](http://docutils.sourceforge.net/docs/user/rst/quickstart.html#id21)
 
 
-### Creating Links
+### Creating Links (Internal)
 
-To make links to specific places within the documentation, first create a link
+To make links to specific places _within_ the documentation, first create a link
 target:
 
   ```
@@ -127,6 +146,18 @@ the documentation with:
     Start with an :ref:`Introduction to OMS <introduction>` ...
   ```
 
+
+### Creating Links (External)
+
+To make _external_ links:
+
+  ```
+  Some would say that `ZeroMQ Rocks!`_
+
+  .. _ZeroMQ Rocks!: http://zeromq.org
+  ```
+
+
 ### Embedding Images
 
 If embedding an image ``Trust_Framework_Features.png`` into a page within the
@@ -136,26 +167,42 @@ If embedding an image ``Trust_Framework_Features.png`` into a page within the
 Then, reference the image in your .rst document with:
 
   ```
-   .. image:: images/Trust_Framework_Features.png
-      :alt: Trusted Compute Framework Features
-      :align: center
+  .. image:: images/Trust_Framework_Features.png
+     :alt: Trusted Compute Framework Features
+     :align: center
   ```
 
 Note that only the ``.. image: path/to/image.png`` is required, the other
 parameters to the image directive are optional.
 
 
-### Notes, warnings, etc..
+### Notes, warnings, todo, etc..
+
+Take note of how to format the text here with spacing above/below and
+indentation:
 
   ```
-    # a note (use when something is important)
-    .. note::
+  # a note (use when something is important)
+  .. note::
 
-    # a warning (orange)
-    .. warning::
+     Include helpful notes to highlight important points the reader may
+     overlook while going through the docs.
 
-    # danger (red, use sparsely)
-    .. danger::
+
+  # a warning (orange)
+  .. warning::
+
+     This will be deprecated in the next release.
+
+
+  # danger (red, use sparsely)
+  .. danger::
+
+
+  # these will not show up in the rendered doc unless configured to do so
+  .. todo::
+
+     We need to fix these things.
   ```
 
 
@@ -164,19 +211,25 @@ parameters to the image directive are optional.
 Include code examples with:
 
   ```
-    .. code-block:: bash
+  .. code-block:: bash
 
-       # here is my example
-       ls -alh /
+     # here is my example
+     ls -alh /
   ```
+
 
 And a python block may look like:
 
   ```
-    .. code-block:: python
+  .. code-block:: python
 
-       print('hello world')
+     print('hello world')
   ```
+
+
+Code examples ought to have two spaces between the code example and the sections
+above and below it.
+
 
 ### Tables
 
