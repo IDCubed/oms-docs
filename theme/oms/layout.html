@@ -96,7 +96,8 @@
     <div class="row">
         <div class="span12">
             <div class="pull-right" id="fork-us">
-                <a  href="https://github.com/IDCubed/oms-docs/blob/master/docs/sources/{{ pagename }}.rst"><i class="icon-code-fork icon-large"></i>&nbsp; Edit this page on Github</a>
+                {# current_version needs to be looked up, and we need to determine if it is possible to create a new branch as part of editing the file - commment out for now #}
+                <!-- <a href="https://github.com/IDCubed/oms-docs/blob/{{ current_version }}/sources/{{ pagename }}.rst"><i class="icon-code-fork icon-large"></i>&nbsp; Edit this page on Github</a> -->
             </div>
             <h1 class="pageheader">
                 OMS Documentation
@@ -132,7 +133,6 @@
                 {% block body %}{% endblock %}
             </section>
 
-            {#<div class="pull-right"><a href="https://github.com/IDCubed/oms-docs/blob/{{ current_version }}/sources/{{ pagename }}.rst" title="edit this article">Edit this article on GitHub</a></div>#}
         </div>
     </div>
 </div>
