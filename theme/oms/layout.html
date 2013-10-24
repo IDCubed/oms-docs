@@ -144,17 +144,20 @@
             <!-- footer -->
             <div class="container">
                 <div class="row">
-                    <div class="span12 tbox">
+                    <div class="span8 tbox">
                         <div class="tbox">
                             <p>Open Mustard Seed is an open source project, sponsored by  <a href="http://www.idcubed.org">IDCubed</a>, under the <a href="https://github.com/IDCubed/oms-core/blob/master/LICENSE" title="ID3 licence, hosted in the Github repository">ID3 MIT license</a></p>
                         </div>
-
+                    </div>
+                <div class="span4">
                         <div class="tbox version-flyer hidden-phone">
                             <div class="content">
-                                <small>Current version:</small>
-                                <ul class="inline">
+                                <span class="pull-left"><i class="icon-file-text"></i> Current version:</span>
+                                <ul class="inline pull-right">
+
                                     {% for slug, url in versions %}
-                                    <li class="alternative"><a href="{{ url }}{%- for word in pagename.split('/') -%}
+                                    <li class="alternative">
+                                        <a href="{{ url }}{%- for word in pagename.split('/') -%}
                                         {%- if word != 'index' -%}
                                             {%- if word != '' -%}
                                                 {{ word }}/
