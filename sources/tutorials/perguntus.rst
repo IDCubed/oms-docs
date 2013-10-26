@@ -12,6 +12,8 @@ Perguntus is an OMS-enabled Quantified Self web app. You can use it to visualize
 your responses to a set of questions, both in terms of the content of the
 response, as well as your location. Perguntus runs in your computer browser and
 your smartphone browser.
+Perguntus also run a CRON Job that will automatically send questions to you.
+You can Enable or Disable this via the manifest (see Edit the manifest) 
 
 .. include:: tutorial_setup.inc
 
@@ -36,13 +38,16 @@ to validate access tokens at the OpenID Connect server.
 There are other URLs/endpoints, update each of the following with correct base
 URL based on how your OMS host was deployed (either with/without SSL and DNS).
 
-======================   =======================================================
-Setting Key              Description
-======================   =======================================================
-``PERGUNTUS_BACKEND``    with the path to Perguntus Backend.
-``PERGUNTUS_FRONTEND``   with the path to Perguntus UI.
-``EMAIL_RECIPIENT``      the email address you want questions to be sent to.
-======================   =======================================================
+========================  ======================================================
+Setting Key               Description
+========================  ======================================================
+``PERGUNTUS_BACKEND``     with the path to Perguntus Backend.
+``PERGUNTUS_FRONTEND``    with the path to Perguntus UI.
+``PERGUNTUS_PDS_SERVER``  with the path to Perguntus PDS Server.
+``EMAIL_RECIPIENT``       the email address you want questions to be sent to.
+``CRON_EMAIL_DELAY``      the time interval in which emails are sent (in hours)
+``APP_QUESTIONS``         Predefined list of quick start questions
+========================  ======================================================
 
 
 Open the manifests for editing:
@@ -54,6 +59,14 @@ Open the manifests for editing:
    # update config in Perguntus Demo TAB manifests
    vim PerguntusDemo.yaml
    vim PerguntusDemoUI.yaml
+   
+
+Enabling or Disabling Perguntus CRON:
+
+* edit PerguntusDemo.yaml
+* find the services field
+* under the services field you should see `enable: True`
+* change enabled to False inorder to Disable the CRON
 
 
 Deploy!
@@ -84,13 +97,17 @@ browser pointed at https://HOST.DOMAIN.TLD/PerguntusUI/ - and update accordingly
 if using SSL and/or DNS.
 
 
-.. if your private_registry is deployed)
-.. Go to your Private Registry page
-.. Authorize to OIDC (if needed)
-.. Click on your Private Trust Framework block - "Private (User) TF"
-.. On the Available Manifests list select Perguntus manifest
-.. Click "Install selected manifest" and follow the on-screen instructions until your TAB is installed.
-.. Once that TAB is succesfully deployed you should follow PerguntusUI app_urls to reach your Perguntus application (You should see a link that will lead you to your Perguntus Application Dashboard)
+.. COMMENT THIS OUT UNTIL IT ACTUALLY WORKS
+.. * if your private_registry is deployed)
+.. * Go to your Private Registry page
+.. * Authorize to OIDC (if needed)
+.. * Click on your Private Trust Framework block - "Private (User) TF"
+.. * On the Available Manifests list select Perguntus manifest
+.. * Click "Install selected manifest" and follow the on-screen instructions until
+..   your TAB is installed.
+.. * Once that TAB is succesfully deployed you should follow PerguntusUI app_urls
+..   to reach your Perguntus application (You should see a link that will lead you
+..   to your Perguntus Application Dashboard)
 
 
 Testing Perguntus
@@ -98,10 +115,12 @@ Testing Perguntus
 
 The following assume that you are in the Perguntus Dashboard
 
-* go to *edit questions* and add a few questions
-* the questions can be manully sent to you at any time by using the *Resend* button, Otherwise the questions will be sent to you at the selected time
+* go to *edit questions* and use the UI to add a few questions
+* the questions can be manully sent to you at any time by using the *Resend*
+  button, Otherwise the questions will be sent to you at the selected time
 * Answer the question
-* Refresh Perguntus Dashboard application and see that the answer is being reflected on graphs
+* Refresh Perguntus Dashboard application and see that the answer is being
+  reflected on graphs
 
 
 Running Perguntus
@@ -160,7 +179,7 @@ of providing your own), you can add a fixture to your manifest before deploying:
      - oms-core/perguntus
 
 
-There are also the `` oms-core/perguntus_national`` fixture, containing a
+There are also the ``oms-core/perguntus_national`` fixture, containing a
 different dataset, is also available.
 
 This information will be available to you in the Pertungus dashboard immediately
