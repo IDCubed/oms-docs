@@ -106,41 +106,51 @@ Leveraging the Open-Source Community
 The framework is made possible by integrating and building on top of numerous
 projects including (we strongly believe in the DRY principles):
 
-* `Python`_
-* `Django`_, `Tastypie`_
-* `Bootstrap`_, `Backbone.js`_, `Underscore.js`_
+* `Python`_, `Java`_, `PIP`_, `Maven`_
+* `Django`_, `Tastypie`_, `Spring`_
+* `Bootstrap`_, `jQuery`_, `Backbone.js`_, `Underscore.js`_
+* `Jinja2`_, `ConfigObj`_, `Celery`_, `Fabric`_
+*  `Nginx`_, `uWSGI`_, `Apache Tomcat`_, `Zeromq`_
 * `Funf`_
-* `PyCLIPS`_
 * `OpenID Connect`_
-* `Jinja2`_, `ConfigObj`_
-* `Salt Stack`_, `Zeromq`_, `Nginx`_, `uWSGI`_, `Celery`_, `Fabric`_, `OpenStack`_
-* `Logstash`_, `Redis`_, `Elasticsearch`_
-* `Werkzeug`_, `Sentry`_
+* `Salt Stack`_, `Salt-Cloud`_, `Salt-API`, `OpenStack`_
+* `Logstash`_, `Elasticsearch`_, `Redis`_, `Postgres`_
+* `Werkzeug`_, `Sentry`_, `Graylog2`_, `Shinken`_
 
 
 .. _Python: http://www.python.org/
+.. _Java: https://www.java.com/en/
+.. _PIP: http://www.pip-installer.org/en/latest/
+.. _Maven: https://maven.apache.org/
 .. _Django: https://www.djangoproject.com/
 .. _Tastypie: http://tastypieapi.org/
+.. _Spring: http://spring.io/
 .. _Bootstrap: http://twitter.github.com/bootstrap/
+.. _jQuery: http://jquery.com/
 .. _Backbone.js: http://backbonejs.org/
 .. _Underscore.js: http://underscorejs.org/
-.. _Funf: http://funf.org/
-.. _PyCLIPS: http://pyclips.sourceforge.net/web/
-.. _OpenID Connect: http://github.com/mitreid-connect/OpenID-Connect-Java-Spring-Server/
 .. _Jinja2: http://jinja.pocoo.org/
 .. _ConfigObj: http://www.voidspace.org.uk/python/configobj.html
-.. _Salt Stack: http://saltstack.org/
-.. _Zeromq: http://www.zeromq.org/
-.. _Nginx: http://wiki.nginx.org/Main
-.. _uWSGI: http://
 .. _Celery: http://celeryproject.org/
 .. _Fabric: http://docs.fabfile.org/en/latest/
+.. _Nginx: http://wiki.nginx.org/Main
+.. _uWSGI: https://uwsgi-docs.readthedocs.org/en/latest/
+.. _Apache Tomcat: https://tomcat.apache.org/
+.. _Zeromq: http://www.zeromq.org/
+.. _Funf: http://funf.org/
+.. _OpenID Connect: http://github.com/mitreid-connect/OpenID-Connect-Java-Spring-Server/
+.. _Salt Stack: http://saltstack.org/
+.. _Salt-Cloud: https://salt-cloud.readthedocs.org/en/latest/
+.. _Salt-API: https://salt-api.readthedocs.org/en/latest/
 .. _OpenStack: http://www.openstack.org/
 .. _Logstash: http://logstash.net/
-.. _Redis: http://redis.io/
 .. _Elasticsearch: http://www.elasticsearch.org/
+.. _Redis: http://redis.io/
+.. _Postgres: http://www.postgresql.org/
 .. _Werkzeug: http://werkzeug.pocoo.org/
 .. _Sentry: http://github.com/getsentry/sentry/
+.. _Graylog2: http://www.graylog2.org/
+.. _Shinken: http://www.shinken-monitoring.org/
 
 
 OMS Features

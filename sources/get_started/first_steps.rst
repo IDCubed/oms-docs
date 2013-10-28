@@ -68,7 +68,7 @@ are a few helpful details:
 
 
 With tmux open, run the script with: ``python kickstart-oms.py -H -c
-example.yaml``
+release.yaml``
 
 You are now good to go grab a fresh beverage and/or entertain yourself for 10
 minutes or so. Once complete, the VM ought to be completely setup and ready for
@@ -91,7 +91,7 @@ The kickstart script has:
   configuration, and fluff that is needed on an OMS host.
 * and finally, used the ``oms.admin`` salt state to wrap up some last-minute
   details, such as cloning the entire OMS source code to ``/var/oms/src/`` and
-  installing both the oms-deploy and oms-admin python pacakge.
+  installing both the oms-deploy and oms-admin python package.
 
 .. todo::
 
