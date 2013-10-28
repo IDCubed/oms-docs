@@ -5,7 +5,10 @@
 Contributing Documentation
 ==========================
 
-Please see the `oms-docs README`_ for details on contributing to the oms-docs
-repository.
+.. note::
 
-.. _oms-docs README: https://github.com/IDCubed/oms-docs/blob/master/README.md
+   Please see the `oms-docs README`_ for details on contributing to the oms-docs
+   repository.
+
+
+.. _oms-docs README: https://github.com/IDCubed/oms-docs/blob/qa-develop/README.md

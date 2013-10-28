@@ -14,7 +14,7 @@ This documentation has the following resources:
    Introduction <introduction/index>
    Getting Started <get_started/index>
    Tutorials <tutorials/index>
+   Contributing <contributing/index>
    FAQ <faq>
 
-.. Contributing <contributing/index>
-   API <api/index>
+.. API <api/index>

@@ -1,11 +1,13 @@
 :title: Contributing to OMS
-:description: Guides on how to contribute to OMS
-:keywords: OMS, documentation, developers, contributing, dev environment
+:description: Contribution Guide: creating issues, development environment,
+              conventions, pull requests
+:keywords: contributing, oms, documentation, help, guideline, dev environment
 
 
+.. _contributing:
 
-Contributing
-============
+Contributing to OMS
+===================
 
 Start first by reviewing `this document on the OMS Wiki`_ for a walkthrough of
 some of our development processes.
@@ -13,17 +15,23 @@ some of our development processes.
 .. _this document on the OMS Wiki: https://wiki.idhypercubed.org/wiki/ProjectDocumentation
 
 
-You can either start from a fresh install of Ubuntu 12.04 LTS and deploy a new
-instance of OMS - review the :ref:`Kickstart a VM Guide<initial_deploy>` - or
-start with the pre-packaged and self-contained :ref:`TAB Development VM
-<tab_developer_vm>`. The latter intends on being an alternative if you would
-like to work from a local VM (as opposed to working on a VM in the cloud).
+When you are ready to start hacking, you can either download and setup the OMS
+development environment as an importable VM image, or create your own
+environment from a fresh install of Ubuntu 12.04 LTS and with the help of the
+OMS systems automation tools. The VM is intended to be a self-contained system
+and includes a running private TCC.
 
->>>>>>> 79e1176... t1477: update to sync up with recent changes to wiki
+:ref:`This guide will get you started with the development VM
+<deploy_development_vm>`.
+
+:ref:`Kickstart a new Ubuntu 12.04 LTS host with this guide <initial_deploy>`.
+
+
+Details related to a specific component
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. toctree::
    :maxdepth: 1
 
-   contributing
-   devenvironment
-   documentation
+   Documentation <documentation>
+.. devenvironment
