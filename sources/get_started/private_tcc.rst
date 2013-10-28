@@ -85,12 +85,6 @@ Here we will cover the deployment and initial configuration of OIDC, as a
 primary component within the Private TCC.
 
 
-Create the Database
-~~~~~~~~~~~~~~~~~~~
-
-This is a step that should actually be included in the OMS system automation,
-but due to a bug in SaltStack, we have the following manual steps to take.
-
 .. note::
 
    The OIDC database user defaults to ``oidc``, and by default, the OMS system
