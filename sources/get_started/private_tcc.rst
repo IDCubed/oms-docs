@@ -93,34 +93,12 @@ but due to a bug in SaltStack, we have the following manual steps to take.
 
 .. note::
 
-   These steps must be taken prior to deploying the OIDC server.
-
-.. note::
-
-   When prompted for the oidc database user password, use ``oidc``. If you would
-   prefer to use a different password, you will need to update the following
-   file ``/etc/salt/pillar/oms/init.sls``. Uncomment the two lines near the end
-   of the file, ``db:`` and ``password``, and update the key to include your
-   preferred password. Complete this prior to deploying the OIDC server.
-
-
-.. code:: bash
-
-   # use postgres system user
-   su -l postgres
-   # create the oidc database user, you will be prompted to provide a password
-   createuser -P -R -S -D oidc
-   # create the database for oidc
-   createdb -O oidc oidc
-   # grant the oidc user access to the oidc database
-   psql -c "grant all privileges on database oidc to oidc;"
-   # run the database initialization scripts
-   cd /var/oms/src/oidc/env/database/postgresql
-   psql -U oidc -W -d oidc -h localhost -f create-oicserver-database.sql
-   psql -U oidc -W -d oidc -h localhost -f insert-system-scopes.sql
-
-
-These manual steps will soon be replaced with the OMS system automation.
+   The OIDC database user defaults to ``oidc``, and by default, the OMS system
+   automation will generate a random, 23 character password. If you would prefer
+   to use a different password, or to change the OIDC database user, you will
+   need to update the following file ``/etc/salt/pillar/oms/init.sls``. You will
+   find the ``oidc`` and ``db`` keys towards the bottom of the file. Complete
+   this prior to deploying the OIDC server.
 
 
 Deploy the OIDC Server
@@ -150,7 +128,8 @@ Once complete, we will need to make a few adjustments and restart OIDC:
 * if an SSL certificate and resolvable domain name were setup during initial
   deployment, edit the ``issuer`` property to be of the form
   ``https://host.domain.tld/idoic/``
-* double check that the ``serverUrl`` property is ``http://localhost/``
+* double check that the ``serverUrl`` property is ``http://localhost/``, if the
+  user registry was deployed to a different host, update this URL accordingly.
 * save the file and restart tomcat and OIDC with: ``/etc/init.d/tomcat7
   restart``
 
@@ -160,18 +139,13 @@ Once complete, we will need to make a few adjustments and restart OIDC:
    If HTTP requests fail, and you are using SSL, ensure you have opened the port
    with ``ufw allow 443``.
 
+
 You should now be able to browser to either https://host.domain.tld/idoic/, or
 the non-SSL equivalent, as you setup.
 
 
 Client and Scope Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The current OIDC deployment requires a few additional configuration steps,
-though a future release will automate these steps as well.
-
-.. todo:: A future release ought to automate this client/scope update process.
-
 
 The OIDC source includes SQL scripts for this, and the OMS deployment process
 includes all source code needed, so let's get to it:
@@ -184,8 +158,14 @@ includes all source code needed, so let's get to it:
    cd /var/oms/src
    # OIDC is deployed on postgres by default, use these scripts
    cd oidc/env/database/postgresql
-   psql oidc < insert-idoic-demo-client.sql
-   psql oidc < insert-private-registry-client.sql
+   psql -v role=oidc oidc < insert-idoic-demo-client.sql
+   psql -v role=oidc oidc < insert-private-registry-client.sql
+
+
+.. note::
+
+   If you set a custom user for the OIDC database (overriding the default of
+   ``oidc``), update the role specified in the ``psql`` commands provided here.
 
 
 .. note::
@@ -194,9 +174,9 @@ includes all source code needed, so let's get to it:
    included in OMS, you will want to run the SQL scripts to insert the clients
    needed by these apps. eg:
 
-     psql oidc < insert-perguntus-ui-client.sql
+     psql -v role=oidc oidc < insert-perguntus-ui-client.sql
 
-     psql oidc < insert-gps-demo-client.sql
+     psql -v role=oidc oidc < insert-gps-demo-client.sql
 
 
 With these clients included in OIDC, you may now proceed to run through the Core
