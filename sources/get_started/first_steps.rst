@@ -2,7 +2,7 @@
 :description: How to take your first steps with OMS deployment 
 :keywords: OMS, deployment, developers, dev environment
 
-.. _oms_deployment:
+.. _initial_deploy:
 
 Initial Deployment
 ==================
