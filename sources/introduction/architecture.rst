@@ -19,13 +19,3 @@ The TAB may be specified by the institution hosting the Trust Framework and be u
 
 In addition to this implementation, we are developing a sort of "Computational Sandbox" that will allow developers to write web services that are easily queued, monitored, and destroyed in a protected environment in the cloud. The Computation Sandbox provides protected access to shared data and is authorized to publish results via a REST interface as long as the result does not violate rules and permissions of the TAB.
 
-
-Trust Framework Diagram with Virtual Resource Controller
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The following are in various stages of development. The following remains mostly accurate as of Spring 2013. However, it's worth noting that Puppet/Celery has mostly been replaced with Salt. The next major documentation release is due end of June 2013, please check back then!
-
-.. image:: images/TF_Systems_Overview_August2012_160dpi.png
-   :alt: Trusted Compute Framework Features
-   :align: center
-

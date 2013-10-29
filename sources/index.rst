@@ -29,8 +29,9 @@ systems - for digital identity, security, computable legal contracts and
 data-management - designed to serve as a new platform for social and economic
 exchange. Just as the original HTML code gave rise to the World Wide Web and new
 types of bottom-up social communication and collaboration, OMS can be conceived
-as a new "social stack" of protocols. Contact IDCubed if you would like access
-to the private repositories ahead of the general release.
+as a new "social stack" of protocols. Contact IDCubed by emailing ``oms``
+*{dash}* ``dev`` *{at}* ``idcubed`` *{dot}* ``org`` if you would like access to
+the private repositories ahead of the general release.
 
 
 Leveraging the Open-Source Community

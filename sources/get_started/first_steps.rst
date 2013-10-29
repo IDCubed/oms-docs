@@ -12,6 +12,15 @@ This can be either a VM running locally, or in the cloud, or even a *bare metal*
 server.
 
 
+.. note::
+
+   The following process will assume your github user has access to the source
+   code repositories `listed here`_.
+
+
+.. _listed here: https://wiki.idhypercubed.org/wiki/ProjectDocumentation#Minimal_OMS_Install
+
+
 Run OMS-Kickstart
 -----------------
 
