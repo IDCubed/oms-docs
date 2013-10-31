@@ -12,6 +12,7 @@ What to do? where to go?
 .. toctree::
    :maxdepth: 1
 
+   OMS Dev VM <tab_dev_environment>
    Kickstart OMS in the Cloud <kickstart_oms>
    Portal Registry <portal>
    Private TCC <private_tcc>
