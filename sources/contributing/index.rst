@@ -24,7 +24,7 @@ and includes a running private TCC.
 :ref:`This guide will get you started with the development VM
 <deploy_development_vm>`.
 
-:ref:`Kickstart a new Ubuntu 12.04 LTS host with this guide <initial_deploy>`.
+:ref:`Kickstart a new Ubuntu 12.04 LTS host with this guide <kickstart_oms>`.
 
 
 Details related to a specific component
