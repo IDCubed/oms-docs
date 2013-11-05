@@ -36,10 +36,6 @@ $(window).load(function() {
 });
 
 $(function(){
-
-    // sidebar accordian-ing
-    // don't apply on last object (it should be the FAQ) or the first (it should be introduction)
-
     // define an array to which all opened items should be added
     var openmenus = [];
 
@@ -70,47 +66,19 @@ $(function(){
     // mark the active documentation in the version widget
     $(".version-flyer a:contains('" + doc_version + "')").parent().addClass('active-slug');
 
-
-    // attached handler on click
-    // Do not attach to first element or last (intro, faq) so that
-    // first and last link directly instead of accordian
-    $('.sidebar > ul > li > a').not(':last').not(':first').click(function(){
-
-        var index = $.inArray(this.href, openmenus)
-
-        if (index > -1) {
-            console.log(index);
-            openmenus.splice(index, 1);
-
-
-            $(this).parent().children('ul').slideUp(200, function() {
-                $(this).parent().removeClass('open'); // toggle after effect
-            });
-        }
-        else {
-            openmenus.push(this.href);
-
-            var current = $(this);
-
-            setTimeout(function() {
-                // $('.sidebar > ul > li').removeClass('current');
-                current.parent().addClass('current').addClass('open'); // toggle before effect
-                current.parent().children('ul').hide();
-                current.parent().children('ul').slideDown(200);
-            }, 100);
-        }
-        return false;
-    });
+    //capture the click on the a tag
+    $("li.toctree-l1.has-children > a").click(function() {
+         window.location = $(this).attr('href');
+         return false;
+   });
 
     // add class to all those which have children
     $('.sidebar > ul > li').not(':last').not(':first').addClass('has-children');
     $('table').addClass('table table-bordered table-hover');
-
 
     prepend_icon('.note > .first', 'pushpin');
     prepend_icon('.warning > .first', 'ban-circle');
     prepend_icon('.danger > .first', 'ban-circle');
     prepend_icon('.seealso > .first', 'eye-open');
     prepend_icon('.todo > .first', 'check');
-
 })
