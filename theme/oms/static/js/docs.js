@@ -66,12 +66,6 @@ $(function(){
     // mark the active documentation in the version widget
     $(".version-flyer a:contains('" + doc_version + "')").parent().addClass('active-slug');
 
-    //capture the click on the a tag
-    $("li.toctree-l1.has-children > a").click(function() {
-         window.location = $(this).attr('href');
-         return false;
-   });
-
     // add class to all those which have children
     $('.sidebar > ul > li').not(':last').not(':first').addClass('has-children');
     $('table').addClass('table table-bordered table-hover');
@@ -81,4 +75,13 @@ $(function(){
     prepend_icon('.danger > .first', 'ban-circle');
     prepend_icon('.seealso > .first', 'eye-open');
     prepend_icon('.todo > .first', 'check');
+
+    var toctree_with_children = $("li.toctree-l1.has-children");
+    toctree_with_children.hover(function(event) {
+        $(this).children("ul").slideDown();
+        $(this).addClass('open');
+        var others = toctree_with_children.not(this);
+        others.children("ul").slideUp();
+        others.removeClass('open');
+    });
 })
