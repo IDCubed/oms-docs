@@ -77,13 +77,16 @@ $(function(){
     prepend_icon('.todo > .first', 'check');
 
     var toctree_with_children = $("li.toctree-l1.has-children");
-    toctree_with_children.hover(function(event) {
-        $(this).children("ul").slideDown().delay(500);
+    toctree_with_children.hoverIntent(function(event) {
+        $(this).children("ul").slideDown(600, 'linear');
         $(this).addClass('open');
         var others = toctree_with_children.not(this);
-        others.children("ul").slideUp().delay(500);
+        others.children("ul").slideUp(600, 'linear');
         others.removeClass('open');
     });
 
 
 })
+
+
+
