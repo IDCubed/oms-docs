@@ -78,10 +78,12 @@ $(function(){
 
     var toctree_with_children = $("li.toctree-l1.has-children");
     toctree_with_children.hover(function(event) {
-        $(this).children("ul").slideDown();
+        $(this).children("ul").slideDown().delay(500);
         $(this).addClass('open');
         var others = toctree_with_children.not(this);
-        others.children("ul").slideUp();
+        others.children("ul").slideUp().delay(500);
         others.removeClass('open');
     });
+
+
 })

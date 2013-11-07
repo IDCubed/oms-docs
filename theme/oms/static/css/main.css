@@ -390,6 +390,7 @@ div.alert.alert-block {
     background-color: #dfdfdf;
 }
 
+
 .sidebar ul li .toctree-l1 .current {
     font-weight: bold;
 }
@@ -438,6 +439,11 @@ div.alert.alert-block {
 .sidebar ul > li.toctree-l1.has-children.open > a {
     background-image: url('../img/arrow-down.png');
     background-position: 95% center;
+}
+
+.sidebar ul > li.toctree-l1.has-children.open > a:hover {
+    text-decoration: underline;
+    background-color: #B9C5D1;
 }
 
 #st-search-input {
