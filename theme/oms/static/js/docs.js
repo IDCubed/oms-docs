@@ -49,7 +49,7 @@ $(function(){
         var current = $(elements[i]);
         if (current.hasClass('current')) {
             current.addClass('open');
-            currentlink = current.children('a')[0].href;
+            currentlink = current.children('a');
             openmenus.push(currentlink);
 
             // do nothing
@@ -76,16 +76,32 @@ $(function(){
     prepend_icon('.seealso > .first', 'eye-open');
     prepend_icon('.todo > .first', 'check');
 
-    var toctree_with_children = $("li.toctree-l1.has-children");
-    toctree_with_children.hoverIntent(function(event) {
-        $(this).children("ul").slideDown(600, 'linear');
-        $(this).addClass('open');
-        var others = toctree_with_children.not(this);
-        others.children("ul").slideUp(600, 'linear');
-        others.removeClass('open');
+// attached handler on click
+    // Do not attach to first element or last (intro, faq) so that
+    // first and last link directly instead of accordian
+
+    $('.sidebar > ul > li > a').not(':last').not(':first').click(function(){
+        var index = $.inArray(this.href, openmenus)
+        if (index > -1) {
+            openmenus.splice(index, 1);
+            $(this).parent().children('ul').slideUp(200, function() {
+                $(this).parent().removeClass('open'); // toggle after effect
+            });
+        }
+        else {
+            openmenus.push(this.href);
+
+            var current = $(this);
+
+            setTimeout(function() {
+                // $('.sidebar > ul > li').removeClass('current');
+                current.parent().addClass('current').addClass('open'); // toggle before effect
+                current.parent().children('ul').hide();
+                current.parent().children('ul').slideDown(200);
+            }, 100);
+        }
+        return false;
     });
-
-
 })
 
 

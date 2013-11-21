@@ -46,7 +46,6 @@ p a.btn {
     color: #E8EBED;
 }
 
-
 .navbar .nav li a {
     text-shadow: none;
     color: #ddd;
@@ -61,7 +60,7 @@ p a.btn {
     box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
 }
 
-.navbar-oms  {
+.navbar-oms {
     -webkit-box-shadow: 0 2px 10px #1A334C;
     box-shadow: 0 2px 15px #1A334C;
     border-bottom: 1px solid #15293D;
@@ -287,7 +286,6 @@ body {
     color: #f6f6f6;
 }
 
-
 /* =======================
    Social footer
 ======================= */
@@ -348,10 +346,9 @@ div.alert.alert-block {
   Documentation
 ========================= ========================= */
 
-
 .sidebar {
     font-weight: normal;
-   /* float: left;*/
+    /* float: left;*/
     background: rgba(26, 51, 76, 0.15);
     /*position: relative;*/
     border: 1px solid #dddddd;
@@ -389,7 +386,6 @@ div.alert.alert-block {
 .sidebar ul li .toctree-l1 a {
     background-color: #dfdfdf;
 }
-
 
 .sidebar ul li .toctree-l1 .current {
     font-weight: bold;
@@ -503,9 +499,9 @@ form input.st-search-input {
     -webkit-box-shadow: inset rgba(255, 255, 255, 0.17) 0 1px 1px;
     -moz-box-shadow: inset rgba(255, 255, 255, 0.17) 0 1px 1px;
     box-shadow: inset rgba(255, 255, 255, 0.17) 0 1px 1px;
-   /* -webkit-transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -o-transform: rotate(90deg);*/
+    /* -webkit-transform: rotate(90deg);
+     -moz-transform: rotate(90deg);
+     -o-transform: rotate(90deg);*/
 }
 
 .version-flyer .content {
@@ -527,7 +523,6 @@ form input.st-search-input {
     display: inline-block;
     visibility: visible;
 }
-
 
 .version-flyer ul li {
     line-height: 1;
@@ -658,12 +653,12 @@ h3 {
 }
 
 .main-content img:first-child {
-   /* background: #1A334C;
-    display: block;
-    margin: 0 auto;
-    padding: 20px 180px;
-    border: none;
-    border-radius: 0;*/
+    /* background: #1A334C;
+     display: block;
+     margin: 0 auto;
+     padding: 20px 180px;
+     border: none;
+     border-radius: 0;*/
 }
 
 tt {
@@ -684,31 +679,31 @@ a {
 
 @media (max-width: 767px) {
 
-  .titlebar,
-  #footer {
-    margin-right: -20px;
-    margin-left: -20px;
-    padding-right: 5px;
-    padding-left: 5px;
-  }
+    .titlebar,
+    #footer {
+        margin-right: -20px;
+        margin-left: -20px;
+        padding-right: 5px;
+        padding-left: 5px;
+    }
 }
 
 @media (max-width: 979px) {
 
-   .titlebar {
-       margin-top: -20px;
-   }
+    .titlebar {
+        margin-top: -20px;
+    }
 
-   .navbar {
-       padding-right: 8px;
-       padding-left: 8px;
-   }
+    .navbar {
+        padding-right: 8px;
+        padding-left: 8px;
+    }
 
 }
 
 .navbar .btn-navbar,
 .nav-collapse .nav > li > a:hover {
-    background-color:#264a6e;
+    background-color: #264a6e;
 }
 
 .navbar .btn-navbar:hover {
