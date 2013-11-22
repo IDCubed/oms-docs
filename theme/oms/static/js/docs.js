@@ -7,7 +7,7 @@
 
 
 // Function to make the sticky header possible
-function shiftWindow() { 
+function shiftWindow() {
     scrollBy(0, -70);
     console.log("window shifted")
 }
@@ -36,28 +36,32 @@ $(window).load(function() {
 });
 
 $(function(){
-    // define an array to which all opened items should be added
-    var openmenus = [];
+    $('.toctree-l1 .current').parent().addClass('open');
+    $('.toctree-l1').not('.current').children('ul').hide();
 
-    var elements = $('.toctree-l2');
-    // for (var i = 0; i < elements.length; i += 1) { var current = $(elements[i]); current.children('ul').hide();}
+    // add class to all those which have children
+    $('.sidebar > ul > li').not(':last').not(':first').addClass('has-children');
+    $('table').addClass('table table-bordered table-hover');
 
+    $('.sidebar ul > li.toctree-l1.has-children > ul').before(
+        '<a class="trigger-collapse" href="#" data-toggle="tooltip" data-placement="right" title="click me to expand the menu"><i class="icon-expand"></i></a>'
+    );
+    $('.trigger-collapse').tooltip();
 
-    // set initial collapsed state
-    var elements = $('.toctree-l1');
-    for (var i = 0; i < elements.length; i += 1) {
-        var current = $(elements[i]);
-        if (current.hasClass('current')) {
-            current.addClass('open');
-            currentlink = current.children('a');
-            openmenus.push(currentlink);
-
-            // do nothing
+    $('.sidebar > ul > li > .trigger-collapse').click(function(){
+        var li = $(this).parent();
+        if(li.hasClass('open')){
+            li.children('ul').slideUp(200, function() {
+                li.removeClass('open');
+            });
         } else {
-            // collapse children
-            current.children('ul').hide();
+            setTimeout(function() {
+                li.addClass('open'); // toggle before effect
+                li.children('ul').hide();
+                li.children('ul').slideDown(200);
+            }, 100);
         }
-    }
+    });
 
     if (doc_version == "") {
         $('.version-flyer ul').html('<li class="alternative active-slug"><a href="" title="Switch to local">Local</a></li>');
@@ -66,43 +70,12 @@ $(function(){
     // mark the active documentation in the version widget
     $(".version-flyer a:contains('" + doc_version + "')").parent().addClass('active-slug');
 
-    // add class to all those which have children
-    $('.sidebar > ul > li').not(':last').not(':first').addClass('has-children');
-    $('table').addClass('table table-bordered table-hover');
-
     prepend_icon('.note > .first', 'pushpin');
     prepend_icon('.warning > .first', 'ban-circle');
     prepend_icon('.danger > .first', 'ban-circle');
     prepend_icon('.seealso > .first', 'eye-open');
     prepend_icon('.todo > .first', 'check');
-
-// attached handler on click
-    // Do not attach to first element or last (intro, faq) so that
-    // first and last link directly instead of accordian
-
-    $('.sidebar > ul > li > a').not(':last').not(':first').click(function(){
-        var index = $.inArray(this.href, openmenus)
-        if (index > -1) {
-            openmenus.splice(index, 1);
-            $(this).parent().children('ul').slideUp(200, function() {
-                $(this).parent().removeClass('open'); // toggle after effect
-            });
-        }
-        else {
-            openmenus.push(this.href);
-
-            var current = $(this);
-
-            setTimeout(function() {
-                // $('.sidebar > ul > li').removeClass('current');
-                current.parent().addClass('current').addClass('open'); // toggle before effect
-                current.parent().children('ul').hide();
-                current.parent().children('ul').slideDown(200);
-            }, 100);
-        }
-        return false;
-    });
-})
+});
 
 
 
