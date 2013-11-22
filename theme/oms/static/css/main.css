@@ -362,21 +362,34 @@ div.alert.alert-block {
 .sidebar ul li {
     font-size: 14px;
     list-style-type: none;
-    list-style-position: outside;
-    list-style-image: none;
     padding: 0;
-}
-
-.sidebar ul li a {
-    display: block;
-    color: #1F3D5C;
-    border-bottom: 1px solid #f6f6f6;
-    padding: 12px 12px 10px 36px;
+     border-bottom: 1px solid #f6f6f6;
     margin-top: 1px;
 }
 
-.sidebar ul li a:hover {
+.sidebar ul li a {
+    display: inline-table;
+    color: #1F3D5C;
+    padding: 12px 8px 10px 20px;
+}
+
+.sidebar ul li a {
+   text-decoration: underline;
+}
+
+.sidebar ul li a.trigger-collapse {
+    position: relative;
+    float: right;
+    margin-right: 10px;
     text-decoration: none;
+    font-size: 1.3em;
+}
+
+.sidebar ul li.open a.trigger-collapse {
+    -webkit-transform:rotate(90deg) translate(-5px,-7px);
+    transform:rotate(90deg) translate(-5px,-7px);
+    -webkit-transition: rotate 0.3s linear;
+    transition: rotate 0.3s linear;
 }
 
 .sidebar ul li .toctree-l1 {
@@ -384,30 +397,26 @@ div.alert.alert-block {
 }
 
 .sidebar ul li .toctree-l1 a {
-    background-color: #dfdfdf;
 }
 
 .sidebar ul li .toctree-l1 .current {
     font-weight: bold;
 }
 
-.sidebar ul li .toctree-l2 a {
+.sidebar ul li .toctree-l2  {
     background: #f6f6f6;
 }
 
-.sidebar ul li .toctree-l2 a:hover {
-    background: #516E8B;
-    color: #f6f6f6;
+.sidebar ul li .toctree-l2:hover {
+    background: #F1F3F6;
 }
 
 .sidebar ul li .toctree-l2 .current {
     font-weight: bold;
     color: #1A334C;
-    background: #f6f6f6;
 }
 
 .sidebar ul li .toctree-l2 .current:hover {
-    background: #f6f6f6;
     color: #1A334C;
 }
 
@@ -424,21 +433,7 @@ div.alert.alert-block {
     font-weight: bold;
 }
 
-.sidebar ul > li.toctree-l1.has-children > a {
-    background-image: url('../img/arrow-right.png');
-    background-repeat: no-repeat;
-    background-position: 95% center;
-    list-style-type: none;
-    vertical-align: middle;
-}
-
-.sidebar ul > li.toctree-l1.has-children.open > a {
-    background-image: url('../img/arrow-down.png');
-    background-position: 95% center;
-}
-
-.sidebar ul > li.toctree-l1.has-children.open > a:hover {
-    text-decoration: underline;
+.sidebar ul > li.toctree-l1:hover {
     background-color: #B9C5D1;
 }
 
@@ -732,4 +727,12 @@ tr {
 
 .table tr {
     color: #485C70;
+}
+
+.tooltip-inner {
+    background-color: rgba(26, 51, 76, 0.8);
+}
+
+.tooltip.right .tooltip-arrow {
+    border-right-color: rgba(26, 51, 76, 0.8);
 }
