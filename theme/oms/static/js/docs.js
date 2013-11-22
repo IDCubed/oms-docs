@@ -5,22 +5,6 @@
 // This Document contains a few helper functions for the documentation to display the current version,
 // collapse and expand the menu etc.
 
-
-// Function to make the sticky header possible
-function shiftWindow() {
-    scrollBy(0, -70);
-    console.log("window shifted")
-}
-
-window.addEventListener("hashchange", shiftWindow);
-
-function loadShift() {
-    if (window.location.hash) {
-        console.log("window has hash");
-        shiftWindow();
-    }
-}
-
 function prepend_icon(selector, icon_name) {
     /*
      Insert a Font Awesome icon followed by a space BEFORE some HTML content.
@@ -30,10 +14,6 @@ function prepend_icon(selector, icon_name) {
     var node = $(selector);
     node.html('<i class="icon-' + icon_name + '"></i>&nbsp;' + node.html());
 }
-
-$(window).load(function() {
-    loadShift();
-});
 
 $(function(){
     $('.toctree-l1 .current').parent().addClass('open');
