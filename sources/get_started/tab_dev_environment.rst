@@ -60,17 +60,18 @@ Get Started - Prerequisites
 * **Install GPG** - `GPG for Windows`_, `GPG options for OSX`_
 * **Decrypt the VM Image** - Expect to wait a few minutes, time will depend on
   the system decrypting the image.
-   - windows: Right click on ``<vm_file_name>.gpg`` and select ``Decrypt and
-     Verify``. Enter the passphrase provided by IDCubed.
-   - linux: ``gpg --decrypt --output <vm_file_name>.ova``. Provide the
-     passphrase from IDCubed when prompted.
-* **Install VM Image** - Open ``<vm_file_name>.ova`` then click ``import`` in
-  the GUI that appears.
+   - windows: Right click on ``OMS-SDK-v0.8.3-20131125.ova.gpg`` and select
+     ``Decrypt and Verify``. Enter the passphrase provided by IDCubed.
+   - linux: ``gpg --decrypt --output OMS-SDK-v0.8.3-20131125.ova
+     OMS-SDK-v0.8.3-20131125.ova.gpg``. Provide the passphrase from IDCubed when
+     prompted.
+* **Install VM Image** - Open ``OMS-SDK-v0.8.3-20131125.ova.gpg`` then click
+  ``import`` in the GUI that appears.
 
 
 .. _VirtualBox: https://www.virtualbox.org/wiki/Downloads
 .. _GnuPG: http://www.gnupg.org/download/#auto-ref-3
-.. _TAB Development Environment VM Image: http://cc2ccf5e7eb9a36051d5-392f3ef49dd2dccea95976ef735392f9.r21.cf1.rackcdn.com/OMS-SDK-v0.8.1-20130930.ova.gpg
+.. _TAB Development Environment VM Image: http://cc2ccf5e7eb9a36051d5-392f3ef49dd2dccea95976ef735392f9.r21.cf1.rackcdn.com/OMS-SDK-v0.8.3-20131125.ova.gpg
 .. _VirtualBox User Manual: https://www.virtualbox.org/manual/UserManual.html
 .. _GPG for Windows: http://gpg4win.de/handbuecher/novices_5.html
 .. _GPG options for OSX: https://duckduckgo.com/?q=gpg+mac+osx
@@ -104,10 +105,10 @@ Configure and Start the VM
    address. This should be set to the IP address of the VM in the form:
    ``http://<IP>/idoic``
 #. Restart tomcat so this takes affect: ``/etc/init.d/tomcat7 restart``
-#. Use your browser to load http://<IP>/private_registry/admin/ - login with the
+#. Use your browser to load *http://<IP>/private_registry/admin/* - login with the
    default user ``admin`` and password ``adminadmin``.  Use the *change password*
    link in the admin panel to set a unique password for this user.
-#. Browse to http://<IP>/private_registry/admin/constance/config/ and update the
+#. Browse to *http://<IP>/private_registry/admin/constance/config/* and update the
    following two config keys:
     - ``OIDC_BASE_URL``: *http://<IP>/idoic/*
     - ``TOKENSCOPE_ENDPOINT``: *http://<IP>/idoic/tokenscope?scope=private_registry_ui*
