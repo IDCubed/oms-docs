@@ -24,7 +24,7 @@ $(function(){
     $('table').addClass('table table-bordered table-hover');
 
     $('.sidebar ul > li.toctree-l1.has-children > ul').before(
-        '<a class="trigger-collapse" href="#" data-toggle="tooltip" data-placement="right" title="click me to expand the menu"><i class="icon-expand"></i></a>'
+        '<a class="trigger-collapse" href="#" data-toggle="tooltip" data-placement="left" title="sub-menu"><i class="icon-expand"></i></a>'
     );
     $('.trigger-collapse').tooltip();
 

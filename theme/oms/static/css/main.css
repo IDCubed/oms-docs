@@ -383,6 +383,7 @@ div.alert.alert-block {
     margin-right: 10px;
     text-decoration: none;
     font-size: 1.3em;
+    color: rgba(31, 61, 92, 0.7);
 }
 
 .sidebar ul li.open a.trigger-collapse {
@@ -731,8 +732,10 @@ tr {
 
 .tooltip-inner {
     background-color: rgba(26, 51, 76, 0.8);
+    padding: 4px;
 }
 
-.tooltip.right .tooltip-arrow {
-    border-right-color: rgba(26, 51, 76, 0.8);
+.tooltip.left .tooltip-arrow {
+    border-left-color: rgba(26, 51, 76, 0.8);
 }
+
