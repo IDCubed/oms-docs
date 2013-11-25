@@ -43,6 +43,15 @@ $(function(){
         }
     });
 
+    $("#expand").click(function() {
+        var element = $(".sidebar .toctree-l1.has-children");
+        if(element.data('open') == true) {
+            element.data('open', false).removeClass('open').children('ul').slideUp(200);
+        } else {
+            element.data('open', true).addClass("open").children('ul').slideDown(200);
+        }
+    });
+
     if (doc_version == "") {
         $('.version-flyer ul').html('<li class="alternative active-slug"><a href="" title="Switch to local">Local</a></li>');
     }

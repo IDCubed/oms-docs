@@ -460,6 +460,24 @@ form input.st-search-input {
     margin: 0;
 }
 
+
+#expand {
+    text-align: left;
+    font-size: 1em;
+    width: 100%;
+    color: #1f3d5c;
+    padding: 12px 12px 10px 20px;
+    background: rgba(26, 51, 76, 0.15);
+    border: 1px solid #dddddd;
+    margin-bottom: 10px;
+}
+
+#expand i {
+    font-size: 1.3em;
+    margin-right: 10px;
+    color: rgba(31, 61, 92, 0.7);
+}
+
 /* =====================================
   Styles for the floating version widget
 ====================================== */
