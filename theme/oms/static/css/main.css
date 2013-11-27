@@ -374,7 +374,7 @@ div.alert.alert-block {
 }
 
 .sidebar ul li a {
-   text-decoration: underline;
+   text-decoration: none;
 }
 
 .sidebar ul li a.trigger-collapse {
