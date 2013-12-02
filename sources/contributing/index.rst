@@ -34,4 +34,4 @@ Details related to a specific component
    :maxdepth: 1
 
    Documentation <documentation>
-.. devenvironment
+   OpenID Connect </oidc/developers_guide>
