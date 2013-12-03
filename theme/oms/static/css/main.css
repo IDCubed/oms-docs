@@ -350,7 +350,7 @@ div.alert.alert-block {
     font-weight: normal;
     /* float: left;*/
     background: rgba(26, 51, 76, 0.15);
-    /*position: relative;*/
+    position: relative;
     border: 1px solid #dddddd;
 }
 
@@ -363,12 +363,12 @@ div.alert.alert-block {
     font-size: 14px;
     list-style-type: none;
     padding: 0;
-     border-bottom: 1px solid #f6f6f6;
+    border-bottom: 1px solid #f6f6f6;
     margin-top: 1px;
 }
 
 .sidebar ul li a {
-    display: inline-table;
+    display: inline-block;
     color: #1F3D5C;
     padding: 12px 8px 10px 20px;
 }
@@ -378,12 +378,12 @@ div.alert.alert-block {
 }
 
 .sidebar ul li a.trigger-collapse {
-    position: relative;
-    float: right;
-    margin-right: 10px;
+    position: absolute;
+    right: 10px;
     text-decoration: none;
-    font-size: 1.3em;
+    font-size: 1.4em;
     color: rgba(31, 61, 92, 0.7);
+
 }
 
 .sidebar ul li.open a.trigger-collapse {
@@ -393,16 +393,10 @@ div.alert.alert-block {
     transition: rotate 0.3s linear;
 }
 
-.sidebar ul li .toctree-l1 {
-    font-size: larger;
-}
-
-.sidebar ul li .toctree-l1 a {
-}
-
 .sidebar ul li .toctree-l1 .current {
     font-weight: bold;
 }
+
 
 .sidebar ul li .toctree-l2  {
     background: #f6f6f6;
