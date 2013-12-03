@@ -54,10 +54,10 @@ prefer to experience OMS running in the cloud, :ref:`see this tutorial
 Get Started - Prerequisites
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* **Download** `VirtualBox`_, `GnuPG`_, and the `Tab Development Environment VM
-  Image`_ (size 2GB)
-* **Install VirtualBox** - See the `VirtualBox User Manual`_
-* **Install GPG** - `GPG for Windows`_, `GPG options for OSX`_
+* **Download** the `Tab Development Environment VM Image`_ (size 2GB)
+* **Install VirtualBox** - OMS has a `VirtualBox Install Guide
+  </tutorials/install_virtualbox>`_
+* **Install GPG** - Download `GnuPG`_, `GPG for Windows`_, `GPG options for OSX`_
 * **Decrypt the VM Image** - Expect to wait a few minutes, time will depend on
   the system decrypting the image.
    - windows: Right click on ``OMS-SDK-v0.8.3-20131125.ova.gpg`` and select
@@ -69,16 +69,11 @@ Get Started - Prerequisites
   ``import`` in the GUI that appears.
 
 
-.. _VirtualBox: https://www.virtualbox.org/wiki/Downloads
 .. _GnuPG: http://www.gnupg.org/download/#auto-ref-3
 .. _TAB Development Environment VM Image: http://cc2ccf5e7eb9a36051d5-392f3ef49dd2dccea95976ef735392f9.r21.cf1.rackcdn.com/OMS-SDK-v0.8.3-20131125.ova.gpg
-.. _VirtualBox User Manual: https://www.virtualbox.org/manual/UserManual.html
 .. _GPG for Windows: http://gpg4win.de/handbuecher/novices_5.html
 .. _GPG options for OSX: https://duckduckgo.com/?q=gpg+mac+osx
 .. _linux link?: http://example.com
-
-
-.. todo:: find a doc on installing gpg for linux? differet for each distro..
 
 
 Configure and Start the VM
