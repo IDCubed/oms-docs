@@ -21,6 +21,16 @@ function loadShift() {
     }
 }
 
+function prepend_icon(selector, icon_name) {
+    /*
+     Insert a Font Awesome icon followed by a space BEFORE some HTML content.
+     selector: jQuery selector that match content to change.
+     icon_name: Font Awesome icon name (excluding the icon- prefix).
+     */
+    var node = $(selector);
+    node.html('<i class="icon-' + icon_name + '"></i>&nbsp;' + node.html());
+}
+
 $(window).load(function() {
     loadShift();
 });
@@ -94,5 +104,13 @@ $(function(){
 
     // add class to all those which have children
     $('.sidebar > ul > li').not(':last').not(':first').addClass('has-children');
+    $('table').addClass('table table-bordered table-hover');
 
-});
+
+    prepend_icon('.note > .first', 'pushpin');
+    prepend_icon('.warning > .first', 'ban-circle');
+    prepend_icon('.danger > .first', 'ban-circle');
+    prepend_icon('.seealso > .first', 'eye-open');
+    prepend_icon('.todo > .first', 'check');
+
+})

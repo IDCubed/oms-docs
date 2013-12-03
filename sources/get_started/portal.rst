@@ -2,7 +2,7 @@
 :description: How to deploy the OMS Portal Registry
 :keywords: OMS, Portal Registry, developers, dev environment
 
-.. _portal_registry:
+.. _deploy_portal:
 
 OMS Portal Registry
 ===================

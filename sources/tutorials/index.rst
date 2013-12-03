@@ -15,7 +15,8 @@ to more complex, real-world Applications like you might find in production.
 .. toctree::
    :maxdepth: 1
 
-   Hello World Example <hello_world>
-   python_web_app
    Perguntus Demo <perguntus>
    GPS Demo <gps_demo>
+
+.. Hello World Example <hello_world>
+   python_web_app

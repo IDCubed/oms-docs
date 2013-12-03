@@ -13,7 +13,9 @@ This documentation has the following resources:
    Overview <index>
    Introduction <introduction/index>
    Getting Started <get_started/index>
+   OpenID Connect <oidc/index>
    Tutorials <tutorials/index>
    Contributing <contributing/index>
-   API <api/index>
    FAQ <faq>
+
+.. API <api/index>
