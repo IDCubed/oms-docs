@@ -9,5 +9,5 @@ Conceptual Material
 
 * :ref:`Personas and Core Identity <personas>`
 * :ref:`OpenID Connect <oidc>`
-* :ref:`Functional Access Control Transform API (TBD) <FACT>`
+* :ref:`Functional Access Control Transform API <FACT>`
 * :ref:`FUNF Open Sensing Framwork (TBD) <FUNF>`

@@ -17,6 +17,7 @@ to more complex, real-world Applications like you might find in production.
 
    Perguntus Demo <perguntus>
    GPS Demo <gps_demo>
+   FACT API Transforms <FACT>
 
 .. Hello World Example <hello_world>
    python_web_app
