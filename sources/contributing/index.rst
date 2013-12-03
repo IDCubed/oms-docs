@@ -35,3 +35,4 @@ Details related to a specific component
 
    Documentation <documentation>
    OpenID Connect </oidc/developers_guide>
+   Build OMS VM Images <vm_images>
