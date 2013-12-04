@@ -105,3 +105,6 @@ Packer will then:
 You can then use VirtualBox to import this virtual appliance to create new VM as
 needed. This is a great setup for local development, custom deployments, and
 general hacking with OMS!
+
+
+.. include:: /snippets/get_help_footer.inc

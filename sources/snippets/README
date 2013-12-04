@@ -1,0 +1,7 @@
+to include a snippet in a sphinx document you are writing, reference the
+snippet with:
+
+.. include:: /snippets/name_of_snippet.rst
+
+
+snippets are expected to be sphinx/rst formatted, reusable bits of documentation
