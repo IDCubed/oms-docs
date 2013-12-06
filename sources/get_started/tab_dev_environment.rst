@@ -75,6 +75,8 @@ Get Started - Prerequisites
 .. _GPG options for OSX: https://duckduckgo.com/?q=gpg+mac+osx
 .. _linux link?: http://example.com
 
+.. todo:: find a doc on installing gpg for linux? differet for each distro..
+
 
 .. _import_vbox_vm_image:
 
@@ -86,8 +88,7 @@ Configure and Start the VM
    address on your local network after starting. (You're welcome to use NAT, but
    this tutorial does not cover it.)
 #. Click the green *Start* arrow. A window named *OMS [Running]* should open.
-#. Wait a minute or two until you see *dev login:*.  Enter ``oms`` for user and
-   password.
+#. Wait until you see *dev login:* Enter ``oms`` for user and password.
 #. Type ``ifconfig`` and note the IP from line 2 *inet:*. We will use this IP
    when connecting to the VM via SSH and with our browser, and we will also
    update a few details in the VM with this IP address.
@@ -97,6 +98,8 @@ Configure and Start the VM
    a randomly generated password of 13 or more characters. You do not need to
    remember the complex password, maintain an encrypted wallet such as the
    cross-platform and open, `keepassx`_.
+#. Use ``sudo`` to switch users to the system's root user: ``sudo su -l``.
+   Provide the password for the ``oms`` user when prompted.
 #. Open ``/var/lib/tomcat7/shared/classes/idoic_config.properties`` for editing
    and update the ``production.configBean.issuer`` parameter to correct the IP
    address. This should be set to the IP address of the VM in the form:
@@ -104,28 +107,19 @@ Configure and Start the VM
 #. Restart tomcat so this takes affect: ``/etc/init.d/tomcat7 restart``
 #. Use your browser to load *http://<IP>/private_registry/admin/* - login with the
    default user ``admin`` and password ``adminadmin``.  Use the *change password*
-   link in the admin panel to set a unique password for this user.
+   link in the admin panel to set a unique password for this user. If you end up
+   on a different page, double check to ensure you included the trailing slash
+   in the URL.
 #. Browse to *http://<IP>/private_registry/admin/constance/config/* and update the
    following two config keys:
     - ``OIDC_BASE_URL``: *http://<IP>/idoic/*
     - ``TOKENSCOPE_ENDPOINT``: *http://<IP>/idoic/tokenscope?scope=private_registry_ui*
 #. Logout of the admin panel
 
+.. _keepassx: https://www.keepassx.org/
+
 
 OpenID Connect and the User Registry are now setup to connect with each other.
-
-If you would like to interact with the OMS repositories on github, you will want
-to add an SSH keypair to the VM and github. This is not required to use the demo
-included in the VM, and is only necessary if you wish to update the code on the
-VM or push changes to a new repository of your own:
-
-#. Create your Github public/private key with ``ssh-keygen``, and hit enter
-   through all the prompts.
-#. Finally, get your Github key with ``cat /home/oms/.ssh/id_rsa.pub``, then `add
-   the key to your github account`_.
-
-.. _keepassx: https://www.keepassx.org/
-.. _add the key to your github account: https://github.com/settings/ssh
 
 
 .. _vm_contents:
@@ -211,11 +205,45 @@ Registry to use as it operates on our behalf.
    the *private_registry_ui* scope.
 
 
-Both GPS and Perguntus Demos will request tokens to access the APIs.
+Setup Perguntus and GPS Demo TAB
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The Demo on the VM is not optimized for interacting with a user on a cell phone
-(as with our deployments in the cloud), but we will update this documentation once
-the VM has been updated to do.
+The TABs have been deployed to the VM, there are only a few minor updates needed
+for the Apps to communicate properly with one another. For each of these admin
+panels, use the same default credentials previously noted.
+
+#. Browse to *http://<IP>/PerguntusBackend/admin/constance/config/* and update
+   the IP in the ``PERGUNTUS_PDS_SERVER`` and ``EMAIL_RECIPIENT`` config keys.
+#. Browse to *http://<IP>/GPSDemoPDS/admin/constance/config/* and update the IP
+   in the ``TOKENSCOPE_ENDPOINT`` config key.
+#. Browse to *http://<IP>/GPSUI/admin/constance/config/* and update the IP in
+   the ``OIDC_BASE_URL`` config key.
+
+Both GPS and Perguntus Demos will request tokens to access the APIs. You can see
+each demo best through their respective UI, eg *http://<IP>/PerguntusUI/* and
+*http://<IP>/GPSUI/*.
+
+.. note::
+
+   The Demo on the VM is not optimized for interacting with a user on a cell phone
+   (as with our deployments in the cloud), but we will update this documentation
+   once the VM has been updated to do.
+
+
+Using the VM for Development
+----------------------------
+
+If you would like to interact with the OMS repositories on github, you will want
+to add an SSH keypair to the VM and github. This is not required to use the demo
+included in the VM, and is only necessary if you wish to update the code on the
+VM or push changes to a new repository of your own:
+
+#. Create your Github public/private key with ``ssh-keygen``, and hit enter
+   through all the prompts.
+#. Finally, get your Github key with ``cat /home/oms/.ssh/id_rsa.pub``, then `add
+   the key to your github account`_.
+
+.. _add the key to your github account: https://github.com/settings/ssh
 
 
 Need one-on-one assistance?
