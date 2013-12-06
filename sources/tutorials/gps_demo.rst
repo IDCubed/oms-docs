@@ -80,10 +80,10 @@ Open the manifests for editing:
 .. code:: bash
 
    # this is where you'll find most OMS manifests
-   cd /var/oms/src/oms-core/manifests
+   oms% cd /var/oms/src/oms-core/manifests
    # update config in GPS Demo TAB manifests
-   vim GPSDemo.yaml
-   vim GPSDemoUI.yaml
+   oms% vim GPSDemo.yaml
+   oms% vim GPSDemoUI.yaml
 
 
 Deploy!
@@ -96,7 +96,7 @@ the Proximity app, and a test suite:
 .. code:: bash
 
    # specify `localhost` when prompted for a host
-   oms deploy -m GPSDemo.yaml
+   oms% oms deploy -m GPSDemo.yaml
    No hosts found. Please specify (single) host string for connection: localhost
 
 
@@ -105,7 +105,7 @@ Now deploy the UI (this ought to be a lot faster than the backend deployment):
 .. code:: bash
 
    # specify `localhost` when prompted for a host
-   oms deploy -m GPSDemoUI.yaml
+   oms% oms deploy -m GPSDemoUI.yaml
    No hosts found. Please specify (single) host string for connection: localhost
 
 
@@ -157,7 +157,7 @@ Finally, POST it to the Proximity app, updating the URL accordingly:
 
 .. code:: bash
 
-   curl -i -H "Authorization: Bearer INSERT_TOKEN_HERE" -X POST --data @reference.json -H "Content-Type: application/json" https://HOST.DOMAIN.TLD/Proximity/api/v1/clientlocation/
+   oms% curl -i -H "Authorization: Bearer INSERT_TOKEN_HERE" -X POST --data @reference.json -H "Content-Type: application/json" https://HOST.DOMAIN.TLD/Proximity/api/v1/clientlocation/
 
 
 Verifying the GPS Demo installation
@@ -169,7 +169,7 @@ First, make sure that your reference location was stored correctly:
 
 .. code:: bash
 
-   curl -i -H "Authorization: Bearer INSERT_TOKEN_HERE" https://HOST.DOMAIN.TLD/Proximity/api/v1/clientlocation/
+   oms% curl -i -H "Authorization: Bearer INSERT_TOKEN_HERE" https://HOST.DOMAIN.TLD/Proximity/api/v1/clientlocation/
 
 
 You should see a JSON-formatted response with the same information as in
@@ -179,7 +179,7 @@ Next, make sure that Funf Journal is uploading your data correctly:
 
 .. code:: bash
 
-   curl -i -H "Authorization: Bearer INSERT_TOKEN_HERE" https://HOST.DOMAIN.TLD/PDS/api/v1/location/
+   oms% curl -i -H "Authorization: Bearer INSERT_TOKEN_HERE" https://HOST.DOMAIN.TLD/PDS/api/v1/location/
 
 
 For each of these commands, you should see a JSON-formatted response with one or
@@ -194,7 +194,7 @@ within the radius from the reference location:
 
 .. code:: bash
 
-   curl -i -H "Authorization: Bearer INSERT_TOKEN_HERE" https://HOST.DOMAIN.TLD/Proximity/proximity/
+   oms% curl -i -H "Authorization: Bearer INSERT_TOKEN_HERE" https://HOST.DOMAIN.TLD/Proximity/proximity/
 
 
 The response body should look like this if you're close to the reference point:

@@ -47,12 +47,12 @@ You may prefer to rely on your OS and the software distribution/packaging
 available to you. As an example, in debian, installing VirtualBox 4.3 would look
 like:
 
-.. code::
+.. code:: bash
 
-   wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | sudo apt-key add -
-   echo "deb http://download.virtualbox.org/virtualbox/debian squeeze contrib non-free" > /etc/apt/sources.list.d/virtualbox.list
-   apt-get update
-   apt-get install virtualbox-4.3
+   oms% wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | sudo apt-key add -
+   oms% echo "deb http://download.virtualbox.org/virtualbox/debian squeeze contrib non-free" > /etc/apt/sources.list.d/virtualbox.list
+   oms% apt-get update
+   oms% apt-get install virtualbox-4.3
 
 
 Steps will differ for other Linux distributions. VirtualBox is also available for
@@ -115,7 +115,7 @@ to wrangle in OS on unruly boxen:
 
 .. code::
 
-   VBoxManage internalcommands createrawvmdk -filename /home/user/VirtualBox/raw_disk.vmdk -rawdisk /dev/sdb -partitions 3 -relative
+   oms% VBoxManage internalcommands createrawvmdk -filename /home/user/VirtualBox/raw_disk.vmdk -rawdisk /dev/sdb -partitions 3 -relative
 
 
 With the raw disk created, you can then add it to a new or existing VM just as

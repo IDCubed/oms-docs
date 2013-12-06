@@ -12,7 +12,6 @@ Each of these tutorials expect to be used on either the :ref:`importable virtual
 appliance <deploy_development_vm>` or an :ref:`OMS Host in the Cloud
 <kickstart_oms>`.
 
-
 .. toctree::
    :maxdepth: 1
 

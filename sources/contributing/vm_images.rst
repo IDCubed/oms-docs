@@ -61,7 +61,7 @@ process are distributed in the `packer module from oms-core`_.
 .. _packer module from oms-core: https://github.com/IDCubed/oms-core/tree/qa-develop/packer
 
 
-.. code::
+.. code:: bash
 
    local% mkdir -p /var/oms/src
    local% cd /var/oms/src/
@@ -104,7 +104,7 @@ provisioning provided by oms-kickstart. The same process would apply should you
 choose to reference different files in the templates used to build VM images with
 packer.
 
-.. code::
+.. code:: bash
 
    # locate OMS source code
    local% cd /var/oms/src/
@@ -182,7 +182,7 @@ Build some VM
 
 COM'ON, let's build some VM now! Easy:
 
-.. code::
+.. code:: bash
 
    local% packer build templates/tab_developer-virtualbox.json
 

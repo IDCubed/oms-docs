@@ -55,10 +55,10 @@ Open the manifests for editing:
 .. code:: bash
 
    # this is where you'll find most OMS manifests
-   cd /var/oms/src/oms-core/manifests
+   oms% cd /var/oms/src/oms-core/manifests
    # update config in Perguntus Demo TAB manifests
-   vim PerguntusDemo.yaml
-   vim PerguntusDemoUI.yaml
+   oms% vim PerguntusDemo.yaml
+   oms% vim PerguntusDemoUI.yaml
    
 
 Enabling or Disabling Perguntus CRON:
@@ -79,7 +79,7 @@ app the UI communicates with:
 .. code:: bash
 
    # specify `localhost` when prompted for a host
-   oms deploy -m PerguntusDemo.yaml
+   oms% oms deploy -m PerguntusDemo.yaml
    No hosts found. Please specify (single) host string for connection: localhost
 
 
@@ -88,7 +88,7 @@ Now deploy the UI, this ought to be a lot faster:
 .. code:: bash
 
    # specify `localhost` when prompted for a host
-   oms deploy -m PerguntusDemoUI.yaml
+   oms% oms deploy -m PerguntusDemoUI.yaml
    No hosts found. Please specify (single) host string for connection: localhost
 
 
