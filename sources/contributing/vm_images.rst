@@ -41,11 +41,15 @@ of prebuilt binaries. `Here are the installation docs`_.
 .. _distributed as a zip archive: http://www.packer.io/downloads.html
 .. _here are the installation docs: http://www.packer.io/docs/installation.html
 
+Here they are as well:
 
-Unzip the archive, your user's home (``~``), ``/usr/local/bin/packer/`` or
-``/usr/local/packer/`` are good locations. Update your ``PATH`` to include this
-directory. Test to confirm with ``packer -v``, you should see somethinv like
-``Packer v0.4.0``.
+#. Unzip the archive. Your user's home (``~/packer/``), or a path such as
+   ``/usr/local/bin/packer/`` or ``/usr/local/packer/`` are good locations.
+#. Update the ``PATH`` shell environment variable to include this directory. This
+   detail will depend on the shell you use. If using bash, something like this
+   should suffice: ``echo "export PATH=$PATH:$HOME/packer/" >> ~/.bash_aliases``.
+   To activate this for the open shell, ``source ~/.bash_aliases``.
+#. Test to confirm with ``packer -v``, you should see something like ``Packer v0.4.0``.
 
 
 Get the templates
@@ -59,9 +63,11 @@ process are distributed in the `packer module from oms-core`_.
 
 .. code::
 
-   git clone git@github.com:IDCubed/oms-core.git
-   git checkout qa-develop
-   cd packer
+   local% mkdir -p /var/oms/src
+   local% cd /var/oms/src/
+   local% git clone git@github.com:IDCubed/oms-core.git
+   local% git checkout qa-develop
+   local% cd packer
 
 
 Review and Update the Templates
@@ -77,6 +83,100 @@ You may wish to update the details of this manifest. The user variables have bee
 defined at the top for your convenience.
 
 
+Setup Kickstart
+---------------
+
+The ``uploads`` directory of the packer module included in ``oms-core`` does not
+include any of the files (config and scripts) referenced by the templates in the
+module - it is expected these would be provided by the user of this module. They
+may be included in the future, though the details of this have yet to be
+determined.
+
+.. note::
+
+   the absence of these files will not cause the basic build to fail, but *will*
+   cause the more complete builds to fail. Be sure to review the uploads path,
+   and confirm it contains the files you need in the version you desire.
+
+
+Let's populate the uploads directory so we can run the automated system
+provisioning provided by oms-kickstart. The same process would apply should you
+choose to reference different files in the templates used to build VM images with
+packer.
+
+.. code::
+
+   # locate OMS source code
+   local% cd /var/oms/src/
+   # we will use the packer module in oms-core
+   local% cd oms-core/packer/
+   # copy the kickstart python script from oms-kickstart
+   local% cp ../../oms-kickstart/kickstart-oms.py ../../oms-kickstart/release.yaml ./uploads/
+
+
+The kickstart script, along with steps run by salt later in the provisioning
+process, will need to checkout code from the OMS git repos on Github. Some of the
+repositories require authentication, and the build process is expected to run as
+a completely automated process, so SSH keys are needed by the build system to
+successfully create the VM image..
+
+This is the same as when deploying OMS in the cloud, we do this just before running
+kickstart. In this case, if we create the files, packer is setup to provide them
+to the VM before kickstarting the OMS deployment to the VM.
+
+We need both a public and private SSH key:
+
+.. code:: bash
+
+   # assuming the current working directory is /var/oms/src/oms-core/packer
+   local% pwd
+   /var/oms/src/oms-core/packer
+   local% ssh-keygen
+   Generating public/private rsa key pair.
+   Enter file in which to save the key (/root/.ssh/id_rsa): /var/oms/src/oms-core/packer/uploads/.ssh/id_rsa
+   Enter passphrase (empty for no passphrase):
+   Enter same passphrase again:
+   Your identification has been saved in /var/oms/src/oms-core/packer/uploads/.ssh/id_rsa.
+   Your public key has been saved in /var/oms/src/oms-core/packer/uploads/.ssh/id_rsa.pub.
+   The key fingerprint is:
+   0d:f2:09:b8:17:51:f9:08:4e:2c:c5:23:bf:3d:48:95 root@oms
+   The key's randomart image is:
+   +--[ RSA 2048]----+
+   | +..o o oo       |
+   |. @  =.=E.       |
+   |    .o .2-0      |
+   |                 |
+   |    . + S .      |
+   | o   skj2o       |
+   |     .   .       |
+   |    . + S .      |
+   |                 |
+   +-----------------+
+   local% ls -alh uploads/.ssh/
+   total 8
+   drwxr-xr-x  2 root  root     5B Dec  6 10:54 .
+   drwxr-xr-x  4 root  root     4B Dec  3 15:00 ..
+   -rw-r--r--  1 root  root    77B Dec  3 02:10 README.rst
+   -rw-------  1 root  root   1.7k Dec  6 10:54 id_rsa
+   -rw-r--r--  1 root  root   398B Dec  6 10:54 id_rsa.pub
+
+
+If you are building an image for personal use (eg not for public distribution),
+or if you intend on making some *post-production* tweaks to the VM before
+releasing the image, you can provide the VM with an authorized_keys file:
+
+.. code:: bash
+
+   local% cat /home/<you>/.ssh/id_rsa.pub >> uploads/.ssh/authorized_keys
+
+
+Note that this is optional, but may provide a simpler flow for what you need to
+do with the VM image after it is built. If you do not see the VM with an
+authorized_keys file, SSH will prompt for password authentication when you connect
+to the VM. The password the user is created with is defined in the template used
+to build the VM.
+
+
 Build some VM
 -------------
 
@@ -84,7 +184,7 @@ COM'ON, let's build some VM now! Easy:
 
 .. code::
 
-   packer build templates/tab_developer-virtualbox.json
+   local% packer build templates/tab_developer-virtualbox.json
 
 
 Packer will then:
@@ -103,5 +203,9 @@ Packer will then:
 
 
 You can then use VirtualBox to import this virtual appliance to create new VM as
-needed. This is a great setup for local development, custom deployments, and
-general hacking with OMS!
+needed, :ref:`The import process is detailed here <import_vbox_vm_image>`. This is
+a great setup for local development, custom deployments, and general hacking with
+OMS!
+
+
+.. include:: /snippets/get_help_footer.inc

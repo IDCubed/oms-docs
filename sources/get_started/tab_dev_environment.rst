@@ -76,6 +76,8 @@ Get Started - Prerequisites
 .. _linux link?: http://example.com
 
 
+.. _import_vbox_vm_image:
+
 Configure and Start the VM
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
