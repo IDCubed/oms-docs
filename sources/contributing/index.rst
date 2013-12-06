@@ -12,7 +12,7 @@ Contributing to OMS
 Start first by reviewing `this document on the OMS Wiki`_ for a walkthrough of
 some of our development processes.
 
-.. _this document on the OMS Wiki: https://wiki.idhypercubed.org/wiki/ProjectDocumentation
+.. _this document on the OMS Wiki: https://wiki.idhypercubed.org/wiki/ProjectDocumentation#Developer_Resources
 
 
 When you are ready to start hacking, you can either download and setup the OMS
