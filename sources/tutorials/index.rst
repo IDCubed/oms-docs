@@ -8,9 +8,10 @@
 Tutorials
 =========
 
-Here are some examples of how to use OMS to create TABs,
-starting from a very simple *Hello World* and progressing
-to more complex, real-world Applications like you might find in production.
+Each of these tutorials expect to be used on either the :ref:`importable virtual
+appliance <deploy_development_vm>` or an :ref:`OMS Host in the Cloud
+<kickstart_oms>`.
+
 
 .. toctree::
    :maxdepth: 1

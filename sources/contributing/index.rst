@@ -27,8 +27,8 @@ and includes a running private TCC.
 :ref:`Kickstart a new Ubuntu 12.04 LTS host with this guide <kickstart_oms>`.
 
 
-Details related to a specific component
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+With an OMS development environment setup, you can get started contributing to
+OMS. See each section below based on where your contributions will be made:
 
 .. toctree::
    :maxdepth: 1
