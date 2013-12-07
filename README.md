@@ -90,12 +90,18 @@ others have great docs rendered with sphinx.
 
 ### Adding New Sections
 
-A top-level section will need a new directory created under ``sources`` as well
-as an entry in ``sources/toctree.rst``, such as: ``API <api/index>``. Then
-create ``sources/new_section/index.rst``. If the new section will only have a
-single page, add all section content to this file. If the new section will have
-sub-sections, create each as another page within ``sources/new_section/`` and
-leave ``sources/new_section/index.rst`` with just a ``toctree`` directive like:
+A top-level section will need the following:
+
+* a new section entry in the Table of Contents (toctree) defined in
+  ``sources/toctree.rst``, such as: ``Get Started with OMS <get_started/index>``.
+  `Get Started with OMS` would be added to the navigation menu as a top-level
+  section, and sphinx will expect to find an ``index.rst`` in this directory.
+* a new directory created under ``sources``, for example ``sources/get_started``
+* create the ``index.rst``, eg: ``sources/get_started/index.rst``. If the new
+  section will only have a single page, add all section content to this file.
+* If the new section will have sub-sections, create each as another page within
+  ``sources/get_started/`` and leave ``sources/get_started/index.rst`` with just
+  a ``toctree`` directive like:
 
   ```
     .. toctree::
@@ -106,6 +112,7 @@ leave ``sources/new_section/index.rst`` with just a ``toctree`` directive like:
        Trust Network <trust_network>
   ```
 
+See the actual oms-docs source as existing examples.
 
 
 ### Headings
