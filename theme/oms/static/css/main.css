@@ -377,6 +377,10 @@ div.alert.alert-block {
    text-decoration: none;
 }
 
+.sidebar ul li.toctree-l1 a:hover {
+   text-decoration: underline;
+}
+
 .sidebar ul li a.trigger-collapse {
     position: absolute;
     right: 10px;
@@ -384,6 +388,10 @@ div.alert.alert-block {
     font-size: 1.4em;
     color: rgba(31, 61, 92, 0.7);
 
+}
+
+.sidebar ul li a.trigger-collapse:hover {
+    text-decoration: none;
 }
 
 .sidebar ul li.open a.trigger-collapse {

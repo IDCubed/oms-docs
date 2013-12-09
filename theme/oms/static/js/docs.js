@@ -28,8 +28,8 @@ $(function(){
     );
     $('.trigger-collapse').tooltip();
 
-    $('.sidebar > ul > li > .trigger-collapse').click(function(){
-        var li = $(this).parent();
+    $('.sidebar > ul > li.toctree-l1.has-children').click(function(){
+        var li = $(this);
         if(li.hasClass('open')){
             li.children('ul').slideUp(200, function() {
                 li.removeClass('open');
