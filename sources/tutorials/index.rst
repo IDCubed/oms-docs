@@ -18,6 +18,7 @@ appliance <deploy_development_vm>` or an :ref:`OMS Host in the Cloud
 
    Perguntus Demo <perguntus>
    GPS Demo <gps_demo>
+   Create a TAB <tab_tutorial>
    Install VirtualBox <install_virtualbox>
 
 .. Hello World Example <hello_world>
