@@ -36,3 +36,4 @@ OMS. See each section below based on where your contributions will be made:
    Documentation <documentation>
    OpenID Connect </oidc/developers_guide>
    Build OMS VM Images <vm_images>
+   Release Process <releases>
