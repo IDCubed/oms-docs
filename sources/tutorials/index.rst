@@ -20,6 +20,7 @@ appliance <deploy_development_vm>` or an :ref:`OMS Host in the Cloud
    Create a TAB <tab_tutorial>
    OIDC Tutorial <oidc_tutorial>
    Install VirtualBox <install_virtualbox>
+   Deploy in Docker <docker_tutorial>
 
 .. Hello World Example <hello_world>
    python_web_app
