@@ -11,6 +11,12 @@ TAB Development Tutorial
 This tutorial is a guide for developing Trusted Application Bundles (TABs) for
 the Open Mustard Seed (OMS) platform.
 
+.. note::
+
+  This tutorial should be used on either the :ref:`importable virtual
+  appliance <deploy_development_vm>` or an :ref:`OMS Host in the Cloud
+  <kickstart_oms>`.
+
 
 Introduction
 ------------
@@ -19,8 +25,15 @@ This tutorial is an easy-to-follow guide to developing TABs that leverage the
 power of the OMS framework. Throughout it, we develop a simple TAB, building
 it from scratch and adding OMS-supported features one step at a time.
 
-The modularity and reusability of OMS components make it easy to create
-full-featured applications in a short amount of time.
+We'll cover the following topics:
+
+* `Creating a TAB`_
+* `Adding the API Console`_
+* `Adding Django Admin support`_
+* `Adding django-constance support`_
+* `Adding OpenID Connect validation`_
+* `Adding PDS support`_
+* `OMS FACT API Transforms`_
 
 
 Creating a TAB
@@ -38,16 +51,50 @@ Another way to go about this would be to start with a deployable manifest and
 build out from there.
 
 
-Create a Basic Django Project
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Creating a basic Django project
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Let's start with a Django project with a single Tastypie-enabled app called
-``location``.  We'll convert the Django project to an OMS app and the Django
-app to an OMS module.
+Let's start with a Django project called ``locationproj`` with a single
+Tastypie-enabled app called ``pds``.  We'll convert the Django project to an
+OMS app and the Django app to an OMS module.
 
-The ``INSTALLED_APPS`` setting in the ``settings.py`` file for this project
-looks like this (we'll need this later when we set up the manifest for the
-TAB).
+Follow these steps in the shell to create a virtual environment, install the
+dependencies, and set up a project with a single app:
+
+.. code:: bash
+
+  oms% cd
+  oms% pip install virtualenv
+  oms% mkdir locationvenv
+  oms% cd locationvenv
+  oms% virtualenv .
+  oms% . bin/activate
+  oms% pip install Django<1.6
+  oms% pip install django-tastypie
+  oms% django-admin.py startproject locationproj
+  oms% cd locationproj
+  oms% python manage.py startapp pds
+
+
+Now, open ``~/locationvenv/locationproj/locationproj/settings.py``. Update the
+``ENGINE`` and ``NAME`` settings under the ``DATABASE`` setting so it looks
+like this:
+
+.. code:: python
+
+  DATABASES = {
+      'default': {
+          'ENGINE': 'django.db.backends.sqlite3',  # added
+          'NAME': 'dev.db',  # added
+          'USER': '',
+          'PASSWORD': '',
+          'HOST': '',
+          'PORT': '',
+      }
+  }
+
+
+Next, scroll down and add your new ``pds`` app to ``INSTALLED_APPS``:
 
 .. code:: python
 
@@ -58,60 +105,19 @@ TAB).
       'django.contrib.sites',
       'django.contrib.messages',
       'django.contrib.staticfiles',
-      'location',
+      'pds',  # added
   )
 
 
-The ``location`` app contains three files:
-
-* ``__init__.py`` (empty)
-* ``models.py``
-* ``api.py``
-* ``views.py``
-
-This is ``models.py``:
-
-.. code:: python
-
-  from django.db import models
-
-  class Location(models.Model):
-      latitude = models.FloatField()
-      longitude = models.FloatField()
-
-
-This is ``api.py``:
-
-.. code:: python
-
-  from tastypie.resources import ModelResource
-
-  from location.models import Location
-
-  class LocationResource(ModelResource):
-      class Meta:
-          queryset = Location.objects.all()
-          resource_name = 'location'
-
-
-This is ``views.py``
-
-.. code:: python
-
-  from django.http import HttpResponse
-
-  def ok(request):
-      return HttpResponse('ok')
-
-
-Additionally, the ``urls.py`` file for the project looks like this:
+Now, open ``~/locationvenv/locationproj/locationproj/urls.py``. Update it so it
+looks like so:
 
 .. code:: python
 
   from django.conf.urls import patterns, include, url
   from tastypie.api import Api
 
-  from location.api import LocationResource
+  from pds.api import LocationResource
 
   v1_api = Api(api_name='v1')
   v1_api.register(LocationResource())
@@ -122,101 +128,402 @@ Additionally, the ``urls.py`` file for the project looks like this:
   )
 
 
-Create OMS-Compatible Modules
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Now we'll focus on the ``pds`` app, which is located in
+``~/locationvenv/locationproj/pds``. We want to set it up so it contains
+these files:
 
-OMS apps are collections of OMS modules.
+* ``__init__.py`` (empty)
+* ``models.py``
+* ``api.py``
+* ``views.py``
 
-We can take our ``location`` app and convert it into an OMS module
-by copying it from the Django project into the top level of a git repository
-(we'll use the fictional ``oms-example`` repo).
+Update the three files with the following code:
 
-Next, we need to copy ``urls.py`` into the new module, ensuring that it
-contains only the code relevant to that module (not a problem for the
-``location`` module).
-
-Finally, we need to update the code so that references to the ``location``
-module are prefixed with ``modules.`` (this is because all modules are placed
-in the ``modules`` package during deployment).  Therefore, we need to update
-the import in ``api.py``:
+``~/locationvenv/locationproj/pds/models.py``:
 
 .. code:: python
 
+  from django.db import models
+
+  class Location(models.Model):
+      latitude = models.FloatField()
+      longitude = models.FloatField()
+
+
+``~/locationvenv/locationproj/pds/api.py``:
+
+.. code:: python
+
+  from tastypie.authorization import Authorization
   from tastypie.resources import ModelResource
 
-  from modules.location.models import Location  # adding "modules."
+  from pds.models import Location
 
   class LocationResource(ModelResource):
       class Meta:
           queryset = Location.objects.all()
           resource_name = 'location'
+          authorization = Authorization()
 
 
-We also need to do this for ``urls.py``:
+``~/locationvenv/locationproj/pds/views.py``
+
+.. code:: python
+
+  from django.http import HttpResponse
+
+  def ok(request):
+      return HttpResponse('ok')
+
+
+Accessing API endpoints
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Let's start the development server:
+
+.. code:: bash
+
+  oms% python manage.py runserver
+
+
+.. note::
+
+  The development server will run on port 8000.
+
+
+Open a new shell. We'll be using the cURL program to check out our API
+endpoints.
+
+First, let's look at the topmost endpoint available to us. The ``/api/v1/``
+endpoint lists all the model endpoints available. For each of these, we are
+provided with a their schema and list endpoints. Our app has one endpoint
+called ``location``:
+
+.. code:: bash
+
+  oms% curl http://localhost:8000/api/v1/
+  {
+      "location": {
+          "list_endpoint": "/api/v1/location/",
+          "schema": "/api/v1/location/schema/"
+      }
+  }
+
+
+The first endpoint under the ``location`` endpoint is the ``schema`` endpoint,
+which provides detailed information about the resource schema:
+
+.. code:: bash
+
+  oms% curl http://localhost:8000/api/v1/location/schema/
+  {
+      "allowed_detail_http_methods": [
+          "get",
+          "post",
+          "put",
+          "delete",
+          "patch"
+      ],
+      "allowed_list_http_methods": [
+          "get",
+          "post",
+          "put",
+          "delete",
+          "patch"
+      ],
+      "default_format": "application/json",
+      "default_limit": 20,
+      "fields": {
+          "id": {
+              "blank": true,
+              "default": "",
+              "help_text": "Integer data. Ex: 2673",
+              "nullable": false,
+              "readonly": false,
+              "type": "integer",
+              "unique": true
+          },
+          "latitude": {
+              "blank": false,
+              "default": "No default provided.",
+              "help_text": "Floating point numeric data. Ex: 26.73",
+              "nullable": false,
+              "readonly": false,
+              "type": "float",
+              "unique": false
+          },
+          "longitude": {
+              "blank": false,
+              "default": "No default provided.",
+              "help_text": "Floating point numeric data. Ex: 26.73",
+              "nullable": false,
+              "readonly": false,
+              "type": "float",
+              "unique": false
+          },
+          "resource_uri": {
+              "blank": false,
+              "default": "No default provided.",
+              "help_text": "Unicode string data. Ex: \"Hello World\"",
+              "nullable": false,
+              "readonly": true,
+              "type": "string",
+              "unique": false
+          }
+      }
+  }
+
+
+The second endpoint under the ``location`` endpoint is the ``list_endpoint``,
+which lists all the resources, along with some useful metadata:
+
+* ``total_count``: the total number of objects in this query
+* ``limit``: the number of items returned in a single HTTP response
+* ``offset``: the offset from the beginning of the query
+* ``previous`` and ``next``: links to adjacent pages in the query
+
+.. code:: bash
+
+  oms% curl http://localhost:8000/api/v1/location/
+  {
+      "meta": {
+          "limit": 20,
+          "next": null,
+          "offset": 0,
+          "previous": null,
+          "total_count": 2
+      },
+      "objects": [
+          {
+              "id": 1,
+              "latitude": 42.0,
+              "longitude": -71.0,
+              "resource_uri": "/api/v1/location/1/"
+          },
+          {
+              "id": 2,
+              "latitude": 42.0,
+              "longitude": -72.0,
+              "resource_uri": "/api/v1/location/2/"
+          }
+      ]
+  }
+
+
+There also exists another type of endpoint called the detail endpoint. Whereas
+the list endpoint lists all the resources, the detail endpoint provides
+information about a single object. This object is specified by adding the
+``id`` to the list endpoint:
+
+.. code:: bash
+
+  oms% curl http://localhost:8000/api/v1/location/1/
+  {
+      "id": 1,
+      "latitude": 42.0,
+      "longitude": -71.0,
+      "resource_uri": "/api/v1/location/1/"
+  }
+
+
+CRUD operations
+~~~~~~~~~~~~~~~
+
+CRUD operations are supported by POSTing to the list endpoint (*create*),
+GETting from the list and detail endpoints (*read*), PUTting or PATCHing to the
+detail endpoint (*update*), and DELETEing at the detail endpoint (*delete*).
+
+To create an object:
+
+.. code:: bash
+
+  oms% curl -X POST -H "Content-Type: application/json" --data '{"latitude": 42.0, "longitude": -73.0}' http://localhost:8000/api/v1/location/
+
+
+To update an object:
+
+.. code:: bash
+
+  oms% curl -X PUT -H "Content-Type: application/json" --data '{"latitude": 41.0, "longitude": -73.0}' http://localhost:8000/api/v1/location/3/
+
+
+To read all the objects;
+
+.. code:: bash
+
+  oms% curl http://localhost:8000/api/v1/location/
+  {
+      "meta": {
+          "limit": 20,
+          "next": null,
+          "offset": 0,
+          "previous": null,
+          "total_count": 3
+      },
+      "objects": [
+          {
+              "id": 1,
+              "latitude": 42.0,
+              "longitude": -71.0,
+              "resource_uri": "/api/v1/location/1/"
+          },
+          {
+              "id": 2,
+              "latitude": 42.0,
+              "longitude": -72.0,
+              "resource_uri": "/api/v1/location/2/"
+          },
+          {
+              "id": 3,
+              "latitude": 41.0,
+              "longitude": -73.0,
+              "resource_uri": "/api/v1/location/3/"
+          }
+      ]
+  }
+
+
+To read a single object:
+
+.. code:: bash
+
+  oms% curl http://localhost:8000/api/v1/location/3/
+  {
+      "id": 3,
+      "latitude": 41.0,
+      "longitude": -73.0,
+      "resource_uri": "/api/v1/location/3/"
+  }
+
+
+To delete an object:
+
+.. code:: bash
+
+  oms% curl -X DELETE http://localhost:8000/api/v1/location/3/
+
+
+We now have a working Django project with a single app, and we are ready to
+convert it into an OMS module.
+
+You can now deactivate your virtualenv:
+
+.. code:: bash
+
+  oms% deactivate
+
+
+Creating OMS-compatible modules
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+OMS apps are collections of OMS modules.
+
+We can take our ``pds`` app and convert it into an OMS module by copying it
+from the Django project into the top level of a git repository.
+
+Let's assume you have an empty git repo that you're going to use for this
+project. We'll clone it here and put our new code in it.
+
+.. code:: bash
+
+  oms% cd /var/oms/src
+  oms% git clone https://github.com/IDCubed/oms-example.git
+  oms% cd /var/oms/src/oms-example
+  oms% cp -r ~/locationvenv/locationproj/pds /var/oms/src/oms-example
+
+
+.. note::
+
+  Make sure to use your own repo instead of the fictional ``oms-example`` repo.
+
+
+Next, we need to copy ``urls.py`` into the new module, ensuring that it
+contains only the code relevant to that module (not a problem for the ``pds``
+module).
+
+.. code:: bash
+
+  oms% cp ~/locationvenv/locationproj/locationproj/urls.py /var/oms/src/oms-example/pds
+
+
+Finally, we need to update the code so that references to the ``pds`` module
+are prefixed with ``modules.`` (this is because all modules are placed in the
+``modules`` package during deployment).
+
+``/var/oms/src/oms-example/pds/api.py``:
+
+.. code:: python
+
+  from tastypie.authorization import Authorization
+  from tastypie.resources import ModelResource
+
+  from modules.pds.models import Location  # adding "modules."
+
+  class LocationResource(ModelResource):
+      class Meta:
+          queryset = Location.objects.all()
+          resource_name = 'location'
+          authorization = Authorization()
+
+
+``/var/oms/src/oms-example/pds/urls.py``:
 
 .. code:: python
 
   from django.conf.urls import patterns, include, url
   from tastypie.api import Api
 
-  from modules.location.api import LocationResource  # adding "modules."
+  from modules.pds.api import LocationResource  # adding "modules."
 
   v1_api = Api(api_name='v1')
   v1_api.register(LocationResource())
 
   urlpatterns = patterns('',
       url(r'^api/', include(v1_api.urls)),
-      url(r'^ok/$', 'modules.location.views.ok'),  # adding "modules."
+      url(r'^ok/$', 'modules.pds.views.ok'),  # adding "modules."
   )
 
 
-Create a Deployable Manifest
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Creating a deployable manifest
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A manifest is file that describes and configures a TAB. It is used by
-oms-deploy to deploy the TAB into a TCC. Manifests can then be combined with
-other applications, bundled together in a *manifest collection*, and even
-imported into an OMS Registry to be deployed from a web interface.
+A manifest is a file that describes and configures a TAB. It is used by
+oms-deploy to deploy the TAB into a TCC.
+
+Manifests can be combined with other applications, bundled together in a
+*manifest collection*, and even imported into an OMS Registry to be deployed
+from a web interface.
 
 Manifests are in `YAML <http://www.yaml.org>`_ format. They also support
 templating, so that variable data (such as hostnames) can be factored out and
 placed in ``/var/oms/etc/deploy.conf``. During deployment, the manifest is
 rendered using the variable definitions in ``deploy.conf``.
 
-``deploy.conf`` uses a simple key-value syntax using the ``:`` separator.  For
-example:
-
-.. code::
-
-  ssl_setup: True
-  hostname: foo.example.com
-  oidc_base_url: https://oidc.example.com/idoic
-
-
-In our TAB, the manifest looks like this:
+Create a manifest for our TAB in ``~/Location.yaml``:
 
 .. code:: yaml
 
   deploy:
     apps:
-      - location
+      - pds
 
   module_repos:
     oms-core: https://github.com/IDCubed/oms-core
     oms-example: https://github.com/IDCubed/oms-example
 
-  location:
+  pds:
     template: sandbox
-    instance: Location
+    instance: PDS
     ssl: {{ ssl_setup }}
     debug: True
+    run_tests: False
 
     pip_requirements:
-      - Django==1.5.5
+      - Django<1.6
       - django-tastypie
 
     modules:
-      - oms-example/location
+      - oms-example/pds
 
     installed_apps:
       - django.contrib.auth
@@ -225,10 +532,21 @@ In our TAB, the manifest looks like this:
       - django.contrib.sites
       - django.contrib.messages
       - django.contrib.staticfiles
-      - modules.location
+      - modules.pds
 
     urls:
-      - url(r'', include('modules.location.urls'))
+      - url(r'', include('modules.pds.urls'))
+
+
+``deploy.conf`` uses a simple key-value syntax using the ``:`` separator.
+Update it so it provides a value for ``ssl_setup`` variable in the manifest,
+using ``True`` or ``False`` depending on your TCC's SSL setup:
+
+``/var/oms/etc/deploy.conf``:
+
+.. code::
+
+  ssl_setup: False
 
 
 Some notes about the contents of this manifest:
@@ -242,78 +560,210 @@ Some notes about the contents of this manifest:
   mirroring Django's ``INSTALLED_APPS`` setting.
 * The ``urls`` parameter lists the URLs for this TAB, pointing to the
   ``urls.py`` in the ``location`` module.
-* ``ssl_setup`` must be defined with ``True`` or ``False`` in ``deploy.conf``.
 
-Manifests also support other parameters (e.g. ``urls_snippet``,
-``settings_snippet``).
+Manifests also support other parameters, which we'll explore in the sections
+below.
 
 This example manifest describes a simple but complete TAB. We'll be fleshing it
 out with additional features in the sections that follow.
 
+.. note::
 
-..
-  Create a TAB
-  ~~~~~~~~~~~~
-
-  Create a manifest collection to serve as the TAB for this app. This is
-  primarily a step related to TABs installed from/through the web interface of a
-  Registry. It is OK to skip this step if developing and working from the command
-  line (and thus deploying TABs from manifests as ``.yaml`` files).
+  You can now deploy the manifest using the command ``oms deploy -m
+  ~/Location.yaml``. The TAB will be installed in ``/var/oms/python/PDS``.
+  Redeploy your TAB anytime you update your source code.
 
 
-Create a Manifest for an Existing Django Project
-------------------------------------------------
+Adding a UI
+-----------
 
-As an aside from our location example, it is also possible to use OMS to deploy
-an existing Django project from a git repository, rather than the default of
-compiling a Django project from modules pulled together from various module
-repositories.
+Let's add a web interface to our TAB.
 
-Here is an example using an application called OpenPDS:
+First, create a template along with its parent directory in our module:
+
+.. code:: bash
+
+  oms% mkdir /var/oms/src/oms-example/pds/templates
+  oms% touch /var/oms/src/oms-example/pds/templates/locations.html
+
+
+Let's make a template that lists the stored locations:
+
+``/var/oms/src/oms-example/pds/templates/locations.html``:
+
+.. code:: html
+
+  <html>
+    <head>
+      <title>Locations</title>
+    </head>
+    <body>
+      <table>
+        {% for location in locations %}
+        <tr>
+          <td>
+            {{ location.latitude}}, {{ location.longitude }}
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td>
+            No locations
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    </body>
+  </html>
+
+
+Now, let's add a view for this template:
+
+``/var/oms/src/oms-example/pds/views.py``:
+
+.. code:: python
+
+  from django.http import HttpResponse
+  from django.shortcuts import render_to_response
+
+  from modules.pds.models import Location
+
+  def ok(request):
+      return HttpResponse('ok')
+
+  def locations(request):  # new view
+      locations = Location.objects.all()
+      return render_to_response('locations.html', {'locations': locations})
+
+
+The last step is add a URL for our view:
+
+``/var/oms/src/oms-example/pds/urls.py``:
+
+.. code:: python
+
+  from django.conf.urls import patterns, include, url
+  from tastypie.api import Api
+
+  from modules.pds.api import LocationResource
+
+  v1_api = Api(api_name='v1')
+  v1_api.register(LocationResource())
+
+  urlpatterns = patterns('',
+      url(r'^api/', include(v1_api.urls)),
+      url(r'^ok/$', 'modules.pds.views.ok'),
+      url(r'^locations/$', 'modules.pds.views.locations'),  # new URL
+  )
+
+
+Now you can redeploy, and the new UI will be available at
+http://HOST.TLD/PDS/locations/ (or https).
+
+
+Adding the API Console
+----------------------
+
+The API Console is an optional but useful tool to help you test and debug your
+API endpoints. It presents a simple, clean web UI in which you can craft HTTP
+requests to--and receive responses from--your app's endpoints, avoiding the
+need to rely on other tools.
+
+Update your manifest to include the module and its dependencies:
+
+.. code:: yaml
+
+  modules:
+    - oms-core/static
+    - oms-core/templates
+    - oms-core/api_console
+
+
+Install the API Console:
+
+.. code:: yaml
+
+  installed_apps:
+    - modules.api_console
+
+
+Finally, add the URL for the console:
+
+.. code:: yaml
+
+  urls_snippet: |
+    from django.views.generic import TemplateView
+
+  urls: |
+    - url(r'^console/$', TemplateView.as_view(template_name='console.html'))
+
+
+Now our manifest looks like this:
 
 .. code:: yaml
 
   deploy:
     apps:
-      - openpds
+      - pds
 
+  module_repos:
+    oms-core: https://github.com/IDCubed/oms-core
+    oms-example: https://github.com/IDCubed/oms-example
 
-  openpds:
-    compile: False
-    instance: openpds
-    project_name: OMS-PDS
-    vhost: localhost
+  pds:
+    template: sandbox
+    instance: PDS
+    ssl: {{ ssl_setup }}
+    debug: True
+    run_tests: False
 
     pip_requirements:
-      - Django==1.5.4
-      - django-tastypie==0.9.15
-      - mongoengine
-      - django-celery
-      - pymongo
-      - requests
-      - django-extensions
-      - django-uni-form
+      - Django<1.6
+      - django-tastypie
 
-    repo:
-      branch: MITv0.4
-      name: OMS-PDS
-      url: 'https://github.com/IDCubed/OMS-PDS/'
+    modules:
+      - oms-core/static
+      - oms-core/templates
+      - oms-core/api_console
+      - oms-example/pds
+
+    installed_apps:
+      - django.contrib.auth
+      - django.contrib.contenttypes
+      - django.contrib.sessions
+      - django.contrib.sites
+      - django.contrib.messages
+      - django.contrib.staticfiles
+      - modules.api_console
+      - modules.pds
+
+    urls_snippet: |
+      from django.views.generic import TemplateView
+
+    urls:
+      - url(r'^console/$', TemplateView.as_view(template_name='console.html'))
+      - url(r'', include('modules.pds.urls'))
 
 
-This will deploy the OMS-PDS Django project from GitHub, checking out the
-``MITv0.4`` branch in the process. This would result in the following:
+After you redeploy, the API Console will be available at
+http://HOST.TLD/PDS/console/ (or https).
 
-* a virtualenv created for the ``openpds`` project at
-  ``/var/oms/python/openpds/``
-* the OMS-PDS git repo cloned from GitHub to ``$virtualenv/OMS-PDS/``
-* in this case, the OMS-PDS git repo has a Django project now available at
-  ``$virtualenv/OMS-PDS/oms_pds/``
-* all project dependencies listed in
-  ``$virtualenv/OMS-PDS/conf/requirements.txt`` are installed into the
-  virtualenv
-* no scripts, configs, etc. installed or fixtures loaded into the database
-* the ``vhost`` parameter can be ignored in this example
-* Nginx and uWSGI hooked up to serve up the application
+The main feature of the API Console is a form that allows you to tailor
+aspects of an HTTP request to an application endpoint. It gives you
+control of the URL (``Action URL``), HTTP method (``choose http method``),
+headers, as well as the body of the HTTP request (``data for
+POST/PUT/PATCH methods``).
+
+The ``Authorization Header`` field makes it simple to add the ``Authorization``
+header, and it will come in handy later when you need to submit an access token
+required by OpenID Connect authorization.
+
+Start by selecting ``get location list`` from the ``Actions`` dropdown. When
+you do this, the API Console will populate some of the other form fields,
+including the HTTP method (``GET``) and the URL
+(``/PDS/api/v1/location/?limit=1000``).
+
+Click ``Send``, and the response body will be displayed below the form.
 
 
 Adding Django Admin support
@@ -323,13 +773,12 @@ If you would like to enable support for the `Django Admin
 <https://docs.djangoproject.com/en/dev/ref/contrib/admin/>`_, you'll need to
 make some updates to your manifest.
 
-First, enable the Admin URLs:
+First, enable the Admin URLs in ``~/Location.yaml``:
 
 .. code:: yaml
 
   urls:
     - url(r'^admin/', include(admin.site.urls))
-    ...
 
 
 .. note::
@@ -350,7 +799,6 @@ Then, install the Admin (and its dependencies, if necessary) into your app:
     - django.contrib.sessions
     - django.contrib.messages
     - django.contrib.admin
-    ...
 
 
 Finally, install the fixture that creates an admin user for your app. You may
@@ -360,20 +808,89 @@ wish to edit this fixture to change the password. By default, the username is
 .. code:: yaml
 
   fixtures:
-    ...
     - oms-core/admin_user
 
 
-The Admin will be available at http://HOST.TLD/Location/admin/ (or https).
+Now our manifest looks like this:
+
+.. code:: yaml
+
+  deploy:
+    apps:
+      - pds
+
+  module_repos:
+    oms-core: https://github.com/IDCubed/oms-core
+    oms-example: https://github.com/IDCubed/oms-example
+
+  pds:
+    template: sandbox
+    instance: PDS
+    ssl: {{ ssl_setup }}
+    debug: True
+    run_tests: False
+
+    pip_requirements:
+      - Django<1.6
+      - django-tastypie
+
+    modules:
+      - oms-core/static
+      - oms-core/templates
+      - oms-core/api_console
+      - oms-example/pds
+
+    installed_apps:
+      - django.contrib.auth
+      - django.contrib.contenttypes
+      - django.contrib.sessions
+      - django.contrib.sites
+      - django.contrib.messages
+      - django.contrib.staticfiles
+      - django.contrib.admin
+      - modules.api_console
+      - modules.pds
+
+    urls_snippet: |
+      from django.views.generic import TemplateView
+
+    urls:
+      - url(r'^console/$', TemplateView.as_view(template_name='console.html'))
+      - url(r'^admin/', include(admin.site.urls))
+      - url(r'', include('modules.pds.urls'))
+
+    fixtures:
+      - oms-core/admin_user
+
+
+Of course, you also need an ``admin.py`` file for your module:
+
+``/var/oms/src/oms-example/pds/admin.py``:
+
+.. code:: python
+
+  from django.contrib import admin
+
+  from modules.pds.models import Location
+
+  class LocationAdmin(admin.ModelAdmin):
+      list_display = ['id', 'latitude', 'longitude']
+
+  admin.site.register(Location, LocationAdmin)
+
+
+After deployment, the Admin will be available at
+http://HOST.TLD/PDS/admin/ (or https).
 
 
 Adding django-constance support
 -------------------------------
 
-.. warning::
+.. note::
 
   Prerequisite: install the Django Admin as described in `Adding Django Admin
   support`_.
+
 
 If you would like to have the ability to update your app's settings while the
 app is running, you can use a Django plugin called `django-constance
@@ -386,18 +903,17 @@ but OMS uses the manifest for this purpose.
 .. warning::
 
   The latest release of django-constance (0.6) is not compatible with Django
-  1.6 .  Please update your manifest to use Django<1.6 with this plugin.
+  1.6.x .  Please update your manifest to use Django<1.6 with this plugin.
 
 
 To install django-constance, you'll need to make a few updates to your
-manifest.
+``~/Location.yaml`` manifest.
 
 First, install django-constance (with database support):
 
 .. code:: yaml
 
   pip_requirements:
-    ...
     - django-constance[database]
 
 
@@ -406,7 +922,6 @@ Then, install django-constance into your app:
 .. code:: yaml
 
   installed_apps:
-    ...
     - constance
     - constance.backends.database
 
@@ -423,11 +938,73 @@ For example:
 .. code:: yaml
 
   settings_snippet: |
-    ...
     CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
     CONSTANCE_CONFIG = {
-        'FOO': ('bar', 'my random setting'),
+        'REF_LATITUDE': ('42.0', 'reference latitude'),
+        'REF_LONGITUDE': ('-71.0', 'reference longitude'),
     }
+
+
+Now our manifest looks like this:
+
+.. code:: yaml
+
+  deploy:
+    apps:
+      - pds
+
+  module_repos:
+    oms-core: https://github.com/IDCubed/oms-core
+    oms-example: https://github.com/IDCubed/oms-example
+
+  pds:
+    template: sandbox
+    instance: PDS
+    ssl: {{ ssl_setup }}
+    debug: True
+    run_tests: False
+
+    pip_requirements:
+      - Django<1.6
+      - django-tastypie
+      - django-constance[database]
+
+    modules:
+      - oms-core/static
+      - oms-core/templates
+      - oms-core/api_console
+      - oms-example/pds
+
+    installed_apps:
+      - django.contrib.auth
+      - django.contrib.contenttypes
+      - django.contrib.sessions
+      - django.contrib.sites
+      - django.contrib.messages
+      - django.contrib.staticfiles
+      - django.contrib.admin
+      - constance
+      - constance.backends.database
+      - modules.api_console
+      - modules.pds
+
+    urls_snippet: |
+      from django.views.generic import TemplateView
+
+    urls:
+      - url(r'^console/$', TemplateView.as_view(template_name='console.html'))
+      - url(r'^admin/', include(admin.site.urls))
+      - url(r'', include('modules.pds.urls'))
+
+    settings_snippet: |
+      CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
+      CONSTANCE_CONFIG = {
+          'REF_LATITUDE': ('42.0', 'reference latitude'),
+          'REF_LONGITUDE': ('-71.0', 'reference longitude'),
+      }
+
+    fixtures:
+      - oms-core/admin_user
 
 
 Now you can use the settings stored with django-constance as you would if
@@ -436,51 +1013,59 @@ importing them from the Django's ``settings.py``:
 .. code:: python
 
   from constance import config
-  ...
-  token = config.FOO
+  from django.http import HttpResponse
+  from django.shortcuts import render_to_response
+
+  from modules.pds.models import Location
+
+  def ok(request):
+      return HttpResponse('ok')
+
+  def locations(request):
+      ref_location = float(config.REF_LATITUDE), float(config.REF_LONGITUDE)
+      locations = Location.objects.all()
+      for location in locations:
+          if (location.latitude, location.longitude) == (ref_location.latitude,
+                                                         ref_location.longitude)
+              location.matches_ref = True
+      return render_to_response('locations.html', {'locations': locations})
 
 
-django-constance in the frontend
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Some additional setup is required to use constance in the frontend.
-
-Override the hidden default ``TEMPLATE_CONTEXT_PROCESSORS`` setting by adding
-constance's context processor:
-
-.. code:: yaml
-
-  settings_snippet: |
-    ...
-    TEMPLATE_CONTEXT_PROCESSORS = (
-        'django.contrib.auth.context_processors.auth',
-        'django.core.context_processors.debug',
-        'django.core.context_processors.i18n',
-        'django.core.context_processors.media',
-        'django.core.context_processors.static',
-        'django.core.context_processors.tz',
-        'django.contrib.messages.context_processors.messages',
-        'constance.context_processors.config',
-    )
-
-
-You can now use constance variables in your templates:
+We'll need to update our template to make use of this new attribute:
 
 .. code:: html
 
-  <p>{{ config.FOO }}</p>
+  <html>
+    <head>
+      <title>Locations</title>
+    </head>
+    <body>
+      <table>
+        {% for location in locations %}
+        <tr>
+          <td>
+            {{ location.latitude}}, {{ location.longitude }}
+            {% if location.matches_ref %}
+            (matches)
+            {% endif %}
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td>
+            No locations
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    </body>
+  </html>
 
+
+Adding OpenID Connect validation
+--------------------------------
 
 .. note::
-
-  Remember to render your template with a ``RequestContext`` object instead of
-  the usual ``Context`` object.
-
-
-Add OpenID Connect Validation
------------------------------
-
-.. warning::
 
   * This section assumes you have an OIDC server online, along with at least
     one client and one associated scope.
@@ -497,7 +1082,6 @@ Update the TAB manifest to include the ``oic_validation`` module:
 .. code:: yaml
 
   modules:
-    ...
     - oms-core/oic_validation
 
 
@@ -506,7 +1090,6 @@ Include the libraries used by the ``oic_validation`` module:
 .. code:: yaml
 
   pip_requirements:
-    ...
     - requests
     - python-dateutil
     - pytz
@@ -518,27 +1101,101 @@ Add OIDC-related settings to constance:
 .. code:: yaml
 
   settings_snippet: |
-    ...
     CONSTANCE_CONFIG = {
-         ...
         'TOKENSCOPE_ENDPOINT': ('{{ oidc_base_url }}/tokenscope?scope={{ scope }}',
                                 'tokenscope endpoint'),
     }
 
 
-.. note::
+Now our manifest looks like this:
 
-  Don't forget to define the template variables in ``deploy.conf``.
+.. code:: yaml
+
+  deploy:
+    apps:
+      - pds
+
+  module_repos:
+    oms-core: https://github.com/IDCubed/oms-core
+    oms-example: https://github.com/IDCubed/oms-example
+
+  pds:
+    template: sandbox
+    instance: PDS
+    ssl: {{ ssl_setup }}
+    debug: True
+    run_tests: False
+
+    pip_requirements:
+      - Django<1.6
+      - django-tastypie
+      - django-constance[database]
+      - requests
+      - python-dateutil
+      - pytz
+      - django-constance[database]
+
+    modules:
+      - oms-core/static
+      - oms-core/templates
+      - oms-core/api_console
+      - oms-core/oic_validation
+      - oms-example/pds
+
+    installed_apps:
+      - django.contrib.auth
+      - django.contrib.contenttypes
+      - django.contrib.sessions
+      - django.contrib.sites
+      - django.contrib.messages
+      - django.contrib.staticfiles
+      - django.contrib.admin
+      - constance
+      - constance.backends.database
+      - modules.api_console
+      - modules.pds
+
+    urls_snippet: |
+      from django.views.generic import TemplateView
+
+    urls:
+      - url(r'^console/$', TemplateView.as_view(template_name='console.html'))
+      - url(r'^admin/', include(admin.site.urls))
+      - url(r'', include('modules.pds.urls'))
+
+    settings_snippet: |
+      CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
+      CONSTANCE_CONFIG = {
+          'TOKENSCOPE_ENDPOINT': ('{{ oidc_base_url }}/tokenscope?scope={{ scope }}',
+              'tokenscope endpoint'),
+          'REF_LATITUDE': ('42.0', 'reference latitude'),
+          'REF_LONGITUDE': ('-71.0', 'reference longitude'),
+      }
+
+    fixtures:
+      - oms-core/admin_user
+
+
+Remember to define the template variables.
+
+``/var/oms/etc/deploy.conf``:
+
+.. code::
+
+  oidc_base_url: https://oidc.example.com/idoic
+  scope: location
 
 
 To add OIDC validation to a Tastypie API endpoint, use the
-``OpenIdConnectAuthorization`` class:
+``OpenIdConnectAuthorization`` class.
+
+``/var/oms/src/oms-example/pds/api.py``:
 
 .. code:: python
 
   from tastypie.resources import ModelResource
 
-  from modules.location.models import Location
+  from modules.pds.models import Location
   from modules.oic_validation.authorization import OpenIdConnectAuthorization
 
   class LocationResource(ModelResource):
@@ -549,318 +1206,272 @@ To add OIDC validation to a Tastypie API endpoint, use the
 
 
 OIDC validation can also be added to a view using the ``validate_access_token``
-decorator:
+decorator.
+
+``/var/oms/src/oms-example/pds/views.py``:
 
 .. code:: python
 
   from django.http import HttpResponse
+  from django.shortcuts import render_to_response
 
+  from modules.pds.models import Location
   from modules.oic_validation.decorators import validate_access_token
 
   @validate_access_token
   def ok(request):
       return HttpResponse('ok')
 
+  @validate_access_token
+  def locations(request):
+      locations = Location.objects.all()
+      return render_to_response('locations.html', {'locations': locations})
+
+
+Let's redeploy the app and make sure that OpenID Connect validation is working.
+Afterwards, when accessing the protected URLs, we should get an HTTP 401 status
+code because we are not submitting an ``Authorization`` header with a valid
+access token.
+
+.. code:: bash
+
+  oms% curl -i https://HOST.TLD/PDS/api/v1/location/
+  HTTP/1.1 401 UNAUTHORIZED
+  Server: nginx/1.4.3
+  Date: Tue, 17 Dec 2013 08:33:35 GMT
+  Content-Type: text/html; charset=utf-8
+  Transfer-Encoding: chunked
+  Connection: keep-alive
+
+  oms% curl -i https://HOST.TLD/PDS/locations/
+  HTTP/1.1 401 UNAUTHORIZED
+  Server: nginx/1.4.3
+  Date: Tue, 17 Dec 2013 08:33:39 GMT
+  Content-Type: text/html; charset=utf-8
+  Transfer-Encoding: chunked
+  Connection: keep-alive
+
 
 OIDC in the frontend
 ~~~~~~~~~~~~~~~~~~~~
 
-If you require OIDC functionality in your UI, you need to make a few more updates.
+Let's create another app in which we'll use OIDC functionality in the frontend.
 
-Add a module containing the ``OMSOIDC.js`` library to your manifest:
+First, let's create a new module called ``ui`` for use in this app:
 
-.. code:: yaml
+.. code:: bash
 
-  modules:
-    ...
-    oms-core/static
-
-
-Add additional settings to constance:
-
-.. code:: yaml
-
-  settings_snippet: |
-    ...
-    CONSTANCE_CONFIG = {
-         ...
-        'TOKENSCOPE_ENDPOINT': ('{{ oidc_base_url }}/tokenscope?scope={{ scope }}',
-                                'tokenscope endpoint'),
-        'TOKEN_ENDPOINT': ('{{ oidc_base_url }}/token', 'token endpoint'),
-        'CLIENT_ID': ('{{ client_id }}', 'client id'),
-        'CLIENT_SECRET': ('{{ client_secret }}', 'client secret'),
-        'SCOPES': ('{{ scopes }}', 'scopes'),
-    }
+  oms% mkdir -p /var/oms/src/oms-example/ui/templates
+  oms% touch /var/oms/src/oms-example/ui/__init__.py
+  oms% touch /var/oms/src/oms-example/ui/models.py
+  oms% touch /var/oms/src/oms-example/ui/urls.py
+  oms% touch /var/oms/src/oms-example/ui/templates/ui.html
 
 
-.. note::
+We only need to create an HTML template and give it a URL.
 
-  Don't forget to define the template variables in ``deploy.conf``.
-
-
-In the templates where you require OIDC, make sure jQuery is available and add
-the following JavaScript snippet, which defines three variables required by
-``OMSOIDC.js``:
+``/var/oms/src/oms-example/ui/templates/ui.html``:
 
 .. code:: html
 
-  <script type="text/javascript">
-    var app_client = '{{ config.APP_CLIENT }}';
-    var app_scope = '{{ config.APP_SCOPE }}';
-    var oidc_base_url = '{{ config.OIDC_BASE_URL }}';
-    ...
-  </script>
-
-
-You must also include the ``OMSOIDC.js`` file in your templates:
-
-.. code:: html
-
-  <script src="{{ STATIC_URL }}js/OMSOIDC.js"></script>
-
-
-.. note::
-
-  * ``STATIC_URL`` points to the server location where the static content is
-    stored and is automatically defined for you.
-
-
-``OMSOIDC.js`` will intercept jQuery's ``ajax`` calls, adding the
-``Authorization`` header containing an access token to your HTTP requests. The
-access token is obtained during the first AJAX request, when the user is
-temporarily redirected to the OIDC server. The token is then cached in a cookie
-for later use.
-
-
-Adding the API Console
-----------------------
-
-The API Console is an optional but useful tool to help you test and debug your
-API endpoints. It presents a simple, clean web UI in which you can craft HTTP
-requests to--and receive responses from--your app's endpoints, avoiding the need to
-rely on other tools.
-
-Update your manifest to include the module and its dependencies:
-
-.. code:: yaml
-
-  modules:
-    ...
-    - oms-core/static
-    - oms-core/templates
-    - oms-core/api_console
-
-
-Install the API console:
-
-.. code:: yaml
-
-  installed_apps:
-    ...
-    - modules.api_console
-
-
-Finally, add the URL for the console:
-
-.. code:: yaml
-
-  urls_snippet: |
-    ...
-    from django.views.generic import TemplateView
-
-  urls: |
-    ...
-    - url(r'^console/$', TemplateView.as_view(template_name='console.html'))
-
-
-The API console will be available at http://HOST.TLD/Location/console/ (or
-https).
-
-
-Adding a Web Frontend (UI)
---------------------------
-
-In the frontend, OMS supports regular static files (e.g. JavaScript, CSS) as
-well as templates created with `Django's template language
-<https://docs.djangoproject.com/en/dev/topics/templates/>`_ .
-
-A module's static files should be placed a directory called ``static`` and its
-templates in a directory called ``templates``. Both of these directories should
-be placed at the top level of the module.
-
-
-Static Files
-~~~~~~~~~~~~
-
-OMS uses Django's ``staticfiles`` management command to collect a TAB's static
-files into a single location that can be easily served in production.
-
-If there is more than one file with the same name across two or more modules,
-``staticfiles`` will collect only the first file it finds (as determined by the
-ordering in the manifest's ``installed_apps`` setting).
-
-You can work around this limitation by renaming the duplicate files or by
-changing the order of modules in ``installed_apps``.
-
-
-Creating and Extending Templates
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Templates need to be referenced in the manifest's ``urls`` parameter. For
-example:
-
-.. code:: yaml
-
-  urls_snippet: |
-    ...
-    from django.views.generic import TemplateView
-
-  urls:
-    ...
-    - url(r'^$', TemplateView.as_view(template_name='index.html'))
-
-
-You may wish to create a base template (called ``app_base.html`` or similar)
-that can be extended by other templates in your module. This template will
-be the skeleton of the frontend, containing common code used by all templates
-in your app. Code that is not common can be marked with ``block`` tags, which
-are filled in by inheriting templates.
-
-Here is an example ``app_base.html``:
-
-.. code:: html
-
-  <!DOCTYPE html>
-  <html lang="en">
-      <head>
-          <title>{% block title %}{% endblock %}</title>
-          <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
-          <link href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-          <!--[if lt IE 9]>
-          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-          <![endif]-->
-          {% block extrahead %}{% endblock %}
-      </head>
-      <body>
-          {% block content %}{% endblock %}
-          {% block le_javascript %}{% endblock %}
-      </body>
+  <html>
+    <head>
+      <script type="text/javascript">
+        var app_client = '{{ config.APP_CLIENT }}';
+        var app_scope = '{{ config.APP_SCOPE }}';
+        var oidc_base_url = '{{ config.OIDC_BASE_URL }}';
+      </script>
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+      <script src="{{ STATIC_URL }}js/OMSOIDC.js"></script>
+      <script type="text/javascript">
+      $(document).ready(function() {
+        $.ajax({
+          url: "{{ config.LOCATION_ENDPOINT }}",
+        })
+        .success(function(msg) {
+          $("#output").html(msg["meta"]["total_count"] + ' object(s)');
+        });
+      });
+      </script>
+    </head>
+    <body>
+      <div id="output"></div>
+    </body>
   </html>
 
 
-.. note::
+``/var/oms/src/oms-example/ui/urls.py``:
 
-  * ``STATIC_URL`` points to the server location where the static content is
-    stored and is automatically defined for you.
+.. code:: python
 
+  from django.conf.urls import patterns, include, url
+  from django.views.generic import TemplateView
 
-You can now create a template called ``app_base_nav.html`` that extends
-``app_base.html``:
-
-.. code:: html
-
-  {% extends "app_base.html" %}
-
-  {% block extrahead %}
-  <script>var someVariablesSetInHead=NULL;</script>
-  {% endblock %}
-
-  {% block content %}
-      <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="navbar-inner">
-          <div class="container">
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </a>
-            <div class="nav-collapse collapse">
-              <ul class="nav">
-                <li><a href="#">Trust Frameworks</a></li>
-                <li><a href="#">Testing Console</a></li>
-                <li><a href="#">Login</a></li>
-              </ul>
-            </div> <!-- /.nav-collapse -->
-          </div>
-        </div>
-      </div>
-
-      <div class="container" id="container">
-        {% block incontent %}{% endblock %}
-      </div> <!-- /container -->
-  {% endblock %}
+  urlpatterns = patterns('',
+      url(r'^$', TemplateView.as_view(template_name='ui.html'))
+  )
 
 
-Note how this template fills in the ``extrahead`` and ``content`` blocks while
-adding a new ``incontent`` block.
-
-The ``app_base_nav.html`` template itself can be extended, such that the
-extending templates inherit both the basic layout and navigation.
-
-
-Loading OMS Templates and Static Files
---------------------------------------
-
-As a convenience, OMS bundles a set of JavaScript libraries in a module that is
-available for your use. The libraries include the following:
-
-* `Backbone <http://backbonejs.org>`_
-* `Bootstrap <http://getbootstrap.com/javascript/>`_
-* `jQuery <http://jquery.com>`_
-* `Modernizr <http://modernizr.com>`_
-* `Underscore <http://underscorejs.org>`_
-
-To use this module, update your manifest:
+Next, let's update the manifest with our new app, called ``ui``:
 
 .. code:: yaml
 
-  modules:
-    ...
-    - oms-core/static
+  deploy:
+    apps:
+      - pds
+      - ui
 
+  module_repos:
+    oms-core: https://github.com/IDCubed/oms-core
+    oms-example: https://github.com/IDCubed/oms-example
+
+  pds:
+    template: sandbox
+    instance: PDS
+    ssl: {{ ssl_setup }}
+    debug: True
+    run_tests: False
+
+    pip_requirements:
+      - Django<1.6
+      - django-tastypie
+      - django-constance[database]
+      - requests
+      - python-dateutil
+      - pytz
+      - django-constance[database]
+
+    modules:
+      - oms-core/static
+      - oms-core/templates
+      - oms-core/api_console
+      - oms-core/oic_validation
+      - oms-example/pds
+
+    installed_apps:
+      - django.contrib.auth
+      - django.contrib.contenttypes
+      - django.contrib.sessions
+      - django.contrib.sites
+      - django.contrib.messages
+      - django.contrib.staticfiles
+      - django.contrib.admin
+      - constance
+      - constance.backends.database
+      - modules.api_console
+      - modules.pds
+
+    urls_snippet: |
+      from django.views.generic import TemplateView
+
+    urls:
+      - url(r'^console/$', TemplateView.as_view(template_name='console.html'))
+      - url(r'^admin/', include(admin.site.urls))
+      - url(r'', include('modules.pds.urls'))
+
+    settings_snippet: |
+      CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
+      CONSTANCE_CONFIG = {
+          'TOKENSCOPE_ENDPOINT': ('{{ oidc_base_url }}/tokenscope?scope={{ scope }}',
+              'tokenscope endpoint'),
+          'REF_LATITUDE': ('42.0', 'reference latitude'),
+          'REF_LONGITUDE': ('-71.0', 'reference longitude'),
+      }
+
+    fixtures:
+      - oms-core/admin_user
+
+  ui:
+    template: sandbox
+    instance: UI
+    ssl: {{ ssl_setup }}
+    debug: True
+    run_tests: False
+
+    pip_requirements:
+      - Django<1.6
+      - django-constance[database]
+
+    modules:
+      - oms-example/ui
+      - oms-core/static
+      - oms-core/api_console
+
+    installed_apps:
+      - django.contrib.auth
+      - django.contrib.contenttypes
+      - django.contrib.sessions
+      - django.contrib.sites
+      - django.contrib.messages
+      - django.contrib.admin
+      - django.contrib.staticfiles
+      - constance
+      - constance.backends.database
+      - modules.api_console
+      - modules.ui
+
+    urls_snippet: |
+      from django.views.generic import TemplateView
+
+    urls:
+      - url(r'^admin/', include(admin.site.urls))
+      - url(r'^console/$', TemplateView.as_view(template_name='console.html'))
+      - url(r'', include('modules.ui.urls'))
+
+    settings_snippet: |
+      TEMPLATE_CONTEXT_PROCESSORS = (
+          'django.contrib.auth.context_processors.auth',
+          'django.core.context_processors.debug',
+          'django.core.context_processors.i18n',
+          'django.core.context_processors.media',
+          'django.core.context_processors.static',
+          'django.core.context_processors.tz',
+          'django.contrib.messages.context_processors.messages',
+          'constance.context_processors.config',
+      )
+      CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
+      CONSTANCE_CONFIG = {
+          'LOCATION_ENDPOINT': ('/PDS/api/v1/location/', 'location endpoint'),
+          'OIDC_BASE_URL': ('{{ oidc_base_url }}', 'OIDC server base URL'),
+          'APP_CLIENT': ('{{ client_id }}', 'OIDC client ID'),
+          'APP_SCOPE': ('{{ scope }}', 'OIDC client scope'),
+      }
+
+    fixtures:
+      - oms-core/admin_user
+
+
+Now you can redeploy, and the new app wll be installed in
+``/var/oms/python/UI``. The UI itself will be available at http://HOST.TLD/UI/
+(or https).
+
+When you load that page, you will be immediately redirected to the OIDC server,
+where you will need to log in and approve the client and scope. You will then
+be redirected back to the app. At the end of this process, a valid access token
+is saved in a cookie for later use.
+
+The ``OMSOIDC.js`` library, which provides this OIDC functionality in the
+frontend and is found in the ``oms-core/static`` module, will add the
+``Authorization`` header containing the access token to your HTTP requests.
+
+
+Adding PDS support
+------------------
 
 .. note::
-
-  OMS static files take precedence over application files. See
-  the `Static Files`_ section for solutions.
-
-
-There is also a convenient base template which you can extend in your
-templates. It is contained in another module, and you can likewise add it to
-your manifest:
-
-.. code:: yaml
-
-  modules:
-    ...
-    - oms-core/templates
-
-
-.. note::
-
-  OMS template files take precedence over application files. See
-  the `Static Files`_ section for solutions.
-
-
-Adding PDS support to your models
----------------------------------
-
-.. warning::
 
   Prerequisite: install the Django Admin as described in `Adding Django Admin
   support`_.
 
 
-The Personal Data Store (PDS) supports the secure storage of data in a TCC. To
-add support for this feature, choose an app in your manifest as your PDS app.
-Then, update this app's manifest entry to include the ``pds_base`` module:
+The Personal Data Store (PDS) supports the secure storage of data in a TCC.
+
+To add support for this feature, update the manifest entry to include the
+``pds_base`` module:
 
 .. code:: yaml
 
   modules:
-    ...
     - oms-core/pds_base
 
 
@@ -869,7 +1480,6 @@ Next, include the dependencies that this module requires:
 .. code:: yaml
 
   pip_requirements:
-    ...
     - django-extensions
 
 
@@ -878,9 +1488,137 @@ Finally, remember to install the necessary components:
 .. code:: yaml
 
   installed_apps:
-    ...
     - django_extensions
     - modules.pds_base
+
+
+Now our manifest looks like this:
+
+.. code:: yaml
+
+  deploy:
+    apps:
+      - pds
+      - ui
+
+  module_repos:
+    oms-core: https://github.com/IDCubed/oms-core
+    oms-example: https://github.com/IDCubed/oms-example
+
+  pds:
+    template: sandbox
+    instance: PDS
+    ssl: {{ ssl_setup }}
+    debug: True
+    run_tests: False
+
+    pip_requirements:
+      - Django<1.6
+      - django-tastypie
+      - django-constance[database]
+      - requests
+      - python-dateutil
+      - pytz
+      - django-constance[database]
+
+    modules:
+      - oms-core/static
+      - oms-core/templates
+      - oms-core/api_console
+      - oms-core/oic_validation
+      - oms-example/pds
+
+    installed_apps:
+      - django.contrib.auth
+      - django.contrib.contenttypes
+      - django.contrib.sessions
+      - django.contrib.sites
+      - django.contrib.messages
+      - django.contrib.staticfiles
+      - django.contrib.admin
+      - constance
+      - constance.backends.database
+      - modules.api_console
+      - modules.pds
+
+    urls_snippet: |
+      from django.views.generic import TemplateView
+
+    urls:
+      - url(r'^console/$', TemplateView.as_view(template_name='console.html'))
+      - url(r'^admin/', include(admin.site.urls))
+      - url(r'', include('modules.pds.urls'))
+
+    settings_snippet: |
+      CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
+      CONSTANCE_CONFIG = {
+          'TOKENSCOPE_ENDPOINT': ('{{ oidc_base_url }}/tokenscope?scope={{ scope }}',
+              'tokenscope endpoint'),
+          'REF_LATITUDE': ('42.0', 'reference latitude'),
+          'REF_LONGITUDE': ('-71.0', 'reference longitude'),
+      }
+
+    fixtures:
+      - oms-core/admin_user
+
+  ui:
+    template: sandbox
+    instance: UI
+    ssl: {{ ssl_setup }}
+    debug: True
+    run_tests: False
+
+    pip_requirements:
+      - Django<1.6
+      - django-constance[database]
+
+    modules:
+      - oms-example/ui
+      - oms-core/static
+      - oms-core/api_console
+
+    installed_apps:
+      - django.contrib.auth
+      - django.contrib.contenttypes
+      - django.contrib.sessions
+      - django.contrib.sites
+      - django.contrib.messages
+      - django.contrib.admin
+      - django.contrib.staticfiles
+      - constance
+      - constance.backends.database
+      - modules.api_console
+      - modules.ui
+
+    urls_snippet: |
+      from django.views.generic import TemplateView
+
+    urls:
+      - url(r'^admin/', include(admin.site.urls))
+      - url(r'^console/$', TemplateView.as_view(template_name='console.html'))
+      - url(r'', include('modules.ui.urls'))
+
+    settings_snippet: |
+      TEMPLATE_CONTEXT_PROCESSORS = (
+          'django.contrib.auth.context_processors.auth',
+          'django.core.context_processors.debug',
+          'django.core.context_processors.i18n',
+          'django.core.context_processors.media',
+          'django.core.context_processors.static',
+          'django.core.context_processors.tz',
+          'django.contrib.messages.context_processors.messages',
+          'constance.context_processors.config',
+      )
+      CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
+      CONSTANCE_CONFIG = {
+          'LOCATION_ENDPOINT': ('/PDS/api/v1/location/', 'location endpoint'),
+          'OIDC_BASE_URL': ('{{ oidc_base_url }}', 'OIDC server base URL'),
+          'APP_CLIENT': ('{{ client_id }}', 'OIDC client ID'),
+          'APP_SCOPE': ('{{ scope }}', 'OIDC client scope'),
+      }
+
+    fixtures:
+      - oms-core/admin_user
 
 
 Now, when you create the models for this app, make sure they inherit from
@@ -910,7 +1648,7 @@ When creating API resource for the PDS-enabled models, inherit from
 
 .. code:: python
 
-  from modules.location.models import Location
+  from modules.pds.models import Location
   from modules.pds_base.resources import PdsResource
 
   class LocationResource(PdsResource):
@@ -930,3 +1668,629 @@ information is stored:
 * path that was accessed
 * HTTP method
 * HTTP status code of the response
+
+
+OMS FACT API Transforms
+-----------------------
+
+FACT (Functional Access Control Transform) provides a structured way to
+transform requests to an OMS backend. In practice, this means removing or
+modifying request/response objects on the fly according to developer-defined
+criteria.
+
+FACT consists of four components: the Arbiter, state, rules, and transforms.
+The Arbiter is a core OMS component, but the others must be provided by the
+developer as OMS modules.
+
+Let's continue developing our location app in this tutorial.
+
+First, create empty FACT modules which we'll be expanding in the sections
+below:
+
+.. code:: bash
+
+  oms% mkdir /var/oms/src/oms-example/state_generator
+  oms% touch /var/oms/src/oms-example/state_generator/__init__.py
+  oms% mkdir /var/oms/src/oms-example/rules
+  oms% touch /var/oms/src/oms-example/rules/__init__.py
+  oms% mkdir /var/oms/src/oms-example/transforms
+  oms% touch /var/oms/src/oms-example/transforms/__init__.py
+
+
+.. note::
+
+  Make sure to use your own repo instead of the fictional ``oms-example`` repo.
+
+
+Next, add all the modules to the ``~/Location.yaml`` manifest. For example:
+
+.. code:: yaml
+
+  modules:
+    - oms-core/arbiter
+    - oms-example/state_generator
+    - oms-example/rules
+    - oms-example/transforms
+
+
+Now our manifest looks like this:
+
+.. code:: yaml
+
+  deploy:
+    apps:
+      - pds
+      - ui
+
+  module_repos:
+    oms-core: https://github.com/IDCubed/oms-core
+    oms-example: https://github.com/IDCubed/oms-example
+
+  pds:
+    template: sandbox
+    instance: PDS
+    ssl: {{ ssl_setup }}
+    debug: True
+    run_tests: False
+
+    pip_requirements:
+      - Django<1.6
+      - django-tastypie
+      - django-constance[database]
+      - requests
+      - python-dateutil
+      - pytz
+      - django-constance[database]
+
+    modules:
+      - oms-core/static
+      - oms-core/templates
+      - oms-core/api_console
+      - oms-core/oic_validation
+      - oms-core/arbiter
+      - oms-example/state_generator
+      - oms-example/rules
+      - oms-example/transforms
+      - oms-example/pds
+
+    installed_apps:
+      - django.contrib.auth
+      - django.contrib.contenttypes
+      - django.contrib.sessions
+      - django.contrib.sites
+      - django.contrib.messages
+      - django.contrib.staticfiles
+      - django.contrib.admin
+      - constance
+      - constance.backends.database
+      - modules.api_console
+      - modules.pds
+
+    urls_snippet: |
+      from django.views.generic import TemplateView
+
+    urls:
+      - url(r'^console/$', TemplateView.as_view(template_name='console.html'))
+      - url(r'^admin/', include(admin.site.urls))
+      - url(r'', include('modules.pds.urls'))
+
+    settings_snippet: |
+      CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
+      CONSTANCE_CONFIG = {
+          'TOKENSCOPE_ENDPOINT': ('{{ oidc_base_url }}/tokenscope?scope={{ scope }}',
+              'tokenscope endpoint'),
+          'REF_LATITUDE': ('42.0', 'reference latitude'),
+          'REF_LONGITUDE': ('-71.0', 'reference longitude'),
+      }
+
+    fixtures:
+      - oms-core/admin_user
+
+  ui:
+    template: sandbox
+    instance: UI
+    ssl: {{ ssl_setup }}
+    debug: True
+    run_tests: False
+
+    pip_requirements:
+      - Django<1.6
+      - django-constance[database]
+
+    modules:
+      - oms-example/ui
+      - oms-core/static
+      - oms-core/api_console
+
+    installed_apps:
+      - django.contrib.auth
+      - django.contrib.contenttypes
+      - django.contrib.sessions
+      - django.contrib.sites
+      - django.contrib.messages
+      - django.contrib.admin
+      - django.contrib.staticfiles
+      - constance
+      - constance.backends.database
+      - modules.api_console
+      - modules.ui
+
+    urls_snippet: |
+      from django.views.generic import TemplateView
+
+    urls:
+      - url(r'^admin/', include(admin.site.urls))
+      - url(r'^console/$', TemplateView.as_view(template_name='console.html'))
+      - url(r'', include('modules.ui.urls'))
+
+    settings_snippet: |
+      TEMPLATE_CONTEXT_PROCESSORS = (
+          'django.contrib.auth.context_processors.auth',
+          'django.core.context_processors.debug',
+          'django.core.context_processors.i18n',
+          'django.core.context_processors.media',
+          'django.core.context_processors.static',
+          'django.core.context_processors.tz',
+          'django.contrib.messages.context_processors.messages',
+          'constance.context_processors.config',
+      )
+      CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
+      CONSTANCE_CONFIG = {
+          'LOCATION_ENDPOINT': ('/PDS/api/v1/location/', 'location endpoint'),
+          'OIDC_BASE_URL': ('{{ oidc_base_url }}', 'OIDC server base URL'),
+          'APP_CLIENT': ('{{ client_id }}', 'OIDC client ID'),
+          'APP_SCOPE': ('{{ scope }}', 'OIDC client scope'),
+      }
+
+    fixtures:
+      - oms-core/admin_user
+
+
+Creating states
+~~~~~~~~~~~~~~~
+
+A state is an object that is passed to a set of rules to inform their behavior.
+
+A state is model. You can populate it with any fields that make sense for your
+app, and you can attach it to a Tastypie resource in the standard fashion. By
+using the API associated with this resource, your app can control FACT's state.
+
+Create a new state model in the location app.
+
+``/var/oms/src/oms-example/state_generator/models.py``:
+
+.. code:: python
+
+  from django.db import models
+
+  class ParallelState(models.Model):
+      active = models.BooleanField()
+      parallel = models.FloatField()
+
+      @classmethod
+      def get_latest(cls):
+          latest_query = cls.objects.all().order_by('-id')
+          try:
+              return latest_query[0]
+          except IndexError:
+              return None
+
+Add a Tastypie resource for the new model.
+
+``/var/oms/src/oms-example/state_generator/api.py``:
+
+.. code:: python
+
+  from tastypie.authorization import Authorization
+  from tastypie.resources import ModelResource
+
+  from modules.state_generator.models import ParallelState
+
+  class ParallelStateResource(ModelResource):
+      class Meta:
+          queryset = ParallelState.objects.all()
+          resource_name = 'state'
+          authorization = Authorization()
+
+
+It's useful to be able to access the ``ParallelState`` model in the Django
+Admin.
+
+``/var/oms/src/oms-example/state_generator/admin.py``:
+
+.. code:: python
+
+  from django.contrib import admin
+
+  from modules.state_generator.models import ParallelState
+
+  class ParallelStateAdmin(admin.ModelAdmin):
+      list_display = ['id', 'active', 'parallel']
+
+  admin.site.register(ParallelState, ParallelStateAdmin)
+
+
+Update your manifest to enable the container app and the resource:
+
+.. code:: yaml
+
+  installed_apps:
+    - modules.state_generator
+
+  urls_snippet: |
+    from tastypie.api import Api
+
+    from modules.state_generator.api import ParallelStateResource
+
+    fact_api = Api(api_name='fact')
+    fact_api.register(ParallelStateResource())
+
+   urls:
+     - url(r'^api/', include(fact_api.urls))
+
+
+.. note::
+
+  The ``api_name`` in this ``Api`` object is ``fact`` because the ``v1``
+  ``Api`` object already exists in the ``pds`` app's ``urls.py``.
+
+
+Now our manifest looks like this:
+
+.. code:: yaml
+
+  deploy:
+    apps:
+      - pds
+      - ui
+
+  module_repos:
+    oms-core: https://github.com/IDCubed/oms-core
+    oms-example: https://github.com/IDCubed/oms-example
+
+  pds:
+    template: sandbox
+    instance: PDS
+    ssl: {{ ssl_setup }}
+    debug: True
+    run_tests: False
+
+    pip_requirements:
+      - Django<1.6
+      - django-tastypie
+      - django-constance[database]
+      - requests
+      - python-dateutil
+      - pytz
+      - django-constance[database]
+
+    modules:
+      - oms-core/static
+      - oms-core/templates
+      - oms-core/api_console
+      - oms-core/oic_validation
+      - oms-core/arbiter
+      - oms-example/state_generator
+      - oms-example/rules
+      - oms-example/transforms
+      - oms-example/pds
+
+    installed_apps:
+      - django.contrib.auth
+      - django.contrib.contenttypes
+      - django.contrib.sessions
+      - django.contrib.sites
+      - django.contrib.messages
+      - django.contrib.staticfiles
+      - django.contrib.admin
+      - constance
+      - constance.backends.database
+      - modules.api_console
+      - modules.pds
+      - modules.state_generator
+
+    urls_snippet: |
+      from django.views.generic import TemplateView
+      from tastypie.api import Api
+
+      from modules.state_generator.api import ParallelStateResource
+
+      fact_api = Api(api_name='fact')
+      fact_api.register(ParallelStateResource())
+
+    urls:
+      - url(r'^console/$', TemplateView.as_view(template_name='console.html'))
+      - url(r'^admin/', include(admin.site.urls))
+      - url(r'^api/', include(fact_api.urls))
+      - url(r'', include('modules.pds.urls'))
+
+    settings_snippet: |
+      CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
+      CONSTANCE_CONFIG = {
+          'TOKENSCOPE_ENDPOINT': ('{{ oidc_base_url }}/tokenscope?scope={{ scope }}',
+              'tokenscope endpoint'),
+          'REF_LATITUDE': ('42.0', 'reference latitude'),
+          'REF_LONGITUDE': ('-71.0', 'reference longitude'),
+      }
+
+    fixtures:
+      - oms-core/admin_user
+
+  ui:
+    template: sandbox
+    instance: UI
+    ssl: {{ ssl_setup }}
+    debug: True
+    run_tests: False
+
+    pip_requirements:
+      - Django<1.6
+      - django-constance[database]
+
+    modules:
+      - oms-example/ui
+      - oms-core/static
+      - oms-core/api_console
+
+    installed_apps:
+      - django.contrib.auth
+      - django.contrib.contenttypes
+      - django.contrib.sessions
+      - django.contrib.sites
+      - django.contrib.messages
+      - django.contrib.admin
+      - django.contrib.staticfiles
+      - constance
+      - constance.backends.database
+      - modules.api_console
+      - modules.ui
+
+    urls_snippet: |
+      from django.views.generic import TemplateView
+
+    urls:
+      - url(r'^admin/', include(admin.site.urls))
+      - url(r'^console/$', TemplateView.as_view(template_name='console.html'))
+      - url(r'', include('modules.ui.urls'))
+
+    settings_snippet: |
+      TEMPLATE_CONTEXT_PROCESSORS = (
+          'django.contrib.auth.context_processors.auth',
+          'django.core.context_processors.debug',
+          'django.core.context_processors.i18n',
+          'django.core.context_processors.media',
+          'django.core.context_processors.static',
+          'django.core.context_processors.tz',
+          'django.contrib.messages.context_processors.messages',
+          'constance.context_processors.config',
+      )
+      CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
+      CONSTANCE_CONFIG = {
+          'LOCATION_ENDPOINT': ('/PDS/api/v1/location/', 'location endpoint'),
+          'OIDC_BASE_URL': ('{{ oidc_base_url }}', 'OIDC server base URL'),
+          'APP_CLIENT': ('{{ client_id }}', 'OIDC client ID'),
+          'APP_SCOPE': ('{{ scope }}', 'OIDC client scope'),
+      }
+
+    fixtures:
+      - oms-core/admin_user
+
+
+Creating transforms
+~~~~~~~~~~~~~~~~~~~
+
+A transform is a function that accepts two arguments. The first is the object
+to be evaluated and the second is a dictionary of attributes that are used in
+this evaluation.
+
+The transform may return the object unaltered, or it may modify it in any way.
+It may also return ``None``, in which case the object is removed from the
+object list in this HTTP transaction.
+
+Let's create a transform that removes all locations south of a given parallel:
+
+``/var/oms/src/oms-example/transforms/__init__.py``:
+
+.. code:: python
+
+  def hide_southern_location(location, attrs):
+      '''
+      only return points at or north of the parallel
+      '''
+      if location.latitude >= attrs['parallel']:
+          return location
+
+
+Creating rules
+~~~~~~~~~~~~~~
+
+A rule is an object with a single method, ``evaluate`` which accepts the
+current state as an argument. It returns a 2-tuple in which the first element
+is a list of transforms (function objects), and the second is a dictionary of
+attributes that is passed to each of the transforms.
+
+Let's create a rule that combines the state and transform we've created.
+
+``/var/oms/src/oms-example/rules/__init__.py``:
+
+.. code:: python
+
+  from modules.transforms import hide_southern_location
+
+  class HideLocationRule(object):
+      def evaluate(self, state):
+          funcs, attrs = [], {}
+          if state.active:
+              funcs.append(hide_southern_location)
+              attrs['parallel'] = state.parallel
+          return funcs, attrs
+
+
+Enabling FACT in your app
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+FACT executes in the Tastypie resource's Authorization class.
+
+The Authorization class should instantiate the Arbiter as its attribute. The
+class also needs to use its ``resource_meta`` to access the resource's state
+and rules. Since the Arbiter returns a list of objects, a decorator is used on
+the ``*_detail`` methods to covert the list to a boolean.
+
+Let's create an Authorization class for our ``pds`` app along with a decorator
+that it requires.
+
+``/var/oms/src/oms-example/pds/decorators.py``:
+
+.. code:: python
+
+  def list_to_boolean(auth_method):
+      '''
+      Decorator to convert an empty list to False, and to True otherwise
+      '''
+      def wrapper(self, object_list, bundle):
+          if auth_method(self, object_list, bundle):
+              return True
+          return False
+      return wrapper
+
+
+``/var/oms/src/oms-example/pds/authorization.py``:
+
+.. code:: python
+
+  from tastypie.authorization import Authorization
+
+  from modules.arbiter import Arbiter
+  from modules.pds.decorators import list_to_boolean
+
+  class FACTAuthorization(Authorization):
+
+      arbiter = Arbiter()
+
+      def read_list(self, object_list, bundle):
+          return self.arbitrate(object_list)
+
+      @list_to_boolean
+      def read_detail(self, object_list, bundle):
+          return self.arbitrate(object_list)
+
+      # create_list (not used)
+
+      @list_to_boolean
+      def create_detail(self, object_list, bundle):
+          return self.arbitrate(object_list)
+
+      def update_list(self, object_list, bundle):
+          return self.arbitrate(object_list)
+
+      @list_to_boolean
+      def update_detail(self, object_list, bundle):
+          return self.arbitrate(object_list)
+
+      def delete_list(self, object_list, bundle):
+          return self.arbitrate(object_list)
+
+      @list_to_boolean
+      def delete_detail(self, object_list, bundle):
+          return self.arbitrate(object_list)
+
+      def arbitrate(self, object_list):
+          '''
+          This method activates the Arbiter, passing in the objects, rules, and
+          state.
+          '''
+          rules = self.resource_meta.rules
+          state = self.resource_meta.state.get_latest()
+          return self.arbiter.arbitrate(object_list, rules, state)
+
+
+To use FACT with your resource, simply use your Arbiter-enabled Authorization
+class, and add ``rules`` (a list) and ``state`` to the ``class Meta``.
+
+``/var/oms/src/oms-example/pds/api.py``:
+
+.. code:: python
+
+  from tastypie.resources import ModelResource
+
+  from modules.pds.models import Location
+  from modules.pds.authorization import FACTAuthorization
+  from modules.rules import HideLocationRule
+  from modules.state_generator.models import ParallelState
+
+  class LocationResource(ModelResource):
+      class Meta:
+          queryset = Location.objects.all()
+          resource_name = 'location'
+          authorization = FACTAuthorization()
+          rules = [HideLocationRule]
+          state = ParallelState
+
+
+.. warning::
+
+  A Tastypie resource only supports one Authorization class, so you must choose
+  between using ``FACTAuthorization`` or ``OpenIdConnectAuthorization``.
+
+
+Using FACT in your app
+~~~~~~~~~~~~~~~~~~~~~~
+
+After you deploy the FACT-enabled app, the first thing that you need to do is
+to set the state. Let's start by creating an inactive state, in which case FACT
+isn't used:
+
+.. code:: bash
+
+  oms% curl -X POST -H "Content-Type: application/json" --data '{"active": false, "parallel": 0.0}' https://HOST.TLD/PDS/api/fact/state/
+  oms% curl https://HOST.TLD/PDS/api/v1/location/
+  {
+      "meta": {
+          "limit": 20,
+          "next": null,
+          "offset": 0,
+          "previous": null,
+          "total_count": 2
+      },
+      "objects": [
+          {
+              "id": 1,
+              "latitude": 42.0,
+              "longitude": -71.0,
+              "resource_uri": "/PDS/api/v1/location/1/"
+          },
+          {
+              "id": 2,
+              "latitude": -42.0,
+              "longitude": -71.0,
+              "resource_uri": "/PDS/api/v1/location/2/"
+          }
+      ]
+  }
+
+
+When we create an active state, however, FACT kicks in and we see objects being
+filtered from the set of results. In our case, the item with the location below
+the equator is removed:
+
+.. code:: bash
+
+  oms% curl -X POST -H "Content-Type: application/json" --data '{"active": true, "parallel": 0.0}' https://HOST.TLD/PDS/api/fact/state/
+  oms% curl https://HOST.TLD/PDS/api/v1/location/
+  {
+      "meta": {
+          "limit": 20,
+          "next": null,
+          "offset": 0,
+          "previous": null,
+          "total_count": 1
+      },
+      "objects": [
+          {
+              "id": 1,
+              "latitude": 42.0,
+              "longitude": -71.0,
+              "resource_uri": "/PDS/api/v1/location/1/"
+          }
+      ]
+  }
