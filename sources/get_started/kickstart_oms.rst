@@ -58,6 +58,17 @@ With the public key in Github, OMS will be able to checkout its code on your
 behalf, and we are now ready to run the kickstart script.
 
 
+Double Check Hostname
+~~~~~~~~~~~~~~~~~~~~~
+
+It is easier to change this now, so double check that your hostname is correct.
+In particular, if you are using DNS or SSL, you will want the system hostname
+to be set to the ``host.domain.tld`` you intend on using to access the OMS Host.
+
+Use ``hostname`` to confirm the system's current hostname. Edit ``/etc/hosts/``
+and ``/etc/hostname`` if you need to update it.
+
+
 Run the Script
 ~~~~~~~~~~~~~~
 
@@ -102,11 +113,11 @@ The kickstart script has:
   details, such as cloning the entire OMS source code to ``/var/oms/src/`` and
   installing both the oms-deploy and oms-admin python package.
 
-.. todo::
+.. note::
 
-    All git repositories have been checked out with the ``qa-develop`` branch,
-    and you may need to update the active revision depending on what you need
-    to do.
+    All git repositories have been checked out with the ``master`` branch, and
+    you may need to update the active revision depending on what you need to do.
+
 
 At this point, you have *everything* needed to either hack on OMS code, or to
 deploy additional OMS components.
@@ -149,17 +160,12 @@ the following, replacing ``HOST.DOMAIN.TLD`` with the value for your domain:
        index  index.html;
 
        include /etc/nginx/proxy.conf;
-
-       if ($ssl_protocol = "") {
-           rewrite ^ https://$server_name$request_uri? permanent;
-       }
-
        include /etc/nginx/conf.d/default/*.location;
 
-       #* This will deny access to any hidden file (beginning with a .period)
-       location ~ /\. { deny  all; }
-
    }
+
+.. z*
+.. this comment above keeps bad syntax highlighting from going crazy over the *
 
 
 Alternatively, if the SSL certificate configuration included above does not
@@ -194,10 +200,18 @@ You will also need to open the SSL port in the firewall: ``ufw allow 443``.
      cat /path/to/ca.crt >> /etc/nginx/ssl/HOST.DOMAIN.TLD.crt
 
 
+OMS deploy.conf
+~~~~~~~~~~~~~~~
+
+If you are not using SSL, open ``/var/oms/etc/deploy.conf`` for editing and
+update ``ssl_enabled`` to ``False``:
+
 .. note::
 
-   TABs deployed via an OMS manifest should have ``enable_ssl: True`` when using
-   SSL on an OMS host.
+   Running ``state.sls`` or ``state.highstate`` as directed by some steps in
+   some OMS tutorials may overwrite changes to ``deploy.conf`` - always use
+   ``test=True`` when using ``salt-call`` to confirm if any changes you have
+   made would be overwritten.
 
 
 Where to go from here?
@@ -213,8 +227,8 @@ links listed below.
 
 The :ref:`OMS Private Trusted Compute Cell (TCC) <deploy_private_tcc>` is
 intended for individual use, where as the :ref:`OMS Portal Registry
-<deploy_portal>` is intended for organizations looking to provide Private TCCs
-to other users.
+<deploy_portal_tcc>` is intended for organizations looking to provide Private
+TCCs to other users.
 
 .. In general, the best place to start is with the :ref:`OMS Virtual Resource
 .. Controller (VRC) <deploy_vrc>` - this is a generic component that can be used to

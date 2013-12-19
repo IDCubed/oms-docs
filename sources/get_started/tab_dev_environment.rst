@@ -60,17 +60,17 @@ Get Started - Prerequisites
 * **Install GPG** - Download `GnuPG`_, `GPG for Windows`_, `GPG options for OSX`_
 * **Decrypt the VM Image** - Expect to wait a few minutes, time will depend on
   the system decrypting the image.
-   - windows: Right click on ``OMS-SDK-v0.8.3-20131125.ova.gpg`` and select
+   - windows: Right click on ``OMS-SDK-v0.8.4-201312XX.ova.gpg`` and select
      ``Decrypt and Verify``. Enter the passphrase provided by IDCubed.
-   - linux: ``gpg --decrypt --output OMS-SDK-v0.8.3-20131125.ova
-     OMS-SDK-v0.8.3-20131125.ova.gpg``. Provide the passphrase from IDCubed when
+   - linux: ``gpg --decrypt --output OMS-SDK-v0.8.4-201312XX.ova
+     OMS-SDK-v0.8.4-201312XX.ova.gpg``. Provide the passphrase from IDCubed when
      prompted.
-* **Install VM Image** - Open ``OMS-SDK-v0.8.3-20131125.ova.gpg`` then click
+* **Install VM Image** - Open ``OMS-SDK-v0.8.4-201312XX.ova.gpg`` then click
   ``import`` in the GUI that appears.
 
 
 .. _GnuPG: http://www.gnupg.org/download/#auto-ref-3
-.. _TAB Development Environment VM Image: http://cc2ccf5e7eb9a36051d5-392f3ef49dd2dccea95976ef735392f9.r21.cf1.rackcdn.com/OMS-SDK-v0.8.3-20131125.ova.gpg
+.. _TAB Development Environment VM Image: http://cc2ccf5e7eb9a36051d5-392f3ef49dd2dccea95976ef735392f9.r21.cf1.rackcdn.com/OMS-SDK-v0.8.4-201312XX.ova.gpg
 .. _GPG for Windows: http://gpg4win.de/handbuecher/novices_5.html
 .. _GPG options for OSX: https://duckduckgo.com/?q=gpg+mac+osx
 .. _linux link?: http://example.com

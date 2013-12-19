@@ -32,33 +32,13 @@ special text file known as a manifest.
 The manifest used to deploy the Private Registry configures the oms deployment
 tools, providing instructions on what to do to compile and bring the app online.
 
-In a future release there will be no need to edit the manifest before it us used
-to deploy the app it describes. For now though, there are a few details you will
-need to edit prior to deploying the Private Registry (these can also be changed
-post-deploy).
-
-Open the manifest for editing:
-
-.. code:: bash
-
-   # this is where you'll find most OMS manifests
-   cd /var/oms/src/oms-core/manifests
-   # update config in Private Registry manifest
-   vim PrivateRegistry.yaml
-
-Each of the URLs you see should be updated to reflect the host you are deploying
-to. EG, https://host.domain.tld, or the non-SSL version if not using SSL, or the
-IP address if not using DNS.
-
-If you are not using SSL, update ``enable_ssl`` to ``False``.
-
 When ready, deploy the Private Registry with the oms command line utility:
 
 .. code:: bash
 
-   # specify `localhost` when prompted for a host
    oms deploy -m PrivateRegistry.yaml
-   No hosts found. Please specify (single) host string for connection: localhost
+   [root@localhost] Executing task '_deploy'
+   ...
 
 
 Once deployed, you ought to be able to view the Private Registry WebUI with your

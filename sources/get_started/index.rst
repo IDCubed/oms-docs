@@ -72,9 +72,9 @@ Section Contents
 
    OMS Dev VM <tab_dev_environment>
    Kickstart OMS in the Cloud <kickstart_oms>
-   Portal Registry <portal>
    Private TCC <private_tcc>
 
 .. Virtual Resource Controller <vrc>
    Trust Network <trust_network>
    Trusted Compute Cells <tcc>
+   Portal Registry <portal>
