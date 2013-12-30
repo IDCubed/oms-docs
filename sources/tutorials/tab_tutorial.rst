@@ -1077,15 +1077,15 @@ OpenID Connect is a core component of OMS, providing security and identity
 services to the TCC. Requests to protected areas of the TCC are authorized by
 the OIDC server.
 
-Update the TAB manifest to include the ``oic_validation`` module:
+Update the TAB manifest to include the ``oidc_validation`` module:
 
 .. code:: yaml
 
   modules:
-    - oms-core/oic_validation
+    - oms-core/oidc_validation
 
 
-Include the libraries used by the ``oic_validation`` module:
+Include the libraries used by the ``oidc_validation`` module:
 
 .. code:: yaml
 
@@ -1139,7 +1139,7 @@ Now our manifest looks like this:
       - oms-core/static
       - oms-core/templates
       - oms-core/api_console
-      - oms-core/oic_validation
+      - oms-core/oidc_validation
       - oms-example/pds
 
     installed_apps:
@@ -1196,7 +1196,7 @@ To add OIDC validation to a Tastypie API endpoint, use the
   from tastypie.resources import ModelResource
 
   from modules.pds.models import Location
-  from modules.oic_validation.authorization import OpenIdConnectAuthorization
+  from modules.oidc_validation.authorization import OpenIdConnectAuthorization
 
   class LocationResource(ModelResource):
       class Meta:
@@ -1216,7 +1216,7 @@ decorator.
   from django.shortcuts import render_to_response
 
   from modules.pds.models import Location
-  from modules.oic_validation.decorators import validate_access_token
+  from modules.oidc_validation.decorators import validate_access_token
 
   @validate_access_token
   def ok(request):
@@ -1345,7 +1345,7 @@ Next, let's update the manifest with our new app, called ``ui``:
       - oms-core/static
       - oms-core/templates
       - oms-core/api_console
-      - oms-core/oic_validation
+      - oms-core/oidc_validation
       - oms-example/pds
 
     installed_apps:
@@ -1525,7 +1525,7 @@ Now our manifest looks like this:
       - oms-core/static
       - oms-core/templates
       - oms-core/api_console
-      - oms-core/oic_validation
+      - oms-core/oidc_validation
       - oms-example/pds
 
     installed_apps:
@@ -1746,7 +1746,7 @@ Now our manifest looks like this:
       - oms-core/static
       - oms-core/templates
       - oms-core/api_console
-      - oms-core/oic_validation
+      - oms-core/oidc_validation
       - oms-core/arbiter
       - oms-example/state_generator
       - oms-example/rules
@@ -1968,7 +1968,7 @@ Now our manifest looks like this:
       - oms-core/static
       - oms-core/templates
       - oms-core/api_console
-      - oms-core/oic_validation
+      - oms-core/oidc_validation
       - oms-core/arbiter
       - oms-example/state_generator
       - oms-example/rules
