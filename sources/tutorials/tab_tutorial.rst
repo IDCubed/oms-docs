@@ -69,7 +69,7 @@ dependencies, and set up a project with a single app:
   oms% cd locationvenv
   oms% virtualenv .
   oms% . bin/activate
-  oms% pip install Django<1.6
+  oms% pip install Django\<1.6
   oms% pip install django-tastypie
   oms% django-admin.py startproject locationproj
   oms% cd locationproj
@@ -124,7 +124,7 @@ looks like so:
 
   urlpatterns = patterns('',
       url(r'^api/', include(v1_api.urls)),
-      url(r'^ok/$', 'location.views.ok'),
+      url(r'^ok/$', 'pds.views.ok'),
   )
 
 
@@ -179,10 +179,12 @@ Update the three files with the following code:
 Accessing API endpoints
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Let's start the development server:
+Let's create the database and start the development server:
 
 .. code:: bash
 
+  oms% cd ~/locationvenv/locationproj
+  oms% python manage.py syncdb --noinput
   oms% python manage.py runserver
 
 
@@ -278,7 +280,7 @@ The second endpoint under the ``location`` endpoint is the ``list_endpoint``,
 which lists all the resources, along with some useful metadata:
 
 * ``total_count``: the total number of objects in this query
-* ``limit``: the number of items returned in a single HTTP response
+* ``limit``: the maximum number of items returned in a single HTTP response
 * ``offset``: the offset from the beginning of the query
 * ``previous`` and ``next``: links to adjacent pages in the query
 
@@ -406,7 +408,8 @@ To delete an object:
 We now have a working Django project with a single app, and we are ready to
 convert it into an OMS module.
 
-You can now deactivate your virtualenv:
+You can now stop the Django server with ``Ctrl-c`` and deactivate your
+virtual environment:
 
 .. code:: bash
 
@@ -770,7 +773,7 @@ Adding Django Admin support
 ---------------------------
 
 If you would like to enable support for the `Django Admin
-<https://docs.djangoproject.com/en/dev/ref/contrib/admin/>`_, you'll need to
+<https://docs.djangoproject.com/en/1.5/ref/contrib/admin/>`_, you'll need to
 make some updates to your manifest.
 
 First, enable the Admin URLs in ``~/Location.yaml``:
@@ -903,7 +906,7 @@ but OMS uses the manifest for this purpose.
 .. warning::
 
   The latest release of django-constance (0.6) is not compatible with Django
-  1.6.x .  Please update your manifest to use Django<1.6 with this plugin.
+  1.6.x .  Make sure your manifest uses Django<1.6 with this plugin.
 
 
 To install django-constance, you'll need to make a few updates to your
@@ -1008,7 +1011,10 @@ Now our manifest looks like this:
 
 
 Now you can use the settings stored with django-constance as you would if
-importing them from the Django's ``settings.py``:
+importing them from Django's ``settings.py``. Let's update our view to use the
+values stored with the plugin.
+
+``/var/oms/src/oms-example/pds/views.py``:
 
 .. code:: python
 
@@ -1025,13 +1031,15 @@ importing them from the Django's ``settings.py``:
       ref_location = float(config.REF_LATITUDE), float(config.REF_LONGITUDE)
       locations = Location.objects.all()
       for location in locations:
-          if (location.latitude, location.longitude) == (ref_location.latitude,
-                                                         ref_location.longitude)
+          if (location.latitude, location.longitude) == (ref_location[0],
+                                                         ref_location[1]):
               location.matches_ref = True
       return render_to_response('locations.html', {'locations': locations})
 
 
-We'll need to update our template to make use of this new attribute:
+We'll need to update our template to make use of this new attribute.
+
+``/var/oms/src/oms-example/pds/templates/locations.html``:
 
 .. code:: html
 
@@ -1133,7 +1141,6 @@ Now our manifest looks like this:
       - requests
       - python-dateutil
       - pytz
-      - django-constance[database]
 
     modules:
       - oms-core/static
@@ -1182,6 +1189,7 @@ Remember to define the template variables.
 
 .. code::
 
+  ssl_setup: False
   oidc_base_url: https://oidc.example.com/idoic
   scope: location
 
@@ -1212,6 +1220,7 @@ decorator.
 
 .. code:: python
 
+  from constance import config
   from django.http import HttpResponse
   from django.shortcuts import render_to_response
 
@@ -1224,7 +1233,12 @@ decorator.
 
   @validate_access_token
   def locations(request):
+      ref_location = float(config.REF_LATITUDE), float(config.REF_LONGITUDE)
       locations = Location.objects.all()
+      for location in locations:
+          if (location.latitude, location.longitude) == (ref_location[0],
+                                                         ref_location[1]):
+              location.matches_ref = True
       return render_to_response('locations.html', {'locations': locations})
 
 
@@ -1312,7 +1326,7 @@ We only need to create an HTML template and give it a URL.
   )
 
 
-Next, let's update the manifest with our new app, called ``ui``:
+Next, let's update the manifest with our new app, also called ``ui``:
 
 .. code:: yaml
 
@@ -1339,7 +1353,6 @@ Next, let's update the manifest with our new app, called ``ui``:
       - requests
       - python-dateutil
       - pytz
-      - django-constance[database]
 
     modules:
       - oms-core/static
@@ -1441,6 +1454,18 @@ Next, let's update the manifest with our new app, called ``ui``:
       - oms-core/admin_user
 
 
+Lastly, provide your OIDC client ID:
+
+``/var/oms/etc/deploy.conf``:
+
+.. code::
+
+  ssl_setup: False
+  oidc_base_url: https://oidc.example.com/idoic
+  scope: location
+  client_id: location_client
+
+
 Now you can redeploy, and the new app wll be installed in
 ``/var/oms/python/UI``. The UI itself will be available at http://HOST.TLD/UI/
 (or https).
@@ -1466,8 +1491,8 @@ Adding PDS support
 
 The Personal Data Store (PDS) supports the secure storage of data in a TCC.
 
-To add support for this feature, update the manifest entry to include the
-``pds_base`` module:
+To add support for this feature, update the ``pds`` app's manifest entry to
+include the ``pds_base`` module:
 
 .. code:: yaml
 
@@ -1519,7 +1544,7 @@ Now our manifest looks like this:
       - requests
       - python-dateutil
       - pytz
-      - django-constance[database]
+      - django-extensions
 
     modules:
       - oms-core/static
@@ -1527,6 +1552,7 @@ Now our manifest looks like this:
       - oms-core/api_console
       - oms-core/oidc_validation
       - oms-example/pds
+      - oms-core/pds_base
 
     installed_apps:
       - django.contrib.auth
@@ -1538,6 +1564,8 @@ Now our manifest looks like this:
       - django.contrib.admin
       - constance
       - constance.backends.database
+      - django_extensions
+      - modules.pds_base
       - modules.api_console
       - modules.pds
 
@@ -1623,7 +1651,9 @@ Now our manifest looks like this:
 
 Now, when you create the models for this app, make sure they inherit from
 ``modules.pds_base.models.PdsModel`` (here: ``pds_models.PdsModel`` because of
-a renamed import) instead of Django's ``models.Model``:
+a renamed import) instead of Django's ``models.Model``.
+
+``/var/oms/src/oms-example/pds/models.py``:
 
 .. code:: python
 
@@ -1644,17 +1674,21 @@ you find them to be useful. Continue using Django field classes such as
 ``models.BooleanField`` to define the fields in your models.
 
 When creating API resource for the PDS-enabled models, inherit from
-``PdsResource`` instead of Tastypie's ``ModelResource``:
+``PdsResource`` instead of Tastypie's ``ModelResource``.
+
+``/var/oms/src/oms-example/pds/api.py``:
 
 .. code:: python
 
   from modules.pds.models import Location
   from modules.pds_base.resources import PdsResource
+  from modules.oidc_validation.authorization import OpenIdConnectAuthorization
 
   class LocationResource(PdsResource):
       class Meta:
           queryset = Location.objects.all()
           resource_name = 'location'
+          authorization = OpenIdConnectAuthorization()
 
 
 Once your TAB is deployed, you can log into the Django Admin to view audit logs
@@ -1740,7 +1774,7 @@ Now our manifest looks like this:
       - requests
       - python-dateutil
       - pytz
-      - django-constance[database]
+      - django-extensions
 
     modules:
       - oms-core/static
@@ -1752,6 +1786,7 @@ Now our manifest looks like this:
       - oms-example/rules
       - oms-example/transforms
       - oms-example/pds
+      - oms-core/pds_base
 
     installed_apps:
       - django.contrib.auth
@@ -1763,6 +1798,8 @@ Now our manifest looks like this:
       - django.contrib.admin
       - constance
       - constance.backends.database
+      - django_extensions
+      - modules.pds_base
       - modules.api_console
       - modules.pds
 
@@ -1962,7 +1999,7 @@ Now our manifest looks like this:
       - requests
       - python-dateutil
       - pytz
-      - django-constance[database]
+      - django-extensions
 
     modules:
       - oms-core/static
@@ -1974,6 +2011,7 @@ Now our manifest looks like this:
       - oms-example/rules
       - oms-example/transforms
       - oms-example/pds
+      - oms-core/pds_base
 
     installed_apps:
       - django.contrib.auth
@@ -1985,6 +2023,8 @@ Now our manifest looks like this:
       - django.contrib.admin
       - constance
       - constance.backends.database
+      - django_extensions
+      - modules.pds_base
       - modules.api_console
       - modules.pds
       - modules.state_generator
@@ -2211,17 +2251,18 @@ class, and add ``rules`` (a list) and ``state`` to the ``class Meta``.
 
 .. code:: python
 
-  from tastypie.resources import ModelResource
-
   from modules.pds.models import Location
+  from modules.pds_base.resources import PdsResource
   from modules.pds.authorization import FACTAuthorization
   from modules.rules import HideLocationRule
   from modules.state_generator.models import ParallelState
+  #from modules.oidc_validation.authorization import OpenIdConnectAuthorization
 
-  class LocationResource(ModelResource):
+  class LocationResource(PdsResource):
       class Meta:
           queryset = Location.objects.all()
           resource_name = 'location'
+          #authorization = OpenIdConnectAuthorization()
           authorization = FACTAuthorization()
           rules = [HideLocationRule]
           state = ParallelState
