@@ -1075,15 +1075,77 @@ Adding OpenID Connect validation
 
 .. note::
 
-  * This section assumes you have an OIDC server online, along with at least
-    one client and one associated scope.
+  * This section assumes you have an OIDC server online.
   * Prerequisite: install django-constance as described in `Adding
     django-constance support`_.
 
 
 OpenID Connect is a core component of OMS, providing security and identity
-services to the TCC. Requests to protected areas of the TCC are authorized by
-the OIDC server.
+services to the TCC. It authorizes requests to protected areas of the TCC.
+
+Setting up your OIDC client
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+On the machine where OIDC is installed, change to the ``postgres`` user:
+
+.. code:: bash
+
+  oms% su - postgres
+
+
+Next, create a file called ``insert_client.sql`` with the following SQL:
+
+.. note::
+
+   Here, the ``id`` of the new ``client_details`` row is 7, but you can use any
+   available ID.
+
+
+.. code:: sql
+
+  DELETE FROM client_details WHERE id = 7;
+  DELETE FROM client_grant_type WHERE owner_id = 7;
+  DELETE FROM client_scope WHERE owner_id = 7;
+
+  SET ROLE :role;
+
+  INSERT INTO client_details
+  (id,client_description,reuse_refresh_tokens,dynamically_registered,allow_introspection,id_token_validity_seconds,client_id        ,client_secret         ,access_token_validity_seconds,refresh_token_validity_seconds,application_type,client_name      ,token_endpoint_auth_method,subject_type,logo_uri,policy_uri,client_uri,tos_uri,jwks_uri,sector_identifier_uri,request_object_signing_alg,user_info_signed_response_alg,user_info_encrypted_response_alg,user_info_encrypted_response_enc,id_token_signed_response_alg,id_token_encrypted_response_alg,id_token_encrypted_response_enc,default_max_age,require_auth_time,created_at,initiate_login_uri,post_logout_redirect_uri) VALUES
+  (7 ,null              ,true                ,false                 ,true               ,31536000                 ,'location_client','1EgLsR9JaOMGoaqpSOHD',31536000                     ,null                          ,null            ,'Location Client','SECRET_BASIC'            ,null        ,null    ,null      ,null      ,null   ,null    ,null                 ,null                      ,null                         ,null                            ,null                            ,null                        ,null                           ,null                           ,60000          ,false            ,now()     ,null              ,null                    )
+  ;
+
+  INSERT INTO client_grant_type (owner_id, grant_type) VALUES (7, 'authorization_code');
+  INSERT INTO client_grant_type (owner_id, grant_type) VALUES (7, 'client_credentials');
+  INSERT INTO client_grant_type (owner_id, grant_type) VALUES (7, 'implicit');
+  INSERT INTO client_scope (owner_id, scope) VALUES (7, 'openid');
+  INSERT INTO client_scope (owner_id, scope) VALUES (7, 'location');
+
+  RESET ROLE;
+
+
+This SQL sets up a client called ``Location Client`` with the client ID
+``location_client``, client secret ``1EgLsR9JaOMGoaqpSOHD``, and an associated
+scope called ``location``.
+
+Execute the SQL with the following command:
+
+.. code:: bash
+
+  oms% psql -d oidc -v role=oidc -f insert_client.sql
+
+
+This command connects to the ``oidc`` database while setting the variable
+``role`` (used by the SQL script) to ``oidc``.
+
+Lastly, log out of the ``postgres`` account:
+
+.. code::
+
+  oms% logout
+
+
+OIDC in the backend
+~~~~~~~~~~~~~~~~~~~
 
 Update the TAB manifest to include the ``oidc_validation`` module:
 
@@ -1183,7 +1245,7 @@ Now our manifest looks like this:
       - oms-core/admin_user
 
 
-Remember to define the template variables.
+Remember to define the template variables, including the scope we just created.
 
 ``/var/oms/etc/deploy.conf``:
 
@@ -1454,7 +1516,7 @@ Next, let's update the manifest with our new app, also called ``ui``:
       - oms-core/admin_user
 
 
-Lastly, provide your OIDC client ID:
+Lastly, list ``location_client`` as the client ID:
 
 ``/var/oms/etc/deploy.conf``:
 
