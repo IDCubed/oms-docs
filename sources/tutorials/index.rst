@@ -19,6 +19,7 @@ appliance <deploy_development_vm>` or an :ref:`OMS Host in the Cloud
    GPS Demo <gps_demo>
    Create a TAB <tab_tutorial>
    Install VirtualBox <install_virtualbox>
+   OIDC Tutorial <oidc_tutorial>
 
 .. Hello World Example <hello_world>
    python_web_app
