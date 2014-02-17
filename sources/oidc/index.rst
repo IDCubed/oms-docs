@@ -192,3 +192,5 @@ Section Contents
    Token Retrieval <token_retrieval>
    Integrating a Protected Resource <integrating_protected_resource>
    Dynamic Client Registration <dynamic_client_registration>
+   API Reference <api_reference>
+
