@@ -228,8 +228,7 @@ This deletes an approval for the given user.
 Token Revocation
 ----------------
 
-**DELETE /revoke**
-**GET /revoke**
+**DELETE /revoke, GET /revoke**
 
 MITRE's OIDC allows for tokens granted to clients to be revoked by the user who granted them, though this feature has not yet been exposed to the UI yet. A client with ROLE_USER or ROLE_ADMIN can authenticate (possibly by means of another token), and request a token passed as a request parameter to be revoked. Upon doing so the token is no longer valid.
 
@@ -241,8 +240,7 @@ OIDC currently supports two APIs, which are being deprecated and will soon be de
 Token Scope
 ~~~~~~~~~~~
 
-**GET /tokenscope**
-**GET /get_key_from_token**
+**GET /tokenscope, GET /get_key_from_token**
 
 This is a mechanism, similar to the introspection endpoint in nature and purpose, to read information about a token. Unlike the introspection endpoint, it supports no security.
 
@@ -250,8 +248,7 @@ Token API
 ~~~~~~~~~
 This was meant to be a set of APIs to handle tokens, but their presence ultimately became moot as there was a much more elegant to implement the usecase they attempt to address. Parts of this API are still being used, which is why it has not been retired.
 
-**GET /tokenapi**
-**GET /tokenapi/check**
+**GET /tokenapi, GET /tokenapi/check**
 
 Yet another endpoint to return information regarding a token, also supporting no security beyond the token being passed. Unlike /tokenscope, this endpoint reports on personas as well.
 
