@@ -12,7 +12,7 @@ Contributing to OMS
 Start first by reviewing `this document on the OMS Wiki`_ for a walkthrough of
 some of our development processes.
 
-.. _this document on the OMS Wiki: https://wiki.idhypercubed.org/wiki/ProjectDocumentation
+.. _this document on the OMS Wiki: https://wiki.idhypercubed.org/wiki/ProjectDocumentation#Developer_Resources
 
 
 When you are ready to start hacking, you can either download and setup the OMS
@@ -27,11 +27,12 @@ and includes a running private TCC.
 :ref:`Kickstart a new Ubuntu 12.04 LTS host with this guide <kickstart_oms>`.
 
 
-Details related to a specific component
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+With an OMS development environment setup, you can get started contributing to
+OMS. See each section below based on where your contributions will be made:
 
 .. toctree::
    :maxdepth: 1
 
    Documentation <documentation>
    OpenID Connect </oidc/developers_guide>
+   Build OMS VM Images <vm_images>

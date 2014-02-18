@@ -11,7 +11,6 @@
 
     {%- set url_root = pathto('', 1) %}
     {%- if url_root == '#' %}{% set url_root = '' %}{% endif %}
-
     <script type="text/javascript">
         // This is included here for Javascript that doesn't have access to the templates.
         var doc_version = "{{ current_version }}";
@@ -27,6 +26,7 @@
     ['https://code.jquery.com/jquery-1.10.1.min.js']
     + ['https://fonts.googleapis.com/css?family=Cabin:400,700,400italic']
     + ['_static/js/bootstrap.min.js']
+    + ['_static/js/jquery.easing.1.3.js']
     %}
 
     {#
@@ -60,131 +60,121 @@
 <body>
 
 <div id="wrap">
-<div class="navbar navbar-fixed-top">
-    <div class="navbar-oms">
-        <div class="container">
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a>
-
-
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-oms">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
                 <a class="brand" href="http://docs.openmustardseed.org/" title="OMS Documentation">
                     <img src="{{ pathto('_static/img/logo.png', 1) }}" alt="OMS/logo">
                 </a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav pull-right">
+                        <li id="nav-introduction"><a href="http://wiki.idhypercubed.org/" title="Wiki">Wiki</a></li>
+                        <li id="nav-documentation" class="active"><a href="http://docs.openmustardseed.org/">Documentation</a>
+                        </li>
+                        <li id="nav-about-id3"><a href="http://www.idcubed.org/about/vision-mission/" title="IDCubed">About
+                            ID3</a></li>
+                        <li id="nav-blog"><a href="http://www.idcubed.org/" title="IDCubed Blog">ID3 Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="titlebar">
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <div class="pull-right" id="fork-us">
+                        {# current_version needs to be looked up, and we need to determine if it is possible to create a new branch as part of editing the file - commment out for now #}
+                        <!-- <a href="https://github.com/IDCubed/oms-docs/blob/{{ current_version }}/sources/{{ pagename }}.rst"><i class="icon-code-fork icon-large"></i>&nbsp; Edit this page on Github</a> -->
+                    </div>
+                    <h1 class="pageheader">
+                        OMS Documentation
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
 
-            <div class="nav-collapse collapse">
+        <!-- Docs nav
+         ================================================== -->
+        <div class="row">
 
-                <ul class="nav pull-right">
-                    <li id="nav-introduction"><a href="http://wiki.idhypercubed.org/" title="Wiki">Wiki</a></li>
-                    <li id="nav-documentation" class="active"><a href="http://docs.openmustardseed.org/">Documentation</a></li>
-                    <li id="nav-about-id3"><a href="http://www.idcubed.org/about/vision-mission/" title="IDCubed">About ID3</a></li>
-                    <li id="nav-blog"><a href="http://www.idcubed.org/" title="IDCubed Blog">ID3 Blog</a></li>
-                </ul>
-
+            <div class="span3">
+                <div class="sidebar bs-docs-sidebar">
+                    {{ toctree(collapse=False, maxdepth=3) }}
+                    <form class="search" action="/search/" method="get">
+                        <input type="text" id="st-search-input" class="st-search-input"/>
+                        <div id="st-results-container"></div>
+                    </form>
+                </div>
             </div>
 
+            <!-- body block -->
+            <div class="span9 main-content">
 
-        </div>
-    </div>
-</div>
+                <!-- Main section
+                ================================================== -->
+                <section id="global" class="containerblock">
+                    {% block body %}{% endblock %}
+                </section>
 
-<div class="titlebar">
-<div class="container">
-    <div class="row">
-        <div class="span12">
-            <div class="pull-right" id="fork-us">
-                {# current_version needs to be looked up, and we need to determine if it is possible to create a new branch as part of editing the file - commment out for now #}
-                <!-- <a href="https://github.com/IDCubed/oms-docs/blob/{{ current_version }}/sources/{{ pagename }}.rst"><i class="icon-code-fork icon-large"></i>&nbsp; Edit this page on Github</a> -->
             </div>
-            <h1 class="pageheader">
-                OMS Documentation
-            </h1>
         </div>
     </div>
+
+    <div id="push-the-footer"></div>
 </div>
-</div>
-<div class="container">
-
-    <!-- Docs nav
-     ================================================== -->
-    <div class="row">
-
-        <div class="span3">
-            <div class="sidebar bs-docs-sidebar">
-
-
-            {{ toctree(collapse=False, maxdepth=3) }}
-	    <form>
-	      <input type="text" id="st-search-input" class="st-search-input"/>
-          <div id="st-results-container"></div>
-	    </form>
-        </div>
-        </div>
-
-        <!-- body block -->
-        <div class="span9 main-content">
-
-            <!-- Main section
-            ================================================== -->
-            <section id="global" class="containerblock">
-                {% block body %}{% endblock %}
-            </section>
-
-        </div>
-    </div>
-</div>
-
-<div id="push-the-footer"></div>
-</div> <!-- end wrap for pushing footer -->
+<!-- end wrap for pushing footer -->
 
 <div id="footer">
-            <!-- footer -->
-            <div class="container">
-                <div class="row">
-                    <div class="span8 tbox">
-                        <div class="tbox">
-                            <p>Open Mustard Seed is an open source project, sponsored by  <a href="http://www.idcubed.org">IDCubed</a>, under the <a href="https://github.com/IDCubed/oms-core/blob/master/LICENSE" title="ID3 licence, hosted in the Github repository">ID3 MIT license</a></p>
-                        </div>
-                    </div>
-                <div class="span4">
-                        <div class="tbox version-flyer hidden-phone">
-                            <div class="content">
-                                <span class="pull-left"><i class="icon-file-text"></i> Current version:</span>
-                                <ul class="inline pull-right">
-
-                                    {% for slug, url in versions %}
-                                    <li class="alternative">
-                                        <a href="{{ url }}{%- for word in pagename.split('/') -%}
+    <!-- footer -->
+    <div class="container">
+        <div class="row">
+            <div class="span8 tbox">
+                <div class="tbox">
+                    <p>Open Mustard Seed is an open source project, sponsored by <a href="http://www.idcubed.org">IDCubed</a>,
+                        under the <a href="https://github.com/IDCubed/oms-core/blob/master/LICENSE"
+                                     title="ID3 licence, hosted in the Github repository">ID3 MIT license</a></p>
+                </div>
+            </div>
+            <div class="span4">
+                <div class="tbox version-flyer hidden-phone">
+                    <div class="content">
+                        <span class="pull-left"><i class="icon-file-text"></i> Current version:</span>
+                        <ul class="inline pull-right">
+                            {% for slug, url in versions %}
+                                <li class="alternative">
+                                    <a href="{{ url }}{%- for word in pagename.split('/') -%}
                                         {%- if word != 'index' -%}
                                             {%- if word != '' -%}
                                                 {{ word }}/
                                             {%- endif -%}
                                         {%- endif -%}
                                     {%- endfor -%}"
-                                    title="Switch to {{ slug }}">{{ slug }}</a></li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                        </div>
-
-
+                                       title="Switch to {{ slug }}">{{ slug }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
                     </div>
                 </div>
             </div>
-
-        <!-- end of footer -->
-
+        </div>
+    </div>
+    <!-- end of footer -->
 </div>
-
 
 <script type="text/javascript" src="{{ pathto('_static/js/docs.js', 1) }}"></script>
 
 <!-- Swiftype search -->
-<!--
-<script type="text/javascript">
+
+{#<script type="text/javascript">
   var Swiftype = window.Swiftype || {};
   (function() {
   Swiftype.key = 'fooooo';
@@ -200,8 +190,8 @@
   var entry = document.getElementsByTagName('script')[0];
   entry.parentNode.insertBefore(script, entry);
   }());
-</script>
--->
+</script>#}
+
 
 <!-- Google analytics -->
 <!--
@@ -221,6 +211,5 @@
 
 </script>
 -->
-
 </body>
 </html>
