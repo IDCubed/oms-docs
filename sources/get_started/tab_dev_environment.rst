@@ -65,7 +65,7 @@ Get Started - Prerequisites
    - Linux: ``gpg --decrypt --output OMS-SDK-v0.8.3-20131125.ova
      OMS-SDK-v0.8.3-20131125.ova.gpg``. Provide the passphrase from IDCubed when
      prompted.
-* **Install VM Image** - Open ``OMS-SDK-v0.8.3-20131125.ova.gpg`` then click
+* **Install VM Image** - Open ``OMS-SDK-v0.8.3-20131125.ova`` then click
   ``import`` in the GUI that appears.
 
 
