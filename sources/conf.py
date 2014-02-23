@@ -42,7 +42,12 @@ html_additional_pages = {
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = ['sphinxcontrib.httpdomain',
               'sphinx.ext.todo',
+              'sphinx.ext.extlinks',
 ]
+
+extlinks = {'ticket': ('https://redmine.idhypercubed.org/issues/%s', 'ticket'),
+            'github-repo': ('https://github.com/IDCubed/%s', 'github: '),
+}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
