@@ -47,7 +47,8 @@ The easiest was to skin OMS OIDC is to use the very trick OMS OIDC itself uses
 to alter MITRE's OIDC: create a Maven overlay. In this case, however, no Java 
 logic is being overlaid as no additional logic is needed, merely UI elements. 
 This mechanism has been used in several situations to great success and has 
-resulted in a very consistent user experience.
+resulted in a very consistent user experience within two systems with very
+different layouts.
 
 How to Overlay the UI
 ---------------------
@@ -60,13 +61,11 @@ between logic (controller) and interface (view), with objects (models) being
 the vehicles to move data back and forth between the two. In OIDC the views 
 responsible for the UI are all located at:
 
-https://github.com/mitreid-connect/OpenID-Connect-Java-Spring-Server/tree/mitrei
-d-connect-1.0.9/openid-connect-server/src/main/webapp/WEB-INF/views
+https://github.com/mitreid-connect/OpenID-Connect-Java-Spring-Server/tree/mitreid-connect-1.0.9/openid-connect-server/src/main/webapp/WEB-INF/views
 
 with the OMS overlays located at:
 
-https://github.com/IDCubed/oms-oidc/tree/master/oms-oidc-server/src/main/webapp/
-views
+https://github.com/IDCubed/oms-oidc/tree/master/oms-oidc-server/src/main/webapp/views
 
 Everything from those two directories gets packaged into the final WAR at 
 ``WEB-INF/views``. The list of views is as follows:
@@ -159,13 +158,12 @@ OMS OIDC has a similar directory structure at:
 
 https://github.com/IDCubed/oms-oidc/tree/master/oms-oidc-server/src/main/webapp/resources
 
-Everything you see in this directory gets packaged at ``/resources`` into the 
-final WAR.
+Everything in this directory gets packaged at ``/resources`` into the final WAR.
 
 Reskinning OIDC is a matter of identifying what needs to change to accomplish 
 the desired look & feel. In many situations, reskinning is simply a matter of 
-changing the color theme of the OIDC. For the purpose, header.tag is the only 
-file to overlay, as it contains the stylesheet used throughout the application. 
+changing the stylesheet of the OIDC. For the purpose, header.tag is the only 
+file to overlay, as it contains the stylesheet inline used throughout the application. 
 In some cases it might be necessary to make more changes, such as swapping out 
 a page: in this situations it is needed to make sure forms are still submitting 
 correctly and that the model maps correctly into the new view. 
@@ -222,7 +220,7 @@ All tiles and views go into the tags and views directories under
 resources go under ``ROOT/reskinned-oidc/src/main/webapp/resources`` under 
 their corresponding directory.
 
-The ROOT pom serves to provide a root for the new overlay project, allowing you 
+The ROOT pom serves to provide a root for the new overlay project, allowing a developer 
 to make sure the versions of plugins and software used match those of OMS OIDC, 
 and also to grow the overlay to include additional logic, additional projects, 
 and also point to development versions of OIDC if required. Full listing of the 
@@ -282,7 +280,8 @@ This file is located under ``ROOT``.
       <name>Reskinned Open Mustard Seed OpenID Connect</name>
 
       <modules>
-         <module>oms-oidc</module>
+         <!-- Uncomment line below if you include a development branch of OMS-OIDC repository as a submodule -->
+         <!-- <module>oms-oidc</module> -->
          <module>reskinned-oidc-server</module>
       </modules>
 
