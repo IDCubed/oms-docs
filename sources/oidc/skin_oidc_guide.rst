@@ -149,7 +149,7 @@ The directory structure needed is as follows:
 
 All tiles and views go into the tags and views directories under ``ROOT/reskinned-oidc/src/main/webapp/tags`` and ``ROOT/reskinned-oidc/src/main/webapp/views`` respectively. All static resources go under ``ROOT/reskinned-oidc/src/main/webapp/resources`` under their corresponding directory.
 
-The ROOT pom serves to provide a root for the new overlay project, allowing you to make sure the versions of plugins and software used match those of OMS OIDC, and also to grow the overlay to include additional logic, additional projects, and also point to development versions of OIDC if required. Full listing of the root pom.xml can be found ::ref:`here <reskin_oidc_root_pom>`.
+The ROOT pom serves to provide a root for the new overlay project, allowing you to make sure the versions of plugins and software used match those of OMS OIDC, and also to grow the overlay to include additional logic, additional projects, and also point to development versions of OIDC if required. Full listing of the root pom.xml can be found :ref:`here <reskin_oidc_root_pom>`.
 
 The overlay pom serves to apply all the relevant overlays on top of the OIDC WAR. This POM also configures three build profiles for you:
 
@@ -162,9 +162,9 @@ The overlay pom serves to apply all the relevant overlays on top of the OIDC WAR
 |                   | Suitable for rapid testing during development.                                                                                              |
 +-------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
 
-The overlay pom can be found ::ref:`here <reskin_oidc_overlay_pom>`.
+The overlay pom can be found :ref:`here <reskin_oidc_overlay_pom>`.
 
-The filters directory is used to hold the relevant configuration for the three build profiles defined above. The dev.properties file is used to configure Spring to use development mocks instead of integrating with the OMS system. The development mocks serve some static data from property files packaged within the WAR. The dev.properties file can be found ::ref:`here <reskin_oidc_dev_properties>`. The prod.properties file is used to configure Spring to integrate OIDC with the OMS system. The prod.properties file can be found ::ref:`here <reskin_oidc_prod_properties>`.
+The filters directory is used to hold the relevant configuration for the three build profiles defined above. The dev.properties file is used to configure Spring to use development mocks instead of integrating with the OMS system. The development mocks serve some static data from property files packaged within the WAR. The dev.properties file can be found :ref:`here <reskin_oidc_dev_properties>`. The prod.properties file is used to configure Spring to integrate OIDC with the OMS system. The prod.properties file can be found :ref:`here <reskin_oidc_prod_properties>`.
 
 File Listings For Overlay Project Example
 -----------------------------------------
@@ -174,7 +174,7 @@ Root pom.xml
 
 .. _reskin_oidc_root_pom:
 
-This file is located under `ROOT`.
+This file is located under ``ROOT``.
 
 .. code:: xml
 
@@ -360,7 +360,7 @@ Overlay pom.xml
 
 .. _reskin_oidc_overlay_pom:
 
-This file is located at `ROOT/reskinned-oidc-server`.
+This file is located at ``ROOT/reskinned-oidc-server``.
 
 .. code:: xml
 
@@ -583,7 +583,7 @@ dev.properties
 
 .. _reskin_oidc_dev_properties:
 
-This file is located at `ROOT/reskinned-oidc-server/src/main/filters`.
+This file is located at ``ROOT/reskinned-oidc-server/src/main/filters``.
 
 .. code:: 
 
@@ -614,7 +614,7 @@ prod.properties
 
 .. _reskin_oidc_prod_properties:
 
-This file is located at `ROOT/reskinned-oidc-server/src/main/filters`.
+This file is located at ``ROOT/reskinned-oidc-server/src/main/filters``.
 
 .. code::
 
