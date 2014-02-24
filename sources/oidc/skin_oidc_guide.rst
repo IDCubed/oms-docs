@@ -193,25 +193,28 @@ The directory structure needed is as follows:
     |
     \ pom.xml
     \ reskinned-oidc-server
-     |
-     \ pom.xml
-     \ src
-       |
-       \ test
-       \ main
-          |
-          \ java
-          \ resources
-          \ filters
-          \ webapp
+        |
+        \ pom.xml
+        \ src
             |
-            \ resources
-            | |
-            | \ css
-            | \ images
-            | \ js
-            \ tags
-            \ views         
+            \ test
+            \ main
+                |
+                \ java
+                \ resources
+                \ filters
+                |   |
+                |   \ dev.properties
+                |   \ prod.properties
+                \ webapp
+                    |
+                    \ resources
+                    |   |
+                    |   \ css
+                    |   \ images
+                    |   \ js
+                    \ tags
+                    \ views         
 
 All tiles and views go into the tags and views directories under 
 ``ROOT/reskinned-oidc/src/main/webapp/tags`` and 
