@@ -1,0 +1,390 @@
+:title: OMS v0.7 Release Notes
+:description: Release notes for the OMS v0.7 series
+:keywords: release notes, contributing, oms, v0.7,
+
+
+.. _v0.7-release_notes:
+
+OMS v0.7 Series Release Notes
+==============================
+
+Here are some release notes associated with the v0.7.x series of OMS.
+
+
+v0.7.1
+------
+
+Focal Points
+~~~~~~~~~~~~
+
+* automation, TCCs, etc!
+
+
+oms-deploy
+~~~~~~~~~~
+
+* t1:   Add license to all Python files in oms-deploy
+* t809: changed order of STATICFILES_FINDERS
+* t847: version bump in prep for v0.7.1 release
+* t786: include api_console >> portal registry template
+* t770: correct use of the stream_port parameter
+* t862: improve handling of templates in settings.py
+* t864: move mkdir_p() >> oms_deploy.util
+* t864: reuse oms_deploy.util.mkdir_p()
+* t864: tidy up code/cruft in oms_deploy.webapps
+* t864: remove oms_deploy.webapps.Webapp.render_local_settings()
+* t864: replace old hack with django.utils.crypto.get_random_string()
+* t862: refactor oms_deploy.codegen.generate_project()
+* t862: refactor how we define details in rendered settings.py
+* t864: minor (cosmetic) adjustments to rendering requirements.txt
+* t862: ensure staticfile_path exists before collectstatic()
+* t864: revert use of django.utils.crypto.get_random_string
+* t869: revert reorder of TEMPLATE_LOADERS from t862
+* t879: correct handling of module_path
+* t847: pin portal's django-registration==0.8
+
+
+oms-core
+~~~~~~~~
+
+* t717: Add middleware_classes to GPSDemo manifest, with defaults
+* t767: Add fixtures to create admin user in each GPSDemo app
+* t711: Use content_type argument for HttpResponse objects; MIME types are now referred to as media types
+* t776: Use separate height/width values in GPSDemo bounding box
+* t732: Rename HelloWorld app to Proximity
+* t777: Move common OIC test code to oic_validation module
+* t777: Add missing settings (LOCATION_ENDPOINT, DB_NAME) to GPSDemo settings_snippets
+* t777: Add quotes to Admin URLs in GPSDemo manifest; move to front of urls list
+* t777: Add oic_validation.test.EndpointTestCaseMixin class
+* t777: Match manifest in fixture to GPSDemoWrapper.ini manifest
+* t710: Move Funf Journal config file to cn_sandbox/templates
+* t710: Delete funf_config_module
+* t710: Generate Funf Journal configuration from template
+* t710: Match manifest in fixture to GPSDemoWrapper.ini manifest
+* t830: Rename GPSDemoWrapper.ini to GPSDemo.ini
+* t1: Add license to all Python files in oms-core
+* t693 - template/JS clean up
+* t834: merge JS/tpl cleanup from t693 >> v0.7.1-qa
+* t679: major cleanup and organization for templates
+* t834: merge base tpl cleanup from t679 >> v0.7.1-qa
+* t787: leverage API schema to generate test console
+* t788: let test console user define an Auth Header
+* t786: the API test console is now a seperate app
+* merge refactored API test console UI >> v0.7.1-qa
+* update v0.7.1 with bugfixes from v0.7's QA
+* t786: add API test console UI to TAB manifests
+* t710: correct typo in manifests fixture
+* t786: api console template must extend base.html
+* t862: remove static/tpl settings from manifests, sensible defaults are now in oms-deploy
+* t862: add oms-core/templates to modules param in each UI manifest
+* t860: Fix manifests fixture
+* t786: added optional constance API_CONSOLE_BACKEND. add fallback support for api testing console. fix console not showing up
+* t870: fix PerguntusDemo manifest
+* t735: merge into qa-develop
+* t868: PerguntusDemo manifest updates
+* t787: add config prefix to API_CONSOLE_BACKEND constance
+* t787: fix OMSConsole.js console_constance check if null error out
+* t787: add async true to ajax on get_methods to properly load schemas
+* t787: remove async from internal ajax for schemas
+* t787: merge fixes to api_console >> qa-develop
+* t847: update RESOURCE_ENDPOINT config in GPSDemoUI.ini for clarity
+* t787: add API_CONSOLE_BACKEND config to Perguntus manifest
+* t895: Clean up GPSDemo imports
+* t597: Update GPSDemo to work with latest Funf Journal
+* t1: add ID3 license to all python source files
+* t910: Rename manifest private_registry > PrivateRegistry
+* t910: separate Perguntus manifests (Backend/UI)
+* t910: update manifests fixture with latest from .ini manifests
+* t932: Limit code to 80 columns in cn_sandbox and oic_validation modules
+* t945: move registry's base template back to its module
+* t945: remove old documentation cruft
+* t945: remove console template from registry module
+* t945: clean up url definitions in Portal/Private Registry
+* t945: add constance template context processor to Private Registry manifest
+* t945: merge Registry url/tpl updates >> qa-develop
+* t945: correct imports for TemplateView in Registry URLs
+* t847: correct name of content block in portal registration form template
+
+
+
+oms-experimental
+~~~~~~~~~~~~~~~~
+
+* t870: add license to perguntus_backend.send_question
+* t938: Change "trust wrapper" to "TAB" in oms-experimental
+* t932: Limit code to 80 columns in GPSDemo sandboxes
+* t931: Sort ClientLocationResource in model, not in resource
+* t885: Add API Transformer feature
+* t885: Add Authorization class to PerguntusStateResource
+* t885: Add license to new API Transformer files
+* t885: Rename "filter" to "transform"
+* t886: Create simple UI to manipulate Perguntus state object
+* t885: Use haversine formula to measure distance
+* t942: fixed JS error when no data
+* t942: fixed loading leaflet JS module locally (fix HTTPS issues)
+* t942: fixed question saved as 'text' and not 'open'. added notification of messages in days logs. showing yes/no questions on map
+* t942: added notification of total messages for month
+* t942: removed sharing page
+* t942: removed phone from settings page
+* t942: fix delete capability. now delete question. added confirmation for delete
+* Merge branch 't885' into t942
+* t942: restore sharing page. set it to marucry page.
+* t942: fixed sharing menu hidden in menu page
+* t942: edit question progress. sharing page enhancements.
+* t942: editing functionally done.
+* t942: removed auth from answering questions
+* t942: removed auth from answering questions
+* t942: removed auth from answering questions
+* t942* Yes/No questions get counted into the log and show up too
+* t942* Make sure graph is scaled 0-10
+* t942* added a nice time chooser to add a question form
+* t886: Always allow object creation in DSAuthorization class
+* t886: Move list_to_boolean decorator to perguntus_backend/decorators.py
+* Merge updates to Perguntus Backend >> t942
+* t1002: add OMS OIDC UI module to PerguntusUI
+* t1002: add OMS OIDC UI module to PerguntusUI
+* t971: fix various issues in Perguntus, prior to demo
+* t1205: Use pds_base with GPSDemo
+* t877: if Perguntus questions API fails, make it clear
+* t1243: Add pds_base support to perguntus_backend module
+* t1257: Remove Resource Server stub from GPSDemo
+* t1261: Remove old unit tests from pds_sandbox and prox_sandbox modules
+* t1242: Use haversine formula for calculating distance in prox_sandbox module
+* t937: Rename API Transformer to FACT
+* t1258: perguntus_backend cleanup (whitespace and imports)
+* t1258: Remove unused file perguntus_backend/tests.py
+* t1258: Add license to files in perguntus_backend where it is missing
+* t1258: Create perguntus_pds module
+* t1258: Update Perguntus code to use new PDS app
+* t1315: Declare utf-8 encoding in Python sources files
+* t1172: quick start questions UI updates for perguntus
+* t906: if questions email fails to send, let the user know
+* t1235: Add django-admin command to check proximity and send an email
+* t1265: Add NOOP FACT to GPSDemo
+* t1: Add license to two empty Python files
+
+
+v0.7.0
+------
+
+oms-deploy
+~~~~~~~~~~
+
+* 7a8a961 drop static use of SCRIPT_NAME in nginx/uwsgi/django, have uwsgi handle it intelligently
+* ef48f4c reference oms-deploy@v0.7 in portal registry template's pip_requirements
+* 283b3c4 uwsgi.ini app template needs instance in the context
+* 598e215 bugfix for uwsgi upstart config, this little detail fixes the weirdest issues with multi app hosting in uwsgi..
+* 9fffa9b update oms-deploy git branch referenced by pip_requirements in the portal config template
+* b9047c9 add Webapp._install_from_repo() to abstract this repetive task
+* 5237c49 add fixtures parameter to app.ini config spec - list of json data fixture to load from module repos
+* 5de7e19 update Webapp._install_module() to use Webapp._install_from_repo()
+* 9cd3b54 merge in doc updates from v0.6 release
+* bec3bb6 tweak config scp to include the virtualenv_root and module_root parameters taken from the deploy section
+* 92fe501 correct input parameters for Webapp._install_module()
+* 7208343 Webapp.__init__() now derives paths and adds them to Webapp.scp
+* 94661a2 add Webapp._install_script() and Webapp.install_scripts() and a new config parameter added to Webapp.scp during __init__(). devs can now specify scripts to be installed into the webapp via the manifest and taken from the existing module repos.
+* 22b91ef add scripts parameter to app.ini config spec - list of scripts to install from module repos
+* b1c0cd0 add Webapp._install_config() and Webapp.install_configs() and a new config parameter added to Webapp.scp during __init__(). devs can now specify configs to be installed into the webapp via the manifest and taken from module repos
+* a9ea1ed add configs parameter to app.ini config spec - list of configs to install from module repos
+* 34e3b29 enable install_configs() and install_scripts() in Webapp._deploy()
+* 6d211f2 use self.scp['foo'] in place of env.FOO - config handling cleanup
+* 2432d03 add url route to portal.ini for JB's test console
+* 8b0ef23 bugfix - don't break if no foos for Webapp.install_foos() to process - foos being: configs, modules, scripts and fixtures
+* 6dcb7cd Webapp.install_dependencies() - default to requirements.txt, if conf/requirements.txt is not there
+* 5430b59 move compiling requirements.txt from codegen.django >> codegen.python - it is generic
+* e7c2a85 refactor Webapp.install_dependencies() and handling of requirements.txt - try to use /<projectroot>/conf/requirements.txt but fallback to /<projectroot>/requirements.txt, and gracefully carry on if no requirements.txt found
+* 4a08f92 correct use of scp['compile'] as a boolean in Webapp() class; comment on similar mistakes
+* 151ff20 compile django, clone repo, or allow third party - Webapp._deploy()
+* b6c0317 skip django deploy when possible; set Webapp.scp['django'] if compiling a django webapp
+* 49c6851 horrible: if...and self.scp['compile'] != 'False'; but required for now..
+* 7ef11ae correct setup.py - bump version
+* 1e6a654 mv base pkg from fullstack >>> base.sls, and update refs
+* b9b0aa9 super awesome helper notes printed after bootstrap
+* 25e6f56 adding source tarball for opensmtpd
+* fe81cb9 add smtpd.conf for basic localhost email relay
+* 31b5e39 add upstart configuration for smtpd daemon
+* 1f52180 salt state for opensmtpd - enable SMTP relay for OMS hosts
+* 89479be add opensmtpd installer.sh for reference
+* 90b23e5 enable smtpd as a service and include for * in top.sls
+* 95e349f move OIDC git clone bootstrap_salt >> bootstrap_oms_deploy
+* 172ec01 fix tags in opensmtpd salt state
+* 4d1af98 restart nginx in create_portal.sh and echo more to user
+* 07a1988 hook up django >> localhost email relay
+* 5b0fdd6 conditionally include sentry/raven in settings.py template
+* e7da0a8 add new option 'sentry' to app configspec
+* 4aa4ed0 add sentry config option to context to compile django
+* 8791628 include raven in settings.INSTALLED_APPS, if sentry is set (also clean up this section of jinja..)
+* 77ed2f9 correct any boolean >> str mishaps in Webapp.scp
+* b138198 add new option 'middleware_classes' to app configspec
+* 1d96c57 add MIDDLEWARE_CLASSES to settings.py like INSTALLED_APPS
+* 0b8b000 include STATIC_ROOT and STATIC_URL in settings.py.tpl - no longer need to include these in the manifest settings_snippet
+* 5e3d6e2 refactor portal manifest to leverage changes in url routing (also clean up while we are here..)
+* 1a8f9b1 update portal fixtures with TF/TW/MC
+* 7e850af doc: add _build to git ignore
+* 4cfd947 doc: rerun autodoc, eg: sphinx-apidoc -o doc/source oms_deploy -F -H oms-deploy -A IDCubed.org -V 0.7.0
+* a9770be doc: remove cruft example and address sphinx build warning
+* 67dce2f leverage sphinx ext.todo module in docstrings
+* f6c7196 doc: clarify subsections and add release notes
+* d11a161 doc: major reorg to docs, make it more sensible
+* 5ff405a doc: clarify what is what, just a bit
+* 220035d doc: have sphinx-build write out to the local directory
+* 7bb3e80 doc: include single page, super awesome, self-referencing, HTML goodness built with sphinx
+* 617741c doc: ask git to ignore sphinx doctrees
+* 3fa2114 doc: rewrite doc/README
+* 1e82eb1 doc: update sphinx rendered doc as singlehtml
+* 6c4bf53 doc: add manifest and config parameter details
+* 30fa5f5 doc: update singlehtml render (with new manifest section)
+* c2ce070 t407: pin django==1.4.3 and tastypie==0.9.12 in portal template
+* baea677 t415: add keys missing from app config {virtualenv,module}_root
+* 494e05e t529: add templated .ini config - run service in uwsgi container
+* 88176d4 t529: add new section to app manifest - services
+* 34ea5eb t529: include ztaskd/workerd service config in portal manifest
+* 6401e98 t529: move enable_uwsgi_app() out of Webapp class
+* 9c4c5b5 t529: _install_service() + install_services() >> webapps.Webapp
+* 818d77d t529: actually install and enable services during deployment
+* 549a5f9 t537: pin django==1.4.5 - portal manifest template
+* 94d3cae add eula fixture and configobj dependency to portal manifest
+* 03f58cb t529: {en,dis}able embedded service from manifest
+* 96af4bb t578: backport opensmtpd state from salt-states
+* 10efbf6 t504: add salt states to install & config logstash
+* 0070c4e t504: merge logstash-t504 >> qa
+* 646aa62 t512: reload nginx after webapp deploy
+* b70e440 t579: runas - new param in uwsgi embedded services
+* 43e580e t576: quick state to include barebones node.js
+* e1af34b t576: add simple stream mod to portal registry
+* bdc57d7 t609: correct Exceptions, and a typo
+* 78c27cf t609: remove duplicate code, reuse oms_deploy.api.deploy() in fabfile.py
+* 3c7d0aa t609: simplify sandbox config template
+* eb6df7f t609: refactor check_results() based on ConfigObj doc
+* a48b6ca t609: update portal registry manifest prior to merge
+* 8aee976 t644: add jsonfield to portal registry
+* a823483 t671: enable HTTPS for django, through uwsgi, but from nginx :P
+* 3ecc8b8 t645: address port clash with option for sockets
+* 491e2e5 t645: remove port from app template manifests
+* 56c4703 t609: remove snippet of code cruft
+* 6035d9c t671: ensure nginx location block gets ssl if enabled
+* b8701fd t645: remove port parameter from portal manifest
+* 1b9d658 t671: enable_ssl = True (portal manifest), leave disabled
+* 93708cb t672: ensure oic_validation dependencies are in portal manifest template
+* 644bc03 t609: major README update
+* 090c895 t696: run django tests after deploy
+* a68f405 t721: app instances can proxy to websocket streams
+* d080ba1 t721: enable simple_stream module in portal manifest
+* 12c10de t699: ensure salt creates /var/log/oms/tests/
+* d74f689 t727: include django-constance in portal manifest
+* 11c368b t687: temporarily disable tests for portal deploy
+* 5e0a2db t709: add STREAM_URL constance config to portal manifest
+* b3efad9 t709: add config args to portals simpleStream service
+* 3e03c76 t687: ensure nodejs state is included
+* e7c17ef t687: use salt to install libzmq3 rather than manually
+* 8e9e361 t736: Update logstash to 1.1.12
+* 5716188 t774: correct logstash state and configs
+* 2eef057 t775: add nginx/stable ppa >> salt bootstrap
+* f5a10a6 t775: ensure latest pkg installed, nginx-full
+* df85e5a t721: update simple_stream config in portal manifest and proxy
+* 5eb5021 add release notes for v0.7 release
+* c85a888 t1: add LICENSE to oms-deploy
+* 569b37e t638: ensure v0.7 Release Notes are included in sphinx docs
+* 92795af t638: correct ConfigObj specs in manifest.rst
+* 3859759 t811: clarify user's next steps, post-bootstrap
+
+
+oms-core
+~~~~~~~~
+
+* t767: Add fixtures to create admin user in each GPSDemo app
+* t711: Use content_type argument for HttpResponse objects; MIME types are now referred to as media types
+* t776: Use separate height/width values in GPSDemo bounding box
+* t732: Rename HelloWorld app to Proximity
+* t777: Move common OIC test code to oic_validation module
+* t777: Add missing settings (LOCATION_ENDPOINT, DB_NAME) to GPSDemo settings_snippets
+* t777: Add quotes to Admin URLs in GPSDemo manifest; move to front of urls list
+* t777: Add oic_validation.test.EndpointTestCaseMixin class
+* t777: Match manifest in fixture to GPSDemoWrapper.ini manifest
+* t710: Move Funf Journal config file to cn_sandbox/templates
+* t710: Delete funf_config_module
+* t710: Generate Funf Journal configuration from template
+* t710: Match manifest in fixture to GPSDemoWrapper.ini manifest
+* t830: Rename GPSDemoWrapper.ini to GPSDemo.ini
+* t693: template/JS clean up
+* t834: merge JS/tpl cleanup from t693 >> v0.7.1-qa
+* t679: major cleanup and organization for templates
+* t834: merge base tpl cleanup from t679 >> v0.7.1-qa
+* t787: leverage API schema to generate test console
+* t788: let test console user define an Auth Header
+* t786: the API test console is now a seperate app
+* merge refactored API test console UI >> v0.7.1-qa
+* update v0.7.1 with bugfixes from v0.7's QA
+* t786: add API test console UI to TAB manifests
+* t710: correct typo in manifests fixture
+* t786: api console template must extend base.html
+* t862: remove static/tpl settings from manifests, sensible defaults are now in oms-deploy
+* t862: add oms-core/templates to modules param in each UI manifest
+* t860: Fix manifests fixture
+* t786: added optional constance API_CONSOLE_BACKEND. add fallback support for api testing console. fix console not showing up
+* t870: fix PerguntusDemo manifest
+* t735: merge into qa-develop
+* t868: PerguntusDemo manifest updates
+* t787: add config prefix to API_CONSOLE_BACKEND constance
+* t787: fix OMSConsole.js console_constance check if null error out
+* t787: add async true to ajax on get_methods to properly load schemas
+* t787: remove async from internal ajax for schemas
+* t787: merge fixes to api_console >> qa-develop
+* t847: update RESOURCE_ENDPOINT config in GPSDemoUI.ini for clarity
+* t787: add API_CONSOLE_BACKEND config to Perguntus manifest
+* t895: Clean up GPSDemo imports
+* t597: Update GPSDemo to work with latest Funf Journal
+* t1:   add ID3 license to all python source files
+* t910: Rename manifest private_registry > PrivateRegistry
+* t910: separate Perguntus manifests (Backend/UI)
+* t910: update manifests fixture with latest from .ini manifests
+* t932: Limit code to 80 columns in cn_sandbox and oic_validation modules
+* t945: move registry's base template back to its module
+* t945: remove old documentation cruft
+* t945: remove console template from registry module
+* t945: clean up url definitions in Portal/Private Registry
+* t945: add constance template context processor to Private Registry manifest
+* t945: merge Registry url/tpl updates >> qa-develop
+* t945: correct imports for TemplateView in Registry URLs
+* t847: correct name of content block in portal registration form template
+
+
+oms-experimental
+~~~~~~~~~~~~~~~~
+
+* t433: Use django-constance for email recipient
+* t433: Add django-constance support to GPSDemo sandboxes
+* t433: Use GPS_RANGE from django-constance
+* t731: Update dialog message in GPSUI
+* t433: Merge origin/qa-develop into t433
+* t433: Add django-constance support to test_gpsdemo module
+* t735: Grab message from django-constance
+* added constance setting Perguntus_frontend and Perguntus_backend
+* t725: added RESOURCE_ENDPOINT constance
+* t711: Use content_type argument for HttpResponse objects; MIME types are now referred to as media types
+* t776: Use separate height/width values in GPSDemo bounding box; add comments
+* t776: Limit lines to 80 columns
+* t732: Rename HelloWorld directories
+* t732: Rename HelloWorld app to Proximity
+* t777: Move common OIC test code to oic_validation module
+* t777: Add models file to res_sandbox app so tests run; remove old files
+* t777: Slight improvement to database file unit tests
+* t777: Remove unused test modules
+* t777: Use mixin from oic_validation module
+* t702, t784 - turn pergntuns check_question into django admin command. add the ability to resend questions.
+* t831: Update RtD docs with HelloWorld app's new name (Proximity)
+* t831: Fix typo in RtD docs
+* t1:   Add license to all Python files in oms-experimental
+* t624 added the story line for pulling text answers from db
+* merge updates to GPS TAB >> v0.7.1-qa
+* merge updates to Perguntus TAB >> v0.7.1-qa
+* t870: add modules prefix to imports in perguntus_backend
+* t870: use request.get_host() to generate link in Perguntus email
+* t870: add jquery mobile files to fix chrome rendering
+* t679: fix GPSUI menu - remove links from registry
+* t870: add validation to add question form
+* t895: Clean up GPSDemo imports
+* t899: Add admin.py to GPSDemo's PDS and Proximity apps
+* t880: intelligently set hostname in perguntus check/send questions
+* t870: merge updates to perguntus >> qa-develop
+

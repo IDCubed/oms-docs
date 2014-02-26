@@ -16,6 +16,7 @@ This documentation has the following resources:
    OpenID Connect <oidc/index>
    Tutorials <tutorials/index>
    Contributing <contributing/index>
+   Release Notes <releases/index>
    FAQ <faq>
 
 .. API <api/index>
