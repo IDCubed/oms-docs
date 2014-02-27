@@ -10,7 +10,7 @@ Contributing to OMS
 ===================
 
 Start first by reviewing `this document on the OMS Wiki`_ for a walkthrough of
-some of our development processes.
+some of the project's existing development processes.
 
 .. _this document on the OMS Wiki: https://wiki.idhypercubed.org/wiki/ProjectDocumentation#Developer_Resources
 
@@ -18,10 +18,11 @@ some of our development processes.
 When you are ready to start hacking, you can either download and setup the OMS
 development environment as an importable VM image, or create your own
 environment from a fresh install of Ubuntu 12.04 LTS and with the help of the
-OMS systems automation tools. The VM is intended to be a self-contained system
-and includes a running private TCC.
+OMS systems automation tools. The VMs are intended to be self-contained systems,
+and include everything needed to get started developing at any level within the
+Holonic OMS EcoSphere.
 
-:ref:`This guide will get you started with the development VM
+:ref:`This guide will get you started with the development VMs
 <deploy_development_vm>`.
 
 :ref:`Kickstart a new Ubuntu 12.04 LTS host with this guide <kickstart_oms>`.
@@ -36,5 +37,5 @@ OMS. See each section below based on where your contributions will be made:
    OMS Source Code Map <source_code>
    Documentation <documentation>
    OpenID Connect </oidc/developers_guide>
-   Build OMS VM Images <vm_images>
+   Build OMS VM Images <build_vm_images>
    Release Process <releases>
