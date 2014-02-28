@@ -100,19 +100,33 @@ A top-level section will need the following:
 * create the ``index.rst``, eg: ``sources/get_started/index.rst``. If the new
   section will only have a single page, add all section content to this file.
 * If the new section will have sub-sections, create each as another page within
-  ``sources/get_started/`` and leave ``sources/get_started/index.rst`` with just
-  a ``toctree`` directive like:
+  ``sources/get_started/`` and ensure ``sources/get_started/index.rst`` has a
+  ``toctree`` directive like:
 
   ```
     .. toctree::
        :maxdepth: 1
+       :hidden:
 
        Initial Deployment <first_steps>
        Virtual Resource Controller <vrc>
        Trust Network <trust_network>
   ```
 
-See the actual oms-docs source as existing examples.
+  This ``toctree`` directive will ensure sphinx is informed of these documents,
+  and otherwise able to access and refer to them within the context sphinx builds
+  the documentation - sphinx is smart.
+
+Note that in the oms-docs project, the ``indest.rst`` of a top-level section is
+rendered and included in the build as an HTML page - this cannot be changed, the
+Table of Contents (which sets up *chapters* with proper *next* and *previous*
+references) and navigation rely on how sphinx handles the toc and it documents.
+
+Due to this, we use the ``:hidden:`` attribute passed to the ``toctree`` directive
+(see the example code snippet above) is used to ensure sphinx is informed of our
+intent, but does not render the table of contents in the section.
+
+See the current oms-docs source for actual/existing examples.
 
 
 ### Headings
