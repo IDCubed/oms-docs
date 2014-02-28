@@ -340,8 +340,7 @@ to be considered.
 
 **GET /api/personaapproved**
 
-.. code-block:: 
-
+.. code::
 
    [
       {
