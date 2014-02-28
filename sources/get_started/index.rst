@@ -104,7 +104,7 @@ file/image format.
    :ref:`product release <contribute_release>` processes are included in the
    :ref:`contributing section <contributing>`. Built with automated tooling based
    on `packer.io`_, `VirtualBox`_, and OMS, the process is both flexible and
-   extensible. You will need access to the full :ref:`list of OMS source code 
+   extensible. You will need access to the full :ref:`list of OMS source code
    <oms_source_code_map>` repositories.
 
 .. _packer.io: http://www.packer.io
