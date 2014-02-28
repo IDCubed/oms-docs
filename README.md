@@ -126,6 +126,10 @@ Due to this, we use the ``:hidden:`` attribute passed to the ``toctree`` directi
 (see the example code snippet above) is used to ensure sphinx is informed of our
 intent, but does not render the table of contents in the section.
 
+Either way, be sure that the ``toctree`` directive you add is *in* the document,
+as seen by sphinx, by including it at some point *after* the document's top-level
+heading/title.
+
 See the current oms-docs source for actual/existing examples.
 
 
