@@ -100,6 +100,6 @@ OMS Features
 
 Here is a mindmap of the features of the OMS TCF:
 
-.. image:: introduction/images/Trust_Framework_Features_mindmap_01.png
+.. image:: /images/intro/Trust_Framework_Features_mindmap_01.png
    :alt: Trusted Compute Framework Features
    :align: center
