@@ -101,14 +101,14 @@ file/image format.
 .. note::
 
    More details about the OMS :ref:`VM build <vm_builders_guide>` and
-   :ref:`product release <contribute_release>` processes in the :ref:`contributing
-   section <contributing>`. Built with automated tooling based on packer.io,
-   VirtualBox, and OMS, the process is both flexible and extensible. You will
-   need access to the full :ref:`list of OMS source code 
+   :ref:`product release <contribute_release>` processes are included in the
+   :ref:`contributing section <contributing>`. Built with automated tooling based
+   on `packer.io`_, `VirtualBox`_, and OMS, the process is both flexible and
+   extensible. You will need access to the full :ref:`list of OMS source code 
    <oms_source_code_map>` repositories.
 
-
-.. todo:: update the above list of references to include URLs to each projects.
+.. _packer.io: http://www.packer.io
+.. _VirtualBox: https://www.virtualbox.org
 
 
 OMS TCF Demo
