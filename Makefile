@@ -39,8 +39,7 @@ help:
 #	@echo "  linkcheck  to check all external links for integrity"
 #	@echo "  doctest    to run all doctests embedded in the documentation (if enabled)"
 	@echo "  docs       to build the docs and copy the static files to the outputdir"
-	@echo "  server     to serve the docs in your browser under \`http://localhost:9000\`"
-	@echo "  publish    to publish the app to dotcloud"
+	@echo "  server     to serve the docs in your browser under \`http://0.0.0.0:9000\`"
 
 clean:
 	-rm -rf $(BUILDDIR)/*
@@ -50,8 +49,9 @@ docs:
 	@echo
 	@echo "Build finished. The documentation pages are now in $(BUILDDIR)/html."
 
-server: docs
-	@cd $(BUILDDIR)/html; $(PYTHON) -m SimpleHTTPServer 9000
+# run make clean before running grunt, which will build and host the rendered docs
+server: clean
+	@grunt
 
 $(VERSIONS):
 	@echo "Hello world"
