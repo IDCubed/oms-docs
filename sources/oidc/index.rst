@@ -22,10 +22,12 @@ Personas
 --------
 
 The persona concept implemented within ID3's extension to MITRE's OpenID Connect
-is taken from a paper titled `Towards a Trustworthy Core Identity Infrastructure
-v13 DRAFT <CoreID Paper>`_. Familiarity with this paper is highly recommended.
+is taken from a paper titled *Towards a Trustworthy Core Identity
+Infrastructure*, here is `v13 of the draft`_. Familiarity with this paper is
+highly recommended.
 
-.. _CoreID Paper: http://iauth.org/wp-content/uploads/2013/01/Core-ID-Infra-paper-v13.pdf
+.. _v13 of the draft: http://iauth.org/wp-content/uploads/2013/01/Core-ID-Infra-paper-v13.pdf
+
 Two types of personas are defined: base personas and principal personas. A base
 persona denotes the existential nature of a person, the OIDC user, in digital
 space, while the principal persona is derived from a base persona by associating
