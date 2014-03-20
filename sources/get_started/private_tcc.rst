@@ -118,6 +118,12 @@ You should now be able to browser to either https://host.domain.tld/idoic/, or
 the non-SSL equivalent, as you setup.
 
 
+.. note::
+
+  Your OIDC server performance may benefit from the use of a swap file. Please
+  see the :ref:`swap_file_tutorial` for details.
+
+
 Client and Scope Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
