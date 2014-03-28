@@ -449,44 +449,6 @@ module).
   oms% cp ~/locationvenv/locationproj/locationproj/urls.py /var/oms/src/oms-example/pds
 
 
-Finally, we need to update the code so that references to the ``pds`` module
-are prefixed with ``modules.`` (this is because all modules are placed in the
-``modules`` package during deployment).
-
-``/var/oms/src/oms-example/pds/api.py``:
-
-.. code:: python
-
-  from tastypie.authorization import Authorization
-  from tastypie.resources import ModelResource
-
-  from modules.pds.models import Location  # adding "modules."
-
-  class LocationResource(ModelResource):
-      class Meta:
-          queryset = Location.objects.all()
-          resource_name = 'location'
-          authorization = Authorization()
-
-
-``/var/oms/src/oms-example/pds/urls.py``:
-
-.. code:: python
-
-  from django.conf.urls import patterns, include, url
-  from tastypie.api import Api
-
-  from modules.pds.api import LocationResource  # adding "modules."
-
-  v1_api = Api(api_name='v1')
-  v1_api.register(LocationResource())
-
-  urlpatterns = patterns('',
-      url(r'^api/', include(v1_api.urls)),
-      url(r'^ok/$', 'modules.pds.views.ok'),  # adding "modules."
-  )
-
-
 Creating a deployable manifest
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -535,10 +497,10 @@ Create a manifest for our TAB in ``~/Location.yaml``:
       - django.contrib.sites
       - django.contrib.messages
       - django.contrib.staticfiles
-      - modules.pds
+      - pds
 
     urls:
-      - url(r'', include('modules.pds.urls'))
+      - url(r'', include('pds.urls'))
 
 
 ``deploy.conf`` uses a simple key-value syntax using the ``:`` separator.
@@ -629,7 +591,7 @@ Now, let's add a view for this template:
   from django.http import HttpResponse
   from django.shortcuts import render_to_response
 
-  from modules.pds.models import Location
+  from pds.models import Location
 
   def ok(request):
       return HttpResponse('ok')
@@ -648,15 +610,15 @@ The last step is add a URL for our view:
   from django.conf.urls import patterns, include, url
   from tastypie.api import Api
 
-  from modules.pds.api import LocationResource
+  from pds.api import LocationResource
 
   v1_api = Api(api_name='v1')
   v1_api.register(LocationResource())
 
   urlpatterns = patterns('',
       url(r'^api/', include(v1_api.urls)),
-      url(r'^ok/$', 'modules.pds.views.ok'),
-      url(r'^locations/$', 'modules.pds.views.locations'),  # new URL
+      url(r'^ok/$', 'pds.views.ok'),
+      url(r'^locations/$', 'pds.views.locations'),  # new URL
   )
 
 
@@ -687,7 +649,7 @@ Install the API Console:
 .. code:: yaml
 
   installed_apps:
-    - modules.api_console
+    - api_console
 
 
 Finally, add the URL for the console:
@@ -737,15 +699,15 @@ Now our manifest looks like this:
       - django.contrib.sites
       - django.contrib.messages
       - django.contrib.staticfiles
-      - modules.api_console
-      - modules.pds
+      - api_console
+      - pds
 
     urls_snippet: |
       from django.views.generic import TemplateView
 
     urls:
       - url(r'^console/$', TemplateView.as_view(template_name='console.html'))
-      - url(r'', include('modules.pds.urls'))
+      - url(r'', include('pds.urls'))
 
 
 After you redeploy, the API Console will be available at
@@ -851,8 +813,8 @@ Now our manifest looks like this:
       - django.contrib.messages
       - django.contrib.staticfiles
       - django.contrib.admin
-      - modules.api_console
-      - modules.pds
+      - api_console
+      - pds
 
     urls_snippet: |
       from django.views.generic import TemplateView
@@ -860,7 +822,7 @@ Now our manifest looks like this:
     urls:
       - url(r'^console/$', TemplateView.as_view(template_name='console.html'))
       - url(r'^admin/', include(admin.site.urls))
-      - url(r'', include('modules.pds.urls'))
+      - url(r'', include('pds.urls'))
 
     fixtures:
       - oms-core/admin_user
@@ -874,7 +836,7 @@ Of course, you also need an ``admin.py`` file for your module:
 
   from django.contrib import admin
 
-  from modules.pds.models import Location
+  from pds.models import Location
 
   class LocationAdmin(admin.ModelAdmin):
       list_display = ['id', 'latitude', 'longitude']
@@ -988,8 +950,8 @@ Now our manifest looks like this:
       - django.contrib.admin
       - constance
       - constance.backends.database
-      - modules.api_console
-      - modules.pds
+      - api_console
+      - pds
 
     urls_snippet: |
       from django.views.generic import TemplateView
@@ -997,7 +959,7 @@ Now our manifest looks like this:
     urls:
       - url(r'^console/$', TemplateView.as_view(template_name='console.html'))
       - url(r'^admin/', include(admin.site.urls))
-      - url(r'', include('modules.pds.urls'))
+      - url(r'', include('pds.urls'))
 
     settings_snippet: |
       CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
@@ -1022,7 +984,7 @@ values stored with the plugin.
   from django.http import HttpResponse
   from django.shortcuts import render_to_response
 
-  from modules.pds.models import Location
+  from pds.models import Location
 
   def ok(request):
       return HttpResponse('ok')
@@ -1221,8 +1183,8 @@ Now our manifest looks like this:
       - django.contrib.admin
       - constance
       - constance.backends.database
-      - modules.api_console
-      - modules.pds
+      - api_console
+      - pds
 
     urls_snippet: |
       from django.views.generic import TemplateView
@@ -1230,7 +1192,7 @@ Now our manifest looks like this:
     urls:
       - url(r'^console/$', TemplateView.as_view(template_name='console.html'))
       - url(r'^admin/', include(admin.site.urls))
-      - url(r'', include('modules.pds.urls'))
+      - url(r'', include('pds.urls'))
 
     settings_snippet: |
       CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
@@ -1265,8 +1227,8 @@ To add OIDC validation to a Tastypie API endpoint, use the
 
   from tastypie.resources import ModelResource
 
-  from modules.pds.models import Location
-  from modules.oidc_validation.authorization import OpenIdConnectAuthorization
+  from pds.models import Location
+  from oidc_validation.authorization import OpenIdConnectAuthorization
 
   class LocationResource(ModelResource):
       class Meta:
@@ -1286,8 +1248,8 @@ decorator.
   from django.http import HttpResponse
   from django.shortcuts import render_to_response
 
-  from modules.pds.models import Location
-  from modules.oidc_validation.decorators import validate_access_token
+  from pds.models import Location
+  from oidc_validation.decorators import validate_access_token
 
   @validate_access_token
   def ok(request):
@@ -1433,8 +1395,8 @@ Next, let's update the manifest with our new app, also called ``ui``:
       - django.contrib.admin
       - constance
       - constance.backends.database
-      - modules.api_console
-      - modules.pds
+      - api_console
+      - pds
 
     urls_snippet: |
       from django.views.generic import TemplateView
@@ -1442,7 +1404,7 @@ Next, let's update the manifest with our new app, also called ``ui``:
     urls:
       - url(r'^console/$', TemplateView.as_view(template_name='console.html'))
       - url(r'^admin/', include(admin.site.urls))
-      - url(r'', include('modules.pds.urls'))
+      - url(r'', include('pds.urls'))
 
     settings_snippet: |
       CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
@@ -1482,8 +1444,8 @@ Next, let's update the manifest with our new app, also called ``ui``:
       - django.contrib.staticfiles
       - constance
       - constance.backends.database
-      - modules.api_console
-      - modules.ui
+      - api_console
+      - ui
 
     urls_snippet: |
       from django.views.generic import TemplateView
@@ -1491,7 +1453,7 @@ Next, let's update the manifest with our new app, also called ``ui``:
     urls:
       - url(r'^admin/', include(admin.site.urls))
       - url(r'^console/$', TemplateView.as_view(template_name='console.html'))
-      - url(r'', include('modules.ui.urls'))
+      - url(r'', include('ui.urls'))
 
     settings_snippet: |
       TEMPLATE_CONTEXT_PROCESSORS = (
@@ -1576,7 +1538,7 @@ Finally, remember to install the necessary components:
 
   installed_apps:
     - django_extensions
-    - modules.pds_base
+    - pds_base
 
 
 Now our manifest looks like this:
@@ -1627,9 +1589,9 @@ Now our manifest looks like this:
       - constance
       - constance.backends.database
       - django_extensions
-      - modules.pds_base
-      - modules.api_console
-      - modules.pds
+      - pds_base
+      - api_console
+      - pds
 
     urls_snippet: |
       from django.views.generic import TemplateView
@@ -1637,7 +1599,7 @@ Now our manifest looks like this:
     urls:
       - url(r'^console/$', TemplateView.as_view(template_name='console.html'))
       - url(r'^admin/', include(admin.site.urls))
-      - url(r'', include('modules.pds.urls'))
+      - url(r'', include('pds.urls'))
 
     settings_snippet: |
       CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
@@ -1677,8 +1639,8 @@ Now our manifest looks like this:
       - django.contrib.staticfiles
       - constance
       - constance.backends.database
-      - modules.api_console
-      - modules.ui
+      - api_console
+      - ui
 
     urls_snippet: |
       from django.views.generic import TemplateView
@@ -1686,7 +1648,7 @@ Now our manifest looks like this:
     urls:
       - url(r'^admin/', include(admin.site.urls))
       - url(r'^console/$', TemplateView.as_view(template_name='console.html'))
-      - url(r'', include('modules.ui.urls'))
+      - url(r'', include('ui.urls'))
 
     settings_snippet: |
       TEMPLATE_CONTEXT_PROCESSORS = (
@@ -1712,7 +1674,7 @@ Now our manifest looks like this:
 
 
 Now, when you create the models for this app, make sure they inherit from
-``modules.pds_base.models.PdsModel`` (here: ``pds_models.PdsModel`` because of
+``pds_base.models.PdsModel`` (here: ``pds_models.PdsModel`` because of
 a renamed import) instead of Django's ``models.Model``.
 
 ``/var/oms/src/oms-example/pds/models.py``:
@@ -1721,7 +1683,7 @@ a renamed import) instead of Django's ``models.Model``.
 
   from django.db import models
 
-  from modules.pds_base import models as pds_models
+  from pds_base import models as pds_models
 
   class Location(pds_models.PdsModel):
       # inherited fields: guid, created_on, and last_modified
@@ -1742,9 +1704,9 @@ When creating API resource for the PDS-enabled models, inherit from
 
 .. code:: python
 
-  from modules.pds.models import Location
-  from modules.pds_base.resources import PdsResource
-  from modules.oidc_validation.authorization import OpenIdConnectAuthorization
+  from pds.models import Location
+  from pds_base.resources import PdsResource
+  from oidc_validation.authorization import OpenIdConnectAuthorization
 
   class LocationResource(PdsResource):
       class Meta:
@@ -1861,9 +1823,9 @@ Now our manifest looks like this:
       - constance
       - constance.backends.database
       - django_extensions
-      - modules.pds_base
-      - modules.api_console
-      - modules.pds
+      - pds_base
+      - api_console
+      - pds
 
     urls_snippet: |
       from django.views.generic import TemplateView
@@ -1871,7 +1833,7 @@ Now our manifest looks like this:
     urls:
       - url(r'^console/$', TemplateView.as_view(template_name='console.html'))
       - url(r'^admin/', include(admin.site.urls))
-      - url(r'', include('modules.pds.urls'))
+      - url(r'', include('pds.urls'))
 
     settings_snippet: |
       CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
@@ -1911,8 +1873,8 @@ Now our manifest looks like this:
       - django.contrib.staticfiles
       - constance
       - constance.backends.database
-      - modules.api_console
-      - modules.ui
+      - api_console
+      - ui
 
     urls_snippet: |
       from django.views.generic import TemplateView
@@ -1920,7 +1882,7 @@ Now our manifest looks like this:
     urls:
       - url(r'^admin/', include(admin.site.urls))
       - url(r'^console/$', TemplateView.as_view(template_name='console.html'))
-      - url(r'', include('modules.ui.urls'))
+      - url(r'', include('ui.urls'))
 
     settings_snippet: |
       TEMPLATE_CONTEXT_PROCESSORS = (
@@ -1983,7 +1945,7 @@ Add a Tastypie resource for the new model.
   from tastypie.authorization import Authorization
   from tastypie.resources import ModelResource
 
-  from modules.state_generator.models import ParallelState
+  from state_generator.models import ParallelState
 
   class ParallelStateResource(ModelResource):
       class Meta:
@@ -2001,7 +1963,7 @@ Admin.
 
   from django.contrib import admin
 
-  from modules.state_generator.models import ParallelState
+  from state_generator.models import ParallelState
 
   class ParallelStateAdmin(admin.ModelAdmin):
       list_display = ['id', 'active', 'parallel']
@@ -2014,12 +1976,12 @@ Update your manifest to enable the container app and the resource:
 .. code:: yaml
 
   installed_apps:
-    - modules.state_generator
+    - state_generator
 
   urls_snippet: |
     from tastypie.api import Api
 
-    from modules.state_generator.api import ParallelStateResource
+    from state_generator.api import ParallelStateResource
 
     fact_api = Api(api_name='fact')
     fact_api.register(ParallelStateResource())
@@ -2086,16 +2048,16 @@ Now our manifest looks like this:
       - constance
       - constance.backends.database
       - django_extensions
-      - modules.pds_base
-      - modules.api_console
-      - modules.pds
-      - modules.state_generator
+      - pds_base
+      - api_console
+      - pds
+      - state_generator
 
     urls_snippet: |
       from django.views.generic import TemplateView
       from tastypie.api import Api
 
-      from modules.state_generator.api import ParallelStateResource
+      from state_generator.api import ParallelStateResource
 
       fact_api = Api(api_name='fact')
       fact_api.register(ParallelStateResource())
@@ -2104,7 +2066,7 @@ Now our manifest looks like this:
       - url(r'^console/$', TemplateView.as_view(template_name='console.html'))
       - url(r'^admin/', include(admin.site.urls))
       - url(r'^api/', include(fact_api.urls))
-      - url(r'', include('modules.pds.urls'))
+      - url(r'', include('pds.urls'))
 
     settings_snippet: |
       CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
@@ -2144,8 +2106,8 @@ Now our manifest looks like this:
       - django.contrib.staticfiles
       - constance
       - constance.backends.database
-      - modules.api_console
-      - modules.ui
+      - api_console
+      - ui
 
     urls_snippet: |
       from django.views.generic import TemplateView
@@ -2153,7 +2115,7 @@ Now our manifest looks like this:
     urls:
       - url(r'^admin/', include(admin.site.urls))
       - url(r'^console/$', TemplateView.as_view(template_name='console.html'))
-      - url(r'', include('modules.ui.urls'))
+      - url(r'', include('ui.urls'))
 
     settings_snippet: |
       TEMPLATE_CONTEXT_PROCESSORS = (
@@ -2217,7 +2179,7 @@ Let's create a rule that combines the state and transform we've created.
 
 .. code:: python
 
-  from modules.transforms import hide_southern_location
+  from transforms import hide_southern_location
 
   class HideLocationRule(object):
       def evaluate(self, state):
@@ -2262,8 +2224,8 @@ that it requires.
 
   from tastypie.authorization import Authorization
 
-  from modules.arbiter import Arbiter
-  from modules.pds.decorators import list_to_boolean
+  from arbiter import Arbiter
+  from pds.decorators import list_to_boolean
 
   class FACTAuthorization(Authorization):
 
@@ -2313,12 +2275,12 @@ class, and add ``rules`` (a list) and ``state`` to the ``class Meta``.
 
 .. code:: python
 
-  from modules.pds.models import Location
-  from modules.pds_base.resources import PdsResource
-  from modules.pds.authorization import FACTAuthorization
-  from modules.rules import HideLocationRule
-  from modules.state_generator.models import ParallelState
-  #from modules.oidc_validation.authorization import OpenIdConnectAuthorization
+  from pds.models import Location
+  from pds_base.resources import PdsResource
+  from pds.authorization import FACTAuthorization
+  from rules import HideLocationRule
+  from state_generator.models import ParallelState
+  #from oidc_validation.authorization import OpenIdConnectAuthorization
 
   class LocationResource(PdsResource):
       class Meta:
