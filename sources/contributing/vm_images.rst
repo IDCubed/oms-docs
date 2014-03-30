@@ -49,25 +49,143 @@ Here they are as well:
    detail will depend on the shell you use. If using bash, something like this
    should suffice: ``echo "export PATH=$PATH:$HOME/packer/" >> ~/.bash_aliases``.
    To activate this for the open shell, ``source ~/.bash_aliases``.
-#. Test to confirm with ``packer -v``, you should see something like ``Packer v0.4.0``.
+#. Test to confirm with ``packer -v``, you should see something like ``Packer v0.5.2``.
 
 
-Get the templates
------------------
+A few key points about packer
+-----------------------------
 
-The templates used to build Ubuntu VM for OMS and kickstart the provisioning
-process are distributed in the `packer module from oms-core`_.
+Packer is a very light-weight framework for automating the process of building
+containers and images for use in various virtualization technologies. Packer
+includes automated structures focused on creating and manipulating virtual
+systems (VMs, cloud instances, containers, etc). It can, for example, boot up a
+new VM, download and provide an ISO to boot and install the host OS, and initiate
+an unattended installation, even entering in arbitrary text as if entered by a
+human on the terminal.
 
-.. _packer module from oms-core: https://github.com/IDCubed/oms-core/tree/qa-develop/packer
+This provides an interesting distiction, Packer provides the means to automate
+the installation of arbitary host OS, but it does not include any pre-defined
+templates for building even the most common systems.
 
 
-.. code:: bash
 
-   local% mkdir -p /var/oms/src
-   local% cd /var/oms/src/
-   local% git clone git@github.com:IDCubed/oms-core.git
-   local% git checkout qa-develop
-   local% cd packer
+Packer uses a simple json manifest to define templates for packer to build
+images and containers from. The templates used to build Ubuntu VM for OMS and
+kickstart the provisioning process are included in the `oms-kickstart
+repository`_. On an OMS Host, these templates could be found in
+``/var/oms/src/oms-kickstart/packer``.
+
+.. _oms-kickstart repository: https://github.com/IDCubed/oms-kickstart/tree/master/packer
+
+
+About user variables in packer templates
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The templates included in oms-kickstart make use of various user variables.
+These variables make it easier to customize the details of the image built.
+Packer enables the user to override these variables in more than one way. If you
+do need to customize any of these values, please use what works best for you.
+This documentation will provide examples on the command line.
+
+The following user variables are available in all templates included in the
+oms-kickstart repository:
+
+=============  =============  ==================================================
+Variable Name  Default Value  Description
+=============  =============  ==================================================
+build_name     ubuntu-base    name of the VM image and build directory.
+system_user    oms            the username of packer's admin user. packer will
+                              SSH to the new VM host as this user.
+system_pass    oms            the password for packer's admin user
+system_memory  256            the amount of memory (MB) to setup the VM with.
+=============  =============  ==================================================
+
+This, by default, the VM image that results has been setup with 256 MB of memory
+and a single user (``oms``) has been created for administrative and automation
+purposes.
+
+
+About the packer administrative user
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To apply any post-install provisioning steps outlined in the template, packer
+expects the system/image it is manipulating to have a system user. In the image
+building framework included in oms-kickstart, installing the base OS (Ubuntu) is
+completely automated within packer and leveraging the existing automated
+installation framework provided by Debian/Ubuntu. It is within ``preseed.cfg``
+that we create the initial administrative user for packer, and set the password
+for this user.
+
+While it is not normally necessary to do so, you may customize the automated
+Ubuntu install. If you choose to customize the system user available to packer,
+note that updating the ``system_user`` user variable will not change the user or
+password defined in ``preseed.cfg``, it will only tell packer to use a different
+username/password when it attempts to SSH to the new VM.
+
+
+Provisioners
+~~~~~~~~~~~~
+
+After the build completes, packer will run one or more provisioners of different
+types. The system automation framework included in the oms-kickstart repository
+includes the following scripts as provisioners, as part of running the kickstart
+scripts:
+
+* *base.sh*: Ensure the OMS administrative user has SSH directories and keys in
+  place, and proper permissions on all files. Finally, copy the SSH keys to
+  root's home.
+* *vbox_guest.sh*: mount the guest additions .iso and run their installation
+  script.
+* *cleanup.sh*: run some clean up with apt, remove the SSH keys and any stale
+  DHCP leases.
+
+
+About the templates
+-------------------
+
+The v0.8.5 release includes four templates of interest in building VM images
+with or for OMS.
+
+
+ubuntu-base
+~~~~~~~~~~~
+
+Create a basic virtualbox VM image with a default Ubuntu 12.04 LTS host system
+installed. Nothing more, nothing less.
+
+
+oms/base/ubuntu-iso
+~~~~~~~~~~~~~~~~~~~
+
+Using packer's ``virtualbox-iso`` builder, start with an ISO and create an OVF-
+formatted image suitable for importing into VirtualBox, with Ubuntu 12.04 LTS
+installed.
+
+After packer has installed the host OS (eg, the build is complete), the following
+provisioners will run: *base.sh*, *vbox_guest.sh*, *cleanup.sh*. Kickstart is
+setup, but not run.
+
+
+oms/base/ubuntu-ovf
+~~~~~~~~~~~~~~~~~~~
+
+Using packer's ``virtualbox-ovf`` builder, import an existing OVF image as a new
+host, upload the kickstart scripts, config, and SSH keys, and run the OMS packer
+provisioner scripts (same as above). Kickstart is setup, but not run.
+
+Additional user variables available:
+* ``ovf_path``: the full/relative path (on the filesystem) to the OVF image to
+  import. This defaults to ``builds/ubuntu-base/ubuntu-base.ova``. You may use
+  a symlink to improve the development flow.
+* ``oms_version``: used to create the vm image filename, defaults to
+  ``qa-develop``.
+
+
+oms/kickstarted
+~~~~~~~~~~~~~~~
+
+Using packer's ``virtualbox-ovf`` builder, import an existing OMS base image
+and execute the OMS kickstart and peripheral provisioning scripts.
 
 
 Review and Update the Templates
@@ -107,11 +225,11 @@ packer.
 .. code:: bash
 
    # locate OMS source code
-   local% cd /var/oms/src/
+   oms% cd /var/oms/src/
    # we will use the packer module in oms-core
-   local% cd oms-core/packer/
+   oms% cd oms-core/packer/
    # copy the kickstart python script from oms-kickstart
-   local% cp ../../oms-kickstart/kickstart-oms.py ../../oms-kickstart/release.yaml ./uploads/
+   oms% cp ../../oms-kickstart/kickstart-oms.py ../../oms-kickstart/release.yaml ./uploads/
 
 
 The kickstart script, along with steps run by salt later in the provisioning
@@ -129,9 +247,9 @@ We need both a public and private SSH key:
 .. code:: bash
 
    # assuming the current working directory is /var/oms/src/oms-core/packer
-   local% pwd
+   oms% pwd
    /var/oms/src/oms-core/packer
-   local% ssh-keygen
+   oms% ssh-keygen
    Generating public/private rsa key pair.
    Enter file in which to save the key (/root/.ssh/id_rsa): /var/oms/src/oms-core/packer/uploads/.ssh/id_rsa
    Enter passphrase (empty for no passphrase):
@@ -152,7 +270,7 @@ We need both a public and private SSH key:
    |    . + S .      |
    |                 |
    +-----------------+
-   local% ls -alh uploads/.ssh/
+   oms% ls -alh uploads/.ssh/
    total 8
    drwxr-xr-x  2 root  root     5B Dec  6 10:54 .
    drwxr-xr-x  4 root  root     4B Dec  3 15:00 ..
@@ -167,7 +285,7 @@ releasing the image, you can provide the VM with an authorized_keys file:
 
 .. code:: bash
 
-   local% cat /home/<you>/.ssh/id_rsa.pub >> uploads/.ssh/authorized_keys
+   oms% cat /home/<you>/.ssh/id_rsa.pub >> uploads/.ssh/authorized_keys
 
 
 Note that this is optional, but may provide a simpler flow for what you need to
@@ -184,7 +302,7 @@ COM'ON, let's build some VM now! Easy:
 
 .. code:: bash
 
-   local% packer build templates/tab_developer-virtualbox.json
+   oms% packer build templates/tab_developer-virtualbox.json
 
 
 Packer will then:
