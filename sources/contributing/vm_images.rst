@@ -8,32 +8,55 @@
 VM Builder's Guide
 ==================
 
-This guide will step through using `packer.io`_ to automate building VM images
-for VirtualBox. The tutorial will show examples using OMS build process, but
-the instructions are generic in nature.
+This guide will step through using `packer.io`_ and the utilities provided by
+the oms-kickstart repository to automate building VM images for VirtualBox. The
+tutorial will show examples using OMS build process, but the instructions are
+generic in nature.
 
 .. _packer.io: http://packer.io
 
 
 .. note::
 
-   Tested on Debian Linux and FreeBSD 9.2
+   This process has been tested on Debian Linux 7.x and FreeBSD 9.2.
 
 
 Initial Set Up
 --------------
 
-To build VM images for VirtualBox, we need packer and VirtualBox installed and
-available on a host that can support running Virtual Machines. It is best to use
-a physical desktop, laptop, or rackmount with at least 4GB of RAM and a quad core
-CPU. It is possible to run a single VM at a time with less power (2GB/dual-core),
-but such a setup is not recommended. Also be sure to confirm that the CPU's
-Virtualization Extensions are enabled in the BIOS.
+Packer is a very light-weight framework for automating the process of building
+containers and images for use in various virtualization technologies. Packer
+includes automated structures for a handful of subsystems, from qemu, to AWS,
+openstack, and even docker.io. Additionally, Packer has support for different
+types of provisioners, including shell scripts and file uploads, Ansible, Puppet,
+and SaltStack.
+
+.. note::
+
+   As of the v0.8.5 release, OMS provides the means to build VM images for
+   VirtualBox, using packer.io, oms-kickstart, and saltstack.
+
+
+VirtualBox
+~~~~~~~~~~
+
+To build VM images for VirtualBox, we first need both VirtualBox and the packer
+command line utility installed and available on a host that can support running
+Virtual Machines. It is best to use a physical desktop, laptop, or rackmount
+with at least 4GB of RAM and a quad core CPU. It is possible to run a single VM
+at a time with less power (2GB/dual-core), but such a setup is not recommended.
+Also be sure to confirm that the CPU's Virtualization Extensions are enabled in
+the BIOS.
 
 .. todo:: see if we can find instructions on enabling this for intel/amd cpus
 
+
 :ref:`There are references here <install_virtualbox>` to get started with
 installing VirtualBox.
+
+
+packer.io
+~~~~~~~~~
 
 Installing packer.io is even easier. Packer is `distributed as a zip archive`_
 of prebuilt binaries. `Here are the installation docs`_.
@@ -48,12 +71,19 @@ Here they are as well:
 #. Update the ``PATH`` shell environment variable to include this directory. This
    detail will depend on the shell you use. If using bash, something like this
    should suffice: ``echo "export PATH=$PATH:$HOME/packer/" >> ~/.bash_aliases``.
-   To activate this for the open shell, ``source ~/.bash_aliases``.
-#. Test to confirm with ``packer -v``, you should see something like ``Packer v0.5.2``.
+   To activate this for the open shell, ``source ~/.bash_aliases``. Note, update
+   the path (*$HOME/packer/*) if you have installed packer to another location.
+#. Test to confirm with ``packer -v``, you should see something like ``Packer
+   v0.5.2``.
 
 
-A few key points about packer
------------------------------
+oms-kickstart
+~~~~~~~~~~~~~
+
+.. todo::
+
+   fill in this section with details about what to setup first, for oms-kickstart,
+   before getting into anything about templates
 
 Packer is a very light-weight framework for automating the process of building
 containers and images for use in various virtualization technologies. Packer
@@ -67,7 +97,31 @@ This provides an interesting distiction, Packer provides the means to automate
 the installation of arbitary host OS, but it does not include any pre-defined
 templates for building even the most common systems.
 
+oms-kickstart includes these templates, as well as all the scripts and the
+configuration needed to build VM images with packer, for OMS.
 
+.. note::
+
+   Given the flexibility provided by OMS generic provisioning framework,
+   oms-kickstart, this build process could easily build VM images for most
+   anything you could deploy on a Ubuntu 12.04 VM.
+
+
+
+Let's Build some VM!
+--------------------
+
+Here is the short and sweet version to building VM images.
+
+
+A few key points about packer
+-----------------------------
+
+The details above are meant to get you started.
+
+
+About build templates
+~~~~~~~~~~~~~~~~~~~~~
 
 Packer uses a simple json manifest to define templates for packer to build
 images and containers from. The templates used to build Ubuntu VM for OMS and
@@ -76,6 +130,9 @@ repository`_. On an OMS Host, these templates could be found in
 ``/var/oms/src/oms-kickstart/packer``.
 
 .. _oms-kickstart repository: https://github.com/IDCubed/oms-kickstart/tree/master/packer
+
+Unfortunately, the build templates are required to be pure JSON, so you will
+not find much in the way of inline documentation/commentary.
 
 
 About user variables in packer templates
@@ -87,7 +144,7 @@ Packer enables the user to override these variables in more than one way. If you
 do need to customize any of these values, please use what works best for you.
 This documentation will provide examples on the command line.
 
-The following user variables are available in all templates included in the
+The following user variables are available in *all* templates included in the
 oms-kickstart repository:
 
 =============  =============  ==================================================
@@ -104,6 +161,9 @@ This, by default, the VM image that results has been setup with 256 MB of memory
 and a single user (``oms``) has been created for administrative and automation
 purposes.
 
+Each build template may define and use user variables in addition to those listed
+here. These are detailed in the sections to follow.
+
 
 About the packer administrative user
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -111,7 +171,7 @@ About the packer administrative user
 To apply any post-install provisioning steps outlined in the template, packer
 expects the system/image it is manipulating to have a system user. In the image
 building framework included in oms-kickstart, installing the base OS (Ubuntu) is
-completely automated within packer and leveraging the existing automated
+completely automated within packer and leverages the existing automated
 installation framework provided by Debian/Ubuntu. It is within ``preseed.cfg``
 that we create the initial administrative user for packer, and set the password
 for this user.
@@ -131,20 +191,36 @@ types. The system automation framework included in the oms-kickstart repository
 includes the following scripts as provisioners, as part of running the kickstart
 scripts:
 
-* *base.sh*: Ensure the OMS administrative user has SSH directories and keys in
+* *setup.sh*: Ensure the OMS administrative user has SSH directories and keys in
   place, and proper permissions on all files. Finally, copy the SSH keys to
   root's home.
 * *vbox_guest.sh*: mount the guest additions .iso and run their installation
   script.
-* *cleanup.sh*: run some clean up with apt, remove the SSH keys and any stale
-  DHCP leases.
+* *cleanup/*: run some clean up with apt, remove the SSH keys and any stale
+  DHCP leases/udev configuration.
+
+These can be found in the ``packer/uploads/kickstart/`` directory within the
+oms-kickstart repository.
+
+.. note::
+
+   I need to sort out the discrepency between the oms-kickstart and the kickstart
+   directories in oms-kickstart/packer/uploads/
 
 
-About the templates
--------------------
+About Each Build template
+-------------------------
 
-The v0.8.5 release includes four templates of interest in building VM images
-with or for OMS.
+Packer uses a json files, known as a *template* in packer.io, to tell it what to
+do. This is packer's concept of a manifest for the build process. The v0.8.5 release includes five templates of interest in building VM images
+with or for OMS. This sections includes high-level details about each template
+while the next section 
+
+.. note::
+
+   some details, such as the variables available with each build template, are
+   not all listed/included in the documentation below.. but it should be.
+   review this until it is correct and complete, then remove this message.
 
 
 ubuntu-base
@@ -157,28 +233,29 @@ installed. Nothing more, nothing less.
 oms/base/ubuntu-iso
 ~~~~~~~~~~~~~~~~~~~
 
-Using packer's ``virtualbox-iso`` builder, start with an ISO and create an OVF-
+Using packer's ``virtualbox-iso`` builder, start with an ISO and create an OVA-
 formatted image suitable for importing into VirtualBox, with Ubuntu 12.04 LTS
 installed.
 
 After packer has installed the host OS (eg, the build is complete), the following
-provisioners will run: *base.sh*, *vbox_guest.sh*, *cleanup.sh*. Kickstart is
+provisioners will run: *setup.sh*, *vbox_guest.sh*, *cleanup.sh*. Kickstart is
 setup, but not run.
 
 
 oms/base/ubuntu-ovf
 ~~~~~~~~~~~~~~~~~~~
 
-Using packer's ``virtualbox-ovf`` builder, import an existing OVF image as a new
+Using packer's ``virtualbox-ovf`` builder, import an existing OVA image as a new
 host, upload the kickstart scripts, config, and SSH keys, and run the OMS packer
 provisioner scripts (same as above). Kickstart is setup, but not run.
 
 Additional user variables available:
+
 * ``ovf_path``: the full/relative path (on the filesystem) to the OVF image to
-  import. This defaults to ``builds/ubuntu-base/ubuntu-base.ova``. You may use
+  import. This defaults to *builds/ubuntu-base/ubuntu-base.ova*. You may use
   a symlink to improve the development flow.
 * ``oms_version``: used to create the vm image filename, defaults to
-  ``qa-develop``.
+  *qa-develop*.
 
 
 oms/kickstarted
@@ -188,11 +265,17 @@ Using packer's ``virtualbox-ovf`` builder, import an existing OMS base image
 and execute the OMS kickstart and peripheral provisioning scripts.
 
 
+oms/kickstarted-iso
+~~~~~~~~~~~~~~~~~~~
+
+Using packer's ``virtualbox-iso`` builder, create a completely new Ubuntu VM, as
+a new install, using a Ubuntu iso. Kickstart is then setup and run after this.
+
+
 Review and Update the Templates
 -------------------------------
 
-Packer uses a json files, known as a *template* in packer.io, to tell it what to
-do. This is packer's concept of a manifest for the build process. Included in
+Included in
 oms-core are two templates. One template builds new Ubuntu VM without running the
 OMS kickstart deployment, and a second one that runs the kickstart script to
 build a developer's environment based on the OMS master release.
@@ -200,6 +283,12 @@ build a developer's environment based on the OMS master release.
 You may wish to update the details of this manifest. The user variables have been
 defined at the top for your convenience.
 
+
+
+.. todo::
+
+   sort through all of the content below and extract what is usable and sensible.
+   this is the archive (below)
 
 Setup Kickstart
 ---------------
