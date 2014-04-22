@@ -24,12 +24,12 @@ generic in nature.
 Initial Set Up
 --------------
 
-Packer is a very light-weight framework for automating the process of building
+Packer is a light-weight framework for automating the process of building
 containers and images for use in various virtualization technologies. Packer
-includes automated structures for a handful of subsystems, from qemu, to AWS,
-openstack, and even docker.io. Additionally, Packer has support for different
-types of provisioners, including shell scripts and file uploads, Ansible, Puppet,
-and SaltStack.
+includes automated structures for a handful of VM subsystems, from qemu, to AWS,
+openstack, and even Docker. Additionally, Packer has support for different types
+of provisioners, including shell scripts and file uploads, Ansible, Puppet, and
+SaltStack.
 
 .. note::
 
@@ -50,32 +50,31 @@ the BIOS.
 
 .. todo:: see if we can find instructions on enabling this for intel/amd cpus
 
-
-:ref:`There are references here <install_virtualbox>` to get started with
-installing VirtualBox.
+How to get started with VirtualBox is detailed in :ref:`this guide
+<install_virtualbox>`.
 
 
 Packer Tool
 ~~~~~~~~~~~
 
-Installing the Packer command line tool is even easier. Packer is `distributed
-as a zip archive`_ of prebuilt binaries. `Here are the installation docs`_.
-
 .. _distributed as a zip archive: http://www.packer.io/downloads.html
-.. _here are the installation docs: http://www.packer.io/docs/installation.html
+.. _Packer Install Documentation: http://www.packer.io/docs/installation.html
 
+Installing the Packer command line tool is even easier. Packer is `distributed
+as a zip archive`_ of prebuilt binaries. The `Packer Install Documentation`_
+includes more detail, but here is an overview of the install:
 
-Here they are as well:
 
 #. Unzip the archive. Your user's home (``~/packer/``), or a path such as
-   ``/usr/local/bin/packer/`` or ``/usr/local/packer/`` are good locations.
-#. Update the ``PATH`` shell environment variable to include this directory. This
+   ``/usr/local/bin/packer/`` or ``/usr/local/packer/``, are all good locations.
+#. Update the ``PATH`` shell environment variable to include that directory. This
    detail will depend on the shell you use. If using bash, something like this
    should suffice: ``echo "export PATH=$PATH:$HOME/packer/" >> ~/.bash_aliases``.
    To activate this for the open shell, ``source ~/.bash_aliases``. Note, update
-   the path (*$HOME/packer/*) if you have installed packer to another location.
-#. Test to confirm with ``packer -v``, you should see something like ``Packer
-   v0.5.2``.
+   the path in this example (*$HOME/packer/*) if you have installed packer to a
+   different location.
+#. Test to confirm your success with ``packer -v``, you should see something like
+   ``Packer v0.5.2``.
 
 
 oms-kickstart
@@ -86,43 +85,156 @@ oms-kickstart
    fill in this section with details about what to setup first, for oms-kickstart,
    before getting into anything about templates
 
-Packer is a very light-weight framework for automating the process of building
+Packer provides a framework that simplifies automating the process of building
 containers and images for use in various virtualization technologies. Packer
 includes automated structures focused on creating and manipulating virtual
 systems (VMs, cloud instances, containers, etc). It can, for example, boot up a
 new VM, download and provide an ISO to boot and install the host OS, and initiate
-an unattended installation, even entering in arbitrary text as if entered by a
-human on the terminal.
+an unattended installation, even entering arbitrary text into the VM's console
+as if entered by a human on the terminal.
 
 This provides an interesting distiction, Packer provides the means to automate
 the installation of arbitary host OS, but it does not include any pre-defined
 templates for building even the most common systems. Thus, oms-kickstart includes
-these templates, as well as all the scripts and the configuration needed to build
-VM images with Packer, for OMS.
+a set of templates, as well as all the scripts and the configuration needed to
+build VM images with Packer, for OMS.
 
 .. note::
 
-   Given the flexibility provided by OMS generic provisioning framework,
+   Given the flexibility provided by the generic provisioning framework in OMS,
    oms-kickstart, this build process could easily build VM images for most
    anything you could deploy with Salt states/formula, on a Ubuntu 12.04 VM.
 
+
+This guide assumes you have cloned a copy of the `kickstart git repository`_ to
+the Linux/BSD/OSX host you are using to build VM images on VirtualBox. If working
+from a host previously provisioned with OMS, this repository can be found in
+*/var/oms/src/oms-kickstart*.
+
+.. _kickstart git repository: https://github.com/IDCubed/oms-kickstart.git
+
+If you need, clone the git repo from github: ``git clone
+https://github.com/IDCubed/oms-kickstart.git``.
+
+
+
+Create an SSH key to access Github
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The kickstart script, along with the provisioning process managed by SaltStack,
+will both need to clone the OMS git repositories from Github. Some of the
+repositories require authentication, and the build process is expected to run as
+a completely automated process, so SSH keys are needed by the build system to
+successfully create the VM image.
+
+This is the same as when deploying OMS in the cloud, we do this just before running
+kickstart. In this case, if we create the files, Packer is setup to provide them
+to the VM before kickstarting the OMS deployment to the VM. Note that not all of
+the build templates run a cleanup script to remove these SSH keys when no longer
+needed - be sure you validate the contents of a VM image before being published.
+
+Create an ssh key with ``ssh-keygen``, saved to
+``oms-kickstart/config/.ssh/id_rsa``, and do not use a passphrase for the key.
+A future release of OMS will allow you to do so - at present, a passphrase will
+prevent the OMS automation system from working properly.
+
+.. code:: bash
+
+   oms% ssh-keygen
+   Generating public/private rsa key pair.
+   Enter file in which to save the key (/root/.ssh/id_rsa): config/.ssh/id_rsa
+   Enter passphrase (empty for no passphrase):
+   Enter same passphrase again:
+   Your identification has been saved in config/.ssh/id_rsa.
+   Your public key has been saved in config/.ssh/id_rsa.pub.
+   The key fingerprint is:
+   0d:f2:09:b8:17:51:f9:08:4e:2c:c5:23:bf:3d:48:95 root@oms
+   The key's randomart image is:
+   +--[ RSA 2048]----+
+   | +..o o oo       |
+   |  @  =.=E.       |
+   | .  .o .2-0      |
+   |                 |
+   |    . + S .      |
+   | o   skj2o       |
+   |     .   .       |
+   |    . + S .      |
+   |                 |
+   +-----------------+
+
+
+Within the oms-kickstart repository, ``packer/uploads/.ssh/`` is a symlink to
+``config/.ssh/``, the keys can be found in either location, as seen here:
+
+.. code:: bash
+
+   oms% ls -alh packer/uploads/.ssh/
+   total 8
+   drwxr-xr-x  2 root  root     5B Dec  6 10:54 .
+   drwxr-xr-x  4 root  root     4B Dec  3 15:00 ..
+   -rw-r--r--  1 root  root    77B Dec  3 02:10 README.rst
+   -rw-------  1 root  root   1.7k Dec  6 10:54 id_rsa
+   -rw-r--r--  1 root  root   398B Dec  6 10:54 id_rsa.pub
+
+
+Adding the public key to your github account
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+With the public key in Github, OMS will be able to checkout its source code on
+your behalf.
+
+To add the key to your account:
+
+#. Navigate to *Account Settings* in the Github web UI,
+#. Find *SSH Keys* in the navigation bar on the lefthand side,
+#. Copy/paste the contents of *id_rsa.pub* into the form on this page. You can
+   view the key with: ``cat oms-kickstart/config/.ssh/id_rsa.pub``. 
+
+
+Add an authorized_keys
+~~~~~~~~~~~~~~~~~~~~~~
+
+This is optional.
+
+If you are building an image for personal use (eg not for public distribution),
+or if you intend on making some *post-production* tweaks to the VM before
+releasing the image, you can provide the VM with an authorized_keys file:
+
+.. code:: bash
+
+   oms% cat /home/<you>/.ssh/id_rsa.pub >> uploads/.ssh/authorized_keys
+
+
+Note that while this is optional, it may provide a simpler flow for what you need
+to do with the VM image after it is built. If you do not see the VM with an
+authorized_keys file, SSH will prompt for password authentication when you connect
+to the VM. The password the user is created with is defined in the configuration
+used to automate the OS install (*preseed.cfg*). Customizing the use of this
+user should not be necessary, and is not recommended.
 
 
 Let's Build some VM!
 --------------------
 
-Here is the short and sweet version to building VM images:
+Here is the short and sweet version to building VM images, more details on each
+step are included in the sections that follow.
 
-#. Clone oms-kickstart git repo: ``git clone
-   https://github.com/IDCubed/oms-kickstart.git``
-#. Setup SSH key with github (details below)
-#. Build the first base VM image, a Ubuntu 12.04 LTS host, with a fresh install
-   and nothing else (details below).
-#. Import the Ubuntu base (just built), and build the second base VM image, the
-   OMS base. Upload the scripts and configuration needed to ignite the kickstart
-   provisioning process, but don't actually run anything (details below).
-#. Import the OMS base (just built), and build a new image having initiated the
-   kickstart provisioning process (details below).
+We will use Packer to:
+
+#. Build the first base VM image, a Ubuntu 12.04 LTS host. This is a fresh
+   install and nothing else.
+#. Import the Ubuntu base (just built), upload the scripts and configuration
+   needed to ignite the kickstart provisioning process, but don't actually run
+   anything. This is the OMS base VM.
+#. Import the OMS base (just built), initiate the kickstart provisioning process,
+   and build a new image with kickstart complete. This will deploy/setup whatever
+   you configure kickstart to apply.
+
+.. note::
+
+   As of OMS v0.8.5, the default build has configured kickstart to deploy the
+   complete OMS Trusted Compute Framework (TCF) along with the reference Trusted
+   Compute Cell (TCC).
 
 
 For the process outlined above, Packer will:
@@ -148,91 +260,6 @@ needed, :ref:`The import process is detailed here <import_vbox_vm_image>`. This 
 a great setup for local development, custom deployments, and general hacking with
 OMS!
 
-
-
-Create an SSH key to access Github
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The kickstart script, along with steps run by salt later in the provisioning
-process, will need to checkout code from the OMS git repos on Github. Some of the
-repositories require authentication, and the build process is expected to run as
-a completely automated process, so SSH keys are needed by the build system to
-successfully create the VM image.
-
-This is the same as when deploying OMS in the cloud, we do this just before running
-kickstart. In this case, if we create the files, Packer is setup to provide them
-to the VM before kickstarting the OMS deployment to the VM.
-
-Create an ssh key with ``ssh-keygen``, saved to
-``oms-kickstart/config/.ssh/id_rsa``, and do not use a passphrase for the key.
-A future release of OMS will allow you to do so - at present, a passphrase will
-prevent OMS’ automation from working properly.
-
-.. code:: bash
-
-   # assuming the current working directory is /var/oms/src/oms-kickstart/
-   oms% pwd
-   /var/oms/src/oms-kickstart/
-   oms% ssh-keygen
-   Generating public/private rsa key pair.
-   Enter file in which to save the key (/root/.ssh/id_rsa): config/.ssh/id_rsa
-   Enter passphrase (empty for no passphrase):
-   Enter same passphrase again:
-   Your identification has been saved in config/.ssh/id_rsa.
-   Your public key has been saved in config/.ssh/id_rsa.pub.
-   The key fingerprint is:
-   0d:f2:09:b8:17:51:f9:08:4e:2c:c5:23:bf:3d:48:95 root@oms
-   The key's randomart image is:
-   +--[ RSA 2048]----+
-   | +..o o oo       |
-   |  @  =.=E.       |
-   | .  .o .2-0      |
-   |                 |
-   |    . + S .      |
-   | o   skj2o       |
-   |     .   .       |
-   |    . + S .      |
-   |                 |
-   +-----------------+
-   oms% ls -alh packer/uploads/.ssh/
-   total 8
-   drwxr-xr-x  2 root  root     5B Dec  6 10:54 .
-   drwxr-xr-x  4 root  root     4B Dec  3 15:00 ..
-   -rw-r--r--  1 root  root    77B Dec  3 02:10 README.rst
-   -rw-------  1 root  root   1.7k Dec  6 10:54 id_rsa
-   -rw-r--r--  1 root  root   398B Dec  6 10:54 id_rsa.pub
-
-
-Add the public key to your github account, you can view the key with:
-``cat oms-kickstart/config/.ssh/id_rsa.pub``. To add the key to your account,
-navigate to *Account Settings* in the Github web UI and then *SSH Keys* in the
-navigation bar on the lefthand side. Copy/paste the contents of *id_rsa.pub*
-into the form on this page.
-
-With the public key in Github, OMS will be able to checkout its source code on
-your behalf.
-
-
-Add an authorized_keys
-~~~~~~~~~~~~~~~~~~~~~~
-
-This is optional.
-
-If you are building an image for personal use (eg not for public distribution),
-or if you intend on making some *post-production* tweaks to the VM before
-releasing the image, you can provide the VM with an authorized_keys file:
-
-.. code:: bash
-
-   oms% cat /home/<you>/.ssh/id_rsa.pub >> uploads/.ssh/authorized_keys
-
-
-Note that while this is optional, it may provide a simpler flow for what you need
-to do with the VM image after it is built. If you do not see the VM with an
-authorized_keys file, SSH will prompt for password authentication when you connect
-to the VM. The password the user is created with is defined in the configuration
-used to automate the OS install (*preseed.cfg*). Customizing the use of this
-user should not be necessary and is not recommended.
 
 
 Build Ubuntu Base VM
