@@ -34,7 +34,7 @@ VirtualBox has documentation for each of its supported OS:
 * `Linux`_
 
 .. _Windows: https://www.virtualbox.org/manual/ch02.html#installation_windows
-.. _MacOSx: https://www.virtualbox.org/manual/ch02.html#idp54312608
+.. _MacOSx: https://www.virtualbox.org/manual/ch02.html#idp52093328
 .. _Linux: https://www.virtualbox.org/manual/ch02.html#install-linux-host
 
 In general, the process involves `downloading the VirtualBox`_ release executable
