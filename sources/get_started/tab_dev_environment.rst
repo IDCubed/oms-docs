@@ -48,7 +48,13 @@ would prefer to experience OMS running in the cloud, :ref:`see this tutorial
 .. The images are cryptographically signed and made available through the Developer's
    Portal hosted by IDCubed. `Register to get access to the environment`_.
 
-.. _Register to get access to the environment: https://dev-portal.idhypercubed.org/
+
+Register to Request a VM Image
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. raw:: html
+
+   <iframe width=100% height="500" src='https://alpha.openmustardseed.org/downloads/'></iframe>
 
 
 Get Started - Prerequisites
