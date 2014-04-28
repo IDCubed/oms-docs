@@ -1134,8 +1134,10 @@ Add OIDC-related settings to constance:
 
   settings_snippet: |
     CONSTANCE_CONFIG = {
-        'TOKENSCOPE_ENDPOINT': ('{{ oidc_base_url }}/tokenscope?scope={{ scope }}',
-                                'tokenscope endpoint'),
+        'INTROSPECTION_ENDPOINT': ('{{ oidc_base_url }}/introspect',
+            'introspection endpoint'),
+        'CLIENT_ID': ('{{ client_id }}', 'OIDC client ID'),
+        'CLIENT_SECRET': ('{{ client_secret }}', 'OIDC client secret'),
     }
 
 
@@ -1197,8 +1199,10 @@ Now our manifest looks like this:
     settings_snippet: |
       CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
       CONSTANCE_CONFIG = {
-          'TOKENSCOPE_ENDPOINT': ('{{ oidc_base_url }}/tokenscope?scope={{ scope }}',
-              'tokenscope endpoint'),
+          'INTROSPECTION_ENDPOINT': ('{{ oidc_base_url }}/introspect',
+              'introspection endpoint'),
+          'CLIENT_ID': ('{{ client_id }}', 'OIDC client ID'),
+          'CLIENT_SECRET': ('{{ client_secret }}', 'OIDC client secret'),
           'REF_LATITUDE': ('42.0', 'reference latitude'),
           'REF_LONGITUDE': ('-71.0', 'reference longitude'),
       }
@@ -1207,15 +1211,16 @@ Now our manifest looks like this:
       - oms-core/admin_user
 
 
-Remember to define the template variables, including the scope we just created.
+Remember to define the template variables.
 
 ``/var/oms/etc/deploy.conf``:
 
 .. code::
 
   ssl_setup: False
-  oidc_base_url: https://oidc.example.com/idoic
-  scope: location
+  oidc_base_url: https://oidc.example.com/oidc
+  client_id: location_client
+  client_secret: 1EgLsR9JaOMGoaqpSOHD
 
 
 To add OIDC validation to a Tastypie API endpoint, use the
@@ -1409,8 +1414,10 @@ Next, let's update the manifest with our new app, also called ``ui``:
     settings_snippet: |
       CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
       CONSTANCE_CONFIG = {
-          'TOKENSCOPE_ENDPOINT': ('{{ oidc_base_url }}/tokenscope?scope={{ scope }}',
-              'tokenscope endpoint'),
+          'INTROSPECTION_ENDPOINT': ('{{ oidc_base_url }}/introspect',
+              'introspection endpoint'),
+          'CLIENT_ID': ('{{ client_id }}', 'OIDC client ID'),
+          'CLIENT_SECRET': ('{{ client_secret }}', 'OIDC client secret'),
           'REF_LATITUDE': ('42.0', 'reference latitude'),
           'REF_LONGITUDE': ('-71.0', 'reference longitude'),
       }
@@ -1478,16 +1485,17 @@ Next, let's update the manifest with our new app, also called ``ui``:
       - oms-core/admin_user
 
 
-Lastly, list ``location_client`` as the client ID:
+Lastly, list ``location`` as the client scope.
 
 ``/var/oms/etc/deploy.conf``:
 
 .. code::
 
   ssl_setup: False
-  oidc_base_url: https://oidc.example.com/idoic
-  scope: location
+  oidc_base_url: https://oidc.example.com/oidc
   client_id: location_client
+  client_secret: 1EgLsR9JaOMGoaqpSOHD
+  scope: location
 
 
 Now you can redeploy, and the new app wll be installed in
@@ -1604,8 +1612,10 @@ Now our manifest looks like this:
     settings_snippet: |
       CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
       CONSTANCE_CONFIG = {
-          'TOKENSCOPE_ENDPOINT': ('{{ oidc_base_url }}/tokenscope?scope={{ scope }}',
-              'tokenscope endpoint'),
+          'INTROSPECTION_ENDPOINT': ('{{ oidc_base_url }}/introspect',
+              'introspection endpoint'),
+          'CLIENT_ID': ('{{ client_id }}', 'OIDC client ID'),
+          'CLIENT_SECRET': ('{{ client_secret }}', 'OIDC client secret'),
           'REF_LATITUDE': ('42.0', 'reference latitude'),
           'REF_LONGITUDE': ('-71.0', 'reference longitude'),
       }
@@ -1838,8 +1848,10 @@ Now our manifest looks like this:
     settings_snippet: |
       CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
       CONSTANCE_CONFIG = {
-          'TOKENSCOPE_ENDPOINT': ('{{ oidc_base_url }}/tokenscope?scope={{ scope }}',
-              'tokenscope endpoint'),
+          'INTROSPECTION_ENDPOINT': ('{{ oidc_base_url }}/introspect',
+              'introspection endpoint'),
+          'CLIENT_ID': ('{{ client_id }}', 'OIDC client ID'),
+          'CLIENT_SECRET': ('{{ client_secret }}', 'OIDC client secret'),
           'REF_LATITUDE': ('42.0', 'reference latitude'),
           'REF_LONGITUDE': ('-71.0', 'reference longitude'),
       }
@@ -2071,8 +2083,10 @@ Now our manifest looks like this:
     settings_snippet: |
       CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
       CONSTANCE_CONFIG = {
-          'TOKENSCOPE_ENDPOINT': ('{{ oidc_base_url }}/tokenscope?scope={{ scope }}',
-              'tokenscope endpoint'),
+          'INTROSPECTION_ENDPOINT': ('{{ oidc_base_url }}/introspect',
+              'introspection endpoint'),
+          'CLIENT_ID': ('{{ client_id }}', 'OIDC client ID'),
+          'CLIENT_SECRET': ('{{ client_secret }}', 'OIDC client secret'),
           'REF_LATITUDE': ('42.0', 'reference latitude'),
           'REF_LONGITUDE': ('-71.0', 'reference longitude'),
       }
@@ -2193,83 +2207,11 @@ Let's create a rule that combines the state and transform we've created.
 Enabling FACT in your app
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-FACT executes in the Tastypie resource's Authorization class.
+To use FACT with your resource, first add ``rules`` (a list) and ``state`` to
+the ``class Meta``.
 
-The Authorization class should instantiate the Arbiter as its attribute. The
-class also needs to use its ``resource_meta`` to access the resource's state
-and rules. Since the Arbiter returns a list of objects, a decorator is used on
-the ``*_detail`` methods to covert the list to a boolean.
-
-Let's create an Authorization class for our ``pds`` app along with a decorator
-that it requires.
-
-``/var/oms/src/oms-example/pds/decorators.py``:
-
-.. code:: python
-
-  def list_to_boolean(auth_method):
-      '''
-      Decorator to convert an empty list to False, and to True otherwise
-      '''
-      def wrapper(self, object_list, bundle):
-          if auth_method(self, object_list, bundle):
-              return True
-          return False
-      return wrapper
-
-
-``/var/oms/src/oms-example/pds/authorization.py``:
-
-.. code:: python
-
-  from tastypie.authorization import Authorization
-
-  from arbiter import Arbiter
-  from pds.decorators import list_to_boolean
-
-  class FACTAuthorization(Authorization):
-
-      arbiter = Arbiter()
-
-      def read_list(self, object_list, bundle):
-          return self.arbitrate(object_list)
-
-      @list_to_boolean
-      def read_detail(self, object_list, bundle):
-          return self.arbitrate(object_list)
-
-      # create_list (not used)
-
-      @list_to_boolean
-      def create_detail(self, object_list, bundle):
-          return self.arbitrate(object_list)
-
-      def update_list(self, object_list, bundle):
-          return self.arbitrate(object_list)
-
-      @list_to_boolean
-      def update_detail(self, object_list, bundle):
-          return self.arbitrate(object_list)
-
-      def delete_list(self, object_list, bundle):
-          return self.arbitrate(object_list)
-
-      @list_to_boolean
-      def delete_detail(self, object_list, bundle):
-          return self.arbitrate(object_list)
-
-      def arbitrate(self, object_list):
-          '''
-          This method activates the Arbiter, passing in the objects, rules, and
-          state.
-          '''
-          rules = self.resource_meta.rules
-          state = self.resource_meta.state.get_latest()
-          return self.arbiter.arbitrate(object_list, rules, state)
-
-
-To use FACT with your resource, simply use your Arbiter-enabled Authorization
-class, and add ``rules`` (a list) and ``state`` to the ``class Meta``.
+Next, switch your authorization class to ``OIDCFACTAuthorization``, which
+performs OIDC token validation followed by FACT execution.
 
 ``/var/oms/src/oms-example/pds/api.py``:
 
@@ -2277,25 +2219,17 @@ class, and add ``rules`` (a list) and ``state`` to the ``class Meta``.
 
   from pds.models import Location
   from pds_base.resources import PdsResource
-  from pds.authorization import FACTAuthorization
   from rules import HideLocationRule
   from state_generator.models import ParallelState
-  #from oidc_validation.authorization import OpenIdConnectAuthorization
+  from oidc_validation.oidc_fact_authorization import OIDCFACTAuthorization
 
   class LocationResource(PdsResource):
       class Meta:
           queryset = Location.objects.all()
           resource_name = 'location'
-          #authorization = OpenIdConnectAuthorization()
-          authorization = FACTAuthorization()
+          authorization = OIDCFACTAuthorization()
           rules = [HideLocationRule]
           state = ParallelState
-
-
-.. warning::
-
-  A Tastypie resource only supports one Authorization class, so you must choose
-  between using ``FACTAuthorization`` or ``OpenIdConnectAuthorization``.
 
 
 Using FACT in your app
