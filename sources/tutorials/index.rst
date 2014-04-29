@@ -12,15 +12,15 @@ Each of these tutorials expect to be used on either the :ref:`importable virtual
 appliance <deploy_development_vm>` or an :ref:`OMS Host in the Cloud
 <kickstart_oms>`.
 
-
 .. toctree::
    :maxdepth: 1
 
    Perguntus Demo <perguntus>
    GPS Demo <gps_demo>
    Create a TAB <tab_tutorial>
-   Install VirtualBox <install_virtualbox>
    OIDC Tutorial <oidc_tutorial>
+   Install VirtualBox <install_virtualbox>
+   Deploy in Docker <docker_tutorial>
 
 .. Hello World Example <hello_world>
    python_web_app

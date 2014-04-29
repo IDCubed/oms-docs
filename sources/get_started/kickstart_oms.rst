@@ -203,8 +203,16 @@ You will also need to open the SSL port in the firewall: ``ufw allow 443``.
 OMS deploy.conf
 ~~~~~~~~~~~~~~~
 
+The default kickstart process will install various snippets of OMS on the host -
+one of these is ``deploy.conf``, found in ``/var/oms/etc/``.
+
+This simple, YAML-formatted configuration file is read by the oms deployment and
+administrative utilities to use as a context dictionary when rendering the
+manifest as a template. That is to say, variables defined in a manifest for an
+OMS TAB would be populated with values from ``deploy.conf``.
+
 If you are not using SSL, open ``/var/oms/etc/deploy.conf`` for editing and
-update ``ssl_enabled`` to ``False``:
+update ``ssl_enabled`` to ``False``.
 
 .. note::
 
@@ -212,6 +220,12 @@ update ``ssl_enabled`` to ``False``:
    some OMS tutorials may overwrite changes to ``deploy.conf`` - always use
    ``test=True`` when using ``salt-call`` to confirm if any changes you have
    made would be overwritten.
+
+
+Some OMS TABs may require updates be made to `deploy.conf` - this is fine. If
+you would like the values to persist in the face of OMS System Automation, add
+the updates to the `deploy_defaults` config key in the salt pillar config:
+`/etc/salt/pillar/bootstrap.sls`.
 
 
 Where to go from here?

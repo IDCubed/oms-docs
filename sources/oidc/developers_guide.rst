@@ -44,12 +44,12 @@ It is assumed that you have a functional Ubuntu 12.04 installation and you have
 basic familiarity using it. Please, open a terminal window. The following
 installs the tools needed to install needed to build the software:
 
-.. code::
+.. code:: bash
 
-   sudo apt-get install git
-   sudo apt-get install maven
-   sudo apt-get install openjdk-6-jre-headless
-   sudo apt-get install openjdk-6-jdk
+   oms% sudo apt-get install git
+   oms% sudo apt-get install maven
+   oms% sudo apt-get install openjdk-6-jre-headless
+   oms% sudo apt-get install openjdk-6-jdk
 
 
 When asked, enter a valid password, as well as confirm installation the
@@ -57,9 +57,9 @@ potentially large number of dependencies the APT command deems necessary. The
 exact list will vary and will depend on the exact packages installed during
 installation of Ubuntu. If this is a fresh Ubuntu installation please type:
 
-.. code::
+.. code:: bash
 
-   sudo apt-get update
+   oms% sudo apt-get update
 
    
 This will force APT to update its internal database of available packages and
@@ -70,41 +70,41 @@ Next, several environment variables need to be defined to help build the softwar
 Become root and open /etc/environment for editing using your favourite text
 editor. Add the following new variables:
 
-.. code::
+.. code:: bash
 
-   export JAVA_HOME=*/usr/lib/jvm/java-6-openjdk-amd64*
-   export JRE_HOME=*/usr/lib/jvm/java-6-openjdk-amd64/jre*
+   oms% export JAVA_HOME=/usr/lib/jvm/java-6-openjdk-amd64
+   oms% export JRE_HOME=/usr/lib/jvm/java-6-openjdk-amd64/jre
    
 
 Save the newly-edited file and load it into the system environment:
 
-.. code::
+.. code:: bash
 
-   source /etc/environment
+   oms% source /etc/environment
    
 
 At this point the following commands should return output very similar to the following:
 
-.. code::
+.. code:: bash
 
-   kangelov@shadow:~$ git --version
+   oms% git --version
    git version 1.7.9.5
-   kangelov@shadow:~$ mvn -version
+   oms% mvn -version
    Apache Maven 3.0.4
    Maven home: /usr/share/maven
    Java version: 1.6.0_27, vendor: Sun Microsystems Inc.
    Java home: /usr/lib/jvm/java-6-openjdk-amd64/jre
    Default locale: en_US, platform encoding: UTF-8
    OS name: "linux", version: "3.2.0-43-generic", arch: "amd64", family: "unix"
-   kangelov@shadow:~$ java -version
+   oms% java -version
    java version "1.6.0_27"
    OpenJDK Runtime Environment (IcedTea6 1.12.5) (6b27-1.12.5-0ubuntu0.12.04.1)
    OpenJDK 64-Bit Server VM (build 20.0-b12, mixed mode)
-   kangelov@shadow:~$ echo $JAVA_HOME
+   oms% echo $JAVA_HOME
    /usr/lib/jvm/java-6-openjdk-amd64
-   kangelov@shadow:~$ echo $JRE_HOME
+   oms% echo $JRE_HOME
    /usr/lib/jvm/java-6-openjdk-amd64/jre
-   kangelov@shadow:~$ 
+   oms% 
 
    
 ``Command not found`` to any of the commands above, or any variables not defined
@@ -119,24 +119,24 @@ At this point you are ready to get a copy of the latest source code to build. At
 the time of writing the latest source code is located in the ``qa-develop``
 branch, and should be cloned from there.
 
-.. code::
+.. code:: bash
 
-   mkdir ~/project
-   cd ~/project
-   git clone -b qa-develop https://github.com/IDCubed/idoic.git
+   oms% mkdir ~/project
+   oms% cd ~/project
+   oms% git clone -b qa-develop https://github.com/IDCubed/oms-oidc/
    
 
 As of the time of writing idoic is a private repository and requires a valid
 username and password with access to the project. Upon providing valid
 credentials, the GIT command will copy the entire repository under
-``~/projects/idoic``.
+``~/projects/oms-oidc``.
 
 
 Building the ID3 OpenID Connect Server and Client
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Building the idoic repository is straightforward with Maven doing the bulk of the
-work for you. The idoic maven scripts provides two build profiles: ``prod`` and
+work for you. The OIDC maven scripts provides two build profiles: ``prod`` and
 ``dev``.  ``prod`` is the production profile with full integration to the User
 Registry. It is meant for production environments, or testing environments where
 full end-to-end integration is possible. The Dev is the development build profile,
@@ -145,18 +145,18 @@ profile is best suited for unit-testing local changes.
 
 For a Production build profile type the following:
 
-.. code::
+.. code:: bash
 
-   cd ~/project/idoic
-   mvn -P prod clean install
+   oms% cd ~/project/oms-oidc
+   oms% mvn -P prod clean install
 
    
 For a Development build profile type the following:
 
-.. code::
+.. code:: bash
 
-   cd ~/project/idoic
-   mvn -P dev clean install
+   oms% cd ~/project/oms-oidc
+   oms% mvn -P dev clean install
 
    
 In both cases a very large number of dependencies being downloaded the first time
@@ -170,25 +170,25 @@ the build script runs embedded servlet containers there.
 
 The build script produces two WAR files: 
 
-* ``~/project/idoic/idoic-server/target/idoic.war`` is the ID3 OpenID Connect
+* ``~/project/oms-oidc/oms-oidc-server/target/oidc.war`` is the ID3 OpenID Connect
   Server itself.
-* ``~/project/idoic-demo/target/idoic-demo.war`` is a sample demo client used to
+* ``~/project/oms-oidc/oms-oidc-demo/target/oidc-demo.war`` is a sample demo client used to
   drive the server. Please do not deploy it in a Production environment.
 
 
 Some JAR artifacts are also produced:
 
-* ``~/project/idoic/idoic-server/target/idoic-sources.jar`` is a JAR with the
+* ``~/project/oms-oidc/oms-oidc-server/target/oidc-sources.jar`` is a JAR with the
   packaged sources.
-* ``~/project/idoic/idoic-server/target/idoic-javadoc.jar`` is a JAR with the
+* ``~/project/oms-oidc/oms-oidc-server/target/oidc-javadoc.jar`` is a JAR with the
   packaged Javadoc documentation.
-* ``~/project/idoic/idoic-demo/target/idoic-demo-javadoc.jar`` is a JAR with the
+* ``~/project/oms-oidc/oms-oidc-demo/target/oidc-demo-javadoc.jar`` is a JAR with the
   packaged Javadoc documentation of the sample client.
 
 
 Finally, the output of all automated tests can be revewed at:
 
-* ``~/project/idoic/idoic-server/target/surefire-reports`` is where Maven's
+* ``~/project/oms-oidc/oms-oidc-server/target/surefire-reports`` is where Maven's
   SureFire plugin stores all its logs. A passed test will log very little
   information apart from the fact that it passed. A failed test logs detailed
   output and causes the entire build to fail.
@@ -206,7 +206,7 @@ Deployment of ID3 OpenID Connect
 
 This section covers installation and set up needed to your Ubuntu 12.04 LTS host
 in order to run the ID3 OpenID Connect software, both client and server. It is
-assumed an idoic.war file and, optionally, an idoic-demo.war are available: either
+assumed an oidc.war file and, optionally, an oidc-demo.war are available: either
 built from source, or made available as pre-built binaries.
 
 
@@ -215,15 +215,15 @@ Installation of Software
 
 ID3 OpenID Connect requires a servlet container such as Tomcat, as well as a
 database. Both have to be installed and configured appropriately before the
-``idoic.war`` and the ``idoic-demo.war`` files would deploy.
+``oidc.war`` and the ``oidc-demo.war`` files would deploy.
 
 The following packages need to be installed for a supported configuration:
 
-.. code::
+.. code:: bash
 
-   sudo apt-get install tomcat7
-   sudo apt-get install postgresql
-   sudo apt-get install libpostgresql-jdbc-java
+   oms% sudo apt-get install tomcat7
+   oms% sudo apt-get install postgresql
+   oms% sudo apt-get install libpostgresql-jdbc-java
 
 
 Apart from PostgreSQL, at the time of writing the IDOIC server has been known to
@@ -237,20 +237,20 @@ PostgreSQL Setup
 
 The PostgreSQL setup needed is straightforward. Starting as a root user, type:
 
-.. code::
+.. code:: bash
 
-   su - postgres
-   createdb oicserver
-   createuser oic
+   oms% su - postgres
+   oms% createdb oicserver
+   oms% createuser oic
 
 
-Please answer "no" to all questions asked regarding the oic user. Now set up the
+Please answer ``no`` to all questions asked regarding the oic user. Now set up the
 new database for use:
 
-.. code::
+.. code:: bash
 
-   psql oicserver
-   \password oic
+   oms% psql oicserver
+   oicserver=# \password oic
 
    
 Enter password of ``oic`` and confirm it. Now type the following to extend all
@@ -258,25 +258,25 @@ access on the oicserver database to the oic user.
 
 .. code::
 
-   grant all privileges on database oicserver to oic;
-
+   oicserver=# grant all privileges on database oicserver to oic;
+   GRANT
    
 Now press CTRL+D to exit. A brand new database and user for the ID3 OpenID
 Connect Server is now defined. The rest of the PostgreSQL setup can be handled
 with scripts:
 
 
-.. warning::
+.. note::
 
-   the following scripts run as the oic user on the oicserver database!
+   The following scripts run as the oic user on the oicserver database!
 
 
-.. code::
+.. code:: bash
 
-   cd ~/project/idoic/env/database/postgresql
-   psql -h localhost -U oic oicserver < create-oicserver-database.sql
-   psql -h localhost -U oic oicserver < insert-system-scopes.sql
-   psql -h localhost -U oic oicserver < insert-idoic-demo-client.sql
+   oms% cd ~/project/oms-oidc/env/database/postgresql
+   oms% psql -h localhost -U oic oicserver < create-oicserver-database.sql
+   oms% psql -h localhost -U oic oicserver < insert-system-scopes.sql
+   oms% psql -h localhost -U oic oicserver < insert-idoic-demo-client.sql
 
    
 Please enter a password of ``oic`` every time. This concludes the database setup.
@@ -288,17 +288,17 @@ Tomcat Setup
 Tomcat requires a few environment variables of its own. Open /etc/environment for
 editing as root using your favourite text editor and add the following:
 
-.. code::
+.. code:: bash
 
-   export CATALINA_HOME=*/usr/share/tomcat7*
-   export CATALINA_BASE=*/var/lib/tomcat7*
+   oms% export CATALINA_HOME=/usr/share/tomcat7
+   oms% export CATALINA_BASE=/var/lib/tomcat7
 
    
 Now source the file into the currently-active environment:
 
-.. code::
+.. code:: bash
 
-   source /etc/environment
+   oms% source /etc/environment
 
 
 Tomcat is started immediately upon installation: open a web browser on your host
@@ -307,13 +307,14 @@ and go to http://localhost:8080. The ``It works!`` message should appear. Upon
 confirming it was installed correctly and it runs, Tomcat needs to be shut down
 for further configuration:
 
-.. code::
+.. code:: bash
 
-   sudo /etc/init.d/tomcat7 stop
+   oms% sudo /etc/init.d/tomcat7 stop
 
 
-Next, the Tomcat server needs to be modified to run on a port lower than 1024.
-On all Unix-based platforms except MacOS, ports lower than 1024 can only be
+Next, unless you are running Tomcat behind a reverse proxy such as Apache or Nginx,
+the Tomcat server needs to be modified to run on a port lower than 1024. On all 
+Unix-based platforms except MacOS, ports lower than 1024 can only be
 opened as root, so Tomcat needs to be told to drop root after opening the server
 socket for itself. Open /etc/default/tomcat7 for editing, and locate the
 ``AUTHBIND`` line at the very end, which is commented out by default. Uncomment
@@ -328,18 +329,18 @@ Ubuntu's firewall needs to have a few ports open to allow Tomcat traffic in. Thi
 is critical for Production installations. For Development installations you may
 choose to skip this.
 
-.. code::
+.. code:: bash
 
-   sudo ufw allow 443
+   oms% sudo ufw allow 443
 
    
 The Tomcat server needs to be configured with a data source to PostgreSQL just
 defined above, but first it needs to be told where to find the JDBC driver for it:
 
-.. code::
+.. code:: bash
 
-   cd /var/lib/tomcat7/server
-   sudo ln -s /usr/share/java/postgresql.jar postgresql.jar 
+   oms% cd /var/lib/tomcat7/server
+   oms% sudo ln -s /usr/share/java/postgresql.jar postgresql.jar 
 
 
 Every JAR in the server directory is being loaded as the Tomcat server starts up.
@@ -351,15 +352,21 @@ Once ID3 OpenID Connect is deployed, it will need to be told where and how to do
 its logging. Logging is highly environment-dependent, which is why the server's
 configuration is not being packaged within the WAR, but rather introduced into the
 server's classpath by Tomcat. If this step is skipped or not working correctly,
-you will see IDOIC logging into the general Tomcat log, which is not recommended.
+you will see OIDC logging into the general Tomcat log, which is not recommended.
 
-.. code::
+.. code:: bash
 
-   cd /var/lib/tomcat7/shared/classes
-   sudo cp ~/projects/idoic/env/var/lib/tomcat7/shared/classes/log4j.xml .
+   oms% cd /var/lib/tomcat7/shared/classes
+   oms% sudo cp ~/projects/oms-oidc/env/var/lib/tomcat7/shared/classes/log4j.xml .
    
 Feel free to examine the file and adjust according to your needs. For example,
 for a development setup, you might want to change minimum log levels to DEBUG.
+Also, should you decide to log to syslog, make sure UDP port 514 has your log
+daemon listening, otherwise please delete the following line near the bottom:
+
+.. code::
+   
+   <appender-ref ref="appender.syslog.application" />
 
 At this time the server configuration also needs to be created. The server
 supports two different configuration mechanisms: one uses a property file and the
@@ -368,7 +375,7 @@ is the preferred as the server will not require its database to be up and runnin
 to initialize on Tomcat.
 
 The ID3 OpenID Connect Server looks for a property file called
-``idoic_config.properties`` at ``/var/lib/tomcat7/shared/classes``, containing
+``oidc_config.properties`` at ``/var/lib/tomcat7/shared/classes``, containing
 the following properties. 
 
 Every property should be prefixed by ``production``. for a production-profile
@@ -379,15 +386,15 @@ server and ``development`` for a development-profile server.
 +=======================================+============================================================================================================================================================================================+
 | configBean.issuer                     | The URL your server responds to. This is the URL your clients call and will be validated by the server. In a reverse-proxy environment, this will be the location of the reverse proxy.    |
 +---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| configBean.logoImageUrl               | Path to the logo displayed on all IDOIC web pages.                                                                                                                                         |
+| configBean.logoImageUrl               | Path to the logo displayed on all OIDC web pages.                                                                                                                                         |
 +---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| configBean.topbarTitle                | Title displayed next to the logo on all IDOIC web pages.                                                                                                                                   |
+| configBean.topbarTitle                | Title displayed next to the logo on all OIDC web pages.                                                                                                                                   |
 +---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | userRegistry.serverURL                | The URL to the User Registry. This property is not used by a server built with the development profile, but a value for it is still required.                                              |
 +---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| userRegistry.authUsername             | Username your IDOIC server uses to authenticate against the User Registry. This property is not used by a server built with the development profile, but a value for it is still required. |
+| userRegistry.authUsername             | Username your OIDC server uses to authenticate against the User Registry. This property is not used by a server built with the development profile, but a value for it is still required. |
 +---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| userRegistry.authPassword             | Password your IDOIC server uses to authenticate against the User Registry. This property is not used by a server built with the development profile, but a value for it is still required. |
+| userRegistry.authPassword             | Password your OIDC server uses to authenticate against the User Registry. This property is not used by a server built with the development profile, but a value for it is still required. |
 +---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | userRegistry.userInfoEndPoint         | User Information endpoint relative to the serverURL entered above.                                                                                                                         |
 +---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -395,13 +402,20 @@ server and ``development`` for a development-profile server.
 +---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | userRegistry.selectedPersonasEndPoint | Persona search endpoint relative to the serverURL entered above. This is usually a variation of the general persona endpoint above.                                                        |
 +---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
+| metrics.useJMXReporter                | Whether or not to make OIDC performance metrics accessible through JMX. This property requires the corresponding Tomcat configuration to work. See Tomcat's documentation for details.     |
++---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| metrics.useGraphiteReporter           | Whether or not to post OIDC performance metrics to a Graphite server. This property requires a properly-configured Graphite server somewhere on your network.                              |
++---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| metrics.graphiteAddress               | The hostname or IP address of a Graphite server to post OIDC performance metrics to. This property is ignored if metrics.useGraphiteReporter is set to ``false``.                          |
++---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| metrics.graphitePort                  | The port where to post OIDC performance metrics to Graphite. This property is ignored if metrics.useGraphiteReporter is set to ``false``.                                                  |
++---------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 This is a sample configuration for a production-profile server:
 
 .. code::
 
-   production.configBean.issuer=https://localhost/idoic/
+   production.configBean.issuer=https://oms.domain.tld/oidc/
    production.configBean.logoImageUrl=resources/images/mustardseed-composite_3_small.png
    production.configBean.topbarTitle=ID3 OpenID Connect Server
    production.userRegistry.serverUrl=https://localhost/
@@ -411,14 +425,15 @@ This is a sample configuration for a production-profile server:
    production.userRegistry.userInfoEndPoint=/private_registry/api/v1/personas/userInfo/
    production.userRegistry.allPersonasEndPoint=/private_registry/api/v1/personas/?limit=0
    production.userRegistry.selectedPersonasEndPoint=/private_registry/api/v1/personas/set/%personaList%/?limit=0   
-
+   production.metrics.useJMXReporter=true
+   production.metrics.useGraphiteReporter=false
    
 This is a sample configuration for a development-profile server:
 Please note that a development-profile server ignores all userRegistry properties as the server is set to run against a development mock of the User Registry and does not integrate with a live User Registry. 
 
 .. code::
 
-   development.configBean.issuer=https://localhost/idoic/
+   development.configBean.issuer=https://localhost/oidc/
    development.configBean.logoImageUrl=resources/images/mustardseed-composite_3_small.png
    development.configBean.topbarTitle=ID3 OpenID Connect Server *DEV*
    development.userRegistry.serverUrl=ignored
@@ -428,9 +443,12 @@ Please note that a development-profile server ignores all userRegistry propertie
    development.userRegistry.userInfoEndPoint=ignored
    development.userRegistry.allPersonasEndPoint=ignored
    development.userRegistry.selectedPersonasEndPoint=ignored
+   development.metrics.useJMXReporter=true
+   development.metrics.useGraphiteReporter=true
+   development.metrics.graphiteAddress=127.0.0.1
+   development.metrics.graphitePort=2003
 
-
-In both cases, every option set to "ignored" is required to be present, but its
+In both cases, every option set to ``ignored`` is required to be present, but its
 value is ignored. Feel free to set the these values as desired, at the very
 minimum you will need to update the ``configBean.issuer`` and
 ``userRegistry.serverUrl`` properties for your setup.
@@ -447,31 +465,32 @@ a certificate acceptable to your local machine, and the cost of obtaining a vali
 SSL certificate is not justified. The two setups are discussed separately below:
 
 
-*Production SSL Setup For Tomcat*
+**Production SSL Setup For Tomcat**
 
-This is how IDCubed creates the SSL certificates for Tomcat with GoDaddy. First,
+
+This is how Open Musard Seed creates the SSL certificates for Tomcat with GoDaddy. First,
 a new keystore is created with a new key:
 
-.. code::
+.. code:: bash
 
-   cd /etc/tomcat7
-   sudo keytool -keysize 2048 -genkey -alias tomcat -keyalg RSA -keystore idoic.keystore
+   oms% cd /etc/tomcat7
+   oms% sudo keytool -keysize 2048 -genkey -alias tomcat -keyalg RSA -keystore oidc.keystore
 
    Enter keystore password: oickeys
    Re-enter new password: oickeys
    What is your first and last name?
-      [Unknown]:  *.idcubed.org
+      [Unknown]:  *.openmustardseed.org
    What is the name of your organizational unit?
       [Unknown]:
    What is the name of your organization?
-      [Unknown]:  IDCubed
+      [Unknown]: Open Mustard Seed 
    What is the name of your City or Locality?
       [Unknown]:  Cambridge
    What is the name of your State or Province?
       [Unknown]:  Massachusetts
    What is the two-letter country code for this unit?
       [Unknown]:  US
-   Is CN=*.idcubed.org, OU=Unknown, O=IDCubed, L=Cambridge, ST=Massachusetts, C=US correct?
+   Is CN=*.openmustardseed.org, OU=Unknown, O=Open Mustard Seed, L=Cambridge, ST=Massachusetts, C=US correct?
       [no]:  Yes
 
    Enter key password for <tomcat>
@@ -480,12 +499,12 @@ a new keystore is created with a new key:
 
 Next, next the CSR from the keystore is exported and sent to GoDaddy to sign:
 
-.. code::
+.. code:: bash
 
-   sudo keytool -certreq -keyalg RSA -alias tomcat -file idcubed.org.csr -keystore idoic.keystore
+   oms% sudo keytool -certreq -keyalg RSA -alias tomcat -file openmustardseed.org.csr -keystore oidc.keystore
 
 
-The signed CSR comes back as idcubed.org.crt, and should be saved at /etc/tomcat7.
+The signed CSR comes back as ``openmustardseed.org.crt``, and should be saved at ``/etc/tomcat7``.
 
 A few more certificates are needed. Browse to `https://certs.godaddy.com/anonymous/repository.seam?cid=352580 <https://certs.godaddy.com/anonymous/repository.seam?cid=352580>`_ and download the following files:
 
@@ -497,15 +516,15 @@ A few more certificates are needed. Browse to `https://certs.godaddy.com/anonymo
 All 3 files should be saved at /etc/tomcat7 as well. All 4 files should be
 imported into Tomcat's keystore as follows:
 
-.. code::
+.. code:: bash
 
-   sudo keytool -import -alias root -keystore idoic.keystore -trustcacerts -file valicert_class2_root.crt
+   oms% sudo keytool -import -alias root -keystore oidc.keystore -trustcacerts -file valicert_class2_root.crt
 
-   sudo keytool -import -alias cross -keystore idoic.keystore -trustcacerts -file gd_cross_intermediate.crt
+   oms% sudo keytool -import -alias cross -keystore oidc.keystore -trustcacerts -file gd_cross_intermediate.crt
 
-   sudo keytool -import -alias intermed -keystore idoic.keystore -trustcacerts -file gd_intermediate.crt
+   oms% sudo keytool -import -alias intermed -keystore oidc.keystore -trustcacerts -file gd_intermediate.crt
    
-   sudo keytool -import -alias tomcat -keystore idoic.keystore -file idcubed.org.crt
+   oms% sudo keytool -import -alias tomcat -keystore oidc.keystore -file openmustardseed.org.crt
 
 
 With this, your production SSL keystore is ready for Tomcat.
@@ -513,12 +532,12 @@ With this, your production SSL keystore is ready for Tomcat.
 Finally, the JVM running Tomcat needs to be told to trust Tomcat's SSL certificate
 as well, or the server will fail to integrate with its User Registry:
 
-.. code::
+.. code:: bash
 
-   sudo keytool -import -alias tomcat -keystore /etc/ssl/certs/java/cacerts -file idcubed.org.crt
+   oms% sudo keytool -import -alias tomcat -keystore /etc/ssl/certs/java/cacerts -file openmustardseed.org.crt
 
 
-*Development SSL Setup For Tomcat:*
+**Development SSL Setup For Tomcat:**
 
 This setup is intended for development purposes only. If used in a Production
 machine, clients will fail talking to the server with a *no trusted SSL
@@ -529,10 +548,10 @@ or your development machine's fully-qualified domain name for first and last nam
 This is important as clients will be checking if the certificate name corresponds
 to the name of the machine being called. 
 
-.. code::
+.. code:: bash
 
-   cd /etc/tomcat7
-   sudo keytool -keysize 2048 -genkey -alias tomcat -keyalg RSA -keystore idoic.keystore
+   oms% cd /etc/tomcat7
+   oms% sudo keytool -keysize 2048 -genkey -alias tomcat -keyalg RSA -keystore oidc.keystore
 
    Enter keystore password: oickeys
    Re-enter new password: oickeys
@@ -541,14 +560,14 @@ to the name of the machine being called.
    What is the name of your organizational unit?
       [Unknown]:
    What is the name of your organization?
-      [Unknown]:  IDCubed
+      [Unknown]:  Open Mustard Seed
    What is the name of your City or Locality?
       [Unknown]:  Cambridge
    What is the name of your State or Province?
       [Unknown]:  Massachusetts
    What is the two-letter country code for this unit?
       [Unknown]:  US
-   Is CN=localhost, OU=Unknown, O=IDCubed, L=Cambridge, ST=Massachusetts, C=US correct?
+   Is CN=localhost, OU=Unknown, O=Open Mustard Seed, L=Cambridge, ST=Massachusetts, C=US correct?
       [no]:  Yes
 
    Enter key password for <tomcat>
@@ -557,21 +576,21 @@ to the name of the machine being called.
 
 Next, export the key just generated:
 
-.. code::
+.. code:: bash
 
-   sudo keytool -exportcert -alias tomcat -keystore idoic.keystore -file localhost.crt
+   oms% sudo keytool -exportcert -alias tomcat -keystore oidc.keystore -file localhost.crt
 
 
 ``localhost.crt`` is your public key, and every client about to call your
 development server needs to be told to trust it. If you are running the
-``idoic-demo.war``, this includes Tomcat itself: Java maintains a separate
-keystore of trusted certificates and idoic-demo will not trust your IDOIC server,
+``oidc-demo.war``, this includes Tomcat itself: Java maintains a separate
+keystore of trusted certificates and idoic-demo will not trust your OIDC server,
 even if it happens to be running on the same Tomcat instance, unless this key is
 also found within the Java trusted keystore. This is how you can import it:
 
-.. code::
+.. code:: bash
 
-   sudo keytool -import -file ./localhost.crt -keystore /etc/ssl/certs/java/cacerts -alias localhost
+   oms% sudo keytool -import -file ./localhost.crt -keystore /etc/ssl/certs/java/cacerts -alias localhost
 
 
 If clients talking to a development server are located on other machines, they
@@ -579,7 +598,7 @@ will need to be configured to trust this certificate as well. This concludes the
 development SSL keystore for Tomcat.
 
 
-*Tomcat Configuration*
+**Tomcat Configuration**
 
 Next, Tomcat needs to be configured. Two configuration files need to be updated:
 ``server.xml`` and ``context.xml``.
@@ -613,7 +632,7 @@ If (and only if) your setup manages your SSL layer at Tomcat, find the
 
    <Connector port="443" protocol="HTTP/1.1" SSLEnabled="true"
       maxThreads="150" scheme="https" secure="true"
-      keystoreFile="/etc/tomcat7/idoic.keystore" keystorePass="oickeys"
+      keystoreFile="/etc/tomcat7/oidc.keystore" keystorePass="oickeys"
       keystoreType="JKS"
       clientAuth="false" sslProtocol="TLS" />
 
@@ -632,7 +651,7 @@ following within:
 Save the file and exit. This concludes the Tomcat configuration needed.
 
 
-*Use Of Reverse Proxies*
+**Use Of Reverse Proxies**
 
 It is possible to use a reverse proxy such as Nginx or an Apache HTTP Server to
 maintain Tomcat's SSL layer. If this is the case, ensure Tomcat is only reachable
@@ -652,7 +671,7 @@ reverse proxy's SSL certificate.
                connectionTimeout="20000"
                URIEncoding="UTF-8"
                redirectPort="8443"
-               proxyName="two.idhypercubed.org" <!-- Location Tomcat is reachable on from WAN. This affects the context URL reported by the server for itself. -->
+               proxyName="oms.domain.tld" <!-- Location Tomcat is reachable on from WAN. This affects the context URL reported by the server for itself. -->
                proxyPort="443"
                scheme="https" />
 
@@ -670,17 +689,17 @@ ID3 OpenID Connect server context to Tomcat:
 
 .. code::
 
-   location ^~ /idoic {
+   location ^~ /oidc {
         expires off;
-        proxy_pass              http://127.0.0.1:8080/idoic;
+        proxy_pass              http://127.0.0.1:8080/oidc;
    }
 
 
 Deploying ID3 OpenID Connect
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-ID3 OpenID Connect defines two WARs: ``idoic.war``, which is the server, and
-``idoic-demo.war``, which is a sample client used to demo server functionality.
+ID3 OpenID Connect defines two WARs: ``oidc.war``, which is the server, and
+``oidc-demo.war``, which is a sample client used to demo server functionality.
 You can deploy the former only, or both.
 
 The two WARs were either made available as binaries, or were built from source
@@ -688,45 +707,45 @@ using the instructions above. First stop the Tomcat server, if not stopped
 already, clean up its deploy directory, then copy the two WARs into the Tomcat
 deploy directory, ``/var/lib/tomcat7/webapps``. Finally, restart the server:
 
-.. code::
+.. code:: bash
 
-   /etc/init.d/tomcat7 stop
-   cd /var/lib/tomcat7/webapps
-   rm -fr idoic*
-   cp ~/project/idoic/idoic-server/target/idoic.war .
-   cp ~/project/idoic/idoic-demo/target/idoic-demo.war .
-   /etc/init.d/tomcat7 start
+   oms% sudo /etc/init.d/tomcat7 stop
+   oms% cd /var/lib/tomcat7/webapps
+   oms% sudo rm -fr oidc*
+   oms% sudo cp ~/project/oms-oidc/oms-oidc-server/target/oidc.war .
+   oms% sudo cp ~/project/oms-oidc/oms-oidc-demo/target/oidc-demo.war .
+   oms% sudo /etc/init.d/tomcat7 start
 
 
 All logs are located at ``/var/lib/tomcat7/logs``, which is a symlink to
-``/var/logs/tomcat7``. For a successful deployment, the idoic-server-errors log
+``/var/logs/tomcat7``. For a successful deployment, the oidc-server-errors log
 should be created, but empty.
 
 
 Testing Your Setup
 ~~~~~~~~~~~~~~~~~~
 
-You can test out your work by browsing to https://localhost/idoic. For a
+You can test out your work by browsing to https://localhost/oidc. For a
 development set up, you will see a warning that the SSL certificate used is not
 trusted. This is normal. For a production setup, this would be unacceptable and
 indicates problem with the SSL certificate.
 
 The ID3 OpenID Connect Server admin page should appear. If, instead, a 404 error
-page appears, the deployment of the idoic.war has failed. Open the log and
+page appears, the deployment of the oidc.war has failed. Open the log and
 troubleshoot. If this is a development build, your server name will contain the
 string *DEV*, indicating it is running against a development mock of the User
 Registry. If you do not see this, or you see it for a production build, you are
 running an incorrect profile for your setup.
 
-Click About, then Log In, then enter valid user credentials. If you used a
-development build, the User Registry is stubbed and two users were defined for
-you to use: admin and user. Both users will accept an arbitrary password.
+Click Log In, then enter valid user credentials. If you used a development build, 
+the User Registry is stubbed and two users were defined for you to use: admin 
+and user. Both users will accept an arbitrary password.
 
-You are now logged in. Click on About again, and you should see a menu on the
-lefthand side of your screen. Choose *Manage Clients*. You should see the ID3
-oic-demo-client, which you imported by running the ``insert-idoic-demo-client.sql``
-script above. Your database connectivity is working. Should you get an error
-instead, go back and rerun the SQL scripts above.
+You are now logged in. You should see a menu on the lefthand side of your screen. 
+Choose *Manage Clients*. You should see the ID3 oic-demo-client, which you imported 
+by running the ``insert-idoic-demo-client.sql`` script above. Your database 
+connectivity is working. Should you get an error instead, go back and rerun the SQL 
+scripts above.
 
 Next, choose the *System Scopes* menu. You should see a list of scopes defined:
 offline_access, profile, openid, phone, email and address. These were imported
@@ -735,15 +754,17 @@ script as these scopes are required for normal operation of the server.
 
 It is important to find out if the server is properly responding to clients
 seeking to perform different operations with it. To test this, deploy the
-``idoic-demo.war``. Browse to `https://localhost/idoic-demo <https://localhost/idoic-demo>`_ and confirm a page titled *A Simple Demo of OIC Workflows* appears. If a 404 page appears instead, the idoic-demo.war is not deployed, or its deployment has failed.
+``oidc-demo.war``. Browse to `https://localhost/oidc-demo <https://localhost/oidc-demo>`_ 
+and confirm a page titled *A Simple Demo of OIC Workflows* appears. If a 404 page 
+appears instead, the oidc-demo.war is not deployed, or its deployment has failed.
 
 Choose *Start*, and you will be redirected to an authorization page of the ID3
 OpenID Connect server (or a login page if not logged in from above, or have
 logged out). Click Authorize. Confirm that a page with the words *Success!* at
 the top appears. At this point, both the server and the client are working.
 
-To exercise the other features of the demo client, click on "Back" to go back to
-the main page of the IDOIC-Demo client, and now the token just retrieved will be
+To exercise the other features of the demo client, click on ``Back`` to go back to
+the main page of the OIDC-Demo client, and now the token just retrieved will be
 pre-populated everywhere for you. Feel free to experiment.
 
 This concludes testing of the ID3 OpenID Connect Server with the sample client
@@ -766,7 +787,10 @@ As of the time of writing Ubuntu's Eclipse package is outdated and, while still
 may be useful, is somewhat buggy.
 
 A very quick way to get started is to simply go and download the 64-bit Linux
-Spring Tools Suite (STS) from `http://www.springsource.org/eclipse-downloads <http://www.springsource.org/eclipse-downloads>`_. This is an environment built on top of Eclipse with Spring and other extensions. Right out of the box it gives a database browser, GIT integration, Spring integration, Maven integration and even an embedded server to test on: everything you need.
+Spring Tools Suite (STS) from `http://www.springsource.org/eclipse-downloads <http://www.springsource.org/eclipse-downloads>`_. 
+This is an environment built on top of Eclipse with Spring and other extensions. 
+Right out of the box it gives a database browser, GIT integration, Spring integration, 
+Maven integration and even an embedded server to test on: everything you need.
 
 
 Workspace Setup
@@ -777,32 +801,32 @@ matter of personal preference. This guide will describe one way to get a fairly
 functional development environment and you are encouraged to alter it to taste.
 
 
-*Importing the IDOIC Repository*
+**Importing the OIDC Repository**
 
 First, create an empty workspace at a convenient location. In Package Explorer,
 right click and select Import. Expand the Maven branch and from there choose
 *Existing Maven Projects*. In the dialogue that follows, choose Browse next to
-the *Root Directory* textbox and browse to ``~/project/idoic``, which is the
-location where you cloned the IDOIC repository in the very beginning of this
+the *Root Directory* textbox and browse to ``~/project/oms-oidc``, which is the
+location where you cloned the OIDC repository in the very beginning of this
 document. Next, expand *Advanced* and type *Eclipse* in the *Profiles* textbox.
 Click Finish.
  
 Eclipse will go away, detect that this is a GIT repository, and import it as such.
 You should see 3 projects imported: id3-openid-connect, the aggregator project,
-idoic, which is the Server project, and idoic-demo, which is the sample client.
-There might be errors, but they should gradually go away gradually as Eclipse
+oms-oidc-server, which is the Server project, and oms-oidc-demo, which is the sample 
+client. There might be errors, but they should gradually go away gradually as Eclipse
 works. In the end you will be left with a few JSP errors for missing tag
-libraries: these are safe to ignore as the idoic project is a Maven overlay. If
-this does not happen, choosing *Project* > *Clean* helps.
+libraries: these are safe to ignore as the oms-oidc-server project is a Maven overlay. If
+this does not happen, choosing *Project* > *Clean* sometimes helps.
 
 
-*Set up the Database Explorer*
+**Set up the Database Explorer**
 
 Choose *Window* > *Open Perspective* > *Database Development*. In Data Source
 Explorer on the left, right click on *Database Connections* and select *New...*.
 From the list of databases, choose PostgreSQL. In the *Name* textbox write
-*oicserver*. Choose Next. In the dialogue that follows, click the *+* button r
-ght next to the *Drivers* dropdown and from the dropdown that follows, choose
+*oicserver*. Choose Next. In the dialogue that follows, click the *+* button rght 
+next to the *Drivers* dropdown and from the dropdown that follows, choose
 *PostgreSQL JDBC Driver*. 
 
 At this point Eclipse will be complaining that it can't find the JDBC driver.
@@ -811,9 +835,9 @@ doesn't exist: Eclipse simply incorrectly assumed it is somewhere within the STS
 tree. Choose it and select *Remove JAR/Zip*. 
 
 The PostgreSQL JDBC driver came with the libpostgresql-jdbc-java Ubuntu package,
-not STS and Eclipse needs to be pointed Eclipse to it. Next choose *Add
-JAR/Zip...* and browse to ``/usr/share/java/postgresql.jar``. Choose the
-*Properties* tab. Populate the table you see as follows:
+not STS, and Eclipse needs to be pointed to it. Next choose *Add JAR/Zip...* and 
+browse to ``/usr/share/java/postgresql.jar``. Choose the *Properties* tab. Populate 
+the table you see as follows:
 
 .. code::
 
@@ -827,32 +851,35 @@ Choose OK, closing the dialogue. From the previous dialogue, check off the *Save
 password* checkbox and click on *Test Connection*. Confirm a message *Ping
 succeeded!*. If this did not happen, either your credentials were wrong (you set
 different credentials when creating the OIC user above), or the JDBC driver
-failed to load. Now choose *Finish*. You should be back into the main Eclipse win
-ow and there should now be a single *oicserver* connection under *Database Conne
-tions* on the left.
+failed to load. Now choose *Finish*. You should be back into the main Eclipse window 
+and there should now be a single *oicserver* connection under *Database Connections* 
+on the left.
 
-In the File menu, choose *Open File...*. Then browse to ``~/projects/idoic/env/database/postgresql/insert-eclipse-configuration.sql``.
+In the File menu, choose *Open File...*. Then browse to ``~/projects/oms-oidc/env/database/postgresql/insert-eclipse-configuration.sql``.
 Please confirm you see the database script open in a window. In the *Name*
 dropdown select *oicserver* and in the *Database* dropdown select *oicserver*.
 Right click anywhere in the window and choose *Execute All*. You should see all
 insert statements get executed, creating the Eclipse configuration profile for
-the IDOIC Server to use. This is how to execute scripts from within Eclipse and
+the OIDC Server to use. This is how to execute scripts from within Eclipse and
 also browse the database from within the *Database Explorer*. Feel free to look
-around.
+around. Please note that it is possible to create a property file as above prefixed
+with ``eclipse`` and put it in Eclipse's Tomcat server classpath. OIDC supports 
+configuration by either means.
 
 This concludes the database setup. Feel free to close the database script without
 saving changes.
 
 
-*Setting up a Maven build*
+**Setting up a Maven build**
 
 Go to Window > Open Perspective > Other > Spring. Confirm that you are back to
 the perspective when you first started Eclipse. Right click on the
 *id3-openid-connect* project, choose *Run As* and choose *2 Maven build...*
 
 Confirm that you are looking at a dialogue with a lot of things to set. In the
-*Name* textbox write *ID3 OpenID Connect – Eclipse profile*. For *Goals* write *
-lean package* For *Profiles* write *Eclipse*.
+*Name* textbox write *ID3 OpenID Connect – Eclipse profile*. For *Goals* write 
+*clean package* For *Profiles* write *Eclipse*. Please note that building with
+*clean package* bypasses most of the automated testing performed with a full build.
 
 Choose *Refresh* tab and check off *Refresh resources upon completion.*, then
 select *The entire workspace*. Click on *Apply*, then click on *Run*. You will
@@ -864,14 +891,14 @@ profile is meant for a the STS's own Tomcat server only, as it works with SSL
 completely disabled. Please do not use this profile for anything else.
 
 
-*Setting Up Eclipse's Tomcat Server*
+**Setting Up Eclipse's Tomcat Server**
 
-The IDOIC project compiles as a standalone project, but it will not deploy as one.
-The IDOIC server is merely a set of Maven overlays on top of the MITRE OIC server
+The OMS OIDC project compiles as a standalone project, but it will not deploy as one.
+The OMS OIDC server is merely a set of Maven overlays on top of MITRE's OIC server
 and Eclipse doesn't understand that. Eclipse will want to just copy your entire
 workspace into the Tomcat hotdeply directory, and then Tomcat will complain that
 half its files are missing. The setup needed is different: your Tomcat server
-will need to use Maven's staging directory for generating the final WAR as its
+will need to use Maven's target directory for generating the final WAR as its
 deployment directory, so that every time you generate a Maven build, Tomcat
 deploys your latest code automatically. It will also need to set up that JNDI
 data source all over again. Please note that if you run a Maven build while
@@ -880,7 +907,8 @@ and Maven trying to repopulate its build target directory: for this reason and
 others it is important to stop Tomcat before executing a Maven build.
 
 In Package Explorer, expand *Servers*. You will see a server pre-defined for you
-called *Vmware vFabric Server Developer Edition*. Expand it.
+called *Vmware vFabric Server Developer Edition*. Expand it: this is just a regular
+Tomcat instance, which Vmware has rebranded.
 
 Open the embedded Tomcat ``server.xml`` for editing. Find the
 ``<GlobalNamingResources>`` tag and add the following within it:
@@ -919,25 +947,28 @@ JARs* button. Browse to /usr/share/java/postgresql.jar and click *OK*. Then clic
 
 Back in the Eclipse main window, click on the *Modules* subtab. Click *Add
 External Web Module...*. Click on the *Browse* button next to *Document base:*
-and browse to ~/projects/idoic/idoic-server/target/idoic. For *Path* type /idoic.
+and browse to ~/projects/oms-oidc/oms-oidc-server/target/oidc. For *Path* type /oidc.
 Make sure *Auto reload* is checked off and click OK. Again, click on *Add External
 Web Module...*. Again, click on *Browse* and this time browse to
-~/projects/idoic/idoic-demo/target/idoic-demo. Again, make sure *Auto reload* is
+~/projects/oms-oidc/oms-oidc-demo/target/oidc-demo. Again, make sure *Auto reload* is
 checked off and click OK. Choose File > Save.
 
 The Eclipse-embedded Tomcat is configured. Go back to the Server view in the
 lower-left corner, right click on the *Vmware vFabric tc Server Developer Edition*
 and choose *Start*. You will see Tomcat starting up. You should not see any errors,
 though you will see Tomcat complaining that log4j is not initialized. This is
-normal, feel free to configure Tomcat's log4j, but the default already logs DEBUG
-output to the console so that Eclipse will show them. There is no need to create
-a idoic_config.properties file, the database script ran above configures the
+normal, feel free to configure Tomcat's log4j if you prefer, though the default already 
+logs DEBUG output to the console so that Eclipse will show them. There is no need to create
+a oidc_config.properties file, the database script ran above configures the
 server via its database.
 
 In the toolbar at the top click on the globe icon (Open Web Browser). You will
-see a very simple web browser window opening within eclipse.
+see a very simple web browser window opening within Eclipse.
 
-From here you can go to `http://localhost:8080/idoic/ <http://localhost:8080/idoic/>`_ for the IDOIC server and `http://localhost:8080/idoic-demo/ <http://localhost:8080/idoic-demo/>`_ for the sample client. Note that there is no HTTPS on either link: this is not a server you would want to do anything other than local testing on.
+From here you can go to `http://localhost:8080/oidc/ <http://localhost:8080/oidc/>`_ 
+for the OIDC server and `http://localhost:8080/oidc-demo/ <http://localhost:8080/oidc-demo/>`_ 
+for the sample client. Note that there is no HTTPS on either link: this is not a server 
+you would want to do anything other than local testing on.
  
 Feel free to execute the *Testing Your Setup* tests above to validate that
 everything is working as it should. In order to redeploy, simply stop the server,
@@ -947,7 +978,7 @@ debug, simply right-click on the server and choose *Debug* instead of *Start* an
 Eclipse will take care of the rest.
 
 
-*Remote Debugging Tomcat With Eclipse*
+**Remote-Debugging Tomcat With Eclipse**
 
 Go back to the Terminal and open the /etc/default/tomcat7 file for editing. Then
 uncomment the following lines:
@@ -959,18 +990,17 @@ uncomment the following lines:
 
 Tomcat's remote debug port is 8000. Now restart Tomcat:
 
-.. code::
+.. code:: bash
 
-   /etc/init.d/tomcat7 stop && /etc/init.d/tomcat7 start
-
+   oms% sudo /etc/init.d/tomcat7 restart
 
 Now, go back to Eclipse to tell Eclipse to create a Remote Debug configuration:
-Find the "Debug" button and click on the drop-down arrow on its right. Choose
-"Debug Configurations..." from the menu. Find "Remote Java Application" on the
-list of options to the left of the dialog. Right click on it and select "New".
+Find the ``Debug`` button and click on the drop-down arrow on its right. Choose
+``Debug Configurations...`` from the menu. Find ``Remote Java Application`` on the
+list of options to the left of the dialog. Right click on it and select ``New``.
 A new remote debug configuration appears. Make sure the remote debug host and
-remote debug port are set correctly. Make sure the project is set to "idoic".
-Call this debug configuration something meaningful and click on "Apply".
+remote debug port are set correctly. Make sure the project is set to ``oms-oidc-server``.
+Call this debug configuration something meaningful and click on ``Apply``.
 
 By clicking Debug, Eclipse will connect to your Tomcat's port 8000 and start
 debugging the ID3 OpenID Connect application remotely. At this point feel free
@@ -986,8 +1016,55 @@ the server normally.
    is up to you to ensure your source code aligns with the code running on Tomcat
    as breakpoints trip based on line numbers within the source.
 
+**Performance Monitoring With JMX**
 
-*Optional Setup*
+JMX allows tools such as Oracle's own JConsole to connect and report on monitors set 
+within the code. This gives you a real-time insight into how the server operates and
+how healthy it is. OIDC implements a large number of monitors, mostly meant for
+performance monitoring, and this is on top of what Tomcat and the JVM monitor already.
+OIDC's performance monitoring is entirely implemented in a single class: AccessMetricsAspect, 
+an aspect designed to intercept most calls to Spring MVC and Framework request handlers, 
+and measure some useful statistics about them. The underlying library doing all the data 
+gathering and analysis can also log to Graphite, but JMX also allows you to monitor Tomcat 
+and JVM as well as OIDC.
+
+This is how to enable JMX monitoring:
+
+First and foremost, open oidc_config.properties for editing and ensure the 
+*metrics.useJMXReporting* property is set to *true*. Having the *useGraphiteReporting* property
+also set to *true* is not a problem, the two are not mutually-exclusive.
+
+Second, tell the JVM running Tomcat to enable JMX monitoring: open */etc/defaults/tomcat7*
+for editing and add the following lines at the very end. This is an example of how this
+file should look:
+
+.. code::
+
+   TOMCAT7_USER=tomcat7
+   TOMCAT7_GROUP=tomcat7
+   JAVA_OPTS="-Djava.awt.headless=true -Xmx128m -XX:+UseConcMarkSweepGC"
+   JAVA_OPTS="${JAVA_OPTS} -Xdebug -Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n"
+
+   JMX_PORT=12121
+   JAVA_OPTS="${JAVA_OPTS} -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=${JMX_PORT} -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false"
+
+This will open port 12121 for tools such as JConsole to connect on localhost only. If
+you wish to monitor Tomcat remotely, you would want to enable authentication as well as SSL.
+Please note that JConsole can do a lot more than just monitor health, so failing to secure the
+JMX port on a production server can result in your server being compromised. Please consult 
+Tomcat's own documentation regarding how to do this.
+
+Third, restart Tomcat.
+
+Fourth and final, open a terminal and type ``jconsole``. When prompted, choose the 
+*Remote Process* radio-button and type *localhost:12121* in the text field below. 
+Then click *Connect* and confirm the attempt to connect to an unsecured JMX port.
+
+You should be looking at a window with four graphs representing the JVM's monitor and
+resource usage. Feel free to look around. The OIDC metrics should be visible on the ``MBeans`` 
+tab under ``metric``. These are the same metrics being reported to Graphite as well.
+
+**Optional Setup**
 
 It is sometimes useful to have the MITRE OIC Source right along the ID3 OpenID
 Connect one. In addition to letting you reverse engineer MITRE's implementation,

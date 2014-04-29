@@ -34,6 +34,14 @@ as a new "social stack" of protocols. Contact IDCubed by emailing ``oms``
 the private repositories ahead of the general release.
 
 
+Get Started
+-----------
+
+* :ref:`Introduction to OMS Concepts <introduction>`
+* :ref:`Get Started with OMS Demos and Development <get_started>`
+* :ref:`Become a Contributor <contributing>`
+
+
 Leveraging the Open-Source Community
 ------------------------------------
 
@@ -95,10 +103,3 @@ Here is a mindmap of the features of the OMS TCF:
 .. image:: introduction/images/Trust_Framework_Features_mindmap_01.png
    :alt: Trusted Compute Framework Features
    :align: center
-
-
-Learn More
-----------
-
-Want to know more? :ref:`Start with the OMS Introduction <introduction>`
-

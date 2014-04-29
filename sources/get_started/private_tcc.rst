@@ -83,7 +83,7 @@ If you have followed the steps outlined in :ref:`initial deployment
 
 .. code:: bash
 
-   salt-call --local state.sls oidc
+   oms% salt-call --local state.sls oidc
 
 
 .. note::
@@ -127,13 +127,13 @@ includes all source code needed, so let's get to it:
 .. code::
 
    # use postgres user to skip db authentication
-   su -l postgres
+   oms% su -l postgres
    # all OMS source is found here
-   cd /var/oms/src
+   oms% cd /var/oms/src
    # OIDC is deployed on postgres by default, use these scripts
-   cd oidc/env/database/postgresql
-   psql -v role=oidc oidc < insert-idoic-demo-client.sql
-   psql -v role=oidc oidc < insert-private-registry-client.sql
+   oms% cd oidc/env/database/postgresql
+   oms% psql -v role=oidc oidc < insert-idoic-demo-client.sql
+   oms% psql -v role=oidc oidc < insert-private-registry-client.sql
 
 
 .. note::
@@ -148,9 +148,9 @@ includes all source code needed, so let's get to it:
    included in OMS, you will want to run the SQL scripts to insert the clients
    needed by these apps. eg:
 
-     psql -v role=oidc oidc < insert-perguntus-ui-client.sql
+     oms% psql -v role=oidc oidc < insert-perguntus-ui-client.sql
 
-     psql -v role=oidc oidc < insert-gps-demo-client.sql
+     oms% psql -v role=oidc oidc < insert-gps-demo-client.sql
 
 
 With these clients included in OIDC, you may now proceed to run through the Core

@@ -14,8 +14,6 @@ Compute Framework (OMS TCF):
    :maxdepth: 1
 
    Architecture <architecture>
-   Background Concepts <concepts>
-   Terminology <terminology>
 
 
 You may also be interested in one of the following guides:

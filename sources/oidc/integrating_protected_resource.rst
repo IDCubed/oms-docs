@@ -114,7 +114,7 @@ REQUEST:
 
 .. code::
 
-   POST https://localhost/idoic/introspect
+   POST https://localhost/oidc/introspect
    Accept: application/json
 
    token=eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjEzODE3MDM2...ZkJGkzM&client_id=protected_resource&client_secret=protected_resource_secret
@@ -149,7 +149,7 @@ REQUEST:
 
 .. code::
    
-   POST https://localhost/idoic/introspect
+   POST https://localhost/oidc/introspect
    Accept: application/json
 
    token=eyJhbGciOiJSUzI1NiJ9.eyJhdXRoX3RpbWUiOjEzODE3M...RANbE_M&client_id=protected_resource&client_secret=protected_resource_secret
@@ -194,7 +194,7 @@ REQUEST:
 
 .. code::
    
-   POST https://localhost/idoic/introspect
+   POST https://localhost/oidc/introspect
    Accept: application/json
 
    token=eyJhbGciOiJub25lIn0.eyJqdGkiOiJjZWE0ZDVkOC1jYjFlLTQ2MjctODhlNC1mMjM4YjMxNzEwNzQifQ.&client_id=id3-oic-demo-client&client_secret=c2b3e080-1923-4b16-9a85-786104d29cf8

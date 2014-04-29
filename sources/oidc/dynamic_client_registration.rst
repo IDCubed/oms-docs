@@ -157,7 +157,7 @@ REQUEST:
 
 .. code::
 
-   POST https://localhost/idoic/register
+   POST https://localhost/oidc/register
    Content-Type: application/json
    Accept: application/json
    Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE..CNcmFdUapol2Kg
@@ -183,7 +183,7 @@ RESPONSE:
    "client_secret_expires_at": 0,
    "client_id_issued_at": 1381714271,
    "registration_access_token": "eyJhbGciOiJSUzI1NiJ9.eyJhdWQiOlsiZjg2MDM0NWQtNDBjN...B2rS86w",
-   "registration_client_uri": "https://localhost/idoic/register/f860345d-40c4-4f46-a1a8-85afe4202939",
+   "registration_client_uri": "https://localhost/oidc/register/f860345d-40c4-4f46-a1a8-85afe4202939",
    "redirect_uris": [ "https://client.example.org/callback https://client.example.org/callback2"],
    "contacts": [],
    "token_endpoint_auth_method": "client_secret_basic",
@@ -215,7 +215,7 @@ REQUEST:
 
 .. code::
 
-   GET https://localhost/idoic/register/f860345d-40c4-4f46-a1a8-85afe4202939
+   GET https://localhost/oidc/register/f860345d-40c4-4f46-a1a8-85afe4202939
    Accept: application/json
    Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJhdWQiOlsiZjg2MDM0NWQtNDBjN...B2rS86w
 
@@ -233,7 +233,7 @@ RESPONSE:
    "client_secret_expires_at":0,
    "client_id_issued_at":1381636800,
    "registration_access_token":"eyJhbGciOiJSUzI1NiJ9.eyJhdWQiOlsiZjg2MDM0NWQtNDBjN...B2rS86w",
-   "registration_client_uri":"https://localhost/idoic/register/f860345d-40c4-4f46-a1a8-85afe4202939",
+   "registration_client_uri":"https://localhost/oidc/register/f860345d-40c4-4f46-a1a8-85afe4202939",
    "redirect_uris":["https://client.example.org/callback https://client.example.org/callback2"],
    "contacts":[],
    "token_endpoint_auth_method":"client_secret_basic",
@@ -275,7 +275,7 @@ REQUEST:
 
 .. code::
 
-   PUT https://localhost/idoic/register/f860345d-40c4-4f46-a1a8-85afe4202939
+   PUT https://localhost/oidc/register/f860345d-40c4-4f46-a1a8-85afe4202939
    Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJhdWQiOlsiZjg2MDM0NWQtNDBjN...B2rS86w
    Content-Type: application/json 
 
@@ -305,7 +305,7 @@ RESPONSE:
    "client_secret_expires_at":0,
    "client_id_issued_at":1381636800,
    "registration_access_token":"eyJhbGciOiJSUzI1NiJ9.eyJhdWQiOlsiZjg2MDM0NWQtNDBjN...B2rS86w",
-   "registration_client_uri":"https://localhost/idoic/register/f860345d-40c4-4f46-a1a8-85afe4202939",
+   "registration_client_uri":"https://localhost/oidc/register/f860345d-40c4-4f46-a1a8-85afe4202939",
    "redirect_uris":["https://client.example.org/callback https://client.example.org/callback2"],
    "contacts":[],
    "token_endpoint_auth_method":"client_secret_basic",
@@ -384,7 +384,7 @@ REQUEST:
 
 .. code::
 
-   POST https://localhost/idoic/token
+   POST https://localhost/oidc/token
    Authorization: Basic Zjg2MDM0NWQtNDBjNC00ZjQ2LWExYTgtODVhZmU0MjAyOTM5OkFJajlUQjBDRGhjc19lZlpqdWxXUEVBN3psMTBIOWt3WXVkMmpGZjlleEJldGVNYnFubFVzZjNqZHdLblpKUzZZWm5IcGx6Ty1RVnBaS0p1VkJSc3lDTQ==
    Content-Type: application/x-www-form-urlencoded 
 
@@ -484,7 +484,7 @@ REQUEST:
 
 .. code::
 
-   DELETE https://localhost/idoic/register/f860345d-40c4-4f46-a1a8-85afe4202939
+   DELETE https://localhost/oidc/register/f860345d-40c4-4f46-a1a8-85afe4202939
    Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJhdWQiOlsiZjg2MDM0N...PB2rS86w
 
 

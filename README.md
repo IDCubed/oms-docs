@@ -10,18 +10,10 @@ started.
 
 ## Getting Started
 
-### Installation
+### Initial Setup
 
-* It is best to install python packages into a virtualenv, and leave your system
-  packages alone, but using virtualenv is outside the scope of this quickstart.
-* Either way, install the oms-docs dependencies with pip:
-
-  ```
-    pip install -r requirements.txt`
-  ```
-
-* If pip is not available you can probably install it using your favorite
-  package manager as **python-pip**
+Please see `sources/contributing/documentation.rst` for details on installing
+the dependencies for easily contributing updates to the OMS Documentation Project.
 
 
 ### Hacking on Docs
@@ -31,19 +23,13 @@ started.
 * Run `make docs` to build the .rst into static .html with all CSS/js/etc
   properly linked and bundled together for you..
 * The rendered, static  website can now be found in the ``_build`` directory.
+* We've bundled an awesome development server, with an automated workflow, as
+  part of the package. See the details in the contributing documentation noted
+  above, the solution is based on grunt and node.js
 * To preview what you have generated run `make server` and open
   http://localhost:9000/ in your favorite browser.
 * If it seems updates you have made are not taking effect, you may need to
   remove the build directory with: ``rm -rf _build``
-
-
-### Use GitHub's file editor
-
-Alternatively, for small changes and typo's you might want to use GitHub's built
-in file editor. It allows you to preview your changes right online. Please be
-careful to avoid creating many commits when working with the Github editor, we
-may ask you to squash your commits (or do it for you) before merging your
-updates to qa-develop.
 
 
 ### Documentation Conventions

@@ -168,7 +168,7 @@ REQUEST:
 
 .. code::
 
-   GET https://localhost/idoic/authorize?response_type=token&client_id=id3-oic-demo-client&redirect_uri=https://localhost/idoic-demo&scope=openid+profile&state=12345
+   GET https://localhost/oidc/authorize?response_type=token&client_id=id3-oic-demo-client&redirect_uri=https://localhost/oidc-demo&scope=openid+profile&state=12345
 
 
 RESPONSE: 
@@ -176,7 +176,7 @@ RESPONSE:
 .. code::
 
    302 Moved Temporarily
-   Location: https://localhost/idoic/login
+   Location: https://localhost/oidc/login
 
 
 Upon following the redirection, the user gets presented with a log in page
@@ -191,7 +191,7 @@ RESPONSE:
 .. code::
 
    302 Moved Temporarily
-   Location: https://localhost/idoic-demo/#access_token=eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0MDk1MjcxNDYsImF1ZCI6WyJpZDMtb2ljLWRlbW8tY2xpZW50Il0sImlzcyI6Imh0dHBzOlwvXC9sb2NhbGhvc3RcL2lkb2ljXC8iLCJqdGkiOiI0ZDY2YzRkNC00YzkxLTQwZjQtYTY5YS1iZjMyNjkzODAxYjQiLCJpYXQiOjEzNzc5OTExNDd9.oINDnU1hplKIOSqZiFJoEKLTrUv0ttz6F9yiyQhpkCG450MgAYvJz8RvSSA7SMPsHtjB89cBpiXFBJ6pkx2v8YdRcFSnC8iYGbApqMnddQQa1GXGYX3FGioXqT_h-jho1LabtQiyEcXKJTYii5CbDPLzWmv7PFTXBR9ZiN_Ziiw&token_type=Bearer&state=12345&expires_in=31535999&id_token=eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0MDk1MjcxNDcsInN1YiI6ImFkbWluIiwiYXRfaGFzaCI6ImVvdFZMYkUxS1lMZm1hS002ZE50VEEiLCJhdWQiOlsiaWQzLW9pYy1kZW1vLWNsaWVudCJdLCJpc3MiOiJodHRwczpcL1wvbG9jYWxob3N0XC9pZG9pY1wvIiwiaWF0IjoxMzc3OTkxMTQ3fQ.Gg9VefoSMTwIS1qn4IrCq6WCF2Vk2HIwf76a6WfbEpe3JukH98MW6OaLAdBj47h_sebR37habqm8TfZnYNpkzRelWWuE6SOhPdcQBB2wousK38d7agjWCuxDqh5yxekRs3FQAydgW71N31sGD4A7c0CTC_bp34uOCEYDiEodka8
+   Location: https://localhost/oidc-demo/#access_token=eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0MDk1MjcxNDYsImF1ZCI6WyJpZDMtb2ljLWRlbW8tY2xpZW50Il0sImlzcyI6Imh0dHBzOlwvXC9sb2NhbGhvc3RcL2lkb2ljXC8iLCJqdGkiOiI0ZDY2YzRkNC00YzkxLTQwZjQtYTY5YS1iZjMyNjkzODAxYjQiLCJpYXQiOjEzNzc5OTExNDd9.oINDnU1hplKIOSqZiFJoEKLTrUv0ttz6F9yiyQhpkCG450MgAYvJz8RvSSA7SMPsHtjB89cBpiXFBJ6pkx2v8YdRcFSnC8iYGbApqMnddQQa1GXGYX3FGioXqT_h-jho1LabtQiyEcXKJTYii5CbDPLzWmv7PFTXBR9ZiN_Ziiw&token_type=Bearer&state=12345&expires_in=31535999&id_token=eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE0MDk1MjcxNDcsInN1YiI6ImFkbWluIiwiYXRfaGFzaCI6ImVvdFZMYkUxS1lMZm1hS002ZE50VEEiLCJhdWQiOlsiaWQzLW9pYy1kZW1vLWNsaWVudCJdLCJpc3MiOiJodHRwczpcL1wvbG9jYWxob3N0XC9pZG9pY1wvIiwiaWF0IjoxMzc3OTkxMTQ3fQ.Gg9VefoSMTwIS1qn4IrCq6WCF2Vk2HIwf76a6WfbEpe3JukH98MW6OaLAdBj47h_sebR37habqm8TfZnYNpkzRelWWuE6SOhPdcQBB2wousK38d7agjWCuxDqh5yxekRs3FQAydgW71N31sGD4A7c0CTC_bp34uOCEYDiEodka8
 
 
 Note that the OIDC server will redirect even when the user does not approve the
@@ -204,7 +204,7 @@ RESPONSE:
 .. code::
 
    302 Moved Temporarily
-   Location: https://localhost/idoic-demo/#error=access_denied&error_description=User+denied+access&state=12345
+   Location: https://localhost/oidc-demo/#error=access_denied&error_description=User+denied+access&state=12345
 
 
 **Authorization Code Grant (AKA Basic Approval)**
@@ -221,7 +221,7 @@ REQUEST:
 
 .. code::
 
-   GET https://localhost/idoic/authorize?response_type=code&client_id=id3-oic-demo-client&redirect_uri=https://localhost/idoic-demo&scope=openid+profile&state=12345
+   GET https://localhost/oidc/authorize?response_type=code&client_id=id3-oic-demo-client&redirect_uri=https://localhost/oidc-demo&scope=openid+profile&state=12345
 
 
 RESPONSE: 
@@ -229,7 +229,7 @@ RESPONSE:
 .. code::
 
    302 Moved Temporarily
-   Location: https://localhost/idoic/login
+   Location: https://localhost/oidc/login
 
 
 Again, the user is redirected to a login page and logs in. Again, the user is
@@ -245,7 +245,7 @@ RESPONSE:
 .. code::
 
    302 Moved Temporarily
-   https://localhost/idoic-demo/?code=6vycYm&state=12345
+   https://localhost/oidc-demo/?code=6vycYm&state=12345
 
 There is an additional interaction now: the authorization code is not an access
 token, and turning it into one takes an extra step.
@@ -258,11 +258,11 @@ REQUEST:
 
 .. code::
 
-   POST https://localhost/idoic/token
+   POST https://localhost/oidc/token
    Authorization: Basic aWQzLW9pYy1kZW1vLWNsaWVudDpjMmIzZTA4MC0xOTIzLTRiMTYtOWE4NS03ODYxMDRkMjljZjg=
    Content-Type: application/x-www-form-urlencoded 
 
-   grant_type=authorization_code&code=6vycYm&state=123456&redirect_uri=https%3A%2F%2Flocalhost%2Fidoic-demo
+   grant_type=authorization_code&code=6vycYm&state=123456&redirect_uri=https%3A%2F%2Flocalhost%2Foidc-demo
 
 
 RESPONSE:
@@ -340,7 +340,7 @@ REQUEST:
 
 .. code::
 
-   POST https://localhost/idoic/token
+   POST https://localhost/oidc/token
    Content-Type: application/x-www-form-urlencoded 
 
    Authorization: Basic aWQzLW9pYy1kZW1vLWNsaWVudDpjMmIzZTA4MC0xOTIzLTRiMTYtOWE4NS03ODYxMDRkMjljZjg=
@@ -373,7 +373,7 @@ REQUEST:
 
 .. code::
 
-   POST https://localhost/idoic/token
+   POST https://localhost/oidc/token
    Content-Type: application/x-www-form-urlencoded 
 
    Authorization: Basic aWQzLW9pYy1kZW1vLWNsaWVudDpjMmIzZTA4MC0xOTIzLTRiMTYtOWE4NS03ODYxMDRkMjljZjg=
@@ -424,7 +424,7 @@ REQUEST:
 
 .. code::
 
-   POST https://localhost/idoic/token
+   POST https://localhost/oidc/token
    Authorization: Basic aWQzLW9pYy1kZW1vLWNsaWVudDpjMmIzZTA4MC0xOTIzLTRiMTYtOWE4NS03ODYxMDRkMjljZjg=
    Content-Type: application/x-www-form-urlencoded 
 
@@ -475,7 +475,7 @@ REQUEST:
 
 .. code::
 
-   POST https://localhost/idoic/token
+   POST https://localhost/oidc/token
    Content-Type: application/x-www-form-urlencoded 
    Authorization: Basic aWQzLW9pYy1kZW1vLWNsaWVudDpjMmIzZTA4MC0xOTIzLTRiMTYtOWE4NS03ODYxMDRkMjljZjg=
 
