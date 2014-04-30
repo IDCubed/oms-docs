@@ -21,19 +21,26 @@ OMS VirtualBox Appliance
 ------------------------
 
 We have a complete OMS deployment distributed as an importable VirtualBox virtual
-applicance. The :ref:`OMS VirtualBox Setup Guide <deploy_development_vm>` steps
+appliance. The :ref:`OMS VirtualBox Setup Guide <deploy_development_vm>` steps
 through the import and setup process.
 
-This applicance includes:
+This appliance includes:
 
-* a Personal Trusted Compute Cell (TCC) with OpenID Connect, a User Registry, and
-  two example Trusted Application Bundles (TABs) to demo a basic OMS TCC
-* all OMS source code
-* system automation to setup and manage the details of the services deployed
+* a reference implementation of the OMS Trusted Compute Framework (TCF)
+* a reference implementation of a Personal Trusted Compute Cell (TCC). This
+  includes the OMS CoreID and Persona through OpenID Connect and the CoreID
+  Registry.
+* a basic interface for managing OMS Personas, implemented as a Trusted
+  Application Bundle (TAB) for reference.
+* all OMS source code, including the manifests and code to deploy two additional
+  reference TABs, GPS Demo and Perguntus for data collection in OMS.
+* the system automation to set up and manage the details of the services deployed
 
 
 The appliance demonstrates:
 
+* the OMS Trusted Compute Framework
+* system automation in OMS
 * how applications are built in OMS
 * how authorization and token approvals work with OpenID Connect
 * how OMS makes use of Core Identities and Personas with configurable attributes
@@ -50,7 +57,7 @@ Run OMS in the Cloud
 OMS Trusted Compute Cells can also be deployed to the Cloud. The first step is
 to :ref:`Kickstart OMS on a VM in the Cloud<kickstart_oms>`.
 
-This kickstart process will get OMS setup on your Host and get you to the point
+This kickstart process will get OMS set up on your host and get you to the point
 where you can either:
 
 * :ref:`deploy a Trusted Compute Cell <deploy_tcc>`
@@ -58,10 +65,15 @@ where you can either:
 * :ref:`hack on any of the OMS components <contributing>`, from system automation
   to our demo TABs and documentation.
 
+.. note::
 
-There are different types of TCCs - Personal, Group, and Portal. Additional TCC
-may be defined in the future, and the details of these TCC are still being
-documented, but for now the Personal TCC is the best demonstration of an OMS TCC.
+   Use the importable OMS VM appliance noted above if you are looking for a
+   simple introduction to OMS.
+
+
+There are different types of TCCs - Personal, Group, and Portal. Additional TCCs
+may be defined in the future, and the details of these TCCs are still being
+documented. For now, the Personal TCC is the best demonstration of an OMS TCC.
 
 
 Section Contents

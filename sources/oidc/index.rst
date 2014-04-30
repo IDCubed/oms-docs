@@ -18,8 +18,8 @@ need to integrate the OIDC server.
 
 .. _oidc_personas:
 
-Personas
---------
+Personas and CoreID Infrastructure
+----------------------------------
 
 The persona concept implemented within ID3's extension to MITRE's OpenID Connect
 is taken from a paper titled *Towards a Trustworthy Core Identity
@@ -36,6 +36,18 @@ persona. ID3's OIDC extensions deal with principal personas and manage delegatio
 of personas selected by the user to OIDC clients, thus granting them all (and
 only) the required access to fulfill the given personas for the user in a very
 safe and flexible manner.
+
+Please see the following links for more information:
+
+* `Core Identity Resources`_
+* `Online Identity Video Series`_
+* `Jericho Forum Identity Commandments`_
+* `Towards a Trustworthy Digital Infrastructure for Core Identities and Personal Data Stores`_
+
+.. _Core Identity Resources: http://civics.com/core-id/
+.. _Online Identity Video Series: http://civics.com/online-identity/
+.. _Jericho Forum Identity Commandments: https://collaboration.opengroup.org/jericho/Jericho%20Forum%20Identity%20Commandments%20v1.0.pdf
+.. _Towards a Trustworthy Digital Infrastructure for Core Identities and Personal Data Stores: http://civics.com/wp-content/uploads/2013/04/coreid04C-ID360-FINAL.pdf
 
 
 .. _oidc_repo:

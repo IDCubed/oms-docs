@@ -1,33 +1,197 @@
-:title: Setting Up a Dev Environment
-:description: Guides on how to contribute to OMS
-:keywords: OMS, documentation, developers, contributing, dev environment
+:title: Set Up the OMS Demo/Dev VM Environment
+:description: Import and Set Up OMS VM
+:keywords: OMS, documentation, demos, developers, contributing, dev environment
 
 
 .. _deploy_development_vm:
 
-Setting Up the Development VM
-=============================
+Setting Up the OMS Demo/Development VM
+======================================
 
-To make it easier to hack on and create OMS apps, we provide a standard
-development environment. This is based off the master branch of each repo within
-the OMS source, and is distributed as a virtual appliance.
+We provide a standard development environment to make it easier to experience
+what OMS has to offer right now. These images are created with each release and
+distributed as virtual appliances.
 
 This tutorial will guide you through the steps to use VirtualBox to import and
-set up this applicance as a VM suitable for development on the OMS framework. The
-guide has been tested on Debian Linux x64 and Windows 7.
+set up this appliance as both a demo of the Open Mustard Seed framework, and a
+VM suitable for development. The guide has been tested on Debian Linux x64 and
+Windows 7.
 
-:ref:`See this section <vm_contents>` at the end of the document, for a list of
-what is included in the environment.
+To assist your exploration and experimentation, a complete demo of the OMS
+CoreID and Personas implementation is available on the VM, as well as all OMS
+source code. :ref:`See this section <vm_contents>` at the end of the document,
+for a more complete list of what is included in the current image.
+
+
+Installation and Setup
+----------------------
+
+The virtual appliance is created, maintained, and distributed by IDCubed. Follow
+the steps below to set up and explore the VM.
+
+If you would prefer to experience OMS running in the cloud, :ref:`see this
+tutorial <kickstart_oms>`. Note that you will still need to send in a request to
+gain access to the git source code for a deployment to a host in the cloud.
+
+
+Register to Request a VM Image
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The images are cryptographically signed and made available through the Developer's
+Portal hosted by IDCubed.
+
+Use the form below to send a request for access to the development environment.
+
+.. raw:: html
+
+  <iframe width=100% height="500" src='https://alpha.openmustardseed.org/downloads/'></iframe>
+
+
+Get Started - Prerequisites
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* **Install VirtualBox** - OMS has a `VirtualBox Install Guide
+  </tutorials/install_virtualbox>`_
+* **Install GPG** - Download `GnuPG`_, `GPG for Windows`_, `GPG options for OSX`_
+* **Decrypt the VM Image** - Expect to wait a few minutes, time will depend on
+  the system decrypting the image.
+   - Windows: Right-click on ``OMS-SDK-v0.8.5-20140429.ova.gpg`` and select
+     ``Decrypt and Verify``. Enter the passphrase provided by IDCubed.
+   - Linux: ``gpg --decrypt --output OMS-SDK-v0.8.5-20140429.ova
+     OMS-SDK-v0.8.5-20140429.ova.gpg``. Provide the passphrase from IDCubed when
+     prompted.
+* **Import VM Image** - Open ``OMS-SDK-v0.8.5-20140429.ova`` then click
+  ``import`` in the GUI that appears.
+
+
+.. _GnuPG: http://www.gnupg.org/download/#auto-ref-3
+.. _GPG for Windows: http://gpg4win.de/handbuecher/novices_5.html
+.. _GPG options for OSX: https://duckduckgo.com/?q=gpg+mac+osx
+.. _Linux link?: http://example.com
+
+
+.. _import_vbox_vm_image:
+
+Configure and Start the VM
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. **Use Bridged Networking** - In the VirtualBox Manager GUI, Click *settings*
+   > *Network* > and select *Attached to: Bridged Adapter*, then click OK. This
+   gives the VM its own address on your local network after starting. (You're
+   welcome to use NAT, but this tutorial does not cover it.)
+#. **Boot the VM** - Click the green *Start* arrow. A new window with the VM
+   should open.
+#. **Get the Assigned IP** - Wait until the system has completed its boot
+   process, you should see a login prompt. We need to get the IP address the VM
+   has been assigned on your network. There is a row of status icons in the
+   bottom right of the window you see the VM running in, and one of these will
+   look like a small network symbol. Hovering over this icon should show the IP
+   the VM's network adapter has on the network. If not, you can login to the
+   console to retrieve the IP (see details below).
+#. **Create a DNS Entry for the IP (optional)** - VirtualBox makes the
+   *oms-dev* hostname automatically available on the host machine thanks to the
+   *Bridged Adapter* setting, so you can easily connect to the VM using this
+   hostname. However, when connecting from a different host, you need to set up
+   a DNS entry for the VM. How you do this will depend on your host, the
+   network you are on, and what is simplest for you to do. In general, the
+   simplest option is to edit your system's *host* file to include an entry for
+   the VM's assigned IP to *oms-dev*. On UNIX-like systems, this is
+   */etc/hosts*. Microsoft systems have an equivalent you will need to locate
+   for your particular OS.
+#. **Confirm Success** - Open up your browser to *http://oms-dev/registration/*.
+   You should see the OMS CoreID Registration page. You can now continue with
+   the demo, or you can dive in deeper (on the command line), to more intimately
+   explore the OMS TCF. Both are detailed below.
 
 .. note::
 
-   This VM is not intended for production use.
+   We are not sure why, but a small percentage of VM imports with VirtualBox
+   fail. If you are left staring at a blank screen when you start the VM, you
+   may need to delete and re-import the appliance.
 
+
+.. _vm_contents:
+
+What is Included in the Demo/Dev Environment?
+---------------------------------------------
+
+The OMS Trusted Compute Cell
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* The CoreID User Registry to store and manage your identity, acting as the
+  backend storage for OpenID Connect.
+* The :ref:`OpenID Connect <oidc>` server for token-based authorization and
+  authentication. OIDC grants and validates tokens to Clients and Personas
+  associated with a Core Identity.
+* An example Trusted Application Bundle (TAB) for reference, and to manage
+  Personas associated with CoreIDs stored in the User Registry. This TAB also
+  demonstrates how to use the OIDC/persona authorization mechanism based on
+  the powerful and extensible :ref:`OMS FACT <oms-fact-api-transforms>` API
+  sub-system.
+* The source code and system automation to deploy two additional example TABs.
+  The :ref:`Perguntus <perguntus>` quantified-self demo and :ref:`GPS Demo
+  <gps_demo>`, the If-Then-Script data collection and visualization demo.
+* :ref:`The entire OMS source code <oms_source_code_map>`.
+
+
+Applications, Frameworks, and Services
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Python
+* Django/Tastypie
+* Java 7 (and Spring)
+* SaltStack & Reclass
+* uWSGI
+* Nginx
+* PostgreSQL
+* Ruby
+* Node.js
+* MongoDB
+* Git
+
+All together, these services and tools are used to build and extend the OMS
+Trusted Compute Framework included on the VM.
+
+
+Run the CoreID TCC Demo
+-----------------------
+
+**Register a CoreID** - Demoing the technologies included in the VM requires a
+Core Identity. Browse to http://oms-dev/registration/ and use the registration
+form to create a new CoreID. The User Registry will create an initial persona
+based on the information provided.
+
+**Manage Personas** - When registration is complete, you will be presented with
+a list of links to the OMS components included in the CoreID Demo - Persona
+Administration, CoreID Registry, and OpenID Connect. Browse to the Persona App
+at http://oms-dev/personas/.
+
+**Login to OIDC** - When the personas administrative interface loads for the
+first time, with no token in the browser, you will be redirected to OpenID
+Connect to authenticate the CoreID you have just registered.
+
+**Approve a Token** - Having authenticated the CoreID, you can now authorize
+granting a token suitable for managing your personas. Once authorized, the token
+will be returned to the Persona App to be used for authenticating all API
+requests with the CoreID Registry backend.
+
+**Create New Attributes and Personas** - Once you have provided the Persona App
+a token with access to persona management, you can now create and manage the
+attributes available to your personas, as well as the personas that use them.
+
+**Explore** - The CoreID Registry administrative panel can be found at
+http://oms-dev/coreid_registry/admin/, and OpenID Connect at http://oms-dev/oidc/.
+The VM can be used for development, and the GPS and Perguntus Demo TABs can also
+be deployed - see the sections below for additional details.
+
+
+Using the VM for Development
+----------------------------
 
 .. note::
 
    **Assumed Knowledge**
-  
+
    * **Editing**: Use text editors from the Linux console, such as Vim or Nano
    * **SSH**: How to use ``ssh`` (or `PuTTY for Windows`_) to access remote
      hosts over the network.
@@ -37,201 +201,33 @@ what is included in the environment.
 .. _PuTTY for Windows: http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html
 
 
-Installation and Setup
-----------------------
+Command Line Access
+~~~~~~~~~~~~~~~~~~~
 
-The virtual appliance is created, maintained, and distributed by IDCubed. Follow
-the steps below to download and set up the VM for local development. If you
-would prefer to experience OMS running in the cloud, :ref:`see this tutorial
-<kickstart_oms>`.
+If you wish to dig in on the command line:
 
-.. The images are cryptographically signed and made available through the Developer's
-   Portal hosted by IDCubed. `Register to get access to the environment`_.
-
-.. _Register to get access to the environment: https://dev-portal.idhypercubed.org/
-
-
-Get Started - Prerequisites
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-* **Download** the `Tab Development Environment VM Image`_ (size 2GB)
-* **Install VirtualBox** - OMS has a `VirtualBox Install Guide
-  </tutorials/install_virtualbox>`_
-* **Install GPG** - Download `GnuPG`_, `GPG for Windows`_, `GPG options for OSX`_
-* **Decrypt the VM Image** - Expect to wait a few minutes, time will depend on
-  the system decrypting the image.
-   - Windows: Right-click on ``OMS-SDK-v0.8.3-20131125.ova.gpg`` and select
-     ``Decrypt and Verify``. Enter the passphrase provided by IDCubed.
-   - Linux: ``gpg --decrypt --output OMS-SDK-v0.8.3-20131125.ova
-     OMS-SDK-v0.8.3-20131125.ova.gpg``. Provide the passphrase from IDCubed when
-     prompted.
-* **Install VM Image** - Open ``OMS-SDK-v0.8.3-20131125.ova`` then click
-  ``import`` in the GUI that appears.
-
-
-.. _GnuPG: http://www.gnupg.org/download/#auto-ref-3
-.. _TAB Development Environment VM Image: http://cc2ccf5e7eb9a36051d5-392f3ef49dd2dccea95976ef735392f9.r21.cf1.rackcdn.com/OMS-SDK-v0.8.3-20131125.ova.gpg
-.. _GPG for Windows: http://gpg4win.de/handbuecher/novices_5.html
-.. _GPG options for OSX: https://duckduckgo.com/?q=gpg+mac+osx
-.. _Linux link?: http://example.com
-
-.. todo:: find a doc on installing gpg for Linux? different for each distro..
-
-
-.. _import_vbox_vm_image:
-
-Configure and Start the VM
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-#. In the VirtualBox Manager GUI, Click *settings* > *Network* > and select
-   *Attached To: Bridge Adapter*, then click OK. This gives the VM its own
-   address on your local network after starting. (You're welcome to use NAT, but
-   this tutorial does not cover it.)
-#. Click the green *Start* arrow. A window named *OMS [Running]* should open.
-#. Wait until you see *dev login:* Enter ``oms`` for user and password.
-#. Type ``ifconfig`` and note the IP from line 2 *inet:*. We will use this IP
-   when connecting to the VM via SSH and with our browser, and we will also
-   update a few details in the VM with this IP address.
 #. On the physical host, use an SSH client (``ssh`` or PuTTY, etc) to connect to
-   the OMS VM with ``oms@<IP>``. The default password is ``oms``.
+   the OMS VM with ``oms@oms-dev``. The default password is ``oms``.
 #. Once connected, change the default password for the ``oms`` user. We recommend
    a randomly generated password of 13 or more characters. You do not need to
    remember the complex password, maintain an encrypted wallet such as the
    cross-platform and open, `keepassx`_.
 #. Use ``sudo`` to switch users to the system's root user: ``sudo su -l``.
    Provide the password for the ``oms`` user when prompted.
-#. Open ``/var/lib/tomcat7/shared/classes/idoic_config.properties`` for editing
-   and update the ``production.configBean.issuer`` parameter to correct the IP
-   address. This should be set to the IP address of the VM in the form:
-   ``http://<IP>/idoic``
-#. Restart Tomcat so this takes effect: ``/etc/init.d/tomcat7 restart``
-#. Use your browser to load *http://<IP>/private_registry/admin/* - login with the
-   default user ``admin`` and password ``adminadmin``.  Use the *change password*
-   link in the admin panel to set a unique password for this user. If you end up
-   on a different page, double-check to ensure you included the trailing slash
-   in the URL.
-#. Browse to *http://<IP>/private_registry/admin/constance/config/* and update the
-   following two config keys:
-    - ``OIDC_BASE_URL``: *http://<IP>/idoic/*
-    - ``TOKENSCOPE_ENDPOINT``: *http://<IP>/idoic/tokenscope?scope=private_registry_ui*
-#. Log out of the admin panel
+
+
+If you were unable to retrieve the IP from the VirtualBox interface, retrieve
+the IP from the console:
+
+#. Login to the VM through the console provided by VirtualBox, use ``oms`` for
+   the default user and password.
+#. Type ``ifconfig`` and note the IP from line 2 *inet:*.
 
 .. _keepassx: https://www.keepassx.org/
 
 
-OpenID Connect and the User Registry are now set up to connect to each other.
-
-
-.. _vm_contents:
-
-VM Contents
-~~~~~~~~~~~
-
-This development environment includes..
-
-**A Private Trusted Compute Cell, containing:**
-
-* A (Private) User Registry to store your identity
-* An OpenID Connect server for authorization/authentication
-* Two example Trusted Application Bundles: Perguntus and the GPS Demo
-* All OMS source code: oms-admin, oms-deploy, oms-core, oms-experimental,
-  oms-docs, oms-ui, salt-common, salt-non-common, python-mitreid, and idoic
-
-
-**Applications, Frameworks, and Services**
-
-* Python
-* Django
-* Node.js
-* Ruby
-* uWSGI
-* Nginx
-* PostgreSQL
-* MongoDB
-* SaltStack
-* Git
-
-
-All together, these services and tools are used to orchestrate the OMS deployment
-included on the VM.
-
-
-
-Run the Private TCC Demo
-------------------------
-
-The Private TCC deployed on this VM includes two applications which demonstrate
-how to integrate OpenID Token Authorization into an app, as well as examples of
-apps built on the OMS framework.
-
-
-There are four applications running in the Private TCC on the VM:
-
-**User Registry**: *http://<IP>/private_registry/* - stores the Core Identity
-and associated personas, acting as the backend storage for OpenID Connect.
-
-**OpenID Connect (OIDC)**: *http://<IP>/idoic/* - grants and validates tokens to
-clients and personas associated with a Core Identity.
-
-**Perguntus**: *http://<IP>/PerguntusUI/* - Quantified Self Demo Application
-
-**GPS Demo**: *http://<IP>/GPSUI/* - If-Then-Script demo based on GPS location and
-proximity.
-
-
-Set up the User Registry
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-First we set up the Core Identity, then we authorize a few tokens for the User
-Registry to use as it operates on our behalf.
-
-#. Browse to *http://<IP>/private_registry/*. You ought to see a form to set up your
-   Core Identity with the User Registry (in your Private TCC, Trusted Compute
-   Cell). First, provide your username and password, you will use these when
-   authenticating with OpenID Connect (OIDC). Then, update the Persona for OIDC
-   to associate with this Core ID.
-#. With the Core ID set up, the Registry will redirect you to OpenID Connect to
-   authorize a token for the Registry to use when it makes requests of OIDC. This
-   is the first time OIDC has seen your client, so it asks you to authenticate.
-   Use the username and password you chose for your Core ID.
-#. OpenID Connect will then ask you to authorize a token, granting the bearer of
-   that token access to the *OpenID Login* and *superclient* scopes. This token
-   will be stored and used by the User Registry (the backend).
-#. After authorizing that token and returning it to the User Registry, you will
-   be taken to the Trust Frameworks page. The UI will detect that it does not
-   have a token, and it needs one to verify its authenticity to the APIs provided
-   by the User Registry. It will request that you authorize one for it to use.
-   OpenID Connect will request your permission to return a token granting the UI
-   the *private_registry_ui* scope.
-
-
-Set up Perguntus and GPS Demo TAB
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The TABs have been deployed to the VM, there are only a few minor updates needed
-for the Apps to communicate properly with one another. For each of these admin
-panels, use the same default credentials previously noted.
-
-#. Browse to *http://<IP>/PerguntusBackend/admin/constance/config/* and update
-   the IP in the ``PERGUNTUS_PDS_SERVER`` and ``EMAIL_RECIPIENT`` config keys.
-#. Browse to *http://<IP>/GPSDemoPDS/admin/constance/config/* and update the IP
-   in the ``TOKENSCOPE_ENDPOINT`` config key.
-#. Browse to *http://<IP>/GPSUI/admin/constance/config/* and update the IP in
-   the ``OIDC_BASE_URL`` config key.
-
-Both GPS and Perguntus Demos will request tokens to access the APIs. You can see
-each demo best through their respective UI, eg *http://<IP>/PerguntusUI/* and
-*http://<IP>/GPSUI/*.
-
-.. note::
-
-   The demo on the VM is not optimized for interacting with a user on a cell phone
-   (as with our deployments in the cloud), but we will update this documentation
-   once the VM has been updated to do.
-
-
-Using the VM for Development
-----------------------------
+Set Up Git
+~~~~~~~~~~
 
 If you would like to interact with the OMS repositories on GitHub, you will want
 to add an SSH keypair to the VM and GitHub. This is not required to use the demo
@@ -246,8 +242,17 @@ VM or push changes to a new repository of your own:
 .. _add the key to your GitHub account: https://github.com/settings/ssh
 
 
+Where to Next?
+~~~~~~~~~~~~~~
+
+* Checkout the :ref:`list of tutorials <tutorials>`
+* Deploy an existing TAB, either :ref:`Perguntus` or :ref:`GPS Demo <gps_demo>`
+* :ref:`Create your own TAB <tab_tutorial>`
+* Explore the :ref:`OMS Source Code <oms_source_code_map>`
+
+
 Need one-on-one assistance?
 ---------------------------
 
-If you need more help then hop on to the `#oms IRC channel on freenode
-<irc://chat.freenode.net#oms>`_.
+If you need more help, do not hesitate to hop on to the `#oms IRC channel on
+freenode <irc://chat.freenode.net#oms>`_ with your questions and needs.
