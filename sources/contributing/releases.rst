@@ -135,6 +135,12 @@ itself. If you don't already have a GPG key, you can create one as follows:
   sub   4096R/EB2EB392 2014-04-29
 
 
+.. note::
+
+   To export a public key to share with others, use GPG's ``--armor``, and
+   ``--export`` parameters. For example, ``gpg --export --armor``.
+
+
 Cut Release
 -----------
 
@@ -178,6 +184,40 @@ To sign the release with your key and encrypt it with a passphrase:
 
 
 You will be prompted to enter a passphrase.
+
+
+Importing the Release Signing Key
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To verify the authenticity of the OMS release and source code, we recommend
+importing and reviewing the Release Signing Key into your GPG keyring.
+
+For releases before v0.8.5, import the following public key:
+
+.. code::
+
+   % wget -O - https://docs.openmustardseed.org/_static/oms-rsk.gpg | gpg --import -
+
+
+For releases starting with v0.8.5, import the following public key:
+
+.. code::
+
+   % wget -O - https://docs.openmustardseed.org/_static/oms-rsk-from-v0_8_5.gpg | gpg --import -
+
+
+You should then be able to list the key, having imported it into your keyring.
+For example:
+
+.. code::
+
+   % gpg --list-keys
+   /home/oms/.gnupg/pubring.gpg
+   ----------------------------
+   
+   pub   4096R/E6C622FB 2013-09-19 [expires: 2014-09-19]
+   uid                  IDCubed (Release Signing Key) <patrick@idcubed.org>
+   sub   4096R/03C510CB 2013-09-19 [expires: 2014-09-19]
 
 
 Uploading the Release to the Rackspace CDN
