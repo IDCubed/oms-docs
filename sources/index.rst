@@ -9,8 +9,8 @@ Open Mustard Seed Trusted Compute Framework
 
 **A Framework for developing and deploying secure cloud applications to collect, compute on, and share personal data**
 
-The Open Mustard Seed project is an open-source framework for developing and
-deploying web apps in a secure, user-centric personal cloud. The framework
+The Open Mustard Seed (OMS) project is an open-source framework for developing
+and deploying web apps in a secure, user-centric personal cloud. The framework
 provides a stack of core technologies that work together to provide a high level
 of security and ease of use when sharing and collecting personal and
 environmental data, controlling web-enabled devices, and engaging with others to
@@ -21,17 +21,34 @@ services.
 Releases
 --------
 
-Soon to be available as an alpha-release (Fall 2013), OMS will provide a new
-infrastructure to let people build their own highly distributed social
-ecosystems for reliably managing all sorts of shared resources, including their
-personal data. The software is a synthesis of a variety of existing software
-systems - for digital identity, security, computable legal contracts and
-data-management - designed to serve as a new platform for social and economic
-exchange. Just as the original HTML code gave rise to the World Wide Web and new
-types of bottom-up social communication and collaboration, OMS can be conceived
-as a new "social stack" of protocols. Contact IDCubed by emailing ``oms``
-*{dash}* ``dev`` *{at}* ``idcubed`` *{dot}* ``org`` if you would like access to
-the private repositories ahead of the general release.
+`Now available`_ as an alpha release (Spring 2014), Open Mustard Seed is both a
+framework for trusted computing, as well as a set of reference implementations
+built on that framework (the Trusted Compute Framework or TCF). Thus, OMS
+provides a collection of tools and applications that aim to let people build
+their own highly distributed social ecosystems with reliable management of
+various types of shared resources, including their personal data.
+
+OMS provides lightweight frameworks focused on meeting the most generic form of
+a need. In particular, OMS includes a powerful framework for bootstrapping new
+hosts and application stacks with specific needs in simple, declarative, and
+repeatable ways. OMS is used to build OMS.
+
+OMS also provides an implementation of a Trusted Compute Framework as the
+foundation to support the identity management included in OMS. The software is
+a synthesis of a variety of existing software systems - for digital identity,
+security, computable legal contracts, and data-management - designed to serve as
+a new platform for social and economic exchange.
+
+Just as the original HTML code gave rise to the World Wide Web and new types of
+bottom-up social communication and collaboration, OMS can be understood as a new
+"social stack" of protocols.
+
+A simple yet powerful way to experience Open Mustard Seed is through the
+importable VM appliance, distributed by IDCubed. You may use `this form`_ to
+make requests for early access to the OMS source code.
+
+.. _Now available: https://alpha.openmustardseed.org/downloads/
+.. _this form: https://alpha.openmustardseed.org/downloads/
 
 
 Get Started
