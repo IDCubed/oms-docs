@@ -130,7 +130,7 @@ looks like so:
 
 Now we'll focus on the ``pds`` app, which is located in
 ``~/locationvenv/locationproj/pds``. We want to set it up so it contains
-these files:
+these files (you may delete ``tests.py``, which was auto-created):
 
 * ``__init__.py`` (empty)
 * ``models.py``
@@ -166,7 +166,7 @@ Update the three files with the following code:
           authorization = Authorization()
 
 
-``~/locationvenv/locationproj/pds/views.py``
+``~/locationvenv/locationproj/pds/views.py``:
 
 .. code:: python
 
@@ -198,8 +198,8 @@ endpoints.
 
 First, let's look at the topmost endpoint available to us. The ``/api/v1/``
 endpoint lists all the model endpoints available. For each of these, we are
-provided with a their schema and list endpoints. Our app has one endpoint
-called ``location``:
+provided with their schema and list endpoints. Our app has one endpoint called
+``location``:
 
 .. code:: bash
 
@@ -277,7 +277,7 @@ which provides detailed information about the resource schema:
 
 
 The second endpoint under the ``location`` endpoint is the ``list_endpoint``,
-which lists all the resources, along with some useful metadata:
+which lists all the resources along with some useful metadata:
 
 * ``total_count``: the total number of objects in this query
 * ``limit``: the maximum number of items returned in a single HTTP response
@@ -314,8 +314,8 @@ which lists all the resources, along with some useful metadata:
 
 There also exists another type of endpoint called the detail endpoint. Whereas
 the list endpoint lists all the resources, the detail endpoint provides
-information about a single object. This object is specified by adding the
-``id`` to the list endpoint:
+information about a single object. A detail endpoint is constructed by adding
+an object's ``id`` to the list endpoint:
 
 .. code:: bash
 
@@ -422,9 +422,9 @@ Creating OMS-compatible modules
 OMS apps are collections of OMS modules.
 
 We can take our ``pds`` app and convert it into an OMS module by copying it
-from the Django project into the top level of a git repository.
+from the Django project into the top level of a Git repository.
 
-Let's assume you have an empty git repo that you're going to use for this
+Let's assume you have an empty Git repo that you're going to use for this
 project. We'll clone it here and put our new code in it.
 
 .. code:: bash
@@ -503,7 +503,7 @@ Create a manifest for our TAB in ``~/Location.yaml``:
       - url(r'', include('pds.urls'))
 
 
-``deploy.conf`` uses a simple key-value syntax using the ``:`` separator.
+``deploy.conf`` uses a simple key-value syntax with a colon as a separator.
 Update it so it provides a value for ``ssl_setup`` variable in the manifest,
 using ``True`` or ``False`` depending on your TCC's SSL setup:
 
@@ -514,7 +514,7 @@ using ``True`` or ``False`` depending on your TCC's SSL setup:
   ssl_setup: False
 
 
-Some notes about the contents of this manifest:
+Some notes about the contents of the ``Location.yaml`` manifest:
 
 * The ``modules_repo`` parameter specifies the repository where our module is
   located (oms-example) as well as the oms-core repository (which contains
@@ -713,15 +713,14 @@ Now our manifest looks like this:
 After you redeploy, the API Console will be available at
 http://HOST.TLD/PDS/console/ (or https).
 
-The main feature of the API Console is a form that allows you to tailor
-aspects of an HTTP request to an application endpoint. It gives you
-control of the URL (``Action URL``), HTTP method (``choose http method``),
-headers, as well as the body of the HTTP request (``data for
-POST/PUT/PATCH methods``).
+The main feature of the API Console is a form that allows you to construct an
+HTTP request to an application endpoint. It gives you control of the URL
+(``Action URL``), HTTP method (``choose http method``), headers, as well as the
+body of the HTTP request (``data for POST/PUT/PATCH methods``).
 
 The ``Authorization Header`` field makes it simple to add the ``Authorization``
 header, and it will come in handy later when you need to submit an access token
-required by OpenID Connect authorization.
+required for OpenID Connect authorization.
 
 Start by selecting ``get location list`` from the ``Actions`` dropdown. When
 you do this, the API Console will populate some of the other form fields,
@@ -748,8 +747,8 @@ First, enable the Admin URLs in ``~/Location.yaml``:
 
 .. note::
 
-  * Place the URL for the Admin before any URLs with catch-all patterns such as
-    ``r''``.
+  * Place the URL for the Admin before any URLs that contain catch-all patterns
+    such as ``r''``.
   * You don't need to add the code ``from django.contrib import admin;
     admin.autodiscover()`` anywhere; this is done automatically for you.
 
@@ -862,8 +861,8 @@ app is running, you can use a Django plugin called `django-constance
 <https://github.com/comoga/django-constance>`_. This plugin lets you update
 specially designated settings from within the Django Admin, on the fly.
 
-In Django, the settings are typically stored in the project's ``settings.py``,
-but OMS uses the manifest for this purpose.
+In Django, settings are typically stored in the project's ``settings.py``, but
+OMS uses the manifest for this purpose.
 
 .. warning::
 
@@ -1505,7 +1504,7 @@ Now you can redeploy, and the new app wll be installed in
 When you load that page, you will be immediately redirected to the OIDC server,
 where you will need to log in and approve the client and scope. You will then
 be redirected back to the app. At the end of this process, a valid access token
-is saved in a cookie for later use.
+will be saved in a cookie for later use.
 
 The ``OMSOIDC.js`` library, which provides this OIDC functionality in the
 frontend and is found in the ``oms-core/static`` module, will add the
@@ -1707,7 +1706,7 @@ these names to your models. Feel free to access (read) these fields wherever
 you find them to be useful. Continue using Django field classes such as
 ``models.BooleanField`` to define the fields in your models.
 
-When creating API resource for the PDS-enabled models, inherit from
+When creating API resources for the PDS-enabled models, inherit from
 ``PdsResource`` instead of Tastypie's ``ModelResource``.
 
 ``/var/oms/src/oms-example/pds/api.py``:
@@ -1743,10 +1742,10 @@ information is stored:
 OMS FACT API Transforms
 -----------------------
 
-FACT (Functional Access Control Transform) provides a structured way to
-transform requests to an OMS backend. In practice, this means removing or
-modifying request/response objects on the fly according to developer-defined
-criteria.
+FACT (Functional Access Control Transform) is a framework that provides a
+structured way to transform requests to an OMS backend. In practice, this means
+removing or modifying request/response objects on the fly according to
+developer-defined criteria.
 
 FACT consists of four components: the Arbiter, state, rules, and transforms.
 The Arbiter is a core OMS component, but the others must be provided by the
@@ -2255,13 +2254,19 @@ isn't used:
       },
       "objects": [
           {
+              "created_on": "2014-05-08T01:16:07.715178",
+              "guid": "5de2a601-c300-420e-a527-fa16af0cacc0",
               "id": 1,
+              "last_modified": "2014-05-08T01:16:07.715226",
               "latitude": 42.0,
               "longitude": -71.0,
               "resource_uri": "/PDS/api/v1/location/1/"
           },
           {
+              "created_on": "2014-05-08T01:16:13.960081",
+              "guid": "a1af6f47-8fb3-40f8-a7f3-58797b267e7a",
               "id": 2,
+              "last_modified": "2014-05-08T01:16:13.960124",
               "latitude": -42.0,
               "longitude": -71.0,
               "resource_uri": "/PDS/api/v1/location/2/"
@@ -2288,7 +2293,10 @@ the equator is removed:
       },
       "objects": [
           {
+              "created_on": "2014-05-08T01:16:07.715178",
+              "guid": "5de2a601-c300-420e-a527-fa16af0cacc0",
               "id": 1,
+              "last_modified": "2014-05-08T01:16:07.715226",
               "latitude": 42.0,
               "longitude": -71.0,
               "resource_uri": "/PDS/api/v1/location/1/"
