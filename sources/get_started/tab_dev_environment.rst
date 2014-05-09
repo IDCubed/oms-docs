@@ -55,12 +55,12 @@ Get Started - Prerequisites
 * **Install GPG** - Download `GnuPG`_, `GPG for Windows`_, `GPG options for OSX`_
 * **Decrypt the VM Image** - Expect to wait a few minutes, time will depend on
   the system decrypting the image.
-   - Windows: Right-click on ``OMS-SDK-v0.8.5-20140429.ova.gpg`` and select
+   - Windows: Right-click on ``OMS-SDK-v0.X.Y-YYYYMMDD.ova.gpg`` and select
      ``Decrypt and Verify``. Enter the passphrase provided by IDCubed.
-   - Linux: ``gpg --decrypt --output OMS-SDK-v0.8.5-20140429.ova
-     OMS-SDK-v0.8.5-20140429.ova.gpg``. Provide the passphrase from IDCubed when
+   - Linux: ``gpg --decrypt --output OMS-SDK-v0.X.Y-YYYYMMDD.ova
+     OMS-SDK-v0.X.Y-YYYYMMDD.ova.gpg``. Provide the passphrase from IDCubed when
      prompted.
-* **Import VM Image** - Open ``OMS-SDK-v0.8.5-20140429.ova`` then click
+* **Import VM Image** - Open ``OMS-SDK-v0.X.Y-YYYYMMDD.ova`` then click
   ``import`` in the GUI that appears.
 
 

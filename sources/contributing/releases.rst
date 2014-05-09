@@ -180,7 +180,7 @@ To sign the release with your key and encrypt it with a passphrase:
 
 .. code::
 
-  $ gpg --sign --symmetric --output OMS-SDK-v0.8.5-20140429.ova.gpg OMS-SDK-v0.8.5-20140429.ova
+  $ gpg --sign --symmetric --output OMS-SDK-v0.X.Y-YYYYMMDD.ova.gpg OMS-SDK-v0.X.Y-YYYYMMDD.ova
 
 
 You will be prompted to enter a passphrase.
