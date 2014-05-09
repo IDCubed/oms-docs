@@ -1,7 +1,7 @@
 {
     "author": "OMS",
     "name": "oms-docs",
-    "version": "0.8.5",
+    "version": "0.8.5.1",
     "homepage": "https://github.com/IDCubed/oms-docs",
     "licenses": {
         "type": "MIT",
