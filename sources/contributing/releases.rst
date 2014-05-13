@@ -186,11 +186,11 @@ To sign the release with your key and encrypt it with a passphrase:
 You will be prompted to enter a passphrase.
 
 
-Importing the Release Signing Key
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Importing the Release Signing Keys
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To verify the authenticity of the OMS release and source code, we recommend
-importing and reviewing the Release Signing Key into your GPG keyring.
+importing and reviewing the release signing keys into your GPG keyring.
 
 For releases before v0.8.5, import the following public key:
 
@@ -206,14 +206,18 @@ For releases starting with v0.8.5, import the following public key:
    % wget -O - https://docs.openmustardseed.org/_static/oms-rsk-from-v0_8_5.gpg | gpg --import -
 
 
-You should then be able to list the key, having imported it into your keyring.
-For example:
+You should then be able to list the keys, having imported them into your
+keyring:
 
 .. code::
 
    % gpg --list-keys
    /home/oms/.gnupg/pubring.gpg
    ----------------------------
+   
+   pub   8192R/D00880BD 2014-04-29
+   uid                  Maurycy <github.com@wayheavy.com>
+   sub   8192R/DF24792B 2014-04-29
    
    pub   4096R/E6C622FB 2013-09-19 [expires: 2014-09-19]
    uid                  IDCubed (Release Signing Key) <patrick@idcubed.org>
