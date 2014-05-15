@@ -11,6 +11,104 @@ OMS v0.8 Series Release Notes
 Here are some release notes associated with the v0.8.x series of OMS.
 
 
+v0.8.5.1
+--------
+
+Focal Points
+~~~~~~~~~~~~
+
+* documentation improvements
+
+
+oms-docs
+~~~~~~~~
+
+* t2353: Update release notes for v0.8.5.1
+* t2353: Bump version to v0.8.5.1
+* t2437: Mention second release signing key in Release Process doc
+* t2353: Bump version in package.json to v0.8.5.1
+* t2417: Use generic VM image filename in docs
+* t2416: Restore instructions for importing the Release Signing Key
+* t2415: update releases section of oms-docs landing page
+* t2285: Update TAB Tutorial
+* t2070: add release notes for OMS v0.7 and v0.8 series releases
+* t1366: add LICENSE, for source that is not explicit about it
+
+
+oms-kickstart
+~~~~~~~~~~~~~
+
+* t2353: Bump version to v0.8.5.1
+* t2343: correct/update license across all scripts
+* t2337: initial sphinx project for kickstart docs
+* t1366: add LICENSE, for source that is not explicit about it
+* t2330: remove config/pillar/master.yaml
+
+
+oms-salt-core
+~~~~~~~~~~~~~
+
+* t2353: Bump version in classes/oms.yml to v0.8.5.1
+* t1366: add LICENSE, for source that is not explicit about it
+
+
+oms-salt-tcf
+~~~~~~~~~~~~
+
+* t1366: add LICENSE, for source that is not explicit about it
+
+
+oms-admin
+~~~~~~~~~
+
+* t2353: Bump version to v0.8.5.1
+* t1366: add LICENSE - for source that is not explicit about it
+
+
+oms-deploy
+~~~~~~~~~~
+
+* t2353: Bump version to v0.8.5.1
+* t1366: add LICENSE, for source that is not explicit about it
+
+
+oms-core
+~~~~~~~~
+
+* t2449: Pin django-extensions to 1.2.5 in manifests
+* t2353: Bump version to v0.8.5.1
+* t2347: functional update to VmImages.yaml manifest
+* t1274: add manifest for VM Image Request app
+* t1366: add LICENSE, for source that is not explicit about it
+
+
+oms-experimental
+~~~~~~~~~~~~~~~~
+
+* t2353: Bump version to v0.8.5.1
+* t1366: add LICENSE, for source that is not explicit about it
+
+
+oms-ui
+~~~~~~
+
+* t1366: add LICENSE, for source that is not explicit about it
+
+
+oms-oidc
+~~~~~~~~
+
+* t2421: sync SQL scripts included in v0.8.5 > qa-develop (v0.8.5.1-rc)
+* t2340: correct licensing for oms-oidc
+
+
+python-oidc
+~~~~~~~~~~~
+
+* t2353: Bump version to v0.8.5.1
+* t1366: add LICENSE, for source that is not explicit about it
+
+
 v0.8.5
 ------
 
