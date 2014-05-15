@@ -365,7 +365,7 @@ Here is the OMS Base build from the command line:
 
 .. code:: bash
 
-   oms-kickstart/packer$ packer build -var oms_version='v0.8.5-rc' templates/oms/base/ubuntu_ovf.json
+   oms-kickstart/packer$ packer build -var oms_version='v0.8.5.1' templates/oms/base/ubuntu_ovf.json
    virtualbox-ovf output will be in this color.
 
    ==> virtualbox-ovf: Importing VM: builds/ubuntu-base/precise-amd64.ova
@@ -401,7 +401,7 @@ Here is the OMS Base build from the command line:
    Build 'virtualbox-ovf' finished.
 
    ==> Builds finished. The artifacts of successful builds are:
-   --> virtualbox-ovf: VM files in directory: builds/oms-base/v0.8.5-rc
+   --> virtualbox-ovf: VM files in directory: builds/oms-base/v0.8.5.1
 
 
 This VM image has been setup to run the kickstart provisioning process, but the
@@ -428,10 +428,10 @@ Here is the kickstart build from the command line:
 
 .. code:: bash
 
-   oms-kickstart/packer$ packer build -var oms_version='v0.8.5-rc' -var kickstart_opts='-H -c config/packer.yaml' -var ovf_path='builds/oms-base/v0.8.5-rc/oms-base.ova' templates/oms/kickstarted.json
+   oms-kickstart/packer$ packer build -var oms_version='v0.8.5.1' -var kickstart_opts='-H -c config/packer.yaml' -var ovf_path='builds/oms-base/v0.8.5.1/oms-base.ova' templates/oms/kickstarted.json
    virtualbox-ovf output will be in this color.
 
-   ==> virtualbox-ovf: Importing VM: builds/oms-base/v0.8.5-rc/oms-base.ova
+   ==> virtualbox-ovf: Importing VM: builds/oms-base/v0.8.5.1/oms-base.ova
    ==> virtualbox-ovf: Creating forwarded port mapping for SSH (host port 3499)
    ==> virtualbox-ovf: Executing custom VBoxManage commands...
        virtualbox-ovf: Executing: modifyvm oms-dev --memory 256
@@ -483,7 +483,7 @@ Here is the kickstart build from the command line:
    Build 'virtualbox-ovf' finished.
   
    ==> Builds finished. The artifacts of successful builds are:
-   --> virtualbox-ovf: VM files in directory: builds/oms/v0.8.5-rc
+   --> virtualbox-ovf: VM files in directory: builds/oms/v0.8.5.1
 
 
 You can then import the image as a new VM, in VirtualBox, and start hacking on
