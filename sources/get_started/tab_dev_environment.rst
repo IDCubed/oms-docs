@@ -44,7 +44,7 @@ Use the form below to send a request for access to the development environment.
 
 .. raw:: html
 
-  <iframe frameBorder="0" scrolling="no" width=100% height="720" src='https://alpha.openmustardseed.org/downloads/iframe/'></iframe>
+  <iframe frameBorder="0" scrolling="no" width=100% height="520" src='https://alpha.openmustardseed.org/downloads/iframe/'></iframe>
 
 
 Get Started - Prerequisites
