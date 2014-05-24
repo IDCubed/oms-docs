@@ -167,10 +167,10 @@ module.exports = function(grunt) {
 
     // register a task to build all docs for all repos
     grunt.registerTask('make_all_docs',
-                       'run sphinx build for all docs',
+                       'run sphinx build for all docs (make all)',
                        function () {
         var done = this.async();
-        require('child_process').exec('make all_docs-html', function (err, stdout) {
+        require('child_process').exec('make all', function (err, stdout) {
             grunt.log.write(stdout);
             done(err);
         });

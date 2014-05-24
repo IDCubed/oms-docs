@@ -2,7 +2,6 @@ module.exports = function(grunt) {
 
     grunt.initConfig({
 
-        // add commentary
         watch: {
             // watches files to see if they change and runs the tasks specified below
             // when they do, automating the build process each time a file is saved.
@@ -11,13 +10,18 @@ module.exports = function(grunt) {
             options: {
                 livereload: 9001, // automatically reload the browser on file change
             },
-            dev: {
-                //files: ['<%= src.dirs.src %>'],
-                files: ['sources/**/*.rst'],
-                tasks: ['make_docs'],
+            these_docs: {
+                files: ['sources/**/*'],
+                tasks: ['make_oms_docs'],
+            },
+            themes: {
+                files: ['theme/**/*'],
+                tasks: ['make_clean', 'make_oms_docs'],
             },
         },
-        // add commentary
+        // run a basic HTTP server on port 9000,
+        // hosting the static files found in _build/html,
+        // and (finally), run the live-reload ping on port 9001
         connect: {
             dev: {
                 options: {
@@ -30,17 +34,32 @@ module.exports = function(grunt) {
 
     });
 
-    // add commentary
-    grunt.registerTask('make_docs', 'run sphinx make docs', function () {
+    // register a task to clean build artifacts (make clean)
+    grunt.registerTask('make_clean',
+                       'run make clean on build directory/artifacts',
+                       function () {
         var done = this.async();
-        require('child_process').exec('make docs', function (err, stdout) {
+        require('child_process').exec('make clean', function (err, stdout) {
             grunt.log.write(stdout);
             done(err);
         });
     });
 
-    // add commentary
-    grunt.registerTask('default', ['make_docs', 'connect', 'watch']);
+    // run sphinx build on oms-docs, not any of the others
+    grunt.registerTask('make_oms_docs', 'run sphinx build on oms-docs only', function () {
+        var done = this.async();
+        require('child_process').exec('make oms-docs', function (err, stdout) {
+            grunt.log.write(stdout);
+            done(err);
+        });
+    });
+
+    // serve up the docs that have already been built, limit to oms-docs
+    grunt.registerTask('serve_oms_docs', ['connect', 'watch']);
+
+    // by default, calling grunt will build all docs, setup HTTP, and watch for changes
+    // only clean the build artifacts when the template is updated (and when told to)
+    grunt.registerTask('default', ['make_oms_docs', 'serve_oms_docs']);
 
     // add commentary
     grunt.loadNpmTasks('grunt-contrib-watch');
