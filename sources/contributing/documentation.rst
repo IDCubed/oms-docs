@@ -9,7 +9,7 @@ Contributing Documentation
 ==========================
 
 This guide will provide the reader with the information needed to get started
-with contributing to the project's documentation. 
+with contributing to the project's documentation.
 
 The end result will be an understanding of the following:
 
@@ -21,7 +21,7 @@ The end result will be an understanding of the following:
 .. note::
 
    Please see the :oms-docs-git:`oms-docs README <master/README.md>` for
-   additional details on contributing to the oms-docs repository.
+   additional details on contributing to the oms-docs src/repository.
 
 
 Where to find source code
@@ -79,7 +79,7 @@ created in the ``_build/html/`` directory.
 
    oms% source /var/oms/python/oms-docs/bin/activate
    (oms-docs) oms% cd /var/oms/src/oms-docs/
-   (oms-docs) oms% make docs
+   (oms-docs) oms% make oms-docs
    ...
    (oms-docs) oms% ls -alh _build/html/
    total 128K
@@ -109,14 +109,14 @@ created in the ``_build/html/`` directory.
 Improving the Workflow
 ----------------------
 
-As noted above, running ``make docs``, leaves us with the documentation project
-rendered as HTML. All assets are HTML/CSS/JS and similar static content that can
-easily be hosted with any HTTP server.
+As noted above, running ``make oms-docs``, leaves us with the documentation
+project rendered as HTML. All assets are HTML/CSS/JS and similar static content
+that can easily be hosted with any HTTP server.
 
 You should not need to setup nginx just to hack on the docs though, so we have
 ``make server`` available to us as a dev server, for development purposes.
 
-While ``make docs`` is a rather wonderfully simple way to build the docs, we
+While ``make oms-docs`` is a rather wonderfully simple way to build the docs, we
 need to run this on an update to any ``.rst`` document source file before we
 could review the change as rendered HTML, even with a simple dev server. To
 address this, the current implementation supporting ``make server`` is based on
@@ -185,10 +185,10 @@ In a separate tmux pane/window or console/shell, run the grunt/node dev server:
 .. code:: bash
 
    # all node.js and grunt components are in place, we can now run the dev server
-   (oms-docs) oms% make server
+   (oms-docs) oms% make clean oms-docs server
    rm -rf _build/*
-   Running "make_docs" task
-   make[1]: Entering directory `/home/luminous/repos/oms-docs'
+   Running "make_oms_docs" task
+   make[1]: Entering directory `/var/oms/src/repos/oms-docs'
    sphinx-build -b dirhtml -d _build/doctrees   sources _build/html
    Running Sphinx v1.1.3
    loading pickled environment... not yet created
@@ -203,10 +203,10 @@ In a separate tmux pane/window or console/shell, run the grunt/node dev server:
    dumping search index... done
    dumping object inventory... done
    build succeeded, 16 warnings.
-   
+
    Build finished. The documentation pages are now in _build/html.
-   make[1]: Leaving directory `/home/luminous/repos/oms-docs'
-   
+   make[1]: Leaving directory `/var/oms/src/repos/oms-docs'
+
    Done, without errors.
    Completed in 4.546s at Thu Mar 06 2014 22:37:03 GMT+0000 (UTC) - Waiting...
 
@@ -214,16 +214,224 @@ In a separate tmux pane/window or console/shell, run the grunt/node dev server:
 Point your browser at http://$ip:9000 to see HTML docs served up by the
 minimal HTTP server (replace *$ip* with the IP of your OMS Host).
 
-.. note::
-
-   If the templates or static assets are updated (such as the .css or .js for the
-   navigation), ``ctrl-c`` the development server and re-run ``make server`` -
-   the build assets need to be removed before being rebuilt.
-
-
 At this point, you may want to review the :oms-docs-git:`oms-docs README
 <master/README.md>` for details about restructured text, sphinx, and style
 conventions found in oms-docs.
+
+The next section details how to leverage the build tools included in oms-docs
+to simplify the work in building, reviewing, and updating sphinx doc projects
+in an arbitrarily long list of source code repositories.
+
+
+Can we make it better?
+----------------------
+
+
+Let's first review the documentation embedded in our Makefile:
+
+.. frustratingly, this code is not yet working, it'll include an extraneous
+.. line we don't want, and in the final rendered output you will see:
+.. make[2]: Entering directory `/home/oms/repos/oms-docs'
+..
+.. .. runblock:: console
+..
+..    $ make help
+.. so instead, we generate this manually:
+
+
+.. code::
+
+   $ make help
+   Please use 'make <target>', where <target> is one of the following:
+
+     clean      to run an rm -rf on everything in the build directory
+     oms-docs   to build the local project, oms-docs, rendered as HTML.
+     all        to build the all doc projects, rendered as HTML.
+     serve      to serve the docs to your browser via `http://0.0.0.0:9000`,
+                using node.js and grunt to watch for changes and auto-reload.
+     serve-all  to serve the HTML build, using grunt to watch all doc projects,
+                (not just oms-docs) for changes.
+     dirhtml    to make HTML files named index.html in directories
+     singlehtml to make a single large HTML file
+     json       to make JSON files
+     latex      to make LaTeX files, you can set PAPER=a4 or PAPER=letter
+     latexpdf   to make LaTeX files and run them through pdflatex
+     text       to make text files
+     man        to make manual pages
+     changes    to make an overview of all changed/added/deprecated items
+     linkcheck  to check all external links for integrity
+     doctest    to run all doctests embedded in the documentation (if enabled)
+
+
+   Note that, for each of the following repositories:
+
+     oms-kickstart
+     oms-admin
+     oms-deploy
+     oms-core
+     oms-experimental
+     oms-ui
+     oms-salt-core
+     oms-salt-tcf
+
+   ..each of the following targets are available:
+
+     html       to make standalone HTML files
+     singlehtml to make a single large HTML file
+     json       to make JSON files
+     text       to make text files
+     man        to make manual pages
+     changes    to make an overview of all changed/added/deprecated items
+     linkcheck  to check all external links for integrity
+     doctest    to run all doctests embedded in the documentation (if enabled)
+
+
+   These are available in the form: make <project>-<target>
+
+   For example: make oms-core-html
+                make oms-deploy-doctest
+   and so on...
+
+
+   In addition, the target 'all_docs-html' will run the HTML build for
+   the sphinx documentation projects listed when creating this Makefile.
+
+   (the list of projects to be built is as noted above)
+
+
+   The variables in this Makefile are set as follows:
+
+     PYTHON:        python
+     BUILDDIR:      _build
+     SPHINXOPTS:
+     SPHINXBUILD:   sphinx-build
+     ALLSPHINXOPTS: -d _build/doctrees
+
+
+Of particular interest are the details about ``make all`` and ``make serve-all``,
+these are the make targets associated with building and serving all doc projects
+configured within the Makefile.
+
+
+Add a repository
+~~~~~~~~~~~~~~~~
+
+How do you update the multi-project doc build to include new repositories? At
+the moment, it requires a few updates:
+
+#. Open ``oms-docs/conf/config-gen.py`` for editing.
+#. Locate the list of repositories, ``project_list``, and add the name of the
+   project to this list - this project is expected to exist as a directory
+   one-level up from oms-docs (in the same directory as oms-docs).
+#. Jump into the ``conf`` directory and run ``python config-gen.py`` with no
+   arguments. This will create a new Makefile, Gruntfile.js, and zGruntfile.js.
+#. Overwrite the old Makefile: ``cp Makefile ../``
+#. Create a new directory, in your project: ``mkdir docs``
+#. Create a python config for the sphinx doc project:
+   ``cp ../oms-docs/sources/conf.py ./docs/``.
+#. Edit the config to be specific to your project.
+#. Add the ``toctree.rst`` and ``index.rst`` documents, using existing sources
+   in OMS as examples. The index page is the front/first page for the projects's
+   documentation, while the toc tree is the Table of Contents.
+#. TEST! use ``make clean all serve-all`` to test everything together, though
+   you can use ``make project-html``, where *project* is the name of the project
+   specified in the update to the ``project_list`` variable.
+
+
+Maybe you need to dig deeper
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Let's look at what tasks the default Gruntfile provides, these are specific to
+oms-docs:
+
+.. .. runblock:: console
+..
+..    $ cd ../conf && grunt --help
+
+.. code::
+
+   Grunt: The JavaScript Task Runner (v0.4.5)
+
+   Usage
+    grunt [options] [task [task ...]]
+
+   Options
+        --help, -h  Display this help text.
+            --base  Specify an alternate base path. By default, all file paths are
+                    relative to the Gruntfile. (grunt.file.setBase) *
+        --no-color  Disable colored output.
+       --gruntfile  Specify an alternate Gruntfile. By default, grunt looks in the
+                    current or parent directories for the nearest Gruntfile.js or
+                    Gruntfile.coffee file.
+       --debug, -d  Enable debugging mode for tasks that support it.
+           --stack  Print a stack trace when exiting with a warning or fatal
+                    error.
+       --force, -f  A way to force your way past warnings. Want a suggestion?
+                    Don't use this option, fix your code.
+           --tasks  Additional directory paths to scan for task and "extra" files.
+                    (grunt.loadTasks) *
+             --npm  Npm-installed grunt plugins to scan for task and "extra"
+                    files. (grunt.loadNpmTasks) *
+        --no-write  Disable writing files (dry run).
+     --verbose, -v  Verbose mode. A lot more information output.
+     --version, -V  Print the grunt version. Combine with --verbose for more info.
+      --completion  Output shell auto-completion rules. See the grunt-cli
+                    documentation for more information.
+
+   Options marked with * have methods exposed via the grunt API and should instead
+   be specified inside the Gruntfile wherever possible.
+
+   Available tasks:
+     make_clean      run make clean on build directory/artifacts
+     make_oms_docs   run sphinx build on oms-docs only
+     serve_oms_docs  Alias for "connect", "watch" tasks.
+     default         Alias for "make_oms_docs", "serve_oms_docs" tasks.
+     watch           Run predefined tasks whenever watched files change.
+     connect         Start a connect web server. *
+
+
+
+There is an additional Gruntfile available for serving the build artifacts and
+then watching all doc projects, here are the tasks provided:
+
+.. .. runblock:: console
+..
+..    $ cd ../conf && grunt --help --gruntfile conf/zGruntfile.js
+
+
+.. code::
+
+   Available tasks:
+     make_clean                  run make clean on build directory/artifacts
+     make_oms-kickstart_html     run sphinx make for oms-kickstart
+     make_oms-admin_html         run sphinx make for oms-admin
+     make_oms-deploy_html        run sphinx make for oms-deploy
+     make_oms-core_html          run sphinx make for oms-core
+     make_oms-experimental_html  run sphinx make for oms-experimental
+     make_oms-ui_html            run sphinx make for oms-ui
+     make_oms-salt-core_html     run sphinx make for oms-salt-core
+     make_oms-salt-tcf_html      run sphinx make for oms-salt-tcf
+     make_oms_docs               run sphinx build on oms-docs only
+     make_all_docs               run sphinx build for all docs
+     serve_all_docs              Alias for "connect", "watch" tasks.
+     default                     Alias for "make_oms_docs", "serve_oms_docs" tasks.
+     build_all                   Alias for "make_all_docs", "serve_all_docs" tasks.
+
+
+If using these Gruntfiles directly, you will likely want the 'serve_all_docs',
+'default', and 'build_all' tasks noted above.
+
+The majority of these Grunt tasks are actually intended for use internally,
+within the rest of the Gruntfile - eg, when using Grunt to watch the source
+directories for changes, Grunt has tasks for cleaning and rebuilding the
+build artifacts.
+
+
+.. note::
+
+   oms-docs currently uses two Gruntfile.js specs for Grunt, one that focuses
+   on serving/watching the oms-docs sphinx project, and one capable of monitoring
+   all projects. Both can be found within the *oms-docs/conf/* directory.
 
 
 Intended Layout of OMS Documentation
