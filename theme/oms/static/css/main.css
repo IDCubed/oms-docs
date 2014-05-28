@@ -733,3 +733,7 @@ tr {
     border-left-color: rgba(26, 51, 76, 0.8);
 }
 
+.ext-doc-project {
+    line-height: 10px !important;
+    padding: 5px !important;
+}
