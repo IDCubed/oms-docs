@@ -23,17 +23,17 @@ started on the path to creating TABs for the Open Mustard Seed (OMS) platform.
 Introduction
 ------------
 
-This tutorial is an easy-to-follow guide to developing TABs that leverage the
-power of the OMS framework. Throughout it, we develop a simple TAB, building
-it from scratch and adding OMS-supported features one step at a time.
+This tutorial is meant to be an easy-to-follow guide to developing TABs that
+leverage the power of the OMS framework. Throughout it, we develop a simple TAB,
+building it from scratch and adding OMS-supported features one step at a time.
 
 The complete tutorial has been split up into separate documents to lighten the
-cognitive load and give you a chance to absorb the concepts and explore the
+cognitive load and to give you a chance to absorb the concepts and explore the
 system.
 
 We'll cover the following topics:
 
-* `Creating a TAB`_
+* `Creating a TAB`_ - 
 * `Adding the API Console`_
 * `Adding Django Admin support`_
 * `Adding django-constance support`_
