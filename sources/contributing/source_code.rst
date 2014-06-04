@@ -129,15 +129,8 @@ and Personas. Built in java, on the Spring Framework, implemented as a maven
 overlay of the MitreID OIDC project.
 
 
-Not yet included in the Release
--------------------------------
-
-While still only pre-alpha, or under heavy development, and otherwise not yet
-included in the OMS TCF Release, these repositories are still significant. 
-
-
 python-oidc
-~~~~~~~~~~~
+-----------
 
 Python client library to OMS-OIDC - 
 :github-repo:`github <python-oidc>`
@@ -145,65 +138,3 @@ Python client library to OMS-OIDC -
 Client library for interacting with an OMS OpenID Connect Server, though this
 python library ought to work with a Mitre ID Server as well.
 
-
-oms-vrc
-~~~~~~~
-
-Everything needed for the OMS Virtual Resource Controller (all of them) - not
-yet in release - :github-repo:`github <oms-vrc>`
-
-Incomplete set of salt states and python utilities to build the different types
-of OMS VRC.
-
-
-inventory
-~~~~~~~~~
-
-Trust Network Inventory Management - not yet in release - 
-:github-repo:`github <inventory>`
-
-A django + salt hybrid application using salt, salt-api, salt-cloud, and many
-other internal modules, with the intention of building Virtual Resource
-inventory management capabilities for different types of virtual assets in the
-cloud.
-
-
-salt-common
-~~~~~~~~~~~
-
-System Automation Library built on SaltStack ~ Common to Many - 
-:github-repo:`github <salt-common>`
-
-Salt states and custom pillars, grains, modules, and states for SaltStack. Major
-system automation, covering everything needed for a wide-variety of web application
-deployments. The goal is total infrastructure management using free and open
-source applications/projects.
-
-
-salt-non-common
-~~~~~~~~~~~~~~~
-
-Extends Salt~Common, OMS~Specific System Automation ~ not yet in release - 
-:github-repo:`github <salt-non-common>`
-
-Salt states and custom modules needed for various OMS components.
-
-
-salt-pillars
-~~~~~~~~~~~~
-
-Configuration Bits for Salt Common System Automation Library ~ not yet in release - 
-:github-repo:`github <salt-pillars>`
-
-Salt pillars are configuration dictionaries, and provide parameterized state
-application when paired with salt states.
-
-
-oms-inside
-~~~~~~~~~~
-
-Module Repository for the OMS "Inside" Trusted Application Bundle (TAB) ~ not yet in release - 
-:github-repo:`github <oms-inside>`
-
-Generic, javascript-based, web UI platform for building modular frontend web
-applications.
