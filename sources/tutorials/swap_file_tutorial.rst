@@ -32,11 +32,22 @@ The kernel's "swappiness" (tendency to use swap) can be configured.
 Setting up the swap file
 ------------------------
 
+OMS includes rudimentary support for swap files, with a utility helper that
+simplifies creating swapfiles.
+
+Let's first step through the manual process, and you can choose what will work
+best for the specifics of your situation.
+
+
+Manual Setup
+~~~~~~~~~~~~
+
 Start by determining the appropriate size for your swap file.  A common
 approach is to use 1.5X or 2X of your machine's RAM size.
 
 To create an empty 1 GB file for swap use, use ``dd`` with 1,048,576 blocks
 of size 1,024 (1,048,576 x 1,024 = 1,073,741,824):
+
 
 .. code:: bash
 
@@ -91,6 +102,31 @@ filesystem table.
   /var/1GB.swap   none            swap    sw              0       0
 
 
+Automated
+~~~~~~~~~
+
+If you are bootstrapping a new host with oms-kickstart, the default build will
+include creating a 1GB swap file (and enabling it) for you.
+
+The basic OMS Root VRC, installed onto an OMS Host, includes a formula which
+can be applied as so:
+
+.. code::
+
+   # salt-call --local state.sls swap
+
+
+This will create a script ``/root/mkswap.sh`` that will run through the manual
+process detailed above. It is simple, but functional. You can also edit the
+script if you wish to change the size of the swapfile.
+
+.. todo::
+
+   We should update the formula, to update the script, to use a bash variable
+   to define the size of the swap file to use. but then we might introduce
+   command injection vulnerability :(
+
+
 Adjusting kernel swappiness
 ---------------------------
 
@@ -100,9 +136,9 @@ setting of 60 is typical. You can view and set swappiness as follows:
 .. code:: bash
 
   oms% sysctl vm.swappiness
-  vm.swappiness = 60
-  oms% sysctl vm.swappiness=70
-  vm.swappiness = 70
+  vm.swappiness = 10
+  oms% sysctl vm.swappiness=25
+  vm.swappiness = 25
 
 
 You can make this setting persist across reboots by adding it to a
@@ -113,4 +149,9 @@ configuration file:
 .. code::
 
   # ...
-  vm.swappiness = 70
+  vm.swappiness = 25
+
+
+These values can be set higher on physical systems. For VMs, it is recommended
+to set swappiness with smaller, incremental updates, and performance evaluations
+between.
