@@ -50,26 +50,26 @@ representing themselves within the OMS ecosystems they are a part of.
 TAB Modules
 ~~~~~~~~~~~
 
-oms-core
+:external-doc:`oms-core`
 
-oms-experimental
+:external-doc:`oms-experimental`
 
-oms-ui
+:external-doc:`oms-ui`
 
 
 OMS Build System (Deployment)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-oms-kickstart
+:external-doc:`oms-kickstart`
 
-oms-admin
+:external-doc:`oms-admin`
 
-oms-deploy
+:external-doc:`oms-deploy`
 
 
 System Automation
 ~~~~~~~~~~~~~~~~~
 
-oms-salt-core
+:external-doc:`oms-salt-core`
 
-oms-salt-tcf
+:external-doc:`oms-salt-tcf`

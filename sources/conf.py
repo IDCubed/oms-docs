@@ -45,6 +45,7 @@ extensions = ['sphinxcontrib.httpdomain',
 
 extlinks = {'ticket': ('https://redmine.idhypercubed.org/issues/%s', 'ticket'),
             'github-repo': ('https://github.com/IDCubed/%s', 'github: '),
+            'external-doc': ('https://docs.openmustardseed.org/%s', ''),
 }
 
 # Add any paths that contain templates here, relative to this directory.
