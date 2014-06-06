@@ -7,7 +7,8 @@
 Open Mustard Seed Trusted Compute Framework
 ===========================================
 
-**A Framework for developing and deploying secure cloud applications to collect, compute on, and share personal data**
+**A Framework for developing and deploying secure cloud applications to collect,
+compute on, and share personal data**
 
 The Open Mustard Seed (OMS) project is an open-source framework for developing
 and deploying web apps in a secure, user-centric personal cloud. The framework
@@ -51,11 +52,13 @@ make requests for early access to the OMS source code.
 .. _this form: https://alpha.openmustardseed.org/downloads/
 
 
-Get Started
------------
+Where to Get Started
+--------------------
 
+* :ref:`Overview of OMS Documentation <doc_overview>`
 * :ref:`Introduction to OMS Concepts <introduction>`
 * :ref:`Get Started with OMS Demos and Development <get_started>`
+* :ref:`Dive into Tutorials <tutorials>`
 * :ref:`Become a Contributor <contributing>`
 
 
@@ -111,6 +114,8 @@ projects including (we strongly believe in the DRY principles):
 .. _Graylog2: http://www.graylog2.org/
 .. _Shinken: http://www.shinken-monitoring.org/
 
+
+.. _oms_features:
 
 OMS Features
 ------------

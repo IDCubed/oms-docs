@@ -62,6 +62,7 @@ what access control mechanisms and policies will govern data; and the
 .. toctree::
    :maxdepth: 1
 
+   Documentation <documentation>
    Architecture <architecture>
 
 
