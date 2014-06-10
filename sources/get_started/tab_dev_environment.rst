@@ -153,6 +153,8 @@ All together, these services and tools are used to build and extend the OMS
 Trusted Compute Framework included on the VM.
 
 
+.. _CoreID_TCC_Demo:
+
 Run the CoreID TCC Demo
 -----------------------
 
