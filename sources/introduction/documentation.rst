@@ -1,36 +1,12 @@
-:title: Documentation Overview
-:description: An overview of the documentation available in OMS
-:keywords: oms, documentation, overview, intro, introduction,
+:title: API Documentation Overview
+:description: An overview of the API documentation available in OMS
+:keywords: oms, api, documentation, overview, intro, introduction,
 
 
-.. _doc_overview:
-
-
-Intro to OMS Documentation
-==========================
-
-There is a lot going on in OMS, and you may not know where to start - the
-intention with this page is to present to you a breakdown of what documentation
-exists where, to serve as a map to these new lands.
-
-You may be interested in one of the following guides:
-
-* :ref:`Get Started with OMS <get_started>`
-* :ref:`Tutorials - Build Applications with OMS <tutorials>`
-* :ref:`Contribute to OMS Development <contributing>`
-
-If you are looking for API integration docs for OpenID Connect, they can be
-found in the section for :ref:`OpenID Connect <oidc>`.
-
-Additionally, the following sections may be of interest:
-
-* :ref:`High-Level Explanation of OMS <overview>`
-* :ref:`List of Features <oms_features>`
-* :ref:`OMS Release Notes <release_notes>`
-
+.. _api_doc_overview:
 
 API Documentation
------------------
+=================
 
 OMS creates the framework for an ecosystem of modules, and instances of OMS
 nodes are living reflections (or different representations) of these ecosystems
@@ -50,26 +26,29 @@ representing themselves within the OMS ecosystems they are a part of.
 TAB Modules
 ~~~~~~~~~~~
 
-:external-doc:`oms-core`
+:external-doc:`oms-core` - Core modules and manifests for OMS Trusted Application
+Bundles included in the TCC reference implementation.
 
-:external-doc:`oms-experimental`
+:external-doc:`oms-experimental` - Modules for OMS experimental TABs.
 
-:external-doc:`oms-ui`
+:external-doc:`oms-ui` - UI modules for various TABs.
 
 
 OMS Build System (Deployment)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-:external-doc:`oms-kickstart`
+:external-doc:`oms-kickstart` - Kickstart new OMS builds on Ubuntu hosts.
 
-:external-doc:`oms-admin`
+:external-doc:`oms-admin` - OMS Administrative Utility (Command line).
 
-:external-doc:`oms-deploy`
+:external-doc:`oms-deploy` - OMS Deployment library (Python).
 
 
 System Automation
 ~~~~~~~~~~~~~~~~~
 
-:external-doc:`oms-salt-core`
+:external-doc:`oms-salt-core` - Core system automation formula (for SaltStack),
+for the OMS Virtual Resource Controller (VRC).
 
-:external-doc:`oms-salt-tcf`
+:external-doc:`oms-salt-tcf` - System automation formula for the OMS Trusted
+Compute Framework.

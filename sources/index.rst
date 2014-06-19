@@ -55,7 +55,7 @@ make requests for early access to the OMS source code.
 Where to Get Started
 --------------------
 
-* :ref:`Overview of OMS Documentation <doc_overview>`
+* :ref:`Overview of OMS Documentation <api_doc_overview>`
 * :ref:`Introduction to OMS Concepts <introduction>`
 * :ref:`Get Started with OMS Demos and Development <get_started>`
 * :ref:`Dive into Tutorials <tutorials>`
