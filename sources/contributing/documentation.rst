@@ -89,7 +89,7 @@ created in the ``_build/html/`` directory.
    drwxr-xr-x  3 root root 4.0K Dec  8 23:34 builder
    -rw-r--r--  1 root root  230 Dec  8 23:35 .buildinfo
    drwxr-xr-x  4 root root 4.0K Dec  8 23:34 concepts
-   drwxr-xr-x  3 root root 4.0K Dec  8 23:34 contributing
+   drwxr-xr-x  3 root root 4.0K Dec  8 23:34 whatsnext
    drwxr-xr-x  2 root root 4.0K Dec  8 23:34 faq
    drwxr-xr-x  2 root root 4.0K Dec  8 23:34 genindex
    drwxr-xr-x  9 root root 4.0K Dec  8 23:34 get_started
@@ -195,7 +195,7 @@ In a separate tmux pane/window or console/shell, run the grunt/node dev server:
    building [dirhtml]: targets for 40 source files that are out of date
    updating environment: 40 added, 0 changed, 0 removed
    reading sources... [  2%] api/index
-   reading sources... [  5%] contributing/documentation
+   reading sources... [  5%] whatsnext/documentation
    ...
    ... <snip>
    ...

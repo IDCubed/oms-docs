@@ -4,10 +4,10 @@
 :keywords: contributing, oms, documentation, help, guideline, dev environment
 
 
-.. _contributing:
+.. _whatsnext:
 
-Contributing to OMS
-===================
+What's next
+===========
 
 Start first by reviewing `this document on the OMS Wiki`_ for a walkthrough of
 some of our development processes.

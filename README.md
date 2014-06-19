@@ -12,7 +12,7 @@ started.
 
 ### Initial Setup
 
-Please see `sources/contributing/documentation.rst` for details on installing
+Please see `sources/whatsnext/documentation.rst` for details on installing
 the dependencies for easily contributing updates to the OMS Documentation Project.
 
 

@@ -17,7 +17,7 @@ You may be interested in one of the following guides:
 
 * :ref:`Get Started with OMS <get_started>`
 * :ref:`Tutorials - Build Applications with OMS <tutorials>`
-* :ref:`Contribute to OMS Development <contributing>`
+* :ref:`What's next <whatsnext>`
 
 If you are looking for API integration docs for OpenID Connect, they can be
 found in the section for :ref:`OpenID Connect <oidc>`.

@@ -62,7 +62,7 @@ where you can either:
 
 * :ref:`deploy a Trusted Compute Cell <deploy_tcc>`
 * :ref:`create a new TAB <tab_tutorial>`
-* :ref:`hack on any of the OMS components <contributing>`, from system automation
+* :ref:`hack on any of the OMS components <whatsnext>`, from system automation
   to our demo TABs and documentation.
 
 .. note::
