@@ -313,6 +313,8 @@ these are the make targets associated with building and serving all doc projects
 configured within the Makefile.
 
 
+.. _update_doc_builder:
+
 Add a repository
 ~~~~~~~~~~~~~~~~
 

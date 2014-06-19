@@ -128,12 +128,12 @@ believe a repository should be included, consult with OMS development advisors
 to have the repository (and its github permissions) reviewed.
 
 Adding a new repository may require updates to the default configuration included
-in the :github-repo:`oms-salt-core <oms-salt-core>` source code - these details
-have not yet been documented in that repository. We'll get there.
+in the :github-repo:`oms-salt-core <oms-salt-core>` source code. If the list of
+repositories with sphinx documentation projects changes, the list can be found
+`here`_, in oms-docs. See :ref:`this section <update_doc_builder>` for more
+details on this list.
 
-.. todo::
-
-   ensure oms-salt-core gets these docs, and this page references those docs
+.. _here: https://github.com/IDCubed/oms-docs/blob/master/conf/config-gen.py
 
 
 What Source Code is included in OMS?
@@ -669,17 +669,17 @@ oms-admin
 oms-oidc
 ~~~~~~~~
 
-Create a new WAR (build artifact), follow :external-doc:`this guide
-<oms-salt-tcf/formula/oidc/>` to build/create the WAR. Alternatively, there is
-automated formula available with ``salt-call --local state.sls oidc.build``.
-Here, we will assume you have already built OpenID Connect with Maven.
+Create a new WAR (build artifact), follow :ref:`this guide <oidc_developers_guide>`
+to build/create the WAR. Alternatively, there is automated formula available with
+``salt-call --local state.sls oidc.build``. Here, we will assume you have already
+built OpenID Connect with Maven.
 
 Collect all .war/.jar into one place:
 
 .. code::
 
    # copy build for server package
-   oms % for war in oidc-Javadoc.jar oidc.war                        
+   oms % for war in oidc-Javadoc.jar oidc.war
    do
    cp oms-oidc-server/target/$war upload
    done
@@ -742,14 +742,14 @@ Use *sha512sum* to generate a SHA512 checksum for the WARs:
    sha512sum $build
    done
 
-  
+
 Upload the WAR to the Rackspace CDN:
 
 .. code::
 
    # enable environment variables for OpenStack and cURL
    # ensure you use 1.0 of the Rackspace Auth URL
-   oms % source ~/.novarc 
+   oms % source ~/.novarc
    # retrieve an auth token
    oms % curl -i -H "X-Auth-User: $OS_USERNAME" -H "X-Auth-Key: $OS_PASSWORD" $OS_AUTH_URL
    oms % export OS_TOKEN=biglonghexadecimalstring
@@ -759,8 +759,8 @@ Upload the WAR to the Rackspace CDN:
 
 Create the *oms-oidc-wars-vx_y_z.yml* (reclass) manifest with the new URL and
 checksum, found in the :github-repo:`oms-salt-tcf
-<oms-salt-tcf/tree/master/classes/>` github repo. Plan to rebase the RC branch
-to correct this commit with the final URL/checksum.
+<oms-salt-tcf/tree/master/classes/>` github repo. If the WAR is rebuilt, rebase
+the RC branch to correct this commit with the final URL/checksum.
 
 
 Python-oidc
@@ -996,7 +996,7 @@ We will use cURL, to upload the *.ova* to the Rackspace CDN:
 
    # enable environment variables for OpenStack and cURL
    # ensure you use 1.0 of the Rackspace Auth URL
-   oms % source ~/.novarc 
+   oms % source ~/.novarc
    # retrieve an auth token
    oms % curl -i -H "X-Auth-User: $OS_USERNAME" -H "X-Auth-Key: $OS_PASSWORD" $OS_AUTH_URL
    # set these using the values you see in the response from the auth request
@@ -1010,12 +1010,17 @@ We will use cURL, to upload the *.ova* to the Rackspace CDN:
 Update Documentation
 ~~~~~~~~~~~~~~~~~~~~
 
-Run ``make clean all`` in the *oms-docs* repository to build the sphinx projects
+After all updates are complete on all OMS repositories included in the release,
+the changelog and overview sections of the :ref:`Release Notes <release_notes>`
+need to be updated for this new release.
+
+When this is complete, we are ready to update the documentation build. Run
+``make clean all`` in the *oms-docs* repository to build the sphinx projects
 embedded in the OMS repositories. Ensure the build includes all repositories
 included in the release by reviewing the output in *_build/html/*, there should
-be a directory for each repository included in the build.
+be a directory for each repository included in the build. This list is configured
 
-Sync the updated doc build (using rsync) with the live documentation, hosted at 
+Sync the updated doc build (using rsync) with the live documentation, hosted at
 *docs.openmustardseed.org*.
 
 Additional information about the documentation build can be :ref:`found here
