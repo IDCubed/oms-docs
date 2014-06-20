@@ -55,14 +55,14 @@ Run OMS in the Cloud
 --------------------
 
 OMS Trusted Compute Cells can also be deployed to the Cloud. The first step is
-to :ref:`Kickstart OMS on a VM in the Cloud<kickstart_oms>`.
+to :ref:`Kickstart OMS on a VM in the Cloud <kickstart_oms>`.
 
 This kickstart process will get OMS set up on your host and get you to the point
 where you can either:
 
 * :ref:`deploy a Trusted Compute Cell <deploy_tcc>`
 * :ref:`create a new TAB <tab_tutorial>`
-* :ref:`hack on any of the OMS components <contributing>`, from system automation
+* :ref:`hack on any of the OMS components <next_steps>`, from system automation
   to our demo TABs and documentation.
 
 .. note::

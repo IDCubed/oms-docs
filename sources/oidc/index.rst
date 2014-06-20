@@ -208,4 +208,5 @@ Section Contents
    Dynamic Client Registration <dynamic_client_registration>
    API Reference <api_reference>
    Reskinning OIDC <skin_oidc_guide>
+   Developer's Guide </oidc/developers_guide>
 

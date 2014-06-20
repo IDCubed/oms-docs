@@ -59,7 +59,7 @@ Where to Get Started
 * :ref:`Introduction to OMS Concepts <introduction>`
 * :ref:`Get Started with OMS Demos and Development <get_started>`
 * :ref:`Dive into Tutorials <tutorials>`
-* :ref:`Become a Contributor <contributing>`
+* :ref:`Next Steps <next_steps>`
 
 
 Leveraging the Open-Source Community

@@ -68,6 +68,6 @@ what access control mechanisms and policies will govern data; and the
 
 **Further Reading** - Next, you may be interested in one of the following guides:
 
-* :ref:`Get Started with OMS <get_started>`
+* :ref:`Get started with OMS <get_started>`
 * :ref:`Tutorials - do stuff with OMS <tutorials>`
-* :ref:`Contribute to OMS Development <contributing>`
+* :ref:`Next steps with OMS <next_steps>`
