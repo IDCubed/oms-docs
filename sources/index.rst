@@ -22,7 +22,7 @@ services.
 Releases
 --------
 
-`Now available`_ as an alpha release (Spring 2014), Open Mustard Seed is both a
+`Now available`_ as an alpha release (Summer 2014), Open Mustard Seed is both a
 framework for trusted computing, as well as a set of reference implementations
 built on that framework (the Trusted Compute Framework or TCF). Thus, OMS
 provides a collection of tools and applications that aim to let people build
@@ -59,7 +59,7 @@ Where to Get Started
 * :ref:`Introduction to OMS Concepts <introduction>`
 * :ref:`Get Started with OMS Demos and Development <get_started>`
 * :ref:`Dive into Tutorials <tutorials>`
-* :ref:`Become a Contributor <contributing>`
+* :ref:`Next Steps <next_steps>`
 
 
 Leveraging the Open-Source Community

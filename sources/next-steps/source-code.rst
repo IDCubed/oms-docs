@@ -17,7 +17,7 @@ were building an OMS deployment from souce (as opposed to a pre-built VM).
 oms-docs
 --------
 
-OMS Trusted Compute Framework (TCF) - Project Documentation - 
+OMS Trusted Compute Framework (TCF) - Project Documentation -
 :github-repo:`Github<oms-docs>`
 
 The source code to this documentation you are reading - technical documentation
@@ -30,7 +30,7 @@ documentation easier and enjoyable.
 oms-kickstart
 -------------
 
-Kickstart Open Mustard Seed - To the Cloud we GO! - 
+Kickstart Open Mustard Seed - To the Cloud we GO! -
 :github-repo:`Github<oms-kickstart>` - :external-doc:`API Docs <oms-kickstart>`
 
 As a holonic system, OMS needs a generic mechanism to support the framework's
@@ -44,7 +44,7 @@ executable system automation framework built on salt stack.
 oms-salt-core
 -------------
 
-Core Salt States for OMS System Automation - 
+Core Salt States for OMS System Automation -
 :github-repo:`Github<oms-salt-core>` - :external-doc:`API Docs <oms-salt-core>`
 
 The core of OMS System Automation is built on and around SaltStack, and at the
@@ -56,7 +56,7 @@ This constitutes the OMS Host, and on which we build  other OMS components.
 oms-salt-tcf
 -------------
 
-Salt States and System Automation Bits for the OMS Trusted Compute Framework (TCF) - 
+Salt States and System Automation Bits for the OMS Trusted Compute Framework (TCF) -
 :github-repo:`Github<oms-salt-tcf>` - :external-doc:`API Docs <oms-salt-tcf>`
 
 With the core of the OMS Host in place, the salt states and configuration profiles
@@ -69,7 +69,7 @@ level) components.
 oms-admin
 ---------
 
-Administrative utilities for the OMS Trusted Compute Framework (TCF) - 
+Administrative utilities for the OMS Trusted Compute Framework (TCF) -
 :github-repo:`Github<oms-admin>` - :external-doc:`API Docs <oms-admin>`
 
 A generic Trusted Compute Framework needs the generic structures for the
@@ -81,7 +81,7 @@ the oms-deploy python deployment and system automation library.
 oms-deploy
 ----------
 
-OMS TAB Deployment and System Automation Library - 
+OMS TAB Deployment and System Automation Library -
 :github-repo:`Github<oms-deploy>` - :external-doc:`API Docs <oms-deploy>`
 
 Python deployment and system automation library, evolving to cover more territory.
@@ -90,7 +90,7 @@ Python deployment and system automation library, evolving to cover more territor
 oms-core
 --------
 
-Core Module Repository - OMS Reference Trusted Application Bundles (TABs) - 
+Core Module Repository - OMS Reference Trusted Application Bundles (TABs) -
 :github-repo:`Github<oms-core>` - :external-doc:`API Docs <oms-core>`
 
 OMS Trusted Application Bundles (TABs) are often assembled from many small,
@@ -102,7 +102,7 @@ implemented in any language and application development environment/framework.
 oms-experimental
 ----------------
 
-Experimental Module Repository - OMS Reference TABs - 
+Experimental Module Repository - OMS Reference TABs -
 :github-repo:`Github<oms-experimental>` - :external-doc:`API Docs
 <oms-experimental>`
 
@@ -112,7 +112,7 @@ The reference TABs included in OMS are built with modules from this repository.
 oms-ui
 ------
 
-UI Module Repository for Reference TABs built on OMS - 
+UI Module Repository for Reference TABs built on OMS -
 :github-repo:`Github<oms-ui>` - :external-doc:`API Docs <oms-ui>`
 
 Reusable UIs for OMS reference TABs, built on bootstrap, jquery, django, and
@@ -122,7 +122,7 @@ others.
 oms-oidc
 --------
 
-Open ID Connect, built for OMS, with support for OMS' Core ID and Personas. - 
+Open ID Connect, built for OMS, with support for OMS' Core ID and Personas. -
 :github-repo:`Github<oms-oidc>` - :ref:`OpenID Connect Docs <oidc>`
 
 The Mitre ID OpenID Connect server, extended to support OMS concept of CoreID
@@ -133,7 +133,7 @@ overlay of the MitreID OIDC project.
 python-oidc
 -----------
 
-Python client library to OMS-OIDC - 
+Python client library to OMS-OIDC -
 :github-repo:`Github<python-oidc>` - :external-doc:`API Docs <python-oidc>`
 
 Client library for interacting with an OMS OpenID Connect Server, though this
