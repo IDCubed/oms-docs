@@ -11,6 +11,135 @@ OMS v0.8 Series Release Notes
 Here are some release notes associated with the v0.8.x series of OMS.
 
 
+v0.8.5.2
+--------
+
+Focal Points
+~~~~~~~~~~~~
+
+* simplify the process to build sphinx documentation projects in all OMS repos
+* define/standardize basic sphinx documentation projects for all OMS repos
+* improve completeness of documentation 
+* new OMS app: the downloadable VM tracking app
+
+
+oms-docs
+~~~~~~~~
+
+* t2227: update iframe for Downloadable VM Requests
+* t2227: update URL in VM Image Request iframe
+* t2465: write a tutorial, update the system hostname
+* t2498: correct version defined in oms-docs/package.json
+* t2454: add sphinx doc builder for an arbitrary list of repos
+* t2454: update Makefile/Gruntfile.js with config generator
+* t2583: document new multi-project doc builder
+* t2584: correct OMS doc template, oms/layout.html
+* t2071: refactor introduction section
+* t1164: import/update tutorial: Intro to Django
+* t2429: update tutorial index with new tutorials
+* t2325: update list of repos in the source code map
+* t2433: add a crude drop-down menu to jump across doc projects
+* t2084: Add Swap File Tutorial
+* t2084: update Swap File Tutorial
+* t1166: create/integrate new page - doc overview/intro
+* t2522: reference external doc projects (API docs)
+* t2455: align the great Sphinx
+* t2568: version bump to v0.8.5.2 in sources/conf.py
+* t2428: correct guide, Get Started with OMS Kickstart
+* t1854: update theme.conf to include document_title
+* t2428: correct guide, deploy/setup reference TCC
+* t2319: Overhaul the documented release process
+* t2522: update source code map, include links to API docs
+* t2642: hide search entry form until search is functional
+* t2522: update (API) Documentation Overview page
+* t2319: another update to the release process doc             oms-kickstart
+* t2721: shuffle around the contributing section               ~~~~~~~~~~~~~
+
+
+oms-kickstart
+~~~~~~~~~~~~~
+
+* t2425: correct use of oms:default_rev in config/pillar/\*.yaml
+* t2426: minor usability clean up config/pillar.yaml
+* t2309: rename oms/base/ubuntu_* build templates for consistency
+* t2310: correct packer's oms/base/ubuntu_iso build template 
+* t2455: align the great Sphinx 
+* t2568: bump version to v0.8.5.2 
+
+
+oms-salt-core
+~~~~~~~~~~~~~
+
+* t2336: create basic sphinx documentation project
+* t2582: import release management formula from oms-admin
+* t2568: bump version in classes/oms.yml to v0.8.5.2
+
+
+oms-salt-tcf
+~~~~~~~~~~~~
+
+* t2076: create a basic sphinx project for the repo
+* t2602: update URL/checksum in OIDC WAR manifest to v0.8.5.1
+* t2696: update oidc-java-properties manifest for OIDC v0.8.5.1
+* t2568: bump version to v0.8.5.2
+
+
+oms-admin
+~~~~~~~~~
+
+* t2455: align the great sphinx, add basic docs
+* t2568: version bump to v0.8.5.2
+
+
+oms-deploy
+~~~~~~~~~~
+
+* t2455: align the great sphinx
+* t2568: v0.8.5.2 version bump and update to setup.py
+
+
+oms-core
+~~~~~~~~
+
+* t2455: align the Great Sphinx!
+* t2491: move GPSDemo.rst > funf-connector.rst and update
+* t2492: update index.rst as the doc overview
+* t2568: version bump to v0.8.5.2
+
+
+python-oidc
+~~~~~~~~~~~
+
+* t2455: define basic sphinx documentation project
+* t2568: version bump for v0.8.5.2
+
+
+oms-oidc
+~~~~~~~~
+
+
+
+oms-experimental
+~~~~~~~~~~~~~~~~
+
+* t1274: TAB for Downloadable VM Images
+* t2227: create separate template for iframe in VmImages
+* t2420: improve auth on downloadrequests/downloadlog in VmImage
+* t2420: rename MyAuthentication > AnonPOSTAuthenticateGET in VmImage module
+* t2348: update content and styling on VmImages templates
+* t2320: eval(config.EMAIL) from constance in vm_image
+* t2469: include login link in admin email sent by vm_images
+* t2455: the Great Sphinx alignment!
+* t2568: version bump to v0.8.5.2
+
+
+oms-ui
+~~~~~~
+
+* t2455: define basic sphinx documentation project
+* t2568: version bump for v0.8.5.2
+
+
 v0.8.5.1
 --------
 
