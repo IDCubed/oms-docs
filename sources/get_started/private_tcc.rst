@@ -69,12 +69,6 @@ obvious problems with the formula we are about to apply, then remove the
 *test=True* bit and re-run the command.
 
 
-Customize the Deployment
-------------------------
-
-Note how to do this.
-
-
 CoreID and Persona Setup
 ------------------------
 

@@ -8,6 +8,15 @@
 Next Steps with OMS
 ===================
 
+Now that you've had a chance to explore OMS, understand its architecture, and
+set up a TCC, we invite you to browse the source code repositories and build
+your own OMS-enabled virtual machine images.
+
+We also welcome contributions to the OMS codebase. Please see the
+`OMS Contributor Documentation`_ for more information.
+
+.. _`OMS Contributor Documentation`: https://wiki.idhypercubed.org/
+
 .. toctree::
    :maxdepth: 1
 

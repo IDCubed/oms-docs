@@ -37,7 +37,7 @@ Can I help by adding some questions and answers?
 ................................................
 
    Definitely! Start with the :ref:`Contributing Documentation Guide
-   <contrib_docs>` and edit the documentation sources, ``sources/faq.rst`` in
+   <contribute_docs>` and edit the documentation sources, ``sources/faq.rst`` in
    particular.
 
 
