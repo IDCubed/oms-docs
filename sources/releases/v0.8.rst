@@ -23,90 +23,90 @@ Focal Points
 oms-docs
 ~~~~~~~~
 
-* t2353: Update release notes for v0.8.5.1
-* t2353: Bump version to v0.8.5.1
-* t2437: Mention second release signing key in Release Process doc
-* t2353: Bump version in package.json to v0.8.5.1
-* t2417: Use generic VM image filename in docs
-* t2416: Restore instructions for importing the Release Signing Key
-* t2415: update releases section of oms-docs landing page
-* t2285: Update TAB Tutorial
-* t2070: add release notes for OMS v0.7 and v0.8 series releases
-* t1366: add LICENSE, for source that is not explicit about it
+* :ticket:`t2353: Update release notes for v0.8.5.1 <2353>`
+* :ticket:`t2353: Bump version to v0.8.5.1 <2353>`
+* :ticket:`t2437: Mention second release signing key in Release Process doc <2437>`
+* :ticket:`t2353: Bump version in package.json to v0.8.5.1 <2353>`
+* :ticket:`t2417: Use generic VM image filename in docs <2417>`
+* :ticket:`t2416: Restore instructions for importing the Release Signing Key <2416>`
+* :ticket:`t2415: update releases section of oms-docs landing page <2415>`
+* :ticket:`t2285: Update TAB Tutorial <2285>`
+* :ticket:`t2070: add release notes for OMS v0.7 and v0.8 series releases <2070>`
+* :ticket:`t1366: add LICENSE, for source that is not explicit about it <1366>`
 
 
 oms-kickstart
 ~~~~~~~~~~~~~
 
-* t2353: Bump version to v0.8.5.1
-* t2343: correct/update license across all scripts
-* t2337: initial sphinx project for kickstart docs
-* t1366: add LICENSE, for source that is not explicit about it
-* t2330: remove config/pillar/master.yaml
+* :ticket:`t2353: Bump version to v0.8.5.1 <2353>`
+* :ticket:`t2343: correct/update license across all scripts <2343>`
+* :ticket:`t2337: initial sphinx project for kickstart docs <2337>`
+* :ticket:`t1366: add LICENSE, for source that is not explicit about it <1366>`
+* :ticket:`t2330: remove config/pillar/master.yaml <2330>`
 
 
 oms-salt-core
 ~~~~~~~~~~~~~
 
-* t2353: Bump version in classes/oms.yml to v0.8.5.1
-* t1366: add LICENSE, for source that is not explicit about it
+* :ticket:`t2353: Bump version in classes/oms.yml to v0.8.5.1 <2353>`
+* :ticket:`t1366: add LICENSE, for source that is not explicit about it <1366>`
 
 
 oms-salt-tcf
 ~~~~~~~~~~~~
 
-* t1366: add LICENSE, for source that is not explicit about it
+* :ticket:`t1366: add LICENSE, for source that is not explicit about it <1366>`
 
 
 oms-admin
 ~~~~~~~~~
 
-* t2353: Bump version to v0.8.5.1
-* t1366: add LICENSE - for source that is not explicit about it
+* :ticket:`t2353: Bump version to v0.8.5.1 <2353>`
+* :ticket:`t1366: add LICENSE - for source that is not explicit about it <1366>`
 
 
 oms-deploy
 ~~~~~~~~~~
 
-* t2353: Bump version to v0.8.5.1
-* t1366: add LICENSE, for source that is not explicit about it
+* :ticket:`t2353: Bump version to v0.8.5.1 <2353>`
+* :ticket:`t1366: add LICENSE, for source that is not explicit about it <1366>`
 
 
 oms-core
 ~~~~~~~~
 
-* t2449: Pin django-extensions to 1.2.5 in manifests
-* t2353: Bump version to v0.8.5.1
-* t2347: functional update to VmImages.yaml manifest
-* t1274: add manifest for VM Image Request app
-* t1366: add LICENSE, for source that is not explicit about it
+* :ticket:`t2449: Pin django-extensions to 1.2.5 in manifests <2449>`
+* :ticket:`t2353: Bump version to v0.8.5.1 <2353>`
+* :ticket:`t2347: functional update to VmImages.yaml manifest <2347>`
+* :ticket:`t1274: add manifest for VM Image Request app <1274>`
+* :ticket:`t1366: add LICENSE, for source that is not explicit about it <1366>`
 
 
 oms-experimental
 ~~~~~~~~~~~~~~~~
 
-* t2353: Bump version to v0.8.5.1
-* t1366: add LICENSE, for source that is not explicit about it
+* :ticket:`t2353: Bump version to v0.8.5.1 <2353>`
+* :ticket:`t1366: add LICENSE, for source that is not explicit about it <1366>`
 
 
 oms-ui
 ~~~~~~
 
-* t1366: add LICENSE, for source that is not explicit about it
+* :ticket:`t1366: add LICENSE, for source that is not explicit about it <1366>`
 
 
 oms-oidc
 ~~~~~~~~
 
-* t2421: sync SQL scripts included in v0.8.5 > qa-develop (v0.8.5.1-rc)
-* t2340: correct licensing for oms-oidc
+* :ticket:`t2421: sync SQL scripts included in v0.8.5 > qa-develop (v0.8.5.1-rc) <2421>`
+* :ticket:`t2340: correct licensing for oms-oidc <2340>`
 
 
 python-oidc
 ~~~~~~~~~~~
 
-* t2353: Bump version to v0.8.5.1
-* t1366: add LICENSE, for source that is not explicit about it
+* :ticket:`t2353: Bump version to v0.8.5.1 <2353>`
+* :ticket:`t1366: add LICENSE, for source that is not explicit about it <1366>`
 
 
 v0.8.5
@@ -123,252 +123,252 @@ Focal Points
 oms-docs
 ~~~~~~~~
 
-* t1839: add CONTRIBUTING.md and reference ID3 wiki article
-* t1166: Add summary to each top-level section
-* t1166: slight improvement for the top-level index/overview
-* t1556: create a guide for contributing to documentation
-* t1855: document details of release process
-* t1816: revamp the OIDC Developer's Guide
-* t1819: Move TAB Tutorial from wiki to oms-docs
-* t1842: update code blocks for correctness and clarity
-* t1875: correct references to IDOIC with OIDC
-* t1819: Expand TAB Tutorial
-* t1903: oic_validation -> oidc_validation
-* t1878: TAB Tutorial updates
-* t1878: Add OIDC client creation section to TAB Tutorial
-* t2012: Add OIDC Tutorial
-* t2015: Lightly copyedit the TAB Dev Environment doc
-* t1792: sync qa-develop with updates from master/v0.8.4
-* t1792: correct URLs for downloadable VM, still v0.8.3
-* t2067: add a map to the OMS source code
-* t1908: add tutorial, build docker containers with oms-kickstart
-* t1557: add better documentation for deploy.conf in kickstart docs
-* t1918: add an API Endpoint Reference for OIDC
-* t2036: document importing and confirming OMS Release Signing Key
-* t2010: minor config fixup for v0.8.5 release
-* t2085: automate build/refresh on file change with grunt/node.js
-* t2085: document the new automated doc dev workflow
-* t1932: correct external link to CoreID Infra paper
-* t2199: Drop 'modules.' prefix when importing OMS modules
-* t2305: TAB Tutorial updates
-* t1945: add a guide detailing how to skin/theme OIDC
-* t1813: Remove links to Background Concepts and Terminology pages
-* t1821: refactor/overhaul vm image build docs with packer
-* t2318: Update Release Process document
-* t2010: Merge v0.8.5 to master
-* t2321: correct demo/dev VM import/setup details for v0.8.5
+* :ticket:`t1839: add CONTRIBUTING.md and reference ID3 wiki article <1839>`
+* :ticket:`t1166: Add summary to each top-level section <1166>`
+* :ticket:`t1166: slight improvement for the top-level index/overview <1166>`
+* :ticket:`t1556: create a guide for contributing to documentation <1556>`
+* :ticket:`t1855: document details of release process <1855>`
+* :ticket:`t1816: revamp the OIDC Developer's Guide <1816>`
+* :ticket:`t1819: Move TAB Tutorial from wiki to oms-docs <1819>`
+* :ticket:`t1842: update code blocks for correctness and clarity <1842>`
+* :ticket:`t1875: correct references to IDOIC with OIDC <1875>`
+* :ticket:`t1819: Expand TAB Tutorial <1819>`
+* :ticket:`t1903: oic_validation -> oidc_validation <1903>`
+* :ticket:`t1878: TAB Tutorial updates <1878>`
+* :ticket:`t1878: Add OIDC client creation section to TAB Tutorial <1878>`
+* :ticket:`t2012: Add OIDC Tutorial <2012>`
+* :ticket:`t2015: Lightly copyedit the TAB Dev Environment doc <2015>`
+* :ticket:`t1792: sync qa-develop with updates from master/v0.8.4 <1792>`
+* :ticket:`t1792: correct URLs for downloadable VM, still v0.8.3 <1792>`
+* :ticket:`t2067: add a map to the OMS source code <2067>`
+* :ticket:`t1908: add tutorial, build docker containers with oms-kickstart <1908>`
+* :ticket:`t1557: add better documentation for deploy.conf in kickstart docs <1557>`
+* :ticket:`t1918: add an API Endpoint Reference for OIDC <1918>`
+* :ticket:`t2036: document importing and confirming OMS Release Signing Key <2036>`
+* :ticket:`t2010: minor config fixup for v0.8.5 release <2010>`
+* :ticket:`t2085: automate build/refresh on file change with grunt/node.js <2085>`
+* :ticket:`t2085: document the new automated doc dev workflow <2085>`
+* :ticket:`t1932: correct external link to CoreID Infra paper <1932>`
+* :ticket:`t2199: Drop 'modules.' prefix when importing OMS modules <2199>`
+* :ticket:`t2305: TAB Tutorial updates <2305>`
+* :ticket:`t1945: add a guide detailing how to skin/theme OIDC <1945>`
+* :ticket:`t1813: Remove links to Background Concepts and Terminology pages <1813>`
+* :ticket:`t1821: refactor/overhaul vm image build docs with packer <1821>`
+* :ticket:`t2318: Update Release Process document <2318>`
+* :ticket:`t2010: Merge v0.8.5 to master <2010>`
+* :ticket:`t2321: correct demo/dev VM import/setup details for v0.8.5 <2321>`
 
 
 oms-kickstart
 ~~~~~~~~~~~~~
 
-* t1858: move YAML configs out of repo root
-* t1460: write arbitrary pillar from config.yaml to bootstrap.sls
-* t1896: use yaml.safe_dump() instead of yaml.dump()
-* t1460: create two new kickstart configs, pillar embedded
-* t1897: document how to provide config to kickstart as multiple files
-* t1460: document the new pillar config key
-* t1460: separate pillar.yaml config per revision
-* t1792: define base deploy_defaults keys for per-revision pillar
-* t1858: point kickstart config at oms-salt-core/legacy
-* t1858: include oms-vrc, oms-salt-core, oms-salt-hosting in OMS source code checkout
-* t1858: fixup vhost_base_url in deploy_defaults pillar
-* t1995: rename SSL key seeded into deploy.conf
-* t2014: add oms-inside to source code checkout
-* t2010: fixup embedded pillar to sync with reality
-* t1906: kickstart kickstart!
-* t1906: update README, how to kickstart-kickstart
-* t2030: shuffle around YAML configs
-* t2051: add more commentary to all YAML configs
-* t2068: move states for TCF - oms-salt-core >> oms-salt-tcf
-* t2010: fixup master/release kickstart config for v0.8.5
-* t1858: define base system packages through pillar
-* t1908: add Dockerfiles and docs to kickstart docker containers
-* t1982: use embedded pillar to seed reclass' master_tops
+* :ticket:`t1858: move YAML configs out of repo root <1858>`
+* :ticket:`t1460: write arbitrary pillar from config.yaml to bootstrap.sls <1460>`
+* :ticket:`t1896: use yaml.safe_dump() instead of yaml.dump() <1896>`
+* :ticket:`t1460: create two new kickstart configs, pillar embedded <1460>`
+* :ticket:`t1897: document how to provide config to kickstart as multiple files <1897>`
+* :ticket:`t1460: document the new pillar config key <1460>`
+* :ticket:`t1460: separate pillar.yaml config per revision <1460>`
+* :ticket:`t1792: define base deploy_defaults keys for per-revision pillar <1792>`
+* :ticket:`t1858: point kickstart config at oms-salt-core/legacy <1858>`
+* :ticket:`t1858: include oms-vrc, oms-salt-core, oms-salt-hosting in OMS source code checkout <1858>`
+* :ticket:`t1858: fixup vhost_base_url in deploy_defaults pillar <1858>`
+* :ticket:`t1995: rename SSL key seeded into deploy.conf <1995>`
+* :ticket:`t2014: add oms-inside to source code checkout <2014>`
+* :ticket:`t2010: fixup embedded pillar to sync with reality <2010>`
+* :ticket:`t1906: kickstart kickstart! <1906>`
+* :ticket:`t1906: update README, how to kickstart-kickstart <1906>`
+* :ticket:`t2030: shuffle around YAML configs <2030>`
+* :ticket:`t2051: add more commentary to all YAML configs <2051>`
+* :ticket:`t2068: move states for TCF - oms-salt-core >> oms-salt-tcf <2068>`
+* :ticket:`t2010: fixup master/release kickstart config for v0.8.5 <2010>`
+* :ticket:`t1858: define base system packages through pillar <1858>`
+* :ticket:`t1908: add Dockerfiles and docs to kickstart docker containers <1908>`
+* :ticket:`t1982: use embedded pillar to seed reclass' master_tops <1982>`
 
 
 oms-salt-core
 ~~~~~~~~~~~~~
 
-* t1858: import salt states from oms-deploy
-* t1858: create /etc/oms.conf
-* t2032: add states for basic management of ufw
-* t1982: basic states to install and setup reclass
-* t2010: move base.sls >> packages.sls
-* t1802: add states and config for salt-minion service
-* t2010: bump copyleft year to 2014
-* t2010: create a packages.yml for reclass
-* t2077: leverage reclass' ability to provide top list
-* t2080: move oms repos pillar from oms-kickstart to reclass
-* t2081: correct file mode set in root SSH keys
-* t1556: make it easier to hack on oms-docs
-* t1982: improve on the initial reclass formula
-* t2206: add formula for installing python, pip, and setuptools
-* t2225: add a formula that installs our mkswap script
-* t2223: define a state which ensures the OMS base is present
-* t2224: import states/cmd.py from saltstack
-* t2032: add ufw.allow_http and allow_https states
-* t2228: correct pkg handling/install in oms-admin formula
-* t2010: create oms-repos-v0_8_5 reclass
-* t2010: minor comment/update to oms.repos formula
-* t2226: include default oms pillar in reclass oms.yml
-* t2223: update oms.admin formula with oms.require_base include
-* t2010: Merge v0.8.5 to master
-* t2010: Update branch to master in classes/oms.yml
+* :ticket:`t1858: import salt states from oms-deploy <1858>`
+* :ticket:`t1858: create /etc/oms.conf <1858>`
+* :ticket:`t2032: add states for basic management of ufw <2032>`
+* :ticket:`t1982: basic states to install and setup reclass <1982>`
+* :ticket:`t2010: move base.sls >> packages.sls <2010>`
+* :ticket:`t1802: add states and config for salt-minion service <1802>`
+* :ticket:`t2010: bump copyleft year to 2014 <2010>`
+* :ticket:`t2010: create a packages.yml for reclass <2010>`
+* :ticket:`t2077: leverage reclass' ability to provide top list <2077>`
+* :ticket:`t2080: move oms repos pillar from oms-kickstart to reclass <2080>`
+* :ticket:`t2081: correct file mode set in root SSH keys <2081>`
+* :ticket:`t1556: make it easier to hack on oms-docs <1556>`
+* :ticket:`t1982: improve on the initial reclass formula <1982>`
+* :ticket:`t2206: add formula for installing python, pip, and setuptools <2206>`
+* :ticket:`t2225: add a formula that installs our mkswap script <2225>`
+* :ticket:`t2223: define a state which ensures the OMS base is present <2223>`
+* :ticket:`t2224: import states/cmd.py from saltstack <2224>`
+* :ticket:`t2032: add ufw.allow_http and allow_https states <2032>`
+* :ticket:`t2228: correct pkg handling/install in oms-admin formula <2228>`
+* :ticket:`t2010: create oms-repos-v0_8_5 reclass <2010>`
+* :ticket:`t2010: minor comment/update to oms.repos formula <2010>`
+* :ticket:`t2226: include default oms pillar in reclass oms.yml <2226>`
+* :ticket:`t2223: update oms.admin formula with oms.require_base include <2223>`
+* :ticket:`t2010: Merge v0.8.5 to master <2010>`
+* :ticket:`t2010: Update branch to master in classes/oms.yml <2010>`
 
 
 oms-salt-tcf
 ~~~~~~~~~~~~
 
-* t1858: import current salt states from oms-deploy
-* t1850: fixup oidc and nginx states
-* t1079: fixup dotfiles setup for root user
-* t1899: set JAVA_OPTS in /etc/default/tomcat7 through pillar
-* t2010: fixup legacy fullstack.sls
-* t2010: clean up .sls for v0.8.5
-* t1908: basic states to install docker
-* t2073: move opensmtpd pillar keys from oms-kickstart to oms-salt-tcf/classes
-* t2074: move sls includes from fullstack sls to reclass
-* t2083: remove oms states provided by oms-salt-core
-* t2081: fixup user.root state - do not pass on bad file mode
-* t2127: bump version of opensmtpd to 5.4.2
-* t2129: watch postgres service/pkg, refresh salt modules
-* t1488: give vim knowledge about salt format and syntax
-* t2087: update OIDC states to build/run with java 7
-* t2147: refactor management of OIDC server's java config
-* t2147: define oidc pillar in oidc-server-config reclass
-* t2152: define default java_opts for OIDC in oidc-server-config reclass
-* t2147: refactor OIDC deploy formula + reclass definitions
-* t2170: manage tomcat's web.xml, ensure running in production mode
-* t2201: update nginx.conf in salt formula for DO
-* t2088: fixup license across all salt states
-* t2241: define /etc/hostname in hostname sls directly
-* t2242: fixup root's tmux config, use default modifier
-* t2268: update fullstack formula and reclass definition
-* t2010: add ufw.allow_http state to nginx.yml reclass
-* t2156: refactor opensmtpd formula, reclass and config
-* t2145: include reclass definition with OIDC WARs for v0.8.5
-* t2090: add a reclass definition for OIDC as an OMS App
-* t2090: CoreID TCC, add states + reclass definitions
-* t2243: add a salt formula + reclass definition for PersonaUI
-* t2243: add Persona Management App to Small Community TCC
+* :ticket:`t1858: import current salt states from oms-deploy <1858>`
+* :ticket:`t1850: fixup oidc and nginx states <1850>`
+* :ticket:`t1079: fixup dotfiles setup for root user <1079>`
+* :ticket:`t1899: set JAVA_OPTS in /etc/default/tomcat7 through pillar <1899>`
+* :ticket:`t2010: fixup legacy fullstack.sls <2010>`
+* :ticket:`t2010: clean up .sls for v0.8.5 <2010>`
+* :ticket:`t1908: basic states to install docker <1908>`
+* :ticket:`t2073: move opensmtpd pillar keys from oms-kickstart to oms-salt-tcf/classes <2073>`
+* :ticket:`t2074: move sls includes from fullstack sls to reclass <2074>`
+* :ticket:`t2083: remove oms states provided by oms-salt-core <2083>`
+* :ticket:`t2081: fixup user.root state - do not pass on bad file mode <2081>`
+* :ticket:`t2127: bump version of opensmtpd to 5.4.2 <2127>`
+* :ticket:`t2129: watch postgres service/pkg, refresh salt modules <2129>`
+* :ticket:`t1488: give vim knowledge about salt format and syntax <1488>`
+* :ticket:`t2087: update OIDC states to build/run with java 7 <2087>`
+* :ticket:`t2147: refactor management of OIDC server's java config <2147>`
+* :ticket:`t2147: define oidc pillar in oidc-server-config reclass <2147>`
+* :ticket:`t2152: define default java_opts for OIDC in oidc-server-config reclass <2152>`
+* :ticket:`t2147: refactor OIDC deploy formula + reclass definitions <2147>`
+* :ticket:`t2170: manage tomcat's web.xml, ensure running in production mode <2170>`
+* :ticket:`t2201: update nginx.conf in salt formula for DO <2201>`
+* :ticket:`t2088: fixup license across all salt states <2088>`
+* :ticket:`t2241: define /etc/hostname in hostname sls directly <2241>`
+* :ticket:`t2242: fixup root's tmux config, use default modifier <2242>`
+* :ticket:`t2268: update fullstack formula and reclass definition <2268>`
+* :ticket:`t2010: add ufw.allow_http state to nginx.yml reclass <2010>`
+* :ticket:`t2156: refactor opensmtpd formula, reclass and config <2156>`
+* :ticket:`t2145: include reclass definition with OIDC WARs for v0.8.5 <2145>`
+* :ticket:`t2090: add a reclass definition for OIDC as an OMS App <2090>`
+* :ticket:`t2090: CoreID TCC, add states + reclass definitions <2090>`
+* :ticket:`t2243: add a salt formula + reclass definition for PersonaUI <2243>`
+* :ticket:`t2243: add Persona Management App to Small Community TCC <2243>`
 
 
 oms-admin
 ~~~~~~~~~
 
-* t1562: refactor oms-admin to use argh
-* t1562: minor fixup to last commit on argh
-* t2009: Use single quotes in triple-quoted docstrings      oms-deploy
-* t2048: move existing commands to a sub-module in oms_admin~~~~~~~~~~
-* t2010: version bump to v0.8.5
-* t2010: Merge v0.8.5 to master
+* :ticket:`t1562: refactor oms-admin to use argh <1562>`
+* :ticket:`t1562: minor fixup to last commit on argh <1562>`
+* :ticket:`t2009: Use single quotes in triple-quoted docstrings <2009>`
+* :ticket:`t2048: move existing commands to a sub-module in oms_admin <2048>`
+* :ticket:`t2010: version bump to v0.8.5 <2010>`
+* :ticket:`t2010: Merge v0.8.5 to master <2010>`
 
 
 oms-deploy
 ~~~~~~~~~~
 
-* t1573: more efficient install for modules, configs, scripts
-* t2038: Remove extra space character from license
-* t1935: Update copyright date in Python source files
-* t1792: sync qa-develop with master/v0.8.4-rc
-* t2010: bump version to v0.8.5
-* t1613: ensure tests are run without user input too
-* t2093: update default django settings.py, log errors to file
-* t2143: suppress verbose output from pip
-* t2083: remove all salt formulas, states, modules, pillar
+* :ticket:`t1573: more efficient install for modules, configs, scripts <1573>`
+* :ticket:`t2038: Remove extra space character from license <2038>`
+* :ticket:`t1935: Update copyright date in Python source files <1935>`
+* :ticket:`t1792: sync qa-develop with master/v0.8.4-rc <1792>`
+* :ticket:`t2010: bump version to v0.8.5 <2010>`
+* :ticket:`t1613: ensure tests are run without user input too <1613>`
+* :ticket:`t2093: update default django settings.py, log errors to file <2093>`
+* :ticket:`t2143: suppress verbose output from pip <2143>`
+* :ticket:`t2083: remove all salt formulas, states, modules, pillar <2083>`
 
 
 oms-core
 ~~~~~~~~
 
-* t1361: Create client_credentials module
-* t1361: Use client_credentials module in GPSDemo
-* t1839: add CONTRIBUTING.md and reference ID3 wiki article
-* t1465: Delete old chat app
-* t1004: mock flow of TW Perguntus deploy
-* t1004: fetch wizard config from selected manifest, and remove hardcoded values.
-* t1209: update manifests.json with the latest from the YAML files
-* t707:  Use template variables instead of hardcoded values in manifests
-* t1903: Rename files (oic_validation -> oidc_validation)
-* t1903: oic_validation -> oidc_validation
-* t1924: Remove empty Python files
-* t1:    Add license to Python files
-* t1975: Add workaround for Tastypie create_api_key ImportError
-* t1984: Update deprecated import (django.conf.urls.defaults -> django.conf.urls)
-* t1818: Add a simple CoreID Registry
-* t1953: add a utility to import any importable python object
-* t1927: add a manifest and module for Core ID Registration
-* t1951: map core IDs to personas in CoreID Registry
-* t1970: Create a FACT-enabled PersonaAuthorization class
-* t1940: Filter the CoreID Registry's Persona APIs through FACT
-* t2009: Use single quotes in triple-quoted docstrings
-* t2026: Use introspection endpoint for OIDC validation
-* t2027: Remove OpenIdConnectAuthorization.is_authorized() method
-* t2037: Add docs and tests to core ID- and persona-related modules
-* t2038: Remove extra space character from license
-* t2039: Rename cn_sandbox to funf_connector
-* t2040: Rename pds_sandbox to gps_demo_pds
-* t2041: Rename prox_sandbox to gps_demo_proximity
-* t2049: Namespace OIDC-related template variables in manifests
-* t1792: sync qa-develop with updates from master/v0.8.4
-* t2060: Add perguntus_farming.json fixture
-* t1935: Update copyright date in Python source files
-* t2150: Change "trust wrapper" to "TAB" in oms-core
-* t2150: Change "trust wrapper" to "TAB" in oms-core (rename files)
-* t1979: Clean up manifests
-* t1965: Add module deps and update Tastypie in PrivateRegistry.yaml
-* t2185: Drop 'modules.' prefix when importing OMS modules
-* t2166: Improve error handling during OIDC token validation
-* t2144: ensure correct Persona/Core ID setup during Registration
-* t2144: update CoreID-Registration manifest for v0.8.5
-* t2179: refactor CoreID Registration Complete page for usability
-* t2144: rename initial scope ven > persona-management
-* t1443: reorganize oms-core/static, move into appropriate places
-* t2198: correct template parameters in TFrameworks page
-* t2216: Turn on tests in CoreID-Registration.yaml
-* t2185: Drop 'modules.' prefix when importing OMS modules
-* t2165: add manifest for PersonasUI OMS (reference) App
-* t1211: Fix PortalRegistry.yaml manifest for v0.8.5
-* t1961: Create OIDCFACTAuthorization class
-* t2248: Improve error handling during OIDC token validation
-* t1922: Update RtD environment and docs
-* t1987: Add CoreID Registry docs
-* t2179: update default registration complete page
+* :ticket:`t1361: Create client_credentials module <1361>`
+* :ticket:`t1361: Use client_credentials module in GPSDemo <1361>`
+* :ticket:`t1839: add CONTRIBUTING.md and reference ID3 wiki article <1839>`
+* :ticket:`t1465: Delete old chat app <1465>`
+* :ticket:`t1004: mock flow of TW Perguntus deploy <1004>`
+* :ticket:`t1004: fetch wizard config from selected manifest, and remove hardcoded values. <1004>`
+* :ticket:`t1209: update manifests.json with the latest from the YAML files <1209>`
+* :ticket:`t707:  Use template variables instead of hardcoded values in manifests <707>`
+* :ticket:`t1903: Rename files (oic_validation -> oidc_validation) <1903>`
+* :ticket:`t1903: oic_validation -> oidc_validation <1903>`
+* :ticket:`t1924: Remove empty Python files <1924>`
+* :ticket:`t1:    Add license to Python files <1>`
+* :ticket:`t1975: Add workaround for Tastypie create_api_key ImportError <1975>`
+* :ticket:`t1984: Update deprecated import (django.conf.urls.defaults -> django.conf.urls) <1984>`
+* :ticket:`t1818: Add a simple CoreID Registry <1818>`
+* :ticket:`t1953: add a utility to import any importable python object <1953>`
+* :ticket:`t1927: add a manifest and module for Core ID Registration <1927>`
+* :ticket:`t1951: map core IDs to personas in CoreID Registry <1951>`
+* :ticket:`t1970: Create a FACT-enabled PersonaAuthorization class <1970>`
+* :ticket:`t1940: Filter the CoreID Registry's Persona APIs through FACT <1940>`
+* :ticket:`t2009: Use single quotes in triple-quoted docstrings <2009>`
+* :ticket:`t2026: Use introspection endpoint for OIDC validation <2026>`
+* :ticket:`t2027: Remove OpenIdConnectAuthorization.is_authorized() method <2027>`
+* :ticket:`t2037: Add docs and tests to core ID- and persona-related modules <2037>`
+* :ticket:`t2038: Remove extra space character from license <2038>`
+* :ticket:`t2039: Rename cn_sandbox to funf_connector <2039>`
+* :ticket:`t2040: Rename pds_sandbox to gps_demo_pds <2040>`
+* :ticket:`t2041: Rename prox_sandbox to gps_demo_proximity <2041>`
+* :ticket:`t2049: Namespace OIDC-related template variables in manifests <2049>`
+* :ticket:`t1792: sync qa-develop with updates from master/v0.8.4 <1792>`
+* :ticket:`t2060: Add perguntus_farming.json fixture <2060>`
+* :ticket:`t1935: Update copyright date in Python source files <1935>`
+* :ticket:`t2150: Change "trust wrapper" to "TAB" in oms-core <2150>`
+* :ticket:`t2150: Change "trust wrapper" to "TAB" in oms-core (rename files) <2150>`
+* :ticket:`t1979: Clean up manifests <1979>`
+* :ticket:`t1965: Add module deps and update Tastypie in PrivateRegistry.yaml <1965>`
+* :ticket:`t2185: Drop 'modules.' prefix when importing OMS modules <2185>`
+* :ticket:`t2166: Improve error handling during OIDC token validation <2166>`
+* :ticket:`t2144: ensure correct Persona/Core ID setup during Registration <2144>`
+* :ticket:`t2144: update CoreID-Registration manifest for v0.8.5 <2144>`
+* :ticket:`t2179: refactor CoreID Registration Complete page for usability <2179>`
+* :ticket:`t2144: rename initial scope ven > persona-management <2144>`
+* :ticket:`t1443: reorganize oms-core/static, move into appropriate places <1443>`
+* :ticket:`t2198: correct template parameters in TFrameworks page <2198>`
+* :ticket:`t2216: Turn on tests in CoreID-Registration.yaml <2216>`
+* :ticket:`t2185: Drop 'modules.' prefix when importing OMS modules <2185>`
+* :ticket:`t2165: add manifest for PersonasUI OMS (reference) App <2165>`
+* :ticket:`t1211: Fix PortalRegistry.yaml manifest for v0.8.5 <1211>`
+* :ticket:`t1961: Create OIDCFACTAuthorization class <1961>`
+* :ticket:`t2248: Improve error handling during OIDC token validation <2248>`
+* :ticket:`t1922: Update RtD environment and docs <1922>`
+* :ticket:`t1987: Add CoreID Registry docs <1987>`
+* :ticket:`t2179: update default registration complete page <>`
 
 
 oms-experimental
 ~~~~~~~~~~~~~~~~
 
-* t1361: Use client_credentials module in GPSDemo
-* t1839: add CONTRIBUTING.md and reference ID3 wiki article
-* t1465: Delete old chat app
-* t1903: oic_validation -> oidc_validation
-* t1924: Remove empty Python files
-* t2009: Use single quotes in triple-quoted docstrings
-* t1935: Update copyright date in Python source files
-* t2039: Rename cn_sandbox to funf_connector
-* t2040: Rename pds_sandbox to gps_demo_pds
-* t2041: Rename prox_sandbox to gps_demo_proximity
-* t1979: Clean up manifests
-* t2185: Drop 'modules.' prefix when importing OMS modules
-* t1961: Use OIDCFACTAuthorization class in GPS Demo and Perguntus
+* :ticket:`t1361: Use client_credentials module in GPSDemo <1361>`
+* :ticket:`t1839: add CONTRIBUTING.md and reference ID3 wiki article <1839>`
+* :ticket:`t1465: Delete old chat app <1465>`
+* :ticket:`t1903: oic_validation -> oidc_validation <1903>`
+* :ticket:`t1924: Remove empty Python files <1924>`
+* :ticket:`t2009: Use single quotes in triple-quoted docstrings <2009>`
+* :ticket:`t1935: Update copyright date in Python source files <1935>`
+* :ticket:`t2039: Rename cn_sandbox to funf_connector <2039>`
+* :ticket:`t2040: Rename pds_sandbox to gps_demo_pds <2040>`
+* :ticket:`t2041: Rename prox_sandbox to gps_demo_proximity <2041>`
+* :ticket:`t1979: Clean up manifests <1979>`
+* :ticket:`t2185: Drop 'modules.' prefix when importing OMS modules <2185>`
+* :ticket:`t1961: Use OIDCFACTAuthorization class in GPS Demo and Perguntus <1961>`
 
 
 oms-ui
 ~~~~~~
 
-* t1160: create a generic management UI for OMS Personas
-* t1408: move to oms-core base_bootstrap3.html
-* t1408: move shared lib.less with common ID3 theme to oms-core. AUTHOR BC
-* t1839: add CONTRIBUTING.md and reference ID3 wiki article
-* t2165: adding OIDC back to persona ui
-* t2165: set Persona UI CoreID API URL through constance
-* t2165: move persona management urls into the module
-* t2165: merge Persona UI > v0.8.5
-* t2144: Add hub_registration_theme module
-* t2179: remove complete page from hub_registration_theme
-* t2010: Merge v0.8.5 to master
+* :ticket:`t1160: create a generic management UI for OMS Personas <1160>`
+* :ticket:`t1408: move to oms-core base_bootstrap3.html <1408>`
+* :ticket:`t1408: move shared lib.less with common ID3 theme to oms-core. AUTHOR BC <1408>`
+* :ticket:`t1839: add CONTRIBUTING.md and reference ID3 wiki article <1839>`
+* :ticket:`t2165: adding OIDC back to persona ui <2165>`
+* :ticket:`t2165: set Persona UI CoreID API URL through constance <2165>`
+* :ticket:`t2165: move persona management urls into the module <2165>`
+* :ticket:`t2165: merge Persona UI > v0.8.5 <2165>`
+* :ticket:`t2144: Add hub_registration_theme module <2144>`
+* :ticket:`t2179: remove complete page from hub_registration_theme <2179>`
+* :ticket:`t2010: Merge v0.8.5 to master <2010>`
 
 
 v0.8.4
@@ -380,105 +380,105 @@ Focal Points
 oms-docs
 ~~~~~~~~
 
-* t1878: Add OIDC client creation section to TAB Tutorial
-* 903: update oic_validation -> oidc_validation
-* t1166: Add summary to each top-level section
-* t1792: update docs for v0.8.4 release
-* t1764: Update GPS Demo Tutorial for v0.8.4
+* :ticket:`t1878: Add OIDC client creation section to TAB Tutorial <1878>`
+* :ticket:`t903: update oic_validation -> oidc_validation <903>`
+* :ticket:`t1166: Add summary to each top-level section <1166>`
+* :ticket:`t1792: update docs for v0.8.4 release <1792>`
+* :ticket:`t1764: Update GPS Demo Tutorial for v0.8.4 <1764>`
 
 
 oms-kickstart
 ~~~~~~~~~~~~~
 
-* t1839: add CONTRIBUTING.md and reference ID3 wiki article
+* :ticket:`t1839: add CONTRIBUTING.md and reference ID3 wiki article <1839>`
 
 
 oms-salt-core
 ~~~~~~~~~~~~~
 
-* t1858: import current salt states from oms-deploy
-* t1850: fixup oidc and nginx states
-* t1079: fixup dotfiles setup for root user
-* t1899: set JAVA_OPTS in /etc/default/tomcat7 through pillar
-* t2010: fixup legacy fullstack.sls
+* :ticket:`t1858: import current salt states from oms-deploy <1858>`
+* :ticket:`t1850: fixup oidc and nginx states <1850>`
+* :ticket:`t1079: fixup dotfiles setup for root user <1079>`
+* :ticket:`t1899: set JAVA_OPTS in /etc/default/tomcat7 through pillar <1899>`
+* :ticket:`t2010: fixup legacy fullstack.sls <2010>`
 
 
 oms-admin
 ~~~~~~~~~
 
-* t1839: add CONTRIBUTING.md and reference ID3 wiki article
-* t1792: bump version to v0.8.4
-* t1792: merge v0.8.4 to master
+* :ticket:`t1839: add CONTRIBUTING.md and reference ID3 wiki article <1839>`
+* :ticket:`t1792: bump version to v0.8.4 <1792>`
+* :ticket:`t1792: merge v0.8.4 to master <1792>`
 
 
 oms-deploy
 ~~~~~~~~~~
 
-* t1613: hardcode hosts list for fabric, and use fabric's execute()
-* t1792: sync qa-develop with master
-* t1792: bump version to 0.8.4
-* t1792: correct default deploy config in oms pillar
-* t1898: ensure HTTP > HTTPS redirect is disabled
-* t1579: ensure nginx does not block OIDC's .well-known URL
-* t1899: disable mongodb service by default
-* t1995: correct SSL key in pillar seeds to deploy.conf
+* :ticket:`t1613: hardcode hosts list for fabric, and use fabric's execute() <1613>`
+* :ticket:`t1792: sync qa-develop with master <1792>`
+* :ticket:`t1792: bump version to 0.8.4 <1792>`
+* :ticket:`t1792: correct default deploy config in oms pillar <1792>`
+* :ticket:`t1898: ensure HTTP > HTTPS redirect is disabled <1898>`
+* :ticket:`t1579: ensure nginx does not block OIDC's .well-known URL <1579>`
+* :ticket:`t1899: disable mongodb service by default <1899>`
+* :ticket:`t1995: correct SSL key in pillar seeds to deploy.conf <1995>`
 
 
 oms-core
 ~~~~~~~~
 
-* t1444: Update access token in GPSDemo.yaml
-* t702: add check_questions service to Perguntus manifest
-* t1464: Remove unnecessary quotation marks in manifests
-* t1471: Unpin pytz version in manifests
-* t551: add oms-deploy as a dependency to Registry manifest
-* l702: add CRON_EMAIL_DELAY constance to Perguntus
-* t790: add module summary doc to all python modules in oms-core
-* t1238: Remove PerguntusPlus.yaml manifest
-* t1476: ensure Registry's embedded services are disabled by default
-* t1494: add simpleStream embedded service to Private Registry manifest
-* t1302: add persona_config to PerguntusDemo manifest
-* t1302: extract persona wizard config from manifest
-* t991: refactor OIDC persona wizard with CoreID page
-* t1404: add copy of bootstrap 3.0.0
-* t1404: add copy of font-awesome 3.2.1.
-* t1404: add copy of HTML5 JS 3.7.0.
-* t1404: add copy of LessCSS 1.4.1.
-* t1408: move shared lib.less with common ID3 theme to oms-core.
-* t1408: add base for bootstrap 3 site
-* t1558: update manifests to leverage jinja template variables
-* t1618 - added OMSOIDC fallback mechanizem
-* t1593: Replace access token with template variable in GPSDemo.yaml
-* t1593: Update Questions' send_time format in Perguntus fixtures
-* t1593: Fix endpoints in GPSDemoUI.yaml
-* t1593: Fix templating when setting funf_connector_base_url in GPSDemo.yaml
-* t1593: Rename GPSDemo's PDS to GPSDemoPDS
-* t1792: sync qa-develop with v0.8.3 from master
-* t1792: correct SSL parameter in Private Registry manifest
-* t1792: disable debugger by default, in Private Registry manifest
-* t1209: update manifests.json with the latest from the YAML files
-* t2049: Namespace OIDC-related template variables in manifests
+* :ticket:`t1444: Update access token in GPSDemo.yaml <1444>`
+* :ticket:`t702: add check_questions service to Perguntus manifest <702>`
+* :ticket:`t1464: Remove unnecessary quotation marks in manifests <1464>`
+* :ticket:`t1471: Unpin pytz version in manifests <1471>`
+* :ticket:`t551: add oms-deploy as a dependency to Registry manifest <551>`
+* :ticket:`l702: add CRON_EMAIL_DELAY constance to Perguntus <702>`
+* :ticket:`t790: add module summary doc to all python modules in oms-core <790>`
+* :ticket:`t1238: Remove PerguntusPlus.yaml manifest <1238>`
+* :ticket:`t1476: ensure Registry's embedded services are disabled by default <1476>`
+* :ticket:`t1494: add simpleStream embedded service to Private Registry manifest <1494>`
+* :ticket:`t1302: add persona_config to PerguntusDemo manifest <1302>`
+* :ticket:`t1302: extract persona wizard config from manifest <1302>`
+* :ticket:`t991: refactor OIDC persona wizard with CoreID page <991>`
+* :ticket:`t1404: add copy of bootstrap 3.0.0 <1404>`
+* :ticket:`t1404: add copy of font-awesome 3.2.1. <1404>`
+* :ticket:`t1404: add copy of HTML5 JS 3.7.0. <1404>`
+* :ticket:`t1404: add copy of LessCSS 1.4.1. <1404>`
+* :ticket:`t1408: move shared lib.less with common ID3 theme to oms-core. <1408>`
+* :ticket:`t1408: add base for bootstrap 3 site <1408>`
+* :ticket:`t1558: update manifests to leverage jinja template variables <1558>`
+* :ticket:`t1618 - added OMSOIDC fallback mechanizem <1618 >`
+* :ticket:`t1593: Replace access token with template variable in GPSDemo.yaml <1593>`
+* :ticket:`t1593: Update Questions' send_time format in Perguntus fixtures <1593>`
+* :ticket:`t1593: Fix endpoints in GPSDemoUI.yaml <1593>`
+* :ticket:`t1593: Fix templating when setting funf_connector_base_url in GPSDemo.yaml <1593>`
+* :ticket:`t1593: Rename GPSDemo's PDS to GPSDemoPDS <1593>`
+* :ticket:`t1792: sync qa-develop with v0.8.3 from master <1792>`
+* :ticket:`t1792: correct SSL parameter in Private Registry manifest <1792>`
+* :ticket:`t1792: disable debugger by default, in Private Registry manifest <1792>`
+* :ticket:`t1209: update manifests.json with the latest from the YAML files <1209>`
+* :ticket:`t2049: Namespace OIDC-related template variables in manifests <2049>`
 
 
 oms-experimental
 ~~~~~~~~~~~~~~~~
 
-* t790: Add module summary doc to all Python modules
-* t906: if questions email fails to send, let the user know
-* t702: fixed backend related issues with cron
-* t702 - update APP_OIDC_HOST to OIDC_BASE_URL on all files
-* t702: refactor Perguntus check_questions()
-* t1609 - removed the link to kodkod vm and moved it into the project.
-* t1610 - removed static token from gps javascripts. added OMSOIDC module to add token to requests
-* t1609 - removed hardcoded hostname from gpsui
-* t1593: Add missing import in prox_sandbox/admin.py
-* t1792: update qa-develop with v0.8.3 from master
+* :ticket:`t790: Add module summary doc to all Python modules <790>`
+* :ticket:`t906: if questions email fails to send, let the user know <906>`
+* :ticket:`t702: fixed backend related issues with cron <702>`
+* :ticket:`t702 - update APP_OIDC_HOST to OIDC_BASE_URL on all files <702 >`
+* :ticket:`t702: refactor Perguntus check_questions() <702>`
+* :ticket:`t1609 - removed the link to kodkod vm and moved it into the project. <1609 >`
+* :ticket:`t1610 - removed static token from gps javascripts. added OMSOIDC module to add token to requests <1610 >`
+* :ticket:`t1609 - removed hardcoded hostname from gpsui <1609 >`
+* :ticket:`t1593: Add missing import in prox_sandbox/admin.py <1593>`
+* :ticket:`t1792: update qa-develop with v0.8.3 from master <1792>`
 
 
 oms-ui
 ~~~~~~
 
-* t790: add module summary doc to python modules
+* :ticket:`t790: add module summary doc to python modules <790>`
 
 
 oms-oidc
@@ -502,7 +502,7 @@ oms-oidc
 python-oidc
 ~~~~~~~~~~~
 
-* t1839: add CONTRIBUTING.md and reference ID3 wiki article
+* :ticket:`t1839: add CONTRIBUTING.md and reference ID3 wiki article <1839>`
 
 
 v0.8.3
@@ -514,135 +514,135 @@ Focal Points
 oms-docs
 ~~~~~~~~
 
-* t1441: initial commit for new docs proposal
-* t968: detail first steps with deployment
-* t1481: remove specific versions from requirements.txt
-* t1481: refactor README.md - detail how to contribute
-* t1480: refine styling and fix accordion in navbar
-* t1477: comment out snippet about VRC and other next steps for the future
-* t1477: improve details RE first steps of deployment
-* t1477: detail domain/SSL setup in first_steps.rst
-* t1480: change styles and colors
-* t1477: add sphinx.ext.todo module to conf.py
-* t1477: hide docs that are not yet ready or required
-* t1477: correct tmux commands
-* t1477: add Private TCC deployment docs
-* t1478: point to oms-kickstart config in master branch
-* t1477: add helpful notes about SSL in first_steps.rst
-* t1477: import Persona/CoreID resources from wiki
-* t1477: swap example_header include for tutorial_setup.inc
-* t1477: import GPS Demo Tutorial from MoinMoin
-* t1481: reference tables in rst, for doc contributors
-* t1477: import Perguntus Demo Tutorial from MoinMoin
-* t1509: Update GPS Demo docs
-* t1480: completely refactor theme & style
-* t1477: include manual db setup for OIDC deployment
-* t1477: disable 'Edit on Github' link for now
-* t1477: update examples & conventions in README.md
-* t1477: update index.rst to maintain 80 character width
-* t1477: update Perguntus docs
-* t1529: update OIDC deployment docs, remove manual steps
-* t1477: update a few details noted by Patrick
-* t1529: remove oidc doc cruft from last update
-* t1568: add ID3 MIT license to oms-docs
-* t1567: reactivate and update FAQ
-* t1477: update main page, sync with updates to MoinMoin
-* t1540: fix responsive styling issues with navbar
-* t1477: update to sync up with recent changes to wiki
-* t1569: reactivate and update contributing section
-* t1477: add an outline of sections in these docs
-* t1477: add the doc outline to contributing/documentation.rst
-* t1480: completely refactor theme & style
-* t1477: move initial_deploy to kickstart_oms
-* t1555: refactor TAB Developer VM setup guide
-* t1555: update URL to current VM image
-* t1479: add a section on OIDC
-* t1479: update OIDC section to wrap at 80 characters
-* t1816: replace OIDCs setup guide with a developers guide
-* t1813: fixup links on /introduction/concepts
-* t1590: refactor the navbar - make is usable
-* t1821: add virtualbox install guide/reference
-* t1821: new guide on using packer.io to build vm image
-* t1821: update the new guide on building VM images with packer
-* t1555: update the TAB Dev VM Setup Guide
-* t1829: update wiki link to details for contributors
-* t1839: add CONTRIBUTING.md and reference ID3 wiki article
-* t1166: slight improvement for the top-level index/overview
-* t1556: create a guide for contributing to documentation
-* t1855: document details of release process
-* t1816: revamp the OIDC Developer's Guide
-* t1819: Move TAB Tutorial from wiki to oms-docs
-* t1568: add ID3 MIT license to oms-docs
-* t1878: TAB Tutorial updates
+* :ticket:`t1441: initial commit for new docs proposal <1441>`
+* :ticket:`t968: detail first steps with deployment <968>`
+* :ticket:`t1481: remove specific versions from requirements.txt <1481>`
+* :ticket:`t1481: refactor README.md - detail how to contribute <1481>`
+* :ticket:`t1480: refine styling and fix accordion in navbar <1480>`
+* :ticket:`t1477: comment out snippet about VRC and other next steps for the future <1477>`
+* :ticket:`t1477: improve details RE first steps of deployment <1477>`
+* :ticket:`t1477: detail domain/SSL setup in first_steps.rst <1477>`
+* :ticket:`t1480: change styles and colors <1480>`
+* :ticket:`t1477: add sphinx.ext.todo module to conf.py <1477>`
+* :ticket:`t1477: hide docs that are not yet ready or required <1477>`
+* :ticket:`t1477: correct tmux commands <1477>`
+* :ticket:`t1477: add Private TCC deployment docs <1477>`
+* :ticket:`t1478: point to oms-kickstart config in master branch <1478>`
+* :ticket:`t1477: add helpful notes about SSL in first_steps.rst <1477>`
+* :ticket:`t1477: import Persona/CoreID resources from wiki <1477>`
+* :ticket:`t1477: swap example_header include for tutorial_setup.inc <1477>`
+* :ticket:`t1477: import GPS Demo Tutorial from MoinMoin <1477>`
+* :ticket:`t1481: reference tables in rst, for doc contributors <1481>`
+* :ticket:`t1477: import Perguntus Demo Tutorial from MoinMoin <1477>`
+* :ticket:`t1509: Update GPS Demo docs <1509>`
+* :ticket:`t1480: completely refactor theme & style <1480>`
+* :ticket:`t1477: include manual db setup for OIDC deployment <1477>`
+* :ticket:`t1477: disable 'Edit on Github' link for now <1477>`
+* :ticket:`t1477: update examples & conventions in README.md <1477>`
+* :ticket:`t1477: update index.rst to maintain 80 character width <1477>`
+* :ticket:`t1477: update Perguntus docs <1477>`
+* :ticket:`t1529: update OIDC deployment docs, remove manual steps <1529>`
+* :ticket:`t1477: update a few details noted by Patrick <1477>`
+* :ticket:`t1529: remove oidc doc cruft from last update <1529>`
+* :ticket:`t1568: add ID3 MIT license to oms-docs <1568>`
+* :ticket:`t1567: reactivate and update FAQ <1567>`
+* :ticket:`t1477: update main page, sync with updates to MoinMoin <1477>`
+* :ticket:`t1540: fix responsive styling issues with navbar <1540>`
+* :ticket:`t1477: update to sync up with recent changes to wiki <1477>`
+* :ticket:`t1569: reactivate and update contributing section <1569>`
+* :ticket:`t1477: add an outline of sections in these docs <1477>`
+* :ticket:`t1477: add the doc outline to contributing/documentation.rst <1477>`
+* :ticket:`t1480: completely refactor theme & style <1480>`
+* :ticket:`t1477: move initial_deploy to kickstart_oms <1477>`
+* :ticket:`t1555: refactor TAB Developer VM setup guide <1555>`
+* :ticket:`t1555: update URL to current VM image <1555>`
+* :ticket:`t1479: add a section on OIDC <1479>`
+* :ticket:`t1479: update OIDC section to wrap at 80 characters <1479>`
+* :ticket:`t1816: replace OIDCs setup guide with a developers guide <1816>`
+* :ticket:`t1813: fixup links on /introduction/concepts <1813>`
+* :ticket:`t1590: refactor the navbar - make is usable <1590>`
+* :ticket:`t1821: add virtualbox install guide/reference <1821>`
+* :ticket:`t1821: new guide on using packer.io to build vm image <1821>`
+* :ticket:`t1821: update the new guide on building VM images with packer <1821>`
+* :ticket:`t1555: update the TAB Dev VM Setup Guide <1555>`
+* :ticket:`t1829: update wiki link to details for contributors <1829>`
+* :ticket:`t1839: add CONTRIBUTING.md and reference ID3 wiki article <1839>`
+* :ticket:`t1166: slight improvement for the top-level index/overview <1166>`
+* :ticket:`t1556: create a guide for contributing to documentation <1556>`
+* :ticket:`t1855: document details of release process <1855>`
+* :ticket:`t1816: revamp the OIDC Developer's Guide <1816>`
+* :ticket:`t1819: Move TAB Tutorial from wiki to oms-docs <1819>`
+* :ticket:`t1568: add ID3 MIT license to oms-docs <1568>`
+* :ticket:`t1878: TAB Tutorial updates <1878>`
 
 
 oms-kickstart
 ~~~~~~~~~~~~~
 
-* t1476: run state.highstate one last time for the user
-* t1792: set oms-deploy revision to master
+* :ticket:`t1476: run state.highstate one last time for the user <1476>`
+* :ticket:`t1792: set oms-deploy revision to master <1792>`
 
 
 oms-admin
 ~~~~~~~~~
 
-* t1315: add unicode encoding declaration
-* t1504: basic functions for processing the manifest as a template
-* t1504: process the manifest as a jinja template
-* t1504: fix bugs related to the last commit
-* t1792: bump version to v0.8.3
-* t1792: merge v0.8.3 to master
+* :ticket:`t1315: add unicode encoding declaration <1315>`
+* :ticket:`t1504: basic functions for processing the manifest as a template <1504>`
+* :ticket:`t1504: process the manifest as a jinja template <1504>`
+* :ticket:`t1504: fix bugs related to the last commit <1504>`
+* :ticket:`t1792: bump version to v0.8.3 <1792>`
+* :ticket:`t1792: merge v0.8.3 to master <1792>`
 
 
 oms-deploy
 ~~~~~~~~~~
 
-* t1419: Update logstash to 1.2.1
-* t1290: minor correction in logstash state
-* t1445: update salt states to do what bootstrap did
-* t1458: remove shell scripts from oms-deploy
-* t308: refactor manifest documentation
-* t1476: fix PPA/GPG details in mongo state
-* t1487: move root-specific details from oms state >> root.sls
-* t1487: import OIDC states and dependencies from salt-(non)-common
-* t1487: include an nginx location block for OIDC
-* t1478: checkout master branch on each repo, by default
-* t1536: update default nginx vhost config for our sanity
-* t1487: tweak OIDC pillar keys
-* t1553: a simple hostname state for ubuntu
-* t1553: include hostname state in fullstack.sls
-* t1553: add a deployment config for oms-admin
-* t1529: oidc state refactor
-* t1529: update how we initialize the OIDC db
-* t1556: checkout oms-docs repo with OMS source code
-* t1556: ensure states create OMS python and bin directories
-* t1556: make it easier to hack on oms-docs
-* t1529: let salt set default oidc db username and password
-* t1572: base state ensures tmux and vim are installed
-* t1504: fix bug RE use of check_results() in oms_deploy.api
-* t1792: bump version to v0.8.3
+* :ticket:`t1419: Update logstash to 1.2.1 <1419>`
+* :ticket:`t1290: minor correction in logstash state <1290>`
+* :ticket:`t1445: update salt states to do what bootstrap did <1445>`
+* :ticket:`t1458: remove shell scripts from oms-deploy <1458>`
+* :ticket:`t308: refactor manifest documentation <308>`
+* :ticket:`t1476: fix PPA/GPG details in mongo state <1476>`
+* :ticket:`t1487: move root-specific details from oms state >> root.sls <1487>`
+* :ticket:`t1487: import OIDC states and dependencies from salt-(non)-common <1487>`
+* :ticket:`t1487: include an nginx location block for OIDC <1487>`
+* :ticket:`t1478: checkout master branch on each repo, by default <1478>`
+* :ticket:`t1536: update default nginx vhost config for our sanity <1536>`
+* :ticket:`t1487: tweak OIDC pillar keys <1487>`
+* :ticket:`t1553: a simple hostname state for ubuntu <1553>`
+* :ticket:`t1553: include hostname state in fullstack.sls <1553>`
+* :ticket:`t1553: add a deployment config for oms-admin <1553>`
+* :ticket:`t1529: oidc state refactor <1529>`
+* :ticket:`t1529: update how we initialize the OIDC db <1529>`
+* :ticket:`t1556: checkout oms-docs repo with OMS source code <1556>`
+* :ticket:`t1556: ensure states create OMS python and bin directories <1556>`
+* :ticket:`t1556: make it easier to hack on oms-docs <1556>`
+* :ticket:`t1529: let salt set default oidc db username and password <1529>`
+* :ticket:`t1572: base state ensures tmux and vim are installed <1572>`
+* :ticket:`t1504: fix bug RE use of check_results() in oms_deploy.api <1504>`
+* :ticket:`t1792: bump version to v0.8.3 <1792>`
 
 
 oms-core
 ~~~~~~~~
 
-* t1476: ensure Registry's embedded services are disabled by default
-* t551:  add oms-deploy as a dependency to Registry manifest
-* t1593: Fix endpoints in GPSDemoUI.yaml
-* t1593: Update access token in GPSDemo.yaml
-* t1593: Rename GPSDemo's PDS to GPSDemoPDS
-* t1792: merge v0.8.3 to master
+* :ticket:`t1476: ensure Registry's embedded services are disabled by default <1476>`
+* :ticket:`t551:  add oms-deploy as a dependency to Registry manifest <551>`
+* :ticket:`t1593: Fix endpoints in GPSDemoUI.yaml <1593>`
+* :ticket:`t1593: Update access token in GPSDemo.yaml <1593>`
+* :ticket:`t1593: Rename GPSDemo's PDS to GPSDemoPDS <1593>`
+* :ticket:`t1792: merge v0.8.3 to master <1792>`
 
 
 oms-experimental
 ~~~~~~~~~~~~~~~~
 
-* t907: add docstrings to perguntus ui and backend
-* t1593: Add missing import in prox_sandbox/admin.py
-* t1593: Add missing import in prox_sandbox/admin.py
-* t1610 - removed static token from gps javascripts. added OMSOIDC module to add token to requests
-* t1610 - removed static token from gps javascripts. added OMSOIDC module to add token to requests
-* t1792: Merge v0.8.3 into master
+* :ticket:`t907: add docstrings to perguntus ui and backend <907>`
+* :ticket:`t1593: Add missing import in prox_sandbox/admin.py <1593>`
+* :ticket:`t1593: Add missing import in prox_sandbox/admin.py <1593>`
+* :ticket:`t1610 - removed static token from gps javascripts. added OMSOIDC module to add token to requests <1610 >`
+* :ticket:`t1610 - removed static token from gps javascripts. added OMSOIDC module to add token to requests <1610 >`
+* :ticket:`t1792: Merge v0.8.3 into master <1792>`
 
 
 oms-oidc
@@ -654,7 +654,7 @@ oms-oidc
 python-oidc
 ~~~~~~~~~~~
 
-* t1367: set license, author & maintainer
+* :ticket:`t1367: set license, author & maintainer <1367>`
 
 
 v0.8.2
@@ -666,217 +666,217 @@ Focal Points
 oms-kickstart
 ~~~~~~~~~~~~~
 
-* t820: add standard .gitignore
-* t820: include initial kickstart shell script
-* t820: add initial kickstart-oms.py
-* t820: include an example YAML kickstart config
-* t820: refactor README based on kickstart-oms.py
-* t1446: add ability to run arbitrary salt modules
-* t1446: update example.yaml to include post_kick
-* t1461: additional docs on both basic and advanced use
-* t1477: ensure README makes note to use tmux
-* t1478: add YAML configs for release and latest dev
-* t1463: install a specific version of salt-minion
+* :ticket:`t820: add standard .gitignore <820>`
+* :ticket:`t820: include initial kickstart shell script <820>`
+* :ticket:`t820: add initial kickstart-oms.py <820>`
+* :ticket:`t820: include an example YAML kickstart config <820>`
+* :ticket:`t820: refactor README based on kickstart-oms.py <820>`
+* :ticket:`t1446: add ability to run arbitrary salt modules <1446>`
+* :ticket:`t1446: update example.yaml to include post_kick <1446>`
+* :ticket:`t1461: additional docs on both basic and advanced use <1461>`
+* :ticket:`t1477: ensure README makes note to use tmux <1477>`
+* :ticket:`t1478: add YAML configs for release and latest dev <1478>`
+* :ticket:`t1463: install a specific version of salt-minion <1463>`
 
 
 oms-deploy
 ~~~~~~~~~~
 
-* 1156: include ALLOWED_HOSTS in settings.py.tpl
-* t779: embedded TAB services can pass extra parameters to uwsgi
-* t779: improve docs/comments for services section of the manifest
-* t1194: ensure we validate the app manifest against its config spec
-* t1195: ensure run_tests is properly handled/evaluated as a boolean
-* t1197: try to read manifest as .yaml before .ini
-* t1197: add PyYAML dependency to setup.py
-* t1145: convert /var/www/python >> /var/oms/python
-* t808: Replace print with Python logging
-* t847: correct port parameter in manifest app configspec
-* t961: ensure oms-deploy does not step on the SSH public key
-* t285: OIDC state in salt-non-common repo has the repo taken care of
-* t1146: convert /var/www/python/modules/ >> /var/oms/src/
-* t1292: remove incorrect bootstrap complete message
-* t875: manage OMS repos in salt
-* t1201: correct postgres state
-* t1359: update list of OMS repos - include those in active development
-* t1315: declare utf-8 encoding in python sources files
-* t702: embedded services can now use uwsgi cron scheduler
-* t702: fix enabling embedded services
-* t1364: properly execute commands in the virtualenv context - for embedded services
-* 1415: bump version to v0.8.2
+* :ticket:`t1156: include ALLOWED_HOSTS in settings.py.tpl <1156>`
+* :ticket:`tt779: embedded TAB services can pass extra parameters to uwsgi <t779>`
+* :ticket:`tt779: improve docs/comments for services section of the manifest <t779>`
+* :ticket:`t1194: ensure we validate the app manifest against its config spec <1194>`
+* :ticket:`t1195: ensure run_tests is properly handled/evaluated as a boolean <1195>`
+* :ticket:`t1197: try to read manifest as .yaml before .ini <1197>`
+* :ticket:`t1197: add PyYAML dependency to setup.py <1197>`
+* :ticket:`t1145: convert /var/www/python >> /var/oms/python <1145>`
+* :ticket:`t808: Replace print with Python logging <808>`
+* :ticket:`t847: correct port parameter in manifest app configspec <847>`
+* :ticket:`t961: ensure oms-deploy does not step on the SSH public key <961>`
+* :ticket:`t285: OIDC state in salt-non-common repo has the repo taken care of <285>`
+* :ticket:`t1146: convert /var/www/python/modules/ >> /var/oms/src/ <1146>`
+* :ticket:`t1292: remove incorrect bootstrap complete message <1292>`
+* :ticket:`t875: manage OMS repos in salt <875>`
+* :ticket:`t1201: correct postgres state <1201>`
+* :ticket:`t1359: update list of OMS repos - include those in active development <1359>`
+* :ticket:`t1315: declare utf-8 encoding in python sources files <1315>`
+* :ticket:`t702: embedded services can now use uwsgi cron scheduler <702>`
+* :ticket:`t702: fix enabling embedded services <702>`
+* :ticket:`t1364: properly execute commands in the virtualenv context - for embedded services <1364>`
+* :ticket:`1415: bump version to v0.8.2 <415>`
 
 
 oms-core
 ~~~~~~~~
 
-* t725: get portal to deploy private registry on another host - edit this msg
-* t565: Break up registry into portal_registry and private_registry moduels (first pass)
-* t565: Update private_registry.ini to use private_registry module
-* t565: Move registry fixtures into appropriate modules
-* t842: Delete ID3Registry.ini; copy in portal.ini from oms-deploy as PortalRegistry.ini
-* t845: Create PersonaLink in portal registry during registration
-* t850: Rename urls_portal.py and urls_private.py to urls.py
-* t817: initial persona models/api resources
-* merge initial persona APIs >> refactored registry modules
-* t795: integrate persona implementation >> registry
-* t565: move user registration backend >> portal_registry
-* t814: Add ENABLE_PORTAL_REGISTRATION to django-constance
-* t852: clean up cruft from persona refactor
-* t853: remove old registry doc in prep for updates
-* t795: correct use of API Resources in private_registry.api
-* t682: add initial CoreIDs API Resource
-* t814: merge portal registration config switch >> personas QA
-* t565: move registration templates >> portal_registry module
-* t814: template for New User Registration closed
-* t852: correct references to Personas in VRC
-* t842: simplify use of portal_registry config tpl
-* t842: update manifests for Portal/Private Registry
-* t845: correct reference to PersonaLink model in personas API
-* t852: do not create old Persona during user registration
-* t842: add urls param to Portal Registry manifest
-* t861: set Registry tastypie datetime format to rfc-2822
-* t1: add license to personas module
-* t795: merge updates from v0.7.1-rc >> personas feature branch
-* t945: correct imports in Registry URLs - merge and update from qa-develop
-* t874: Add Perguntus fixture from uidemo.idhypercubed.org
-* t859: add json fixture with an example oic-compatible persona
-* t859: add oic-compatible Principal Persona
-* t962: create navigation content block in base template
-* t962: update common registry template to use navigation blocko
-* t982: merge personas feature branch >> qa-develop
-* t708: update django-tastypie to v0.9.16 in Portal/Private Registry manifests
-* t951: when we create a User, create an API Key too
-* t682: correct idc_admin field on CoreIDs API
-* t951: add api_key field to CoreIDs API
-* t682: correct missing label in personas.admin
-* t900: custom authentication class for CoreIDs API
-* t900: enable DjangoPasswordAuthentication() on CoreID API
-* t990: upgrade Registry to django 1.5.1
-* t885: Add arbiter module
-* t885: Add license to new API Transformer files
-* t886: Add fixture for Perguntus
-* t885 - set manifest urls.py to include share.html and not sharing.html template
-* t886: Add Perguntus state fixture
-* t1001: OMSOIDC.js expects the app to specify OIDC client/scope/host for token authorization
-* t1002: include scope/client/host in Perguntus UI manifest
-* t942: update Perguntus Backend manifest for the API Transformer
-* t942: add perguntus_state fixture to manifest (Perguntus Backend)
-* t985: initial view, form & template to create a CoreID
-* t985: add CoreID create view to Private Registry
-* t962: tweak css in registry-base.html
-* t990: correct tastypie version in Registry manifests, .16 is git dev (next release)
-* t985: add Dashboard redirect view
-* t995: Add initial django oidc_token module
-* t995: Add push_token/ URL to Private Registry
-* t1003: POST token to backend once received from OIDC
-* t565: duplicate fixtures for Private Registry
-* t991: Persona Wizard on coreID page - without backbone.
-* t1001: use OIDC_HOST constance config key, update manifests and js
-* t991: wizard now create personas on coreid flow
-* t971: update scopes for Private Registry tokens
-* t991: disable Persona API hiding oic_compatible flag
-* t971: disable OpenIdConnectAuthorization() on VRC APIs (for demo)
-* t989: Portal Registry user registration refactor
-* t994: Create NoOp TCC deployment task
-* t990: add ALLOWED_HOSTS setting to Portal manifest
-* t1012: add demo-specific TCC deploy task
-* t994: fix use of app_urls in Portal's welcome UI
-* t1004: intial integration of dynamic persona creation wizard into TAB deploy flow
-* t967: ensure hosts fixture loaded into Private Registry
-* t1003: hide failed POST token alert message on Core IDs page
-* Revert "t1012: add demo-specific TCC deploy task"
-* t779: update workerd service config in the Portal/Private Registry
-* t1015: Create new token for GPSDemo app
-* t1179: Add missing Tastypie dep (mimeparse) to manifests' pip_requirements
-* t1175: Pin pytz version for pip 1.4
-* t1194: remove extra parameters covered by defaults (in manifests)
-* t1203: Create module with PDS base functionality
-* t1210: remove unused URLs from portal_registry.urls
-* t959: remove login link from Registry UI nav bar
-* t1224: Fix ALLOWED_HOSTS values in manifests
-* t1205: Use pds_base with GPSDemo
-* t1198: Update manifests to pin Django at 1.5.3
-* t1198: Update manifests to pin Django at 1.5.4
-* t1204: Add logging to pds_base
-* t1243: Add pds_base support to PerguntusDemo.ini manifest
-* t1203: Make pds_base.models.PdsModel abstract
-* t1251: Update Perguntus fixtures with new pds_base fields
-* t1259: Remove virtualenv_root and module_root settings from Perguntus manifests
-* t1257: Remove resource app from GPSDemo.ini manifest
-* t1261: Remove unused settings vars in GPSDemo.ini manifest
-* t1264: Update GPSDemo fixture with new pds_base fields
-* t1242: Use haversine formula for calculating distance in prox_sandbox module
-* t937: Rename API Transformer to FACT
-* t1197: convert INI-formatted manifests to YAML
-* t1301: Update access token in GPSDemo.yaml manifest
-* t1315: declare unicode encoding in all python source
-* t1258: Update Perguntus to use new PDS app
-* t1172: include predefined questions in Perguntus manifest
-* t1364: simplify commands in embedded services, for each Registry
-* t1235: Add manifest and fixture for PerguntusPlus
-* t1235: Fix PerguntusPlus email recipient
-* t1372: Update GPSDemo token
-* t1265: Add NOOP FACT to GPSDemo
-* t1346: remove client/scope/token defaults hardcoded into OMSOIDC.js
-* t1346: refactor oidc_host as oidc_base_url in OMSOIDC.js
-* t1346: OMSOIDC.js should require scope/client/url
+* :ticket:`t725: get portal to deploy private registry on another host - edit this msg <725>`
+* :ticket:`t565: Break up registry into portal_registry and private_registry moduels (first pass) <565>`
+* :ticket:`t565: Update private_registry.ini to use private_registry module <565>`
+* :ticket:`t565: Move registry fixtures into appropriate modules <565>`
+* :ticket:`t842: Delete ID3Registry.ini; copy in portal.ini from oms-deploy as PortalRegistry.ini <842>`
+* :ticket:`t845: Create PersonaLink in portal registry during registration <845>`
+* :ticket:`t850: Rename urls_portal.py and urls_private.py to urls.py <850>`
+* :ticket:`t817: initial persona models/api resources <817>`
+* :ticket:`merge initial persona APIs >> refactored registry modules <erge >`
+* :ticket:`t795: integrate persona implementation >> registry <795>`
+* :ticket:`t565: move user registration backend >> portal_registry <565>`
+* :ticket:`t814: Add ENABLE_PORTAL_REGISTRATION to django-constance <814>`
+* :ticket:`t852: clean up cruft from persona refactor <852>`
+* :ticket:`t853: remove old registry doc in prep for updates <853>`
+* :ticket:`t795: correct use of API Resources in private_registry.api <795>`
+* :ticket:`t682: add initial CoreIDs API Resource <682>`
+* :ticket:`t814: merge portal registration config switch >> personas QA <814>`
+* :ticket:`t565: move registration templates >> portal_registry module <565>`
+* :ticket:`t814: template for New User Registration closed <814>`
+* :ticket:`t852: correct references to Personas in VRC <852>`
+* :ticket:`t842: simplify use of portal_registry config tpl <842>`
+* :ticket:`t842: update manifests for Portal/Private Registry <842>`
+* :ticket:`t845: correct reference to PersonaLink model in personas API <845>`
+* :ticket:`t852: do not create old Persona during user registration <852>`
+* :ticket:`t842: add urls param to Portal Registry manifest <842>`
+* :ticket:`t861: set Registry tastypie datetime format to rfc-2822 <861>`
+* :ticket:`t1: add license to personas module <1>`
+* :ticket:`t795: merge updates from v0.7.1-rc >> personas feature branch <795>`
+* :ticket:`t945: correct imports in Registry URLs - merge and update from qa-develop <945>`
+* :ticket:`t874: Add Perguntus fixture from uidemo.idhypercubed.org <874>`
+* :ticket:`t859: add json fixture with an example oic-compatible persona <859>`
+* :ticket:`t859: add oic-compatible Principal Persona <859>`
+* :ticket:`t962: create navigation content block in base template <962>`
+* :ticket:`t962: update common registry template to use navigation blocko <962>`
+* :ticket:`t982: merge personas feature branch >> qa-develop <982>`
+* :ticket:`t708: update django-tastypie to v0.9.16 in Portal/Private Registry manifests <708>`
+* :ticket:`t951: when we create a User, create an API Key too <951>`
+* :ticket:`t682: correct idc_admin field on CoreIDs API <682>`
+* :ticket:`t951: add api_key field to CoreIDs API <951>`
+* :ticket:`t682: correct missing label in personas.admin <682>`
+* :ticket:`t900: custom authentication class for CoreIDs API <900>`
+* :ticket:`t900: enable DjangoPasswordAuthentication() on CoreID API <900>`
+* :ticket:`t990: upgrade Registry to django 1.5.1 <990>`
+* :ticket:`t885: Add arbiter module <885>`
+* :ticket:`t885: Add license to new API Transformer files <885>`
+* :ticket:`t886: Add fixture for Perguntus <886>`
+* :ticket:`t885 - set manifest urls.py to include share.html and not sharing.html template <885 >`
+* :ticket:`t886: Add Perguntus state fixture <886>`
+* :ticket:`t1001: OMSOIDC.js expects the app to specify OIDC client/scope/host for token authorization <1001>`
+* :ticket:`t1002: include scope/client/host in Perguntus UI manifest <1002>`
+* :ticket:`t942: update Perguntus Backend manifest for the API Transformer <942>`
+* :ticket:`t942: add perguntus_state fixture to manifest (Perguntus Backend) <942>`
+* :ticket:`t985: initial view, form & template to create a CoreID <985>`
+* :ticket:`t985: add CoreID create view to Private Registry <985>`
+* :ticket:`t962: tweak css in registry-base.html <962>`
+* :ticket:`t990: correct tastypie version in Registry manifests, .16 is git dev (next release) <990>`
+* :ticket:`t985: add Dashboard redirect view <985>`
+* :ticket:`t995: Add initial django oidc_token module <995>`
+* :ticket:`t995: Add push_token/ URL to Private Registry <995>`
+* :ticket:`t1003: POST token to backend once received from OIDC <1003>`
+* :ticket:`t565: duplicate fixtures for Private Registry <565>`
+* :ticket:`t991: Persona Wizard on coreID page - without backbone. <991>`
+* :ticket:`t1001: use OIDC_HOST constance config key, update manifests and js <1001>`
+* :ticket:`t991: wizard now create personas on coreid flow <991>`
+* :ticket:`t971: update scopes for Private Registry tokens <971>`
+* :ticket:`t991: disable Persona API hiding oic_compatible flag <991>`
+* :ticket:`t971: disable OpenIdConnectAuthorization() on VRC APIs (for demo) <971>`
+* :ticket:`t989: Portal Registry user registration refactor <989>`
+* :ticket:`t994: Create NoOp TCC deployment task <994>`
+* :ticket:`t990: add ALLOWED_HOSTS setting to Portal manifest <990>`
+* :ticket:`t1012: add demo-specific TCC deploy task <1012>`
+* :ticket:`t994: fix use of app_urls in Portal's welcome UI <994>`
+* :ticket:`t1004: intial integration of dynamic persona creation wizard into TAB deploy flow <1004>`
+* :ticket:`t967: ensure hosts fixture loaded into Private Registry <967>`
+* :ticket:`t1003: hide failed POST token alert message on Core IDs page <1003>`
+* :ticket:`Revert "t1012: add demo-specific TCC deploy task" <evert >`
+* :ticket:`t779: update workerd service config in the Portal/Private Registry <779>`
+* :ticket:`t1015: Create new token for GPSDemo app <1015>`
+* :ticket:`t1179: Add missing Tastypie dep (mimeparse) to manifests' pip_requirements <1179>`
+* :ticket:`t1175: Pin pytz version for pip 1.4 <1175>`
+* :ticket:`t1194: remove extra parameters covered by defaults (in manifests) <1194>`
+* :ticket:`t1203: Create module with PDS base functionality <1203>`
+* :ticket:`t1210: remove unused URLs from portal_registry.urls <1210>`
+* :ticket:`t959: remove login link from Registry UI nav bar <959>`
+* :ticket:`t1224: Fix ALLOWED_HOSTS values in manifests <1224>`
+* :ticket:`t1205: Use pds_base with GPSDemo <1205>`
+* :ticket:`t1198: Update manifests to pin Django at 1.5.3 <1198>`
+* :ticket:`t1198: Update manifests to pin Django at 1.5.4 <1198>`
+* :ticket:`t1204: Add logging to pds_base <1204>`
+* :ticket:`t1243: Add pds_base support to PerguntusDemo.ini manifest <1243>`
+* :ticket:`t1203: Make pds_base.models.PdsModel abstract <1203>`
+* :ticket:`t1251: Update Perguntus fixtures with new pds_base fields <1251>`
+* :ticket:`t1259: Remove virtualenv_root and module_root settings from Perguntus manifests <1259>`
+* :ticket:`t1257: Remove resource app from GPSDemo.ini manifest <1257>`
+* :ticket:`t1261: Remove unused settings vars in GPSDemo.ini manifest <1261>`
+* :ticket:`t1264: Update GPSDemo fixture with new pds_base fields <1264>`
+* :ticket:`t1242: Use haversine formula for calculating distance in prox_sandbox module <1242>`
+* :ticket:`t937: Rename API Transformer to FACT <937>`
+* :ticket:`t1197: convert INI-formatted manifests to YAML <1197>`
+* :ticket:`t1301: Update access token in GPSDemo.yaml manifest <1301>`
+* :ticket:`t1315: declare unicode encoding in all python source <1315>`
+* :ticket:`t1258: Update Perguntus to use new PDS app <1258>`
+* :ticket:`t1172: include predefined questions in Perguntus manifest <1172>`
+* :ticket:`t1364: simplify commands in embedded services, for each Registry <1364>`
+* :ticket:`t1235: Add manifest and fixture for PerguntusPlus <1235>`
+* :ticket:`t1235: Fix PerguntusPlus email recipient <1235>`
+* :ticket:`t1372: Update GPSDemo token <1372>`
+* :ticket:`t1265: Add NOOP FACT to GPSDemo <1265>`
+* :ticket:`t1346: remove client/scope/token defaults hardcoded into OMSOIDC.js <1346>`
+* :ticket:`t1346: refactor oidc_host as oidc_base_url in OMSOIDC.js <1346>`
+* :ticket:`t1346: OMSOIDC.js should require scope/client/url <1346>`
 
 
 oms-experimental
 ~~~~~~~~~~~~~~~~
 
-* t870: add license to perguntus_backend.send_question
-* t938: Change "trust wrapper" to "TAB" in oms-experimental
-* t932: Limit code to 80 columns in GPSDemo sandboxes
-* t931: Sort ClientLocationResource in model, not in resource
-* t885: Add API Transformer feature
-* t885: Add Authorization class to PerguntusStateResource
-* t885: Add license to new API Transformer files
-* t885: Rename "filter" to "transform"
-* t886: Create simple UI to manipulate Perguntus state object
-* t885: Use haversine formula to measure distance
-* t942 - fixed JS error when no data
-* t942 - fixed loading leaflet JS module locally (fix HTTPS issues)
-* t942 - fixed question saved as 'text' and not 'open'. added notification of messages in days logs. showing yes/no questions on map
-* t942 - added notification of total messages for month
-* t942 - removed sharing page
-* t942 - removed phone from settings page
-* t942 - fix delete capability. now delete question. added confirmation for delete
-* Merge branch 't885' into t942
-* t942 - restore sharing page. set it to marucry page.
-* t942 - fixed sharing menu hidden in menu page
-* t942 - edit question progress. sharing page enhancements.
-* t942 - editing functionally done.
-* t942 - removed auth from answering questions
-* t942 - removed auth from answering questions
-* t942 - removed auth from answering questions
-* t942 - Yes/No questions get counted into the log and show up too
-* t942 - Make sure graph is scaled 0-10
-* t942 - added a nice time chooser to add a question form
-* t886: Always allow object creation in DSAuthorization class
-* t886: Move list_to_boolean decorator to perguntus_backend/decorators.py
-* Merge updates to Perguntus Backend >> t942
-* t1002: add OMS OIDC UI module to PerguntusUI
-* t1002: add OMS OIDC UI module to PerguntusUI
-* t971: fix various issues in Perguntus, prior to demo
-* t1205: Use pds_base with GPSDemo
-* t877: if Perguntus questions API fails, make it clear
-* t1243: Add pds_base support to perguntus_backend module
-* t1257: Remove Resource Server stub from GPSDemo
-* t1261: Remove old unit tests from pds_sandbox and prox_sandbox modules
-* t1242: Use haversine formula for calculating distance in prox_sandbox module
-* t937: Rename API Transformer to FACT
-* t1258: perguntus_backend cleanup (whitespace and imports)
-* t1258: Remove unused file perguntus_backend/tests.py
-* t1258: Add license to files in perguntus_backend where it is missing
-* t1258: Create perguntus_pds module
-* t1258: Update Perguntus code to use new PDS app
-* t1315: Declare utf-8 encoding in Python sources files
-* t1172: quick start questions UI updates for perguntus
-* t906: if questions email fails to send, let the user know
-* t1235: Add django-admin command to check proximity and send an email
-* t1265: Add NOOP FACT to GPSDemo
-* t1: Add license to two empty Python files
+* :ticket:`t870: add license to perguntus_backend.send_question <870>`
+* :ticket:`t938: Change "trust wrapper" to "TAB" in oms-experimental <938>`
+* :ticket:`t932: Limit code to 80 columns in GPSDemo sandboxes <932>`
+* :ticket:`t931: Sort ClientLocationResource in model, not in resource <931>`
+* :ticket:`t885: Add API Transformer feature <885>`
+* :ticket:`t885: Add Authorization class to PerguntusStateResource <885>`
+* :ticket:`t885: Add license to new API Transformer files <885>`
+* :ticket:`t885: Rename "filter" to "transform" <885>`
+* :ticket:`t886: Create simple UI to manipulate Perguntus state object <886>`
+* :ticket:`t885: Use haversine formula to measure distance <885>`
+* :ticket:`t942 - fixed JS error when no data <942 >`
+* :ticket:`t942 - fixed loading leaflet JS module locally (fix HTTPS issues) <942 >`
+* :ticket:`t942 - fixed question saved as 'text' and not 'open'. added notification of messages in days logs. showing yes/no questions on map <942 >`
+* :ticket:`t942 - added notification of total messages for month <942 >`
+* :ticket:`t942 - removed sharing page <942 >`
+* :ticket:`t942 - removed phone from settings page <942 >`
+* :ticket:`t942 - fix delete capability. now delete question. added confirmation for delete <942 >`
+* :ticket:`Merge branch 't885' into t942 <erge >`
+* :ticket:`t942 - restore sharing page. set it to marucry page. <942 >`
+* :ticket:`t942 - fixed sharing menu hidden in menu page <942 >`
+* :ticket:`t942 - edit question progress. sharing page enhancements. <942 >`
+* :ticket:`t942 - editing functionally done. <942 >`
+* :ticket:`t942 - removed auth from answering questions <942 >`
+* :ticket:`t942 - removed auth from answering questions <942 >`
+* :ticket:`t942 - removed auth from answering questions <942 >`
+* :ticket:`t942 - Yes/No questions get counted into the log and show up too <942 >`
+* :ticket:`t942 - Make sure graph is scaled 0-10 <942 >`
+* :ticket:`t942 - added a nice time chooser to add a question form <942 >`
+* :ticket:`t886: Always allow object creation in DSAuthorization class <886>`
+* :ticket:`t886: Move list_to_boolean decorator to perguntus_backend/decorators.py <886>`
+* :ticket:`Merge updates to Perguntus Backend >> t942 <erge >`
+* :ticket:`t1002: add OMS OIDC UI module to PerguntusUI <1002>`
+* :ticket:`t1002: add OMS OIDC UI module to PerguntusUI <1002>`
+* :ticket:`t971: fix various issues in Perguntus, prior to demo <971>`
+* :ticket:`t1205: Use pds_base with GPSDemo <1205>`
+* :ticket:`t877: if Perguntus questions API fails, make it clear <877>`
+* :ticket:`t1243: Add pds_base support to perguntus_backend module <1243>`
+* :ticket:`t1257: Remove Resource Server stub from GPSDemo <1257>`
+* :ticket:`t1261: Remove old unit tests from pds_sandbox and prox_sandbox modules <1261>`
+* :ticket:`t1242: Use haversine formula for calculating distance in prox_sandbox module <1242>`
+* :ticket:`t937: Rename API Transformer to FACT <937>`
+* :ticket:`t1258: perguntus_backend cleanup (whitespace and imports) <1258>`
+* :ticket:`t1258: Remove unused file perguntus_backend/tests.py <1258>`
+* :ticket:`t1258: Add license to files in perguntus_backend where it is missing <1258>`
+* :ticket:`t1258: Create perguntus_pds module <1258>`
+* :ticket:`t1258: Update Perguntus code to use new PDS app <1258>`
+* :ticket:`t1315: Declare utf-8 encoding in Python sources files <1315>`
+* :ticket:`t1172: quick start questions UI updates for perguntus <1172>`
+* :ticket:`t906: if questions email fails to send, let the user know <906>`
+* :ticket:`t1235: Add django-admin command to check proximity and send an email <1235>`
+* :ticket:`t1265: Add NOOP FACT to GPSDemo <1265>`
+* :ticket:`t1: Add license to two empty Python files <1>`
 
 
 oms-ui
