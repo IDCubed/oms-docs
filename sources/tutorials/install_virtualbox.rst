@@ -118,5 +118,11 @@ to wrangle in OS on unruly boxen:
    oms% VBoxManage internalcommands createrawvmdk -filename /home/user/VirtualBox/raw_disk.vmdk -rawdisk /dev/sdb -partitions 3 -relative
 
 
-With the raw disk created, you can then add it to a new or existing VM just as
-any other virtual disk in VirtualBox.
+.. _install_virtualbox_sdk:
+
+How to Install and Setup the VirtualBox SDK
+-------------------------------------------
+
+The purpose of this section is to provide instructions for installing the
+*pyvbox* python client to the VirtualBox SDK.
+
