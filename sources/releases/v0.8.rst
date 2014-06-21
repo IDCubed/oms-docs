@@ -11,6 +11,136 @@ OMS v0.8 Series Release Notes
 Here are some release notes associated with the v0.8.x series of OMS.
 
 
+
+v0.8.5.2
+--------
+
+Focal Points
+~~~~~~~~~~~~
+
+* simplify the process to build sphinx documentation projects in all OMS repos
+* define/standardize basic sphinx documentation projects for all OMS repos
+* improve completeness of documentation
+* new OMS app: the downloadable VM tracking app
+
+
+oms-docs
+~~~~~~~~
+
+* :ticket:`t2227: update iframe for Downloadable VM Requests <2227>`
+* :ticket:`t2227: update URL in VM Image Request iframe <2227>`
+* :ticket:`t2465: write a tutorial, update the system hostname <2465>`
+* :ticket:`t2498: correct version defined in oms-docs/package.json <2498>`
+* :ticket:`t2454: add sphinx doc builder for an arbitrary list of repos <2454>`
+* :ticket:`t2454: update Makefile/Gruntfile.js with config generator <2454>`
+* :ticket:`t2583: document new multi-project doc builder <2583>`
+* :ticket:`t2584: correct OMS doc template, oms/layout.html <2584>`
+* :ticket:`t2071: refactor introduction section <2071>`
+* :ticket:`t1164: import/update tutorial: Intro to Django <1164>`
+* :ticket:`t2429: update tutorial index with new tutorials <2429>`
+* :ticket:`t2325: update list of repos in the source code map <2325>`
+* :ticket:`t2433: add a crude drop-down menu to jump across doc projects <2433>`
+* :ticket:`t2084: Add Swap File Tutorial <2084>`
+* :ticket:`t2084: update Swap File Tutorial <2084>`
+* :ticket:`t1166: create/integrate new page - doc overview/intro <1166>`
+* :ticket:`t2522: reference external doc projects (API docs) <2522>`
+* :ticket:`t2455: align the great Sphinx <2455>`
+* :ticket:`t2568: version bump to v0.8.5.2 in sources/conf.py <2568>`
+* :ticket:`t2428: correct guide, Get Started with OMS Kickstart <2428>`
+* :ticket:`t1854: update theme.conf to include document_title <1854>`
+* :ticket:`t2428: correct guide, deploy/setup reference TCC <2428>`
+* :ticket:`t2319: Overhaul the documented release process <2319>`
+* :ticket:`t2522: update source code map, include links to API docs <2522>`
+* :ticket:`t2642: hide search entry form until search is functional <2642>`
+* :ticket:`t2522: update (API) Documentation Overview page <2522>`
+* :ticket:`t2319: another update to the release process doc <2319>`
+* :ticket:`t2721: shuffle around the contributing section <2721>`
+
+
+oms-kickstart
+~~~~~~~~~~~~~
+
+* :ticket:`t2425: correct use of oms:default_rev in config/pillar/*.yaml <2425>`
+* :ticket:`t2426: minor usability clean up config/pillar.yaml <2426>`
+* :ticket:`t2309: rename oms/base/ubuntu_* build templates for consistency <2309>`
+* :ticket:`t2310: correct packer's oms/base/ubuntu_iso build template <2310>`
+* :ticket:`t2455: align the great Sphinx <2455>`
+* :ticket:`t2568: bump version to v0.8.5.2 <2568>`
+
+
+oms-salt-core
+~~~~~~~~~~~~~
+
+* :ticket:`t2336: create basic sphinx documentation project <2336>`
+* :ticket:`t2582: import release management formula from oms-admin <2582>`
+* :ticket:`t2568: bump version in classes/oms.yml to v0.8.5.2 <2568>`
+
+
+oms-salt-tcf
+~~~~~~~~~~~~
+
+* :ticket:`t2076: create a basic sphinx project for the repo <2076>`
+* :ticket:`t2602: update URL/checksum in OIDC WAR manifest to v0.8.5.1 <2602>`
+* :ticket:`t2696: update oidc-java-properties manifest for OIDC v0.8.5.1 <2696>`
+* :ticket:`t2568: bump version to v0.8.5.2 <2568>`
+
+
+oms-admin
+~~~~~~~~~
+
+* :ticket:`t2455: align the great sphinx, add basic docs <2455>`
+* :ticket:`t2568: version bump to v0.8.5.2 <2568>`
+
+
+oms-deploy
+~~~~~~~~~~
+
+* :ticket:`t2455: align the great sphinx <2455>`
+* :ticket:`t2568: v0.8.5.2 version bump and update to setup.py <2568>`
+
+
+oms-core
+~~~~~~~~
+
+* :ticket:`t2455: align the Great Sphinx! <2455>`
+* :ticket:`t2491: move GPSDemo.rst > funf-connector.rst and update <2491>`
+* :ticket:`t2492: update index.rst as the doc overview <2492>`
+* :ticket:`t2568: version bump to v0.8.5.2 <2568>`
+
+
+python-oidc
+~~~~~~~~~~~
+
+* :ticket:`t2455: define basic sphinx documentation project <2455>`
+* :ticket:`t2568: version bump for v0.8.5.2 <2568>`
+
+
+oms-oidc
+~~~~~~~~
+
+
+
+oms-experimental
+~~~~~~~~~~~~~~~~
+
+* :ticket:`t1274: TAB for Downloadable VM Images <1274>`
+* :ticket:`t2227: create separate template for iframe in VmImages <2227>`
+* :ticket:`t2420: improve auth on downloadrequests/downloadlog in VmImage <2420>`
+* :ticket:`t2420: rename MyAuthentication > AnonPOSTAuthenticateGET in VmImage module <2420>`
+* :ticket:`t2348: update content and styling on VmImages templates <2348>`
+* :ticket:`t2320: eval(config.EMAIL) from constance in vm_image <2320>`
+* :ticket:`t2469: include login link in admin email sent by vm_images <2469>`
+* :ticket:`t2455: the Great Sphinx alignment! <2455>`
+* :ticket:`t2568: version bump to v0.8.5.2 <2568>`
+
+
+oms-ui
+~~~~~~
+
+* :ticket:`t2455: define basic sphinx documentation project <2455>`
+* :ticket:`t2568: version bump for v0.8.5.2 <2568>`
+
+
 v0.8.5.1
 --------
 
