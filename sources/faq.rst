@@ -47,11 +47,11 @@ Where can I find more answers?
     You can find more answers on:
 
     * `IRC, oms on freenode`_
-    * `OMS-docs Github`_
+    * `OMS-docs GitHub`_
     * `OMS Wiki`_
 
     .. _IRC, oms on freenode: irc://chat.freenode.net#oms
-    .. _OMS-docs Github: http://www.github.com/IDCubed/oms-docs
+    .. _OMS-docs GitHub: http://www.github.com/IDCubed/oms-docs
     .. _OMS Wiki: http://wiki.idhypercubed.org/wiki/
 
 Looking for something else to read? Checkout the :ref:`the Getting Started

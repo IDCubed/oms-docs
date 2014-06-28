@@ -107,7 +107,7 @@ UIs to OpenID Connect as well as the creation of applications to manage an
 OpenID Connect server. All endpoints provided with the original MITRE 
 implementations are very well-documented witin a 
 `dedicated page <https://github.com/mitreid-connect/OpenID-Connect-Java-Spring-Server/wiki/API>`_
-within MITRE's Github Wiki and will be summarized here for your convenience. 
+within MITRE's GitHub Wiki and will be summarized here for your convenience. 
 For persona support within OMS, an additional endpoint for persona-approved 
 sites was added and will be documented in detail below.
 

@@ -37,7 +37,7 @@ Here is an overview of the process we run through:
 #. With the repositories updated, build and upload all artifacts (VM Images, Java
    WARs, packages, etc), including the updated documentation.
 #. Clean up Redmine (update status, resolve, shuffle tickets around, etc), and
-   git repositories (remove RC branch, etc).
+   Git repositories (remove RC branch, etc).
 
 
 Pre-Requisites
@@ -64,10 +64,10 @@ release, please seek the assistance of the OMS management team.
 When running through the OMS release process on a set of repositories, the
 manipulations can be applied by an operator (completely manual) or with the aid
 of an automated process. If using the automated tooling, you will need an SSH
-key in */root/.ssh/id_rsa*, and ensure it has access to the git repositories the
+key in */root/.ssh/id_rsa*, and ensure it has access to the Git repositories the
 process is applied to. It is possible to apply the updates without the aid of
 this release formula, and in this case you should ensure the SSH key for the
-user running the git manipulations, has sufficient access to the git
+user running the Git manipulations, has sufficient access to the Git
 repositories.
 
 .. todo:: reference a tutorial on creating and managing SSH keys.
@@ -125,7 +125,7 @@ with each release, not all repositories will need a version bump or an RC branch
 It is also important to review active development to determine if a new
 repository is ready to be flagged for inclusion in the official release. If you
 believe a repository should be included, consult with OMS development advisors
-to have the repository (and its github permissions) reviewed.
+to have the repository (and its GitHub permissions) reviewed.
 
 Adding a new repository may require updates to the default configuration included
 in the :github-repo:`oms-salt-core <oms-salt-core>` source code. If the list of
@@ -162,12 +162,12 @@ Configure Release Formula
 -------------------------
 
 The instructions included throughout this document detail the set of commands
-needed to complete the manipulations of the git repositories. While generally
+needed to complete the manipulations of the Git repositories. While generally
 pretty simple to execute, it is a tedious process to run through manually,
 especially when there are a dozen or more repositories to apply the process to.
 
 To make this easier and faster, OMS includes a set of system automation formula
-that focuses on each of the manipulations made to the git repositories during a
+that focuses on each of the manipulations made to the Git repositories during a
 release. Using this formula is optional, as it is still possible to run through
 the release process executing the steps manually.
 
@@ -199,11 +199,11 @@ example:
      release:
        # the tag to use for the release, should be in the form: 'vX.Y.Z'
        tag: v0.8.5.2
-       # the message to use with the git commit when merging the release
+       # the message to use with the Git commit when merging the release
        commit_message: t2568: merge v0.8.5.2 to master
        # the user/email id of the GPG User to use for signing the release
        gpg_user: oms-dev@idcubed.org
-       # the base URL (for git) to use when building the RC branch URL list
+       # the base URL (for Git) to use when building the RC branch URL list
        # (using the formula's doc helpers)
        base_git_url: https://github.com/IDCubed
        # the name of the RC branch to create for the release
@@ -212,9 +212,9 @@ example:
        base_branch: qa-develop
        # the branch to merge the RC branch to for the release
        merge_to: master
-       # the git remote to push the release (merge and tags) to
+       # the Git remote to push the release (merge and tags) to
        remote: origin
-       # the path to the directory to store all git repos in while creating the release
+       # the path to the directory to store all Git repos in while creating the release
        # omit any trailing slash -  when used, it is assumed not present.
        work_dir: /var/oms/release
        # the list of repositories to operate on and manage
@@ -234,7 +234,7 @@ example:
 
 .. note::
 
-   Update the list of git repositories defined in the release manifest - this is
+   Update the list of Git repositories defined in the release manifest - this is
    the list of repositories the automated release formula will be applied to, and
    should match the results from the source code review.
 
@@ -342,7 +342,7 @@ Cut the Release Candidate
 
 With our prerequisites met, the list of repositories to process confirmed, and
 (optionally) the VRC updated to help us apply the release process on the source
-code, we can now start maniuplating git!
+code, we can now start manipulating Git!
 
 .. note::
 
@@ -364,8 +364,8 @@ Create a working directory and clone each repository:
    # mkdir /var/oms/release
    # git clone git@github.com:IDCubed/<repo>/
 
-Repeat the git clone for each repository in the release, replacing *<repo>* with
-the name of the OMS repository (or completely replacing the git URL). If the
+Repeat the Git clone for each repository in the release, replacing *<repo>* with
+the name of the OMS repository (or completely replacing the Git URL). If the
 */var/oms/release/* directory already exists, either rename or remove it.
 
 
@@ -389,7 +389,7 @@ each repository in the release:
   ``__init__.py``
 * Create a new branch for the release candidate. For example: ``v0.X.Y-rc``: ``git
   checkout -b v0.X.Y-rc``
-* Push that new branch out to gitHub: ``Git push origin v0.X.Y-rc``
+* Push that new branch out to GitHub: ``git push origin v0.X.Y-rc``
 
 The above is the manual process to create the RC branch.
 
@@ -403,7 +403,7 @@ use the VRC to..
 * clone new copies,
 * checkout clean *qa-develop*,
 * create the RC branch,
-* and push the new branch out to github.
+* and push the new branch out to GitHub.
 
 Yes, everything from above, in one fell swoop. Let's confirm the updates before
 we actually apply them:
@@ -539,10 +539,10 @@ If something fails, such as this:
    Total:     35
 
 
-..ensure that root's SSH key setup/created with github, and has *write access*
+..ensure that root's SSH key setup/created with GitHub, and has *write access*
 to the repositories listed in the release manifest. You can also scroll further
 up in the output from salt-call to locate the more specific error message from
-git, if you need a better confirmation of what went wrong.
+Git, if you need a better confirmation of what went wrong.
 
 Drop the *test=True* to actually apply the *oms.release.create_rc* formula.
 
@@ -617,7 +617,7 @@ oms-experimental
 * Version bump in */setup.py* and in the *__init__.py* found in each module.
 * Update auto-generated documentation if any Python packages, modules,
   functions, or classes were added/removed - re-run ``sphinx-autogen`` and use
-  git to compare the output. Updates may be needed.
+  Git to compare the output. Updates may be needed.
 
 
 oms-core
@@ -626,7 +626,7 @@ oms-core
 * Version bump in */setup.py* and in the *__init__.py* found in each module.
 * Update auto-generated documentation if any Python packages, modules,
   functions, or classes were added/removed - re-run ``sphinx-autogen`` and use
-  git to compare the output. Updates may be needed.
+  Git to compare the output. Updates may be needed.
 
 
 oms-kickstart
@@ -654,7 +654,7 @@ oms-deploy
 * Version bump in */setup.py*, and */docs/conf.py*.
 * Update auto-generated documentation if any Python packages, modules,
   functions, or classes were added/removed - re-run *sphinx-autogen* and use
-  git to compare the output. Updates may be needed.
+  Git to compare the output. Updates may be needed.
 
 
 oms-admin
@@ -663,7 +663,7 @@ oms-admin
 * Version bump in */setup.py* and */oms_admin/__init__.py*
 * Update auto-generated documentation if any Python packages, modules,
   functions, or classes were added/removed - re-run *sphinx-autogen* and use
-  git to compare the output. Updates may be needed.
+  Git to compare the output. Updates may be needed.
 
 
 oms-oidc
@@ -759,7 +759,7 @@ Upload the WAR to the Rackspace CDN:
 
 Create the *oms-oidc-wars-vx_y_z.yml* (reclass) manifest with the new URL and
 checksum, found in the :github-repo:`oms-salt-tcf
-<oms-salt-tcf/tree/master/classes/>` github repo. If the WAR is rebuilt, rebase
+<oms-salt-tcf/tree/master/classes/>` GitHub repo. If the WAR is rebuilt, rebase
 the RC branch to correct this commit with the final URL/checksum.
 
 
@@ -769,7 +769,7 @@ Python-oidc
 * Version bump in */setup.py*.
 * Update auto-generated documentation if any Python packages, modules,
   functions, or classes were added/removed - re-run *sphinx-autogen* and use
-  git to compare the output.
+  Git to compare the output.
 
 
 Version Bumps
@@ -836,7 +836,7 @@ the oms-kickstart repository to point the build at the RC branch we've created.
 
 .. note::
 
-   This update is not committed to git - it is only necessary to make this update
+   This update is not committed to Git - it is only necessary to make this update
    locally, for the build.
 
 
@@ -913,9 +913,9 @@ Create and sign a tag
 Referencing the release version and using an accepted GPG key:
 
 * Create a tag: ``git tag -s -m "$repo v0.X.Y" v0.X.Y -u john@example.com``.
-  Note that the email address specified tells git which GPG key to use when
+  Note that the email address specified tells Git which GPG key to use when
   signing the release.
-* Push the tag to gitHub: ``Git push origin master && git push --tags origin``
+* Push the tag to GitHub: ``git push origin master && git push --tags origin``
 
 
 Build a Demo VM
@@ -1046,6 +1046,6 @@ Clean up Redmine
 
 * update status, resolve, shuffle tickets around, ensure the taskboard is
   acceptable, etc.
-* purge RC branches from git repositories
+* purge RC branches from Git repositories
 
 

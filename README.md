@@ -239,7 +239,7 @@ the widths of text in each column.
 ## Editing THIS readme.md
 
 [This guide](http://daringfireball.net/projects/markdown/syntax) it a good place
-to start, but note that Github's *flavor* of Markdown has differences.
+to start, but note that GitHub's *flavor* of Markdown has differences.
 
-See [Github's help doc](https://help.github.com/articles/github-flavored-markdown)
+See [GitHub's help doc](https://help.github.com/articles/github-flavored-markdown)
 for details on their version of Markdown.

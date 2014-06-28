@@ -727,13 +727,13 @@ debugging helpers
 -----------
 
 Ok, let's leave runserver up and do some work in another console. note that if
-you are not familiar with ssh or the console, you can either start a new ssh
+you are not familiar with SSH or the console, you can either start a new SSH
 session, or use a console (terminal) multiplexor like ``tmux``. describing how to
 use tmux is outside the scope of this tutorial, but a few hours of use will prove
-its worth - rather than start new ssh sessions, you create a pseudo terminal that
+its worth - rather than start new SSH sessions, you create a pseudo terminal that
 can have many windows and panes. you can also 'detach' the session, logout, and
 reattach later after logging back in from another location (which you can't
-really do with ssh).
+really do with SSH).
 
 Let's install some tools to help us.. having created a second terminal/console,
 activate your virtualenv and install the ``werkzeug`` and ``django-extensions``
@@ -976,7 +976,7 @@ Add a View
 
 We're now going to add a basic django ``TemplateView`` using django's _class-based
 views_. More documentation about django's CBV's can be seen here <LINK>. We will
-use this basic view to define a template, include some javascript, and eventually,
+use this basic view to define a template, include some JavaScript, and eventually,
 to access our current project's API via js.
 
 It's generally best to define URL routes per-module, and then include these

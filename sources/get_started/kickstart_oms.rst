@@ -30,7 +30,7 @@ ready-made appliance, please see :ref:`this tutorial <deploy_development_vm>`.
 
 .. note::
 
-   The following process will assume your github user has access to the
+   The following process will assume your GitHub user has access to the
    repositories listed in the :ref:`Source Code Map <oms_source_code_map>`.
 
 
@@ -78,7 +78,7 @@ this document will start off assuming we are running a local build.
 Create an SSH Key
 ~~~~~~~~~~~~~~~~~
 
-Create an ssh key with ``ssh-keygen``, saved to ``/root/.ssh/id_rsa``, and do
+Create an SSH key with ``ssh-keygen``, saved to ``/root/.ssh/id_rsa``, and do
 not use a passphrase for the key. A future release of OMS will allow you to do
 so - at present, a passphrase will prevent OMS' automation from working properly.
 
@@ -92,14 +92,14 @@ correct permissions for SSH:
    # chmod 600 /root/.ssh/id_rsa*
 
 
-Upload SSH pub key to Github
+Upload SSH pub key to GitHub
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Add the public key to your github account, you can view the key with: ``cat
+Add the public key to your GitHub account, you can view the key with: ``cat
 /root/.ssh/id_rsa.pub``. To add the key to your account, navigate to ``Account
-Settings`` in the Github web UI and then ``SSH Keys`` in the navigation bar on
+settings`` in the GitHub web UI and then ``SSH keys`` in the navigation bar on
 the lefthand side.
 
-With the public key in Github, OMS will be able to checkout its code on your
+With the public key in GitHub, OMS will be able to checkout its code on your
 behalf, and we are now ready to run the kickstart script.
 
 
@@ -255,7 +255,7 @@ few helpful details:
 
 
 With tmux open, change to the root of the oms-kickstart directory uploaded (or
-cloned, if you used git) to the host, then run the script with:
+cloned, if you used Git) to the host, then run the script with:
 
 .. code::
 
@@ -282,15 +282,15 @@ The kickstart script has:
 
 * installed the salt-minion package and its dependencies,
 * configured salt-minion to run in *masterless* mode (eg local, no master),
-* used salt-minion to apply a set of base states, installing git and running
+* used salt-minion to apply a set of base states, installing Git and running
   through some basic *first steps* to update the salt-minion with formula
-  from the oms-salt-core and oms-salt-tcf git repositories. Salt's pillar is
+  from the oms-salt-core and oms-salt-tcf Git repositories. Salt's pillar is
   seeded with a bootstrap.sls (from the manifest provided to oms-kickstart),
   and the salt-minion service re-synced to be up-to-date (after all those
   changes).
 * The update salt-minion was then used to install and setup the Root VRC. This
   core component on the host is based on the salt-minion already installed, the
-  formula in the oms-salt-core and oms-salt-tcf git repositories, and reclass.
+  formula in the oms-salt-core and oms-salt-tcf Git repositories, and reclass.
 * Use the Root VRC to update the host with the TCF and TCC specified in the
   manifest provided to oms-kickstart. Use *state.highstate* to provision the
   host with all of the services, packages, configuration, and fluff that is
@@ -298,7 +298,7 @@ The kickstart script has:
 
 .. note::
 
-    All git repositories have been checked out with the ``master`` branch, and
+    All Git repositories have been checked out with the ``master`` branch, and
     you may need to update the active revision depending on what you need to do.
 
 

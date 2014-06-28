@@ -136,7 +136,7 @@ Building the ID3 OpenID Connect Server and Client
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Building the idoic repository is straightforward with Maven doing the bulk of the
-work for you. The OIDC maven scripts provides two build profiles: ``prod`` and
+work for you. The OIDC Maven scripts provides two build profiles: ``prod`` and
 ``dev``.  ``prod`` is the production profile with full integration to the User
 Registry. It is meant for production environments, or testing environments where
 full end-to-end integration is possible. The Dev is the development build profile,

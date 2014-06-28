@@ -18,7 +18,7 @@ Portal User Registry
 --------------------
 
 The OMS Portal Registry is a core component of the Private TCC. It stores the
-User's Core Identity, all Personas associated with these Core IDs, and various
+User's Core Identity, all Personas associated with these CoreIDs, and various
 other details OMS tracks for the User as part of managing their deployed
 applications (TABs).
 

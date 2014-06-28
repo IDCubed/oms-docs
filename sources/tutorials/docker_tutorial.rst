@@ -73,7 +73,7 @@ kickstart scripts and YAML configs:
    -rw-r--r--  1 root root  683 Feb 24 06:25 README.rst
 
 
-We'll need an SSH key that has access to the github repos, we can either create
+We'll need an SSH key that has access to the GitHub repos, we can either create
 a new keypair, or use the one from the host:
 
 .. code::

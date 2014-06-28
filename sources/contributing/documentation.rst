@@ -29,7 +29,7 @@ Where to find source code
 
 The OMS project documentation is source code, formatted as `ReStructured Text`_,
 built by `Sphinx`_, version controlled with `git`_, and :github-repo:`hosted on
-github <oms-docs>`.
+GitHub <oms-docs>`.
 
 .. _ReStructured Text: http://docutils.sourceforge.net/rst.html
 .. _Sphinx: http://sphinx-doc.org/index.html

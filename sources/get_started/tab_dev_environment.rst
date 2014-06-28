@@ -31,7 +31,7 @@ the steps below to set up and explore the VM.
 
 If you would prefer to experience OMS running in the cloud, :ref:`see this
 tutorial <kickstart_oms>`. Note that you will still need to send in a request to
-gain access to the git source code for a deployment to a host in the cloud.
+gain access to the Git source code for a deployment to a host in the cloud.
 
 
 Register to Request a VM Image

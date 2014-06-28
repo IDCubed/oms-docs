@@ -106,23 +106,23 @@ build VM images with Packer, for OMS.
    anything you could deploy with Salt states/formula, on a Ubuntu 12.04 VM.
 
 
-This guide assumes you have cloned a copy of the `kickstart git repository`_ to
+This guide assumes you have cloned a copy of the `kickstart Git repository`_ to
 the Linux/BSD/OSX host you are using to build VM images on VirtualBox. If working
 from a host previously provisioned with OMS, this repository can be found in
 */var/oms/src/oms-kickstart*.
 
-.. _kickstart git repository: https://github.com/IDCubed/oms-kickstart.git
+.. _kickstart Git repository: https://github.com/IDCubed/oms-kickstart.git
 
-If you need, clone the git repo from github: ``git clone
+If you need, clone the Git repo from GitHub: ``git clone
 https://github.com/IDCubed/oms-kickstart.git``.
 
 
 
-Create an SSH key to access Github
+Create an SSH key to access GitHub
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The kickstart script, along with the provisioning process managed by SaltStack,
-will both need to clone the OMS git repositories from Github. Some of the
+will both need to clone the OMS Git repositories from GitHub. Some of the
 repositories require authentication, and the build process is expected to run as
 a completely automated process, so SSH keys are needed by the build system to
 successfully create the VM image.
@@ -133,7 +133,7 @@ to the VM before kickstarting the OMS deployment to the VM. Note that not all of
 the build templates run a cleanup script to remove these SSH keys when no longer
 needed - be sure you validate the contents of a VM image before being published.
 
-Create an ssh key with ``ssh-keygen``, saved to
+Create an SSH key with ``ssh-keygen``, saved to
 ``oms-kickstart/config/.ssh/id_rsa``, and do not use a passphrase for the key.
 A future release of OMS will allow you to do so - at present, a passphrase will
 prevent the OMS automation system from working properly.
@@ -177,16 +177,16 @@ Within the oms-kickstart repository, ``packer/uploads/.ssh/`` is a symlink to
    -rw-r--r--  1 root  root   398B Dec  6 10:54 id_rsa.pub
 
 
-Adding the public key to your github account
+Adding the public key to your GitHub account
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-With the public key in Github, OMS will be able to checkout its source code on
+With the public key in GitHub, OMS will be able to checkout its source code on
 your behalf.
 
 To add the key to your account:
 
-#. Navigate to *Account Settings* in the Github web UI,
-#. Find *SSH Keys* in the navigation bar on the lefthand side,
+#. Navigate to *Account settings* in the GitHub web UI,
+#. Find *SSH keys* in the navigation bar on the lefthand side,
 #. Copy/paste the contents of *id_rsa.pub* into the form on this page. You can
    view the key with: ``cat oms-kickstart/config/.ssh/id_rsa.pub``.
 
@@ -262,7 +262,7 @@ For the process outlined above, Packer will:
 You can then use VirtualBox to import this virtual appliance to create new VM as
 needed, :ref:`The import process is detailed here <import_vbox_vm_image>`.
 
-Given the flexible nature of oms-kickstart, accepting any compilation of git
+Given the flexible nature of oms-kickstart, accepting any compilation of Git
 repositories with formula (modules, states, config, etc) for SaltStack, there
 are few limitations to what services and applications can be deployed. This is a
 great setup for local development, custom deployments, and general hacking with

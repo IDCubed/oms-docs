@@ -55,11 +55,11 @@ Please see the following links for more information:
 Repository Location & Install Guide
 -----------------------------------
 
-The project repository is `hosted on Github.com`_. There is also a comprehensive
+The project repository is `hosted on github.com`_. There is also a comprehensive
 :ref:`Developer's Guide <developers_guide>` that details how to build, set
 up, deploy and even operate both production and development instances of OIDC.
 
-.. _hosted on Github.com: https://github.com/IDCubed/oms-oidc
+.. _hosted on github.com: https://github.com/IDCubed/oms-oidc
 
 
 .. _oidc_extensions:
