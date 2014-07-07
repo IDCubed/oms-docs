@@ -40,8 +40,8 @@ Here is an overview of the process we run through:
    Git repositories (remove RC branch, etc).
 
 
-Pre-Requisites
---------------
+Prerequisites
+-------------
 
 To complete the entire release process, ensure you have met the following
 prerequisites. Here is a high-level review, with more details in sections
@@ -52,7 +52,7 @@ below:
 #. Write access to OMS Rackspace Cloud Files.
 #. A GPG key approved for use in signing OMS releases and build artifacts.
 #. Review/confirm the repositories to apply the release process to.
-#. Setup release manifest for automated formula (optional).
+#. Set up release manifest for automated formula (optional).
 
 If you do not have sufficient access to the resources needed to complete the
 release, please seek the assistance of the OMS management team.
@@ -67,7 +67,7 @@ of an automated process. If using the automated tooling, you will need an SSH
 key in */root/.ssh/id_rsa*, and ensure it has access to the Git repositories the
 process is applied to. It is possible to apply the updates without the aid of
 this release formula, and in this case you should ensure the SSH key for the
-user running the Git manipulations, has sufficient access to the Git
+user running the Git manipulations has sufficient access to the Git
 repositories.
 
 .. todo:: reference a tutorial on creating and managing SSH keys.
@@ -129,7 +129,7 @@ to have the repository (and its GitHub permissions) reviewed.
 
 Adding a new repository may require updates to the default configuration included
 in the :github-repo:`oms-salt-core <oms-salt-core>` source code. If the list of
-repositories with sphinx documentation projects changes, the list can be found
+repositories with Sphinx documentation projects changes, the list can be found
 `here`_, in oms-docs. See :ref:`this section <update_doc_builder>` for more
 details on this list.
 
@@ -172,11 +172,11 @@ release. Using this formula is optional, as it is still possible to run through
 the release process executing the steps manually.
 
 If you would like to use the formula, this section will ensure the system is
-setup to help process the release.
+set up to help process the release.
 
 .. note::
 
-   The release formula included in OMS is best run on a host setup and running
+   The release formula included in OMS is best run on a host set up and running
    the OMS VRC. The OMS basic Root VRC (development base) is all that is needed.
 
 
@@ -242,9 +242,9 @@ example:
 Update the Root VRC
 ~~~~~~~~~~~~~~~~~~~
 
-The oms-release reclass manifest has been updated with the specific details of
-the release you are working to process - we now need to ensure it is included in
-the Root VRC's node definition for this host.
+The ``oms-release.yml`` reclass manifest has been updated with the specific
+details of the release you are working to process - we now need to ensure it is
+included in the Root VRC's node definition for this host.
 
 Open ``/etc/salt/pillar/bootstrap.sls`` for editing, you will see something
 similar to the following (your list of classes will likely differ):
@@ -261,7 +261,7 @@ similar to the following (your list of classes will likely differ):
            version: v0.8.5.1
 
 
-Update the list of classes specified to include the ``oms-release`` reclass
+Update the list of classes specified to include the ``oms-release.yml`` reclass
 manifest we just created/updated:
 
 .. code-block:: yaml
@@ -276,15 +276,15 @@ manifest we just created/updated:
            version: v0.8.5.1
 
 
-Finally, ask the VRC to update it's node and tops definitions for the host:
+Finally, ask the VRC to update its node and tops definitions for the host:
 
 .. code::
 
    # salt-call --local state.sls reclass.update_tops test=True
 
 
-This will ask salt to review and tell us about the updates to be made, but will
-not make any changes. You ought to see salt wanting to add the ``oms-release``
+This will ask Salt to review and tell us about the updates to be made, but will
+not make any changes. You ought to see Salt wanting to add the ``oms-release``
 class to the node definition for this host, eg:
 
 .. code::
@@ -398,7 +398,7 @@ Automate Creating the RC Branch
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 With the release manifest configured and in place, and the VRC updated, we can
-use the VRC to..
+use the VRC to
 
 * clone new copies,
 * checkout clean *qa-develop*,
@@ -539,10 +539,10 @@ If something fails, such as this:
    Total:     35
 
 
-..ensure that root's SSH key setup/created with GitHub, and has *write access*
+... ensure that root's SSH key setup/created with GitHub, and has *write access*
 to the repositories listed in the release manifest. You can also scroll further
-up in the output from salt-call to locate the more specific error message from
-Git, if you need a better confirmation of what went wrong.
+up in the output from ``salt-call`` to locate the more specific error message
+from Git, if you need a better confirmation of what went wrong.
 
 Drop the *test=True* to actually apply the *oms.release.create_rc* formula.
 
@@ -629,17 +629,25 @@ oms-core
   Git to compare the output. Updates may be needed.
 
 
+oms-ui
+~~~~~~
+
+* Version bump in */docs/conf.py*.
+
+
 oms-kickstart
 ~~~~~~~~~~~~~
 
 * Version bump in */config/packer.yaml*, */config/pillar/release.yaml*, and
-  */doc/conf.py*
+  */docs/conf.py*.
 
 
 oms-salt-core
 ~~~~~~~~~~~~~
 
-* Version bump in */classes/oms.yml* and */docs/conf.py*.
+* Version bump in */manifests/oms-release.yml*,
+*/manifests/oms-repos-extra.yml*, */manifests/oms.yml*, */docs/conf.py*, and
+*/oms/release/PILLAR.sls*.
 
 
 oms-salt-tcf
@@ -651,7 +659,7 @@ oms-salt-tcf
 oms-deploy
 ~~~~~~~~~~
 
-* Version bump in */setup.py*, and */docs/conf.py*.
+* Version bump in */setup.py*, and */doc/source/conf.py*.
 * Update auto-generated documentation if any Python packages, modules,
   functions, or classes were added/removed - re-run *sphinx-autogen* and use
   Git to compare the output. Updates may be needed.
@@ -660,7 +668,7 @@ oms-deploy
 oms-admin
 ~~~~~~~~~
 
-* Version bump in */setup.py* and */oms_admin/__init__.py*
+* Version bump in */oms_admin/__init__.py*
 * Update auto-generated documentation if any Python packages, modules,
   functions, or classes were added/removed - re-run *sphinx-autogen* and use
   Git to compare the output. Updates may be needed.
@@ -674,7 +682,7 @@ to build/create the WAR. Alternatively, there is automated formula available wit
 ``salt-call --local state.sls oidc.build``. Here, we will assume you have already
 built OpenID Connect with Maven.
 
-Collect all .war/.jar into one place:
+Collect all WARs/JARs into one place:
 
 .. code::
 
@@ -714,7 +722,7 @@ Collect all .war/.jar into one place:
    oms-oidc-test-jar-with-dependencies.jar
    oms-oidc-test-Javadoc.jar
 
-Rename the war to include the version string. Here is a method using zsh,
+Rename the WAR to include the version string. Here is a method using zsh,
 different from bash:
 
 .. code::
@@ -733,7 +741,7 @@ different from bash:
    oms-oidc-test-Javadoc-v0_8_5_1.jar
 
 
-Use *sha512sum* to generate a SHA512 checksum for the WARs:
+Use *sha512sum* to generate a SHA-512 checksum for the WARs:
 
 .. code::
 
@@ -763,10 +771,10 @@ checksum, found in the :github-repo:`oms-salt-tcf
 the RC branch to correct this commit with the final URL/checksum.
 
 
-Python-oidc
+python-oidc
 ~~~~~~~~~~~
 
-* Version bump in */setup.py*.
+* Version bump in */setup.py* and */docs/conf.py*.
 * Update auto-generated documentation if any Python packages, modules,
   functions, or classes were added/removed - re-run *sphinx-autogen* and use
   Git to compare the output.
@@ -793,7 +801,7 @@ Build and Review Documentation
 ------------------------------
 
 Every repository includes extensive documentation in the form of a ReStructured
-Text (*.rst*), Sphinx doc project (or equivalent, such as Java-doc for oms-oidc).
+Text (*.rst*), Sphinx doc project (or equivalent, such as Javadoc for oms-oidc).
 All of these documentation projects are (at least in part) auto-generated based
 on the details of the source code (and the build being run/executed), and need
 to be updated with each release.
@@ -805,7 +813,7 @@ For the others, we can rely on oms-docs. Here is the short version of the
 process, more details can be :ref:`found here <>`:
 
 * cd to ``/var/oms/releases/oms-docs``
-* build the sphinx projects in all repos with make: ``make clean all``
+* build the Sphinx projects in all repos with make: ``make clean all``
 * review the output from each project to confirm the results of each build
 * run the dev server to review the rendered results: ``make serve-all``
 
@@ -821,7 +829,7 @@ QA each repository, individually
 QA the TCF/TCC/TAB system as a whole
 ------------------------------------
 
-Starting with a clean/fresh VM, run a kickstart build to setup the default TCC
+Starting with a clean/fresh VM, run a kickstart build to set up the default TCC
 and TAB demos. The process is :ref:`documented here <deploy_private_tcc>`,
 though do take note of the following points.
 
@@ -865,7 +873,7 @@ key):
 If all is well, the default kickstart build will leave you with a host that has
 the primary OMS TCC with a demonstration of the OMS OpenID Connect, CoreID, and
 Persona reference implementation. You ought to be able to follow :ref:`this
-guide <CoreID_TCC_Demo>` to Register a CoreID and setup an initial persona.
+guide <CoreID_TCC_Demo>` to register a CoreID and set up an initial persona.
 The build process is complex, and as such, the specifics of debugging problems
 the build runs into will depend on the specifics of the subsystem(s) involved.
 
@@ -880,7 +888,7 @@ to reference the RC branch for this release.
 
 Review the output of the process in detail, to confirm the results. Import and
 boot up the appliance VM built and use your browser to QA the TCC as deployed
-through the packer build process.
+through the Packer build process.
 
 .. todo::
 
@@ -923,7 +931,7 @@ Build a Demo VM
 
 Follow the :ref:`VM Builder's Guide <vm_builders_guide>` to create a VirtualBox
 image with Packer. The config for OMS Kickstart is already pointed at
-*master*, so it should build and there ought to be no problem.
+*master*, so it should build, and there ought to be no problem.
 
 The appliance name should follow the ``OMS-SDK-v0.X.Y-YYYYMMDD.ova`` format.
 For example, ``OMS-SDK-v0.8.5-20140429.ova``.
@@ -936,7 +944,7 @@ With the repositories updated, build and upload all artifacts:
 
 * Importable VM Images
 * Java WARs
-* the updated documentation.
+* the updated documentation
 
 
 Signing Artifacts
@@ -944,7 +952,7 @@ Signing Artifacts
 
 All Open Mustard Seed release VM are signed and encrypted.
 
-To sign the release VM with your key, and encrypt it with a passphrase:
+To sign the release VM with your key and encrypt it with a passphrase:
 
 .. code::
 
@@ -1015,7 +1023,7 @@ the changelog and overview sections of the :ref:`Release Notes <release_notes>`
 need to be updated for this new release.
 
 When this is complete, we are ready to update the documentation build. Run
-``make clean all`` in the *oms-docs* repository to build the sphinx projects
+``make clean all`` in the *oms-docs* repository to build the Sphinx projects
 embedded in the OMS repositories. Ensure the build includes all repositories
 included in the release by reviewing the output in *_build/html/*, there should
 be a directory for each repository included in the build. This list is configured
@@ -1036,7 +1044,7 @@ can now update the webapp that tracks these images:
 * Create a new VM object using `this form`_.
 * Include a meaningful description of the VM image you are adding.
 * Ensure the passphrase for decrypting the image is correct.
-* Ensure the URL to the image hosted on the Rackspace CDN is correct
+* Ensure the URL to the image hosted on the Rackspace CDN is correct.
 
 .. _this form: https://alpha.openmustardseed.org/downloads/admin/vm_images/
 
@@ -1044,8 +1052,8 @@ can now update the webapp that tracks these images:
 Clean up Redmine
 ----------------
 
-* update status, resolve, shuffle tickets around, ensure the taskboard is
+* Update status, resolve, shuffle tickets around, ensure the taskboard is
   acceptable, etc.
-* purge RC branches from Git repositories
+* Purge RC branches from Git repositories.
 
 
