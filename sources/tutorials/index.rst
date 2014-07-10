@@ -24,6 +24,7 @@ appliance <deploy_development_vm>` or an :ref:`OMS Host in the Cloud
    Install VirtualBox <install_virtualbox>
    Deploy in Docker <docker_tutorial>
    Swap File Tutorial <swap_file_tutorial>
+   Logging with OMS Layer <logging_tutorial>
 
 .. Hello World Example <hello_world>
    python_web_app
