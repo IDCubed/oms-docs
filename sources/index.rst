@@ -66,18 +66,79 @@ Leveraging the Open-Source Community
 ------------------------------------
 
 The framework is made possible by integrating and building on top of numerous
-projects including (we strongly believe in the DRY principles):
+projects - we strongly believe in the DRY principles. Though additional projects
+can and are being added as needed, the existing reference platform includes and
+makes use of the following open source projects: 
 
-* `Python`_, `Java`_, `PIP`_, `Maven`_
-* `Django`_, `Tastypie`_, `Spring`_
-* `Bootstrap`_, `jQuery`_, `Backbone.js`_, `Underscore.js`_
-* `Jinja2`_, `ConfigObj`_, `Celery`_, `Fabric`_
-*  `Nginx`_, `uWSGI`_, `Apache Tomcat`_, `Zeromq`_
+
+Languages
+~~~~~~~~~
+
+* `Python`_
+* `Java`_
+* `Javascript`_
+* `PIP`_
+* `Maven`_
+
+
+Libraries and Web Frameworks
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* `Django`_
+* `Tastypie`_
+* `Spring`_
+* `Node.js`_
+* `Bootstrap`_
+* `jQuery`_
+* `Backbone.js`_
+* `Underscore.js`_
+* `Gulp.js`_ and `Grunt.js`_
+* `Jinja2`_
+* `ConfigObj`_
+* `Requests`_
+* `Fabric`_
+* `Zeromq`_
 * `Funf`_
+* `Werkzeug`_
+* `Reclass`_
+* `SQLite`_
+* `PyYAML`_
+* `django-extensions`_
+
+
+Services
+~~~~~~~~
+
+* `Nginx`_
+* `uWSGI`_
+* `Apache Tomcat`_
+* `Postgres`_
 * `OpenID Connect`_
-* `Salt Stack`_, `Salt-Cloud`_, `Salt-API`_, `OpenStack`_
-* `Logstash`_, `Elasticsearch`_, `Redis`_, `Postgres`_
-* `Werkzeug`_, `Sentry`_, `Graylog2`_, `Shinken`_
+* `Logstash`_
+* `Elasticsearch`_
+* `Kibana`_
+* `Salt Stack`_
+* `OpenSMTPd`_
+* `Supervisord`_
+
+
+Utilities
+~~~~~~~~~
+
+* `Git`_
+* `tmux`_
+* `OpenSSH`_
+* `GNU GPG`_
+
+
+OS and Virtualization
+~~~~~~~~~~~~~~~~~~~~~
+
+* `Ubuntu`_
+* `OpenStack`_
+* `VirtualBox`_
+* `Docker`_
+* `Packer`_
 
 
 .. _Python: http://www.python.org/
@@ -85,34 +146,45 @@ projects including (we strongly believe in the DRY principles):
 .. _PIP: http://www.pip-installer.org/en/latest/
 .. _Maven: https://maven.apache.org/
 .. _Django: https://www.djangoproject.com/
+.. _Node.js: https://www.nodejs.com/
 .. _Tastypie: http://tastypieapi.org/
 .. _Spring: http://spring.io/
 .. _Bootstrap: http://twitter.github.com/bootstrap/
 .. _jQuery: http://jquery.com/
 .. _Backbone.js: http://backbonejs.org/
 .. _Underscore.js: http://underscorejs.org/
+.. _Gulp.js: http://gulpjs.com/
+.. _Grunt.js: http://gruntjs.com/
+.. _Reclass: http://reclass.pantsfullofunix.net
+.. _SQLite: http://sqlite.org
+.. _PyYAML: http://pyyaml.org/
+.. _django-extensions: http://django-extensions.readthedocs.org/en/latest/
 .. _Jinja2: http://jinja.pocoo.org/
 .. _ConfigObj: http://www.voidspace.org.uk/python/configobj.html
-.. _Celery: http://celeryproject.org/
+.. _Requests: http://docs.python-requests.org/en/latest/
 .. _Fabric: http://docs.fabfile.org/en/latest/
 .. _Nginx: http://wiki.nginx.org/Main
 .. _uWSGI: https://uwsgi-docs.readthedocs.org/en/latest/
 .. _Apache Tomcat: https://tomcat.apache.org/
 .. _Zeromq: http://www.zeromq.org/
 .. _Funf: http://funf.org/
-.. _OpenID Connect: http://github.com/mitreid-connect/OpenID-Connect-Java-Spring-Server/
+.. _Supervisord: http://supervisord.org
+.. _OpenSMTPd: http://opensmtpd.org
+.. _OpenID Connect: http://openid.net/connect/
 .. _Salt Stack: http://saltstack.org/
-.. _Salt-Cloud: https://salt-cloud.readthedocs.org/en/latest/
-.. _Salt-API: https://salt-api.readthedocs.org/en/latest/
-.. _OpenStack: http://www.openstack.org/
 .. _Logstash: http://logstash.net/
 .. _Elasticsearch: http://www.elasticsearch.org/
-.. _Redis: http://redis.io/
+.. _Kibana: http://www.elasticsearch.org/overview/kibana/
 .. _Postgres: http://www.postgresql.org/
 .. _Werkzeug: http://werkzeug.pocoo.org/
-.. _Sentry: http://github.com/getsentry/sentry/
-.. _Graylog2: http://www.graylog2.org/
-.. _Shinken: http://www.shinken-monitoring.org/
+.. _tmux: http://tmux.sourceforge.net/
+.. _Git: http://www.git-scm.com/
+.. _OpenSSH: https://openssh.com
+.. _GNU GPG: http://gnugpg.org
+.. _OpenStack: http://www.openstack.org/
+.. _VirtualBox: http://www.virtualbox.org/
+.. _Docker: http://www.docker.io
+.. _Packer: http://www.packer.io
 
 
 .. _oms_features:
