@@ -20,6 +20,7 @@ appliance <deploy_development_vm>` or an :ref:`OMS Host in the Cloud
    Intro to Django <basic-django>
    Create a TAB <tab_tutorial>
    OIDC Tutorial <oidc_tutorial>
+   Create a TCC <tcc-tutorial>
    Update System Hostname <update-hostname>
    Install VirtualBox <install_virtualbox>
    Deploy in Docker <docker_tutorial>
