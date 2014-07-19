@@ -90,4 +90,4 @@ you may now continue with any of the :ref:`OMS Tutorials <tutorials>`.
 * The CoreID Registry is `documented in more detail`_, as is :ref:`OpenID
   Connect <oidc>`.
 
-.. _documented in more detail: http://oms-core.readthedocs.org/en/latest/api/coreid_registry_tutorial.html
+.. _documented in more detail: https://docs.openmustardseed.org/oms-core/api/coreid_registry_tutorial.html

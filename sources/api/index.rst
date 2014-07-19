@@ -5,15 +5,13 @@
 APIs
 ====
 
-The following are auto-generated docs hosted on `Read the Docs`_
-
-.. _Read the Docs: https://readthedocs.org
+The following are auto-generated docs for several OMS repositories.
 
 * `oms-deploy`_
 * `oms-core`_
 * `oms-experimental`_
 
-.. _oms-deploy: https://oms-deploy.readthedocs.org/en/latest/
-.. _oms-core: https://oms-experimental.readthedocs.org/en/latest/
-.. _oms-experimental: https://oms-core.readthedocs.org/en/latest/
+.. _oms-deploy: https://docs.openmustardseed.org/oms-deploy/
+.. _oms-core: https://docs.openmustardseed.org/oms-core/
+.. _oms-experimental: https://docs.openmustardseed.org/oms-experimental/
 
