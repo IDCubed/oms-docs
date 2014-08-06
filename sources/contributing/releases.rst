@@ -1046,7 +1046,7 @@ can now update the webapp that tracks these images:
 * Ensure the passphrase for decrypting the image is correct.
 * Ensure the URL to the image hosted on the Rackspace CDN is correct.
 
-.. _this form: https://alpha.openmustardseed.org/downloads/admin/vm_images/
+.. _this form: https://alpha.openmustardseed.org/downloads/admin/vm_image/
 
 
 Clean up Redmine

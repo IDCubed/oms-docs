@@ -76,7 +76,7 @@ Languages
 
 * `Python`_
 * `Java`_
-* `Javascript`_
+* JavaScript
 * `PIP`_
 * `Maven`_
 
@@ -185,6 +185,7 @@ OS and Virtualization
 .. _VirtualBox: http://www.virtualbox.org/
 .. _Docker: http://www.docker.io
 .. _Packer: http://www.packer.io
+.. _Ubuntu: http://www.ubuntu.com/
 
 
 .. _oms_features:
