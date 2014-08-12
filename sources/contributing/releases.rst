@@ -638,8 +638,11 @@ oms-ui
 oms-kickstart
 ~~~~~~~~~~~~~
 
-* Version bump in */config/packer.yaml*, */config/pillar/release.yaml*, and
-  */docs/conf.py*.
+* Version bump in */config/packer/coreid-demo.yaml*, */config/packer/rTCC.yaml*,
+  */config/packer/vbox-trust-network-tcc.yml*,
+  */config/packer/july_conf/private-dash-with-coreid.yaml*,
+  */config/packer/july_conf/private-dash.yaml*, */config/pillar/release.yaml*,
+  and */docs/conf.py*.
 
 
 oms-salt-core
@@ -659,7 +662,7 @@ oms-salt-tcf
 oms-deploy
 ~~~~~~~~~~
 
-* Version bump in */setup.py*, and */doc/source/conf.py*.
+* Version bump in */setup.py*, and */docs/conf.py*.
 * Update auto-generated documentation if any Python packages, modules,
   functions, or classes were added/removed - re-run *sphinx-autogen* and use
   Git to compare the output. Updates may be needed.
@@ -883,8 +886,8 @@ Build a VM Image for QA
 
 Follow the :ref:`VM Builder's Guide <vm_builders_guide>` to create a VirtualBox
 image with Packer. The config for OMS Kickstart is pointed at *master* - you
-will need to update *config/packer.yaml* (as we did above with *release.yaml*),
-to reference the RC branch for this release.
+will need to update the Packer YAML file in *config/packer/* (as we did above
+with *release.yaml*) to reference the RC branch for this release.
 
 Review the output of the process in detail, to confirm the results. Import and
 boot up the appliance VM built and use your browser to QA the TCC as deployed
