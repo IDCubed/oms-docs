@@ -11,6 +11,974 @@ OMS v0.8 Series Release Notes
 Here are some release notes associated with the v0.8.x series of OMS.
 
 
+v0.8.6.5
+--------
+
+
+karma-jasmine-ajax
+~~~~~~~~~~~~~~~~~~
+
+* t2635 - Updated LICENSE copyrights.
+* t2635 - Adding code and updated package.json
+* Initial commit. Moving code from other repository.
+* Initial commit
+
+
+oms-admin
+~~~~~~~~~
+
+* t3051: version bump for v0.8.6.5
+
+
+oms-chat
+~~~~~~~~
+
+* made the participant list add and expire participants that are actively in the chatroom, participating. A participant is expired within 10 seconds of not coming back to pic
+* Implemented listing and updating of the chatroom participants.
+* commented out our fake chat participants.
+* fixed the need to create a new OMSChat-Manager manifest for every virtual machine we create.
+* integrated Lena's UI. It is now working at the same level of functionality as the white-screen chat app.
+* Implemented OMSChat-Client authentication/authorizing its user in order to access OMSChat-Client profiles.
+* simply gathered all the log4j configs in one place. Makes things neater.
+* cleaned up log4j logging so that now every WAR file logs into a separate log file IN ADDITION to the application-level logging of Tomcat. also found a file I forgot to chec
+* Created the Group APIs as discussed: one API to get the personas for all participants, a second one to get up-to-date persona and everything needed to contact the remote pa
+* finally put a bug to sleep causing portal updates to not always "stick". As it turned out I was failing to update the record expiration date in certain cases causing update
+* Persona Manager now works with OMSChat!
+* Changed the persona manager SQL to generate UUIDs on the fly.
+* Got rid of the property files with personas and redid them as a database script load. Everything is now served from database.
+* Fixed multiple problems with persona manager and also added profile prefixes to the omschat_config file handling.
+* Persona Manager development complete.
+* added some docs as per Patric's instructions.
+* forgot to check in a few files.
+* Implemented everything up to the attribute API. Attribute API is a work in progress.
+* some little fixes all over the place. I forgot to add the persona endpoint path for the persona manager to several places.
+* Cleaned up persona manager and policy manager URLs.
+* Externalized configuration for environment values from OMSChat applications
+* forgot to fix manifest for the user identities.
+* Reintegrated OMSChat and OIDC so that the demo runs correctly end to end through the modified OIDC.
+* Tried to modify the Persona Manager interface for the changes to OIDC.
+* A bugfix handling enumerations as REST API submission parameters. Created a dev mock for the RIDS interface.
+* Integrated the new rule for LOA with Policy Manager.
+* fixed up the katoidc profile, and also added code changes needed for Provision not to display links to provision applications it has no manifests for.
+* Forgot to add user identities to the built-in users.
+* Bugfixes.
+* I just refactored the provision app so that it would provision the OMSChat apps from a manifest. Not tested. Yet.
+* Got rid of all links back to the TCC on persona level (they should be coming from the user identity registration) and also got rid of the identity manager link from identit
+* Replaced the userCertificateHash, userCertificate and userCertificateExpiresAt with the vague concept of user identity string. At some point that will be populated with the
+* Got rid of the e-mail manager, which we aren't using anymore. Implemented a protected resource registration with Portal. Implemented a manifest generation class (for conven
+* Created an entire DAO layer in the Provision app for the Portal integration module.
+* Finished writing the Portal Manager. Nothing has been tested yet.
+* Added feature to distinguish between an unauthorized updated. Added the feature to handle attempt to register an existing object as an update.
+* Fixed a bug causing querying personas not to return the owning user hash. Also created a foreign key constraint between a registered persona and the identity of its user so
+* drafted the API for a Portal integration module. Implemented a registration step.
+* fully tested the portal app, fixed all the little bugs. Next stop is Provision.
+* development of portal completed. Need to test it now.
+* this is the DAO layer of the new Portal, all figured out and implemented.
+* created the shell of a portal project.
+* increased REST communication timeout from 10 seconds to 30 to address issues with the Racksapce VMs constantly timing out when first talking to pieces (said pieces are "laz
+* forgot a file.
+* Implemented full policy manager integration for OIDC.
+* A little cleanup of how a RESTException renders into a page with meaningful error message.
+* Changed the Policy Manager over to operate on Objects and integrated GSON configuration to serialize and deserialize the resulting map of objects correctly in a nice and si
+* forgot to fix the managed-policy scope on the omschat-client
+* forgot to rename the managed-policy scope here.
+* Integrated the OAuth2-based mechanism to authenticate users with the Persona Manager, so that OIDC can talk to it with a single-use OAuth2 token, which it internally issues
+* I have changed the OMSChat application around to use Hanging Gets instead of polling, which makes for a lot more responsive app. I also seriously cleaned up all error handl
+* Persona Manager now has the ability to validate a CoreID so that OIDC can run against it in Production Mode.
+* eliminated a relative path from the Provision POM, making the build a lot less fragile.
+* Changed how the home.jsp is populated with the defaults based on the build profile. Now I have a much finer-grained control.
+* The token for remote isn't supposed to have the OMSChat-Admin persona. Both the client and manager talk to their LOCAL Policy Managers only, and they already have the clien
+* Had OMSChat-Manager validate the user persona with the Private TCC based on a policy returned by the Policy Manager (every 5 minutes currently).
+* Added OMSChatManager capability to dynamically register itself with the private TCC as well. Yet to get it to do something useful with it.
+* Token Revalidation Policy changes. Now every application can get a policy to revalidate its tokens. The tokens are stored in an in-memory cache, which is cleaned up wheneve
+* Integrated and fixed both the Provision App and the Policy Manager, fixing lots of little bugs all over the place.
+* integrated the PolicyManager with the Provision app and also created the framework for other apps to drive the Policy Manager. Nothing is tested right now.
+* Checked in the Policy Manager piece, a mock for a rule engine applying the rules whether or not to accept an invitation.
+* Changed the Persona Manager to detect fraud conditions applicable to this mock.
+* added more chat personas. Changed the POM to do search and replace so that setting up KATOIDC isn't going to be such a pain in the future.
+* Attempted to clean up the use of introspection and persona API. Also integrated the more insightful token endpoint response whenever a token is granted. The latter was quit
+* Changed the OIDC Manager to send its authorization request in such a way that OIDC would force a new login for token approval.
+* changed the client-side initial access token offered to the group provision app to user-based approval.
+* fully tested and working, finally.
+* got rid of an entity I ended up not needing.
+* multiple bugfixes resulting in the first successful provision by the Provision application. Now need to troubleshoot the chat manager itself.
+* Forgot to submit my invitation VOs
+* fixed a problem so that everything would deploy. Step 1 of the troubleshoot.
+* finished writing the provision piece as well. Development complete.
+* Unit-tested the persona manager and begun work on the Provision piece.
+* added an omschat scope to look for in order to safely choose whether or not the attributes are granted.
+* Defined the Persona Manager application and also updated the provision project for the requirement for it to have an OMSChat-Admin persona token in order ot provision.
+* factored the OMS-Chat-Manager and OMS-Chat-Manager to handle external provisioning so that now I can implement OMS-Chat-Provision to do it.
+* more cleanup.
+* a massive refactor so that I can better reuse the code already written between projects.
+* Implemented token validation within the OMSChat-Manager application. This is now a true OAuth-enabled client!
+* XML is case sensitive.
+* forgot to change the pom.
+* Added a Logrus profile for the provision project
+* fixed 2 bugs, one with an access token not being requested when no token is present, and another with profiles being unable to be recreated.
+* Fixed a problem with the dynamic registration.
+* Simply prepopulated the provision invite page for convenience.
+* removed the provision project's dependence on a database. This project does not require one. It does not use it.
+* updated client to handle provisioning and also refactored quite a few things. Integrated OIDC into the client. Everything's untested right now.
+* Forgot to update one of the properties
+* created the provision project, the one to provision a new client by getting its initial access token in the group TCC fashion.
+* implemented the Chat Client and had it refer to the manager application. I can have two windows open and chat between them.
+* fixed a problem causing the length paramter on the entity bean to be mishandled. VARCHAR has a limit of 255, so my record field has to use @Lob. moved the jQuery library in
+* began implementation to populate the chat record on page using pure AJAX. Also did some cleanup
+* implemented database handling for the chat application: chat records can be inserted and read back.
+* fixed a type in the POM and got rid of some garbage
+* added a JNDI datasource to Jetty and configured a hot-swappable database with a Maven profile.
+* created the shell of the Manager project.
+* created shell for OMS-Chat project
+* Initial commit
+
+
+oms-core
+~~~~~~~~
+
+* t3051: version bump for v0.8.6.5
+* t3250: Rearrange fields in gesture_template.json
+* t2948: Merge v0.8.6.4 from master to qa-develop
+* t3248: Use single quotes when triple-quoting
+* t3247: Turn on 'run_tests' in all manifests
+* t3245: Rename 'rest' module to 'gesture_recognition'
+* t3243: Move code from 'grec' module into 'rest' module
+* t3231: Add Admin support to rids module
+* t3230: update RIDS manifest to use deploy.conf for constance
+* t3229: include the gesture_template fixture in RIDS manifest
+* t3229: create a fixture with gesture templates (training stub)
+* t3222: RIDS manifest with Gesture Recognition
+* t3095: add initial RIDS-Mock manifest
+* t3200: Modified admin interface for persona
+* t3182: move ID3NetworkUI manifest from oms-ui to oms-core
+* t3151: add a fixture with all scopes the CoreID Registry needs
+* t3169: Added possibility to edit persona_guid in admin of coreid_registry
+* t3094: namespace app client/scope keys in Dashboard manifest
+* t3108: Changes in escrow manifest for moved logs
+* t3094: update Dashboard manifest to pull config from deploy.conf
+* t3087: Copy in new manifests from oms-experimental
+
+
+oms-core-ios
+~~~~~~~~~~~~
+
+* t3228: Catch-all for iOS app UI fixes
+* t3144: Implement iOS UI UX changes needed to sync with RIDS specifications
+* t3114: The iOS scenario specifies that multiple auth requests must be tracked and presented to the user
+* t3154: OMS Biometric Authorization app crashes on gesture
+* t2887: Implement missing animations
+* t2982: Integrate root-id library with native app
+
+
+oms-deploy
+~~~~~~~~~~
+
+* t3051: version bump for v0.8.6.5
+
+
+oms-docs
+~~~~~~~~
+
+* t3051: Update release notes for v0.8.6.5
+* t3051: version bump for v0.8.6.5
+* t3260: Fix several links
+
+
+oms-experimental
+~~~~~~~~~~~~~~~~
+
+* t3051: version bump for v0.8.6.5
+* t3246: Add license to 'gesture_recognition' module
+* t3249: Update __version_info__ in log_service module
+* t2948: Merge v0.8.6.4 from master to qa-develop
+* t3248: Use single quotes when triple-quoting
+* t3245: Rename 'rest' module to 'gesture_recognition'
+* t3243: Move code from 'grec' module into 'rest' module
+* t3231: Add Admin support to rids module
+* t3241: bugfixes to GRec and rids modules
+* t3240: update RIDS app to use Gesture Recognition API
+* t3239: initial import of gesture recognition modules
+* t3204: deploy fake-oidc app with fabric
+* t3234: Fix a bug in TN handling
+* t3233: send pending auth count as badge
+* t3234: Added unicode to TN, allow not installed applications without groups
+* t3221: Notifications in reveres order on API
+* t3221: Add url field to tn and application
+* t3095: Stub in RIDS mock, connecting OIDC and iOS backend mock
+* t3217: Revert changes for 3217
+* t3217: Fixed trusted networks API listing
+* t3210: Quick fix for notifications - all notfications returned from api
+* t3209: Modify escrow to return all accounts
+* t3203: panic action
+* t3202: wrong client_id data type
+* t3201: don't expire sa-ui_nonce on flow cancel
+* t3085: Added fixtures for one user, one trust network and one group, and one notification
+* t3163: Trusted network error logs enhanced
+* t3194: serialize client data with pending authorization
+* t3185: merge bitcoind account_fixture.py generator script
+* t3170: Modify escrow so it produces notifications with account id
+* Merge branch 't2909-rootid-mock' into qa-develop
+* t3138: Fixes in escrow and trusted networks
+* t2876: Added notifications for failed transactions and low balance
+* t3122: limit access to account data to public only for another personas
+* t3108: Moved logging from currency to escrow
+* t3099: add title and description attributes to transaction and payment
+* t3100: Added installed flag to trusted_networks model
+* t3087: Move manifests to oms-core
+* t3090: revert account lookup to surrogate id
+* t3088: serialize incoming transactions within account data too
+* t2986: Fix escrow FACT Authorization
+* t3070: List full transactions in escrow
+* t2925: Added Trusted networks API with filtering per persona
+* t2909: mock RIDS v2 for iOS app
+* t3138: Fixes in escrow and trusted networks
+* t2876: Added notifications for failed transactions and low balance
+* t3122: limit access to account data to public only for another personas
+* t3108: Moved logging from currency to escrow
+* t3099: add title and description attributes to transaction and payment
+* t3100: Added installed flag to trusted_networks model
+* t3087: Move manifests to oms-core
+* t3090: revert account lookup to surrogate id
+* t3088: serialize incoming transactions within account data too
+* t2986: Fix escrow FACT Authorization
+* t3070: List full transactions in escrow
+* t2925: Added Trusted networks API with filtering per persona
+
+
+oms-inside
+~~~~~~~~~~
+
+* Updated text at John's Havens' request
+* Fixed api call that was causing blank screen
+* Merge pull request #57 from a-laughlin/issue56
+* fixed build break by updating grunt-eslint and eslint.json
+* Adding roadmap dates
+* Fixed reference to grunt watch with grunt dev
+* Removed Happathon references from contributing
+* Missed the page title on last commit.
+* Removed Happathon references & related parts
+* Merge pull request #53 from a-laughlin/issue47
+* Merge pull request #52 from a-laughlin/issue51
+* created initial roadmap
+* Distinguished inside UI from core in architecture diagram
+* Merge pull request #50 from a-laughlin/issue47
+* Added architecture diagrams
+* Updated with new (preliminary) project direction.
+* Merge pull request #44 from a-laughlin/master
+* fixed missing link in install process
+* Merge pull request #43 from a-laughlin/master
+* updated readme and and cleaned up unnecessary files
+* Merge pull request #42 from a-laughlin/master
+* updated gruntfile - it was accidentally running watch on default, stopping travis from completing build
+* updated node version in travis config to latest (0.10.24)
+* Merge pull request #41 from a-laughlin/master
+* fixed weird npm update issue with grunt-eslint
+* Merge pull request #40 from a-laughlin/master
+* modifying appjs to trigger a travis build after a likely fluke error
+* Merge pull request #34 from a-laughlin/issue30
+* updated documentation for new architecture, plus did file cleanup, reinstated tests, and a few other small updates.  Too much for one commit, really.
+* removed unused demo files
+* added grunt-gh-pages to dependencies, for pushing demos. Not implemented yet though
+* added the dist/ i.e. compiled directory to tracked files for gh-pages publishing
+* Merge branch 'master' into issue30
+* ui updates & compile process
+* updated build process with compile
+* ui updates & cleanup
+* checkpoint for mock backend working with new build process
+* updated plugin copying
+* bower fully working again, and plugins copied to app/thirdparty
+* modified gitignore. adjusting for a bunch of components showing up deleted
+* updated .gitignore to correctly ignore files
+* accidentally added a dev folder. Removing
+* ugly, but working
+* Merge pull request #32 from a-laughlin/bower_linting
+* bower.json had extra comma. wasn't in jshint list.  Fixed
+* Merge pull request #29 from a-laughlin/issue14
+* Merge branch 'master' into issue14
+* added a bunch of data and updated templates to start displaying the raw JSON
+* fixed linting syntax in gruntfile after jshint package
+* styling changes
+* removed line causing error after jshint package update
+* fixed linting error by updating grunt-contrib-jshint version
+* Merge pull request #25 from a-laughlin/issue14
+* refactored ui, module structure, css, data structure... pretty much everything
+* Rename module.js to happathon-engine-module.js
+* cleaning up deleted files
+* basic working state
+* update less files for bootstrap 3.0.2
+* updated dependency libraries to latest versions
+* Updates to make getting started easier
+* Automatically open browser to start page on grunt watch
+* Docs updates
+* Merge pull request #15 from tfmorris/faker-fix
+* Fixed Faker.js package name for Bower
+* docs updates + license mod for IDcubed's custom one
+* initial commit for happathon repo re-org
+* t1238: Add PerguntusPlus.yaml manifest from oms-core
+* t1238: Remove directories and modules that already exist in other repos
+* t1075: add mimeparse to PerguntusTAB manifest (for tastypie, now 1.0)
+* t1075: update Perguntus manifest - set specific version for pytz
+* Added GPSDemo modules and manifests into repo
+* t1057: add Perguntus TAB manifest from oms-core
+* t1057: add perguntus UI and backend modules from oms-experimental
+* update .gitignore with what we have elsewhere
+* Initial commit
+
+
+oms-kickstart
+~~~~~~~~~~~~~
+
+* t3280: update repo list in build manifest comments
+* t3051: version bump for v0.8.6.5
+* t3080: define packer build manifests with Private Dashboard TCC
+
+
+oms-root-id
+~~~~~~~~~~~
+
+* added RIDS spec. minor corrections to other docs
+* updates to SE, SA; added credential spec
+* removed old source files
+* add subject agent v0.1.0; correction to UI (minor)
+* getting rid of some watermarks. Also created PNG versions since I personally find them more convenient.
+* corrected a typo in actor names in UMLs
+* added Secure Element spec v0.1.0
+* fixed H1/H2 message exchange in auth
+* remove old docs
+* fixes to registration, auth UML
+* update auth UML, registration UML
+* registration: incorporate yesterday discussions
+* update registration UML to v0-4-0
+* user interface spec added; others updated
+* updated SA & vocab source docs for conf call
+* updates to vocabulary, SA, RA source files
+* new design docs
+* added v0-1 registration UML msg seq diagram
+* auth msg seq dia v0-2-2 (final)
+* updated drafts for authentication
+* updates to the RE-RA interface specs
+* drafts of RE-RA interface added
+* clarified repository organization, updated docs
+* root id registration & hard recovery
+* sketch sequence for registration, recovery
+* interim update to draft doc
+* updating a bunch of stuff
+* mobile app UX root identity storyboard added
+* clean up org of repository
+* add UX screens & flow directory
+* NIST SP 800-63v2 reference added
+* final (initial) version of root identity intro doc
+* initial work in progress snapshot
+
+
+oms-salt-core
+~~~~~~~~~~~~~
+
+* t3280: clean up repos included in the base build
+* t3051: version bump for v0.8.6.5
+
+
+oms-salt-tcf
+~~~~~~~~~~~~
+
+* t3051: version bump for v0.8.6.5
+* t3192: automate deploying the Gesture Collection app
+* t3159: Install the correct bitcoind package from PPA
+* t3158: add Notes & Notifications TABs > Group-Escrow-Service TCC
+* t3148: define Private TCC backend build, separate from Dashboard
+* t3082: automate Escrow/Bitcoind install
+* t3153: include OIDC client registration in Dashboard UI formula
+* t3150: Automate deployment of Notes app
+* t3147: automate deployment of Trusted Networks app
+* t3145: automate deployment of Notifications app
+* t2948: Merge v0.8.6.4 from master to qa-develop
+* t3140: Drop OIDC WARs/config back to v0.8.6.2
+* t3136: OIDC scopes are not allowed to have spaces
+
+
+oms-ui
+~~~~~~
+
+* t3051: version bump for v0.8.6.5
+* t2948: Merge v0.8.6.4 from master to qa-develop
+* t3238: Tile fadeIn and image stretch.
+* t3237: Menu possition fixed. Adding styled scrollbar.
+* t3156: Update error messages.
+* t3225: fixed loading messages on all screens.
+* t3236: Notifications are fetched only when user is authenticatd.
+* t3235: Use url property and fix group members list.
+* t3227: Transactions sorted from latest to oldest
+* t3218: Use Lato font and other minor fixes.
+* t3207: Updated groups views.
+* t3211: Added notifications autorefresh.
+* t3212: Added loading texts on all lists in application.
+* t3213: Making menus working properly.
+* t3062: Updated personas (networks/personas) attributes, added 'Active Members' to networks and groups.
+* t3196: Add missing actions in tiles and add few tile adjustments.
+* t3206: Updated default image on network persona view.
+* t3197: List of member of Trusted Network do not show duplicate personas.
+* t3190: Default images are used all across the application
+* t3182: move ID3NetworkUI manifest from oms-ui to oms-core
+* t3175: Adding missing Lodash dependency.
+* t3173: Fix the persona details view avatar.
+* t3137: Adding simplest version of notifications.
+* t3168: Fix for list of transactions in wallets.
+* t3129: All personas images use 'avatar' attribute.
+* t3127: Fixes for trusted network application list.
+* t3123: Adding OIDC errors handling.
+* t3157: Adding trailing slashes to requestes.
+* t3139: Adding ability to buy attributes.
+* t3128: Adding ability to make transaction to member of trusted network.
+* t3115: Adding clickable tile picture
+* t3073: Adding view of trusted network member.
+* t3063: Integrate Trusted Networks API
+* t3038: Integrate Escrow API for Wallets views
+* t3092: script production build of the dashboard_ui module
+* t3089: Updated readme with up to date installation instructions.
+* t3075: Adding styles for home screen of ID3 Trusted Network.
+* t3074: Adding working manifest for ID3 Network.
+* t3072: Adding skeleton for ID3 trusted network.
+* t2992: Integrate Groups API
+* t3043: Adding ability to define base url for each endpoint.
+
+
+python-oidc
+~~~~~~~~~~~
+
+* t3051: v0.8.6.5 release
+
+
+v0.8.6.4
+--------
+
+
+oms-admin
+~~~~~~~~~
+
+* t2948: v0.8.6.4 release
+
+
+oms-core
+~~~~~~~~
+
+* t2948: v0.8.6.4 release
+* t3043: Adding configuation options to dashboard manifest.
+* t2955: Create first version of Attribute Authority
+* t3027: Remove links to RtD
+* t2981: Create simple backend to collect gesture information
+* t2884: add a manifest for the VirtualBox VRC
+* t2979: Merge missing commits to qa-develop
+* t2840: Added description and avatar fields to Groups
+
+
+oms-core-ios
+~~~~~~~~~~~~
+
+* t2965: New gesture app for sending points to the backend
+
+
+oms-core-js
+~~~~~~~~~~~
+
+* t3036: Library now respect expire_in parameter. Cookies use max-age.
+* t3035: Adding option to force removing token.
+
+
+oms-deploy
+~~~~~~~~~~
+
+* t2948: v0.8.6.4 release
+* t2979: Merge missing commits to qa-develop
+* t2257: correct perms on /var/log/oms/django-* log files
+
+
+oms-docs
+~~~~~~~~
+
+* t2948: v0.8.6.4 release
+* t2777: Update list of open source libraries, frameworks, etc in use
+* t3049: Update Source Code Map
+* t3027: Remove links to RtD
+
+
+oms-experimental
+~~~~~~~~~~~~~~~~
+
+* t2948: v0.8.6.4 release
+* t2955: Create first version of Attribute Authority
+* t3027: Remove links to RtD
+* t2926: Added basic notification API and modified escrow to use it
+* t2996: Disable EscrowFACT for now to fix escrow service
+* t2981: Create simple backend to collect gesture information
+* t2979: Merge missing commits to qa-develop
+* t2824: refactor FACT, created as a single module
+* t2970: fix license header in sources
+* t2875: FACT transformations for Escrow transfers
+
+
+oms-kickstart
+~~~~~~~~~~~~~
+
+* t3107: ensure the hostname is set for packer builds
+* t2971: update reclass to 1.3 + patched in packer builds
+* t3076: update post_kick for hostname/minion correctness
+* t2948: v0.8.6.4 release
+* t2936: create kickstart build manifest for the VBox Trust Network VRC
+* t2971: use reclass 1.3 + patched
+* t2980: remove qa-develop build manifests from oms-kickstart
+* t2973: correct references to packages:base pillar key
+* t2961: set oms.tcc.rTCC as the default kickstart build
+* t2972: add ability to keep/clear bootstrap pillar
+
+
+oms-oidc
+~~~~~~~~
+
+* added my general log4j config.
+* checked in the modified log4j config files for OIDC and OIDC-Demo.
+* created per-WAR logging with Log4j in addition to the application-level logging Tomcat normally does.
+* fixed a bug with the way one of the fields was deserialized as ,causing personas to come without their scopes. updated SQL scripts to align the persona UUIDs.
+* Cleaned up inconsistencies with persona information: some places had it as persona_id, persona_uuid.... and other as simply id, uuid.... Everything now just says id, uuid e
+* added a few new scopes to Persona Manager's database client. Need to figure out how to handle arbitrary scopes with OIDC for persona manager.
+* Merge branch 'qa-develop' of github.com:IDCubed/oms-oidc into qa-develop
+
+
+oms-salt-core
+~~~~~~~~~~~~~
+
+* t3078: manage /etc/salt/minion_id through salt.minion.base
+* t2948: v0.8.6.4 release
+* t2988: add reclass manifest for python
+* t2971: use reclass 1.3 + patched
+* t2974: correct requisites in reclass.install formula
+* t2973: correct references to packages:base pillar key
+* t2950: add manifests to manage PPA and install libzmq3-dev
+* t2967: define manifest to manage PPA for salt
+* t2966: add generic formula to manage Ubuntu PPA for apt
+
+
+oms-salt-tcf
+~~~~~~~~~~~~
+
+* t3140: Drop OIDC WARs/config back to v0.8.6.2
+* t3134: define basic TCC/TAB manifests for Escrow Service
+* t3136: Fix Dashboard scopes for readability in demo
+* t3131: ensure Dashboard UI has the persona-management scope
+* t3094: namespace app client/scope keys for dashboard deploy
+* t2948: v0.8.6.4 release
+* t3081: Automate the deployment and config of the DashboardUI
+* t3118: Update log configs in oidc.tomcat formula
+* t3079: Define a TCC for the Dashboard UI
+* t3104: update OIDC java properties for v0.8.6.4
+* t2934: update logstash to use supervisord, replace init.d
+* t2839: add formula/manifest to deploy the VBox Trust Network TCC
+* t2988: correct uwsgi requisites in formula/manifest
+* t2968: update rTCC manifest to lock salt at v0.17.x
+* t2962: correct CoreID Demo TCC manifest to extend the rTCC
+* t2733: include user.root formula into the rTCC
+* t2733: clean up user.root formula
+* t2181: raise root's tmux scrollback buffer to 5000
+
+
+oms-ui
+~~~~~~
+
+* t2948: v0.8.6.4 release
+* t3041: Adding missing bower dependencies.
+* t3037: Adding global error handler.
+* t3040: Fix issues with tiles.
+* t2993: Adding modified tile directive
+* t2998: Adding logout functionality.
+* t2994: Integrate Restangular.
+* t2995: Minor fixes to home screen look.
+* t2910: Adding wallets views
+* t2842: Created groups view.
+* t2920: Adding views of trusted networks.
+* t2919: Adding personas views.
+* t2906: Create Angular.js directive for bottom menu.
+* t2956: Adding updated icons and default tile icons.
+
+
+oms-vrc
+~~~~~~~
+
+* t2851: document how to deploy and setup the VBox VRC
+* t2884: drop Snapshot from vbox_vrc.api and vbox_vrc.urls
+* t2884: Convert VBox VRC -> OMS modules
+
+
+python-oidc
+~~~~~~~~~~~
+
+* t2948: v0.8.6.4 release
+
+
+v0.8.6.3
+--------
+
+
+oms-core
+~~~~~~~~
+
+* t2918: Modify manifets to support new escrow API
+* t2809: Merge v0.8.6.2 to qa-develop
+* t2897: Fixing Dashboard UI manifest.
+* t2821: Added membership resource and modifed notes to use groups
+* t2805: Created group resource with rule for per persona access
+* t2728: Adding manifest for Dashboard UI.
+
+
+oms-core-ios
+~~~~~~~~~~~~
+
+* t2848: iOS app needs Authorization header when talking to backend
+* t2846: Prepare the functional prototype of the complete iOS application flow
+* t2847: Perform fixes to the iOS authentication flow after feedback from demo
+
+
+oms-core-js
+~~~~~~~~~~~
+
+* t2176: Adding initialization error handling, documentation and tests for it.
+* t2178: Adding functionality to revoke token (logout). Included tests and updated README.md
+* t2858: Adding correct license text.
+
+
+oms-docs
+~~~~~~~~
+
+* t2888: add logging tutorial
+* t2896: Update release process documentation
+
+
+oms-experimental
+~~~~~~~~~~~~~~~~
+
+* t2821: Modifed notes app to use groups
+* t2917: internal transfers are not reflected in blockchain
+* t2908: Escrow API changes (json-ld, all operations through manager)
+* t2809: Merge v0.8.6.2 to qa-develop
+* t2795: escrow account manager for balance & payment management
+
+
+oms-kickstart
+~~~~~~~~~~~~~
+
+* t2931: Increase VM image RAM from 256 MB to 1 GB
+
+
+oms-oidc
+~~~~~~~~
+
+* Reintegrated OMSChat and OIDC so that the demo runs correctly end to end through the modified OIDC.
+* Final fixes. All done. OIDC is building and testing all the way.
+* More bugxies. Only one test is now broken: GroupUsecaseIntegrationTest.
+* Lots of bugfixes. More bugfixes to come.
+* Implemented a mechanism to determine administrator from the userInfo persona. I am hoping this will be signed by an Attribute Authority and validated during login. Also, fi
+* Created a RIDS mock that allows passing through the authentication step. Lots of little changes to test that have somehow eluded me checking them in.
+* The UserRegistry unit tests were not salvagable. I created brand new test for the brand new persona provider component.
+* Fully integrated RIDS and replace the User Registry module with an almost equivalent Persona Provider one. Rippled changes through the entire code base. Nothing is tested y
+* Removed the Authorization endpoint security filter as it was not needed in the end. Changed the Login filter to handle everything.
+* Multiple bugfixes across the board.
+* Bugfixes. Consolidating things.
+* created the RIDSConfiguration bean and mechanism to configure the RIDS integration layer with it.
+* Fixing some Spring config I had missed.
+* Added validation of LOA through Policy Manager.
+* Root Identity System integration logic, partially completed and partially tested.
+* replaced the concept of a user hash with the rather vague term user identity string. The latter will hopefully soon be populated with the RE-SE handle from the Root Identit
+* allowed the portal client to use introspection, limited lifetime of all the tokens to 1 hour.
+* Created a Portal client script.
+
+
+oms-salt-core
+~~~~~~~~~~~~~
+
+* t2866: Add 3 repos to OMS release oms-core-ios oms-core-js oms-vrc
+* t2809: Merge v0.8.6.2 to qa-develop
+
+
+oms-salt-tcf
+~~~~~~~~~~~~
+
+* t2941: add formula to deploy the set_master app as a service
+* t2940: define a manifest for the rTCC Seeds TAB
+* t2870: add formula to deploy the trust_score app as a service
+* t2591: remove (old) salt.master formula
+
+
+oms-ui
+~~~~~~
+
+* t2809: Merge v0.8.6.2 to qa-develop
+* t2841: Updated button menu as designed.
+* t2879: SASS files are now correctly mapped onto CSS when using gulp watch-oms task in default template.
+* t2889: Integrating tile directive into personas view. Adding notifications API mockup.
+* t2771: Adding tile directive for dashboard-ui
+* t2886: Fixes unmerged files in dashboard UI.
+* t2874: Catching up with new version of bootstrap-sass. Some fixes after merge.
+* t2728: Adding base for Dashboard UI.
+
+
+oms-vrc
+~~~~~~~
+
+* t2946: bugfix in set_master
+* t2929: disable support for snapshots of VBox VMs
+* t2816: initial VBox module documentation
+* t2755: improve storage controller management
+* t2883: add django management commands to VBox VRC
+* t2782: Update VBox VRC APIs
+* t2891: TOFU Set Master, give the rTCC a means to update itself
+* t2729: create an initial trust score mvp
+* t2869: correct the last (messy) commit
+* t2782: add read-only API views to vbox vrc
+* t2755: add support for taking and tracking VM snapshots
+* t2755: add support for setting network options of the VM
+* t2624: include a salt client wrapper for the vbox vrc
+* t2624: add virtualbox module for salt
+* t2734: initial django project to track VResources
+* t2804: add a setup.py to install vbox_wrapper as a python pkg
+* t2577: create a wrapper module around pyvbox
+* t2523: add initial version of the UI Framework
+* t2817: add data collection and plotting scripts for Linux
+* t2814: minor update to pyvbox_stress_test script
+* t2628: add script to stress test VM usage
+* t1734: correct LICENSE
+
+
+v0.8.6.2
+--------
+
+
+oms-admin
+~~~~~~~~~
+
+* t2809: v0.8.6.2 release
+
+
+oms-core
+~~~~~~~~
+
+* t2809: v0.8.6.2 release
+* t2801: Make changes in manifests to support new escrow service
+* t2716: manifest for escrow service
+* t2717: Modify coreid_registry to collect payment for paid attributes,        Also change in notes manifest due to ref
+* t2800: Clean up Notes.yaml manifest
+
+
+oms-core-ios
+~~~~~~~~~~~~
+
+* t2557: Create OIDC library for iOS to simplify authorization process and make it reusable.
+* t2759: Implement multiple auths flow
+* t2784: Implement repeat gesture system.
+* t2785: Implement panic button.
+* t2758: Implement Association flow
+
+
+oms-deploy
+~~~~~~~~~~
+
+* t2809: v0.8.6.2 release
+
+
+oms-docs
+~~~~~~~~
+
+* t2809: v0.8.6.2 release
+* t2792: Fix up capitalization and typos
+
+
+oms-experimental
+~~~~~~~~~~~~~~~~
+
+* t2809: v0.8.6.2 release
+* t2796: Added escrow wrapper and switched currency to use escrow service
+* t2798: make Escrow service (partially) deployable
+* t2767: Added logging of transactions to currency module
+* t2716: escrow service
+* t2717: Create rule, transform for paying for attribute access,        Refactoring of currency transforms and rules
+* t2800: Clean up payment gateway and Notes application code
+
+
+oms-kickstart
+~~~~~~~~~~~~~
+
+* t2809: v0.8.6.2 release
+* t2753: add a packer build manifest for the OMS rTCC
+
+
+oms-salt-core
+~~~~~~~~~~~~~
+
+* t2809: v0.8.6.2 release
+* t1802: define a manifest, salt minion with a local master
+* t1802: add manifest to enable salt-minion service
+* t2591: add formula for basic salt-master setup
+* t2854: drop isinstance() jinja macro from salt minion config
+* t1802: define config template for a masterless salt minion
+* t2837: salt-minion service is disabled, by default
+* t2835: clean up the list of repos in the official build
+
+
+oms-salt-tcf
+~~~~~~~~~~~~
+
+* t2809: v0.8.6.2 release
+* t1802: include masterless salt minion config in rTCC
+* t2853: correct logstash config template
+
+
+oms-ui
+~~~~~~
+
+* t2809: v0.8.6.2 release
+* t2856: Updating LICENSE with correct license text.
+* t2754: Adding default template for OMS JavaScript applications.
+* t2568: version bump for v0.8.5.2
+* t2455: define basic sphinx documentation project
+* t2754: Adding default template for OMS JavaScript applications.
+
+
+oms-vrc
+~~~~~~~
+
+* t1734: add ID3 license to repo root
+* t1734: add .gitignore for an initial commit
+
+
+python-oidc
+~~~~~~~~~~~
+
+* t2809: v0.8.6.2 release
+
+
+v0.8.6.1
+--------
+
+
+oms-core
+~~~~~~~~
+
+* t2605: Added manifest for digital payments app - notes
+* t2606: Modified OIDCFACTAuthorization to pass aditional data to state generator
+* t2687: Reorg Perguntus and GPS Demo states
+* t2436: Pin critical Python deps in manifests to tested versions
+
+
+oms-core-ios
+~~~~~~~~~~~~
+
+* t2757: Adjust current views to new design.
+* t2760: Implement new behaviors to Main menu
+* t2658: OIDC redirect for authentication request should be redirected to backend where notification to user's mobile d
+* t2715: Implement views for authentication process and granting permissions.
+* Merge pull request #1 from IDCubed/t-2617-implement_mocked_flow
+* shows all collected data in Complele view
+* all data can be entered
+* updated style
+* Registration flow (views)
+* upload code to github
+* added OMS-oidc-library first attempt with demo
+
+
+oms-core-js
+~~~~~~~~~~~
+
+* t2600 - Fixed type and change wording a bit.
+* t2600 - Adding documentation describing how to integrate library with jQuery (it will work with Backbone.js as well) and Angular.js
+* t2600 - Rephrased test specs to be proper BDD sentences.
+* t2600 - Adding instruction how to use library.
+* t2600 - Small code refactoring, coding style fixes.
+* t2600 - Added option to configure XMLHttpRequest that user passed if needed - will be good for creating framework specific plugins. Added some more JsDocs.
+* t2600 - Added method for getting pre-configured XMLHttpRequest with Authorization headers.
+* t2600 - Adding instruction for building production version of library to README.md.
+* t2600 - Forget that IE 8 doesnt support max-age cookies, changes it to work with expires.
+* t2600 - Fixed failing tests of PhantomJS. Fixed method for setting cookies. Removed accidentally commited console.log.
+* t2600 - Added functionality and tests for getting access token from URL. Failing on PhantomJS for unknown reasons - needs to be investigated.
+* t2600 - Made private variables private.
+* t2600 - Adding mising JsDocs.
+* t2600 - Added working method for forgeting credentials.
+* t2600 - Merge. Fixed indentions.
+* t2600 - Adding test for forgeting credentials.
+* Merge pull request #2 from IDCubed/t2650-gulp-script-for-minimization
+* t2650 - Adaptation to comments
+* t2650 - First Gulp script for minimization
+* t2600 - Fixed indention
+* t2600 - Adding method and tests for testing whatever credentials are set.
+* t2600 - Fixed typo
+* Adding method and tests for redirecting to authorization page using configuration.
+* Adding option to set scope and oidc base url.
+* Adding karma-jshint to karma configuration to make sure that we wont commit any errors.
+* Fixing some linter errors after getting in work again.
+* Adding some simple instructions to readme file.
+* t2600 - Adding some simple test to check whatever entier configuration works as expected.
+* Adding new configuration that include karma-jasmine-ajax adapter for faking ajax responses - will be needed to test library base functionality.
+* t2600 - Added some configuration for jasmine-ajax. Adapter needs to be added.
+* t2600 - Changing version of Jasmine used by karma to 2.x.x. Please run npm update
+* t2600 - Adding configuration for Karma.js
+* t2600 - Adding karma as dependency. Run npm install
+* t2600 - Adding skeleton for omscode.js library. Just dummy file for now.
+* t2600 - Adding skeleton of files required for library.
+* t2600 - Creating a short description README.md about repository and its purpose.
+
+
+oms-deploy
+~~~~~~~~~~
+
+* t2565: Modified deploy to support plugins installing via setuptools
+
+
+oms-experimental
+~~~~~~~~~~~~~~~~
+
+* t2737: method to make payment from specific account instead of default
+* t2605: Provide transforms,rules and state for payment processing
+* t2562: digital currencies payments gateway
+* t2604: closed bitcoind network (local, regtest mode)
+* t2648: Added module to make digital payments based on transactions in JSON-LD format
+* t2687: Reorg Perguntus and GPS Demo states
+
+
+oms-kickstart
+~~~~~~~~~~~~~
+
+* t2736: rename reclass classes -> manifests
+* t2731: reclass formula sources config from pillar, add to build
+
+
+oms-salt-core
+~~~~~~~~~~~~~
+
+* t2128: automate updating salt top.sls (for developers)
+* t2736: rename reclass classes -> manifests
+* t2733: core formula should not depend on user.root from tcf
+* t2590: bump reclass to v1.3
+* t2731: update reclass formula to source config from pillar
+* t2732: import hostname formula/manifest from oms-salt-tcf
+* t2588: Fixup license across all .sls formula
+
+
+oms-salt-tcf
+~~~~~~~~~~~~
+
+* t2790: fix kibana service with supervisord
+* t2799: add basic formula for supervisord
+* t2778: correct permissions on logstash log directory
+* t2780: update service config/script in logstash formula
+* t2740: update logstash formula to install v1.4.2
+* t2741: refactor the logstash config
+* t2739: update logstash formula to pull from pillar
+* t2593: define the manifest to create an ELK TAB
+* t2622: add a manifest to define the Root TCC (rTCC)
+* t2766: template the entire KibanaConfig.rb
+* t2738: add basic formula to install/config kibana
+* t2593: include basic formula/manifest for Elasticsearch
+* t2736: rename reclass classes -> manifests
+* t2732: remove hostname formula/manifest
+* t2588: Fixup license across all .sls formula
+
+
 v0.8.5.2
 --------
 
