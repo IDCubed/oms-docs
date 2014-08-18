@@ -598,6 +598,34 @@ through the QA process.
 The following repositories have specific needs to be met.
 
 
+oms-admin
+~~~~~~~~~
+
+* Version bump in */docs/conf.py* and */oms_admin/__init__.py*
+* Update auto-generated documentation if any Python packages, modules,
+  functions, or classes were added/removed - re-run *sphinx-autogen* and use
+  Git to compare the output. Updates may be needed.
+
+
+oms-core
+~~~~~~~~
+
+* Version bump in */setup.py*, */docs/conf.py*, and in the *__init__.py* found
+  in each module.
+* Update auto-generated documentation if any Python packages, modules,
+  functions, or classes were added/removed - re-run ``sphinx-autogen`` and use
+  Git to compare the output. Updates may be needed.
+
+
+oms-deploy
+~~~~~~~~~~
+
+* Version bump in */setup.py*, and */docs/conf.py*.
+* Update auto-generated documentation if any Python packages, modules,
+  functions, or classes were added/removed - re-run *sphinx-autogen* and use
+  Git to compare the output. Updates may be needed.
+
+
 oms-docs
 ~~~~~~~~
 
@@ -614,25 +642,11 @@ oms-docs
 oms-experimental
 ~~~~~~~~~~~~~~~~
 
-* Version bump in */setup.py* and in the *__init__.py* found in each module.
+* Version bump in */setup.py*, */docs/conf.py*, and in the *__init__.py* found
+  in each module.
 * Update auto-generated documentation if any Python packages, modules,
   functions, or classes were added/removed - re-run ``sphinx-autogen`` and use
   Git to compare the output. Updates may be needed.
-
-
-oms-core
-~~~~~~~~
-
-* Version bump in */setup.py* and in the *__init__.py* found in each module.
-* Update auto-generated documentation if any Python packages, modules,
-  functions, or classes were added/removed - re-run ``sphinx-autogen`` and use
-  Git to compare the output. Updates may be needed.
-
-
-oms-ui
-~~~~~~
-
-* Version bump in */docs/conf.py*.
 
 
 oms-kickstart
@@ -643,38 +657,6 @@ oms-kickstart
   */config/packer/july_conf/private-dash-with-coreid.yaml*,
   */config/packer/july_conf/private-dash.yaml*, */config/pillar/release.yaml*,
   and */docs/conf.py*.
-
-
-oms-salt-core
-~~~~~~~~~~~~~
-
-* Version bump in */manifests/oms-release.yml*,
-*/manifests/oms-repos-extra.yml*, */manifests/oms.yml*, */docs/conf.py*, and
-*/oms/release/PILLAR.sls*.
-
-
-oms-salt-tcf
-~~~~~~~~~~~~
-
-* Version bump in */docs/conf.py*.
-
-
-oms-deploy
-~~~~~~~~~~
-
-* Version bump in */setup.py*, and */docs/conf.py*.
-* Update auto-generated documentation if any Python packages, modules,
-  functions, or classes were added/removed - re-run *sphinx-autogen* and use
-  Git to compare the output. Updates may be needed.
-
-
-oms-admin
-~~~~~~~~~
-
-* Version bump in */oms_admin/__init__.py*
-* Update auto-generated documentation if any Python packages, modules,
-  functions, or classes were added/removed - re-run *sphinx-autogen* and use
-  Git to compare the output. Updates may be needed.
 
 
 oms-oidc
@@ -772,6 +754,32 @@ Create the *oms-oidc-wars-vx_y_z.yml* (reclass) manifest with the new URL and
 checksum, found in the :github-repo:`oms-salt-tcf
 <oms-salt-tcf/tree/master/classes/>` GitHub repo. If the WAR is rebuilt, rebase
 the RC branch to correct this commit with the final URL/checksum.
+
+
+oms-salt-core
+~~~~~~~~~~~~~
+
+* Version bump in */manifests/oms-release.yml*,
+  */manifests/oms-repos-extra.yml*, */manifests/oms.yml*, */docs/conf.py*, and
+  */oms/release/PILLAR.sls*.
+
+
+oms-salt-tcf
+~~~~~~~~~~~~
+
+* Version bump in */docs/conf.py*.
+
+
+oms-ui
+~~~~~~
+
+* Version bump in */docs/conf.py*.
+
+
+oms-vrc
+~~~~~~~
+
+* Version bump in */docs/conf.py* and */vbox_wrapper/__init__.py*.
 
 
 python-oidc
