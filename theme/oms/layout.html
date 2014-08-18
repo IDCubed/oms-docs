@@ -75,18 +75,19 @@
                 <div class="nav-collapse collapse">
                     <ul class="nav pull-right">
                         <li id="nav-introduction"><a href="https://wiki.idhypercubed.org/" title="Wiki">Wiki</a></li>
-                        <li id="nav-documentation" class="active"><a href="http://docs.openmustardseed.org/">Documentation</a>
+                        <li id="nav-documentation"><a href="http://docs.openmustardseed.org/">Documentation</a>
                         </li>
                         <li id="nav-about-id3"><a href="https://www.idcubed.org/about/vision-mission/" title="IDCubed">About
                             ID3</a></li>
-                        <li id="nav-blog"><a href="https://www.idcubed.org/" title="IDCubed Blog">ID3 Blog</a></li>
+                        <li id="nav-blog"><a href="https://beta.openmustardseed.org/" title="OMS Blog">OMS Blog</a></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Overview docs <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a class="ext-doc-project" href="/">Open Mustard Seed</a></li>
                                 <li class="divider"></li>
                                 <li><a class="ext-doc-project" href="/oms-core">oms-core</a></li>
                                 <li><a class="ext-doc-project" href="/oms-experimental">oms-experimental</a></li>
+                                <li><a class="ext-doc-project" href="/oms-ui">oms-ui</a></li>
                                 <li class="divider"></li>
                                 <li><a class="ext-doc-project" href="/oms-kickstart">oms-kickstart</a></li>
                                 <li><a class="ext-doc-project" href="/oms-salt-core">oms-salt-core</a></li>
@@ -94,9 +95,6 @@
                                 <li class="divider"></li>
                                 <li><a class="ext-doc-project" href="/oms-deploy">oms-deploy</a></li>
                                 <li><a class="ext-doc-project" href="/oms-admin">oms-admin</a></li>
-                                <li class="divider"></li>
-                                <li><a class="ext-doc-project" href="/oms-oidc">oms-oidc</a></li>
-                                <li><a class="ext-doc-project" href="/python-oidc">python-oidc</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -159,32 +157,11 @@
     <!-- footer -->
     <div class="container">
         <div class="row">
-            <div class="span8 tbox">
+            <div class="span12 tbox">
                 <div class="tbox">
                     <p>Open Mustard Seed is an open source project, sponsored by <a href="https://www.idcubed.org">IDCubed</a>,
                         under the <a href="https://github.com/IDCubed/oms-core/blob/master/LICENSE"
                                      title="ID3 licence, hosted in the GitHub repository">ID3 MIT license</a></p>
-                </div>
-            </div>
-            <div class="span4">
-                <div class="tbox version-flyer hidden-phone">
-                    <div class="content">
-                        <span class="pull-left"><i class="icon-file-text"></i> Current version:</span>
-                        <ul class="inline pull-right">
-                            {% for slug, url in versions %}
-                                <li class="alternative">
-                                    <a href="{{ url }}{%- for word in pagename.split('/') -%}
-                                        {%- if word != 'index' -%}
-                                            {%- if word != '' -%}
-                                                {{ word }}/
-                                            {%- endif -%}
-                                        {%- endif -%}
-                                    {%- endfor -%}"
-                                       title="Switch to {{ slug }}">{{ slug }}</a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div>

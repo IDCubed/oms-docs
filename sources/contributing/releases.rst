@@ -229,7 +229,7 @@ example:
          oms-salt-core: 'git@github.com:IDCubed/oms-salt-core.git'
          oms-salt-tcf: 'git@github.com:IDCubed/oms-salt-tcf.git'
          oms-ui: 'git@github.com:IDCubed/oms-ui.git'
-         Python-oidc: 'git@github.com:IDCubed/python-oidc.git'
+         python-oidc: 'git@github.com:IDCubed/python-oidc.git'
 
 
 .. note::
@@ -480,10 +480,10 @@ we actually apply them:
            Changes:
    ----------
        State: - git
-       Name:      git@github.com:IDCubed/Python-oidc.git
+       Name:      git@github.com:IDCubed/python-oidc.git
        Function:  latest
            Result:    None
-           Comment:   Repository git@github.com:IDCubed/Python-oidc.git is about to be cloned to /var/oms/release/python-oidc/
+           Comment:   Repository git@github.com:IDCubed/python-oidc.git is about to be cloned to /var/oms/release/python-oidc/
            Changes:
    ----------
        State: - git
@@ -630,9 +630,14 @@ oms-docs
 ~~~~~~~~
 
 * Update the release notes (we need to document how to do this).
-* Version bump in */package.json* and */sources/conf.py*. Note that the Node
-  Package Manager (npm) is picky about version strings, *0.8.5* is valid where
-  *0.8.5.1* is not - do be aware of this when updating */package.json*.
+* Version bump in */sources/next-steps/source-code.rst*, */package.json* and
+  */sources/conf.py*.
+
+.. note::
+
+  The Node Package Manager (npm) is picky about version strings, *0.8.5* is
+  valid but *0.8.5.1* is not - do be aware of this when updating
+  */package.json*.
 
 .. todo::
 
