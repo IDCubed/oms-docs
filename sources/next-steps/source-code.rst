@@ -14,6 +14,16 @@ They are ordered as you would generally interact with the source code, if you
 were building an OMS deployment from souce (as opposed to a pre-built VM).
 
 
+karma-jasmine-ajax
+------------------
+
+Karma adapter for Jasmine plugin for faking Ajax responses in your tests -
+:github-repo:`GitHub<karma-jasmine-ajax>` -
+:github-readme:`Readme<karma-jasmine-ajax>`
+
+Karma adapter for Jasmine plugin for faking Ajax responses in your tests.
+
+
 oms-admin
 ---------
 
@@ -25,6 +35,16 @@ A generic Trusted Compute Framework needs the generic structures for the
 administrative and management tasks - oms-admin aims to build a modular,
 command-driven, framework for administrative tasks. Built in Python and leveraging
 the oms-deploy Python deployment and system automation library.
+
+
+oms-chat
+--------
+
+Simple chat application demonstrating auth/auth and group functionality -
+:github-repo:`GitHub<oms-chat>`
+
+Simple chat application demonstrating authentication, authorization, and group
+functionality.
 
 
 oms-core
@@ -89,6 +109,15 @@ Experimental Module Repository - OMS Reference TABs -
 The reference TABs included in OMS are built with modules from this repository.
 
 
+oms-inside
+----------
+
+Module repository for the OMS "Inside" TAB -
+:github-repo:`GitHub<oms-inside>` - :github-readme:`Readme<oms-inside>`
+
+Module repository for the OMS "Inside" TAB.
+
+
 oms-kickstart
 -------------
 
@@ -114,6 +143,15 @@ OpenID Connect, built for OMS, with support for OMS' CoreID and Personas. -
 The MITREid OpenID Connect server, extended to support OMS concept of CoreID
 and Personas. Built in Java, on the Spring Framework, implemented as a Maven
 overlay of the MITREid OIDC project.
+
+
+oms-root-id
+-----------
+
+Specifications for the OMS Root Identity System -
+:github-repo:`GitHub<oms-root-id>`
+
+Specifications for the OMS Root Identity System (RIDS).
 
 
 oms-salt-core

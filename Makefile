@@ -24,6 +24,8 @@ PROJECT_PATH-oms-kickstart = ../oms-kickstart/docs
 PROJECT_PATH-oms-salt-core = ../oms-salt-core/docs
 PROJECT_PATH-oms-salt-tcf = ../oms-salt-tcf/docs
 PROJECT_PATH-oms-ui = ../oms-ui/docs
+PROJECT_PATH-oms-vrc = ../oms-vrc/docs
+PROJECT_PATH-python-oidc = ../python-oidc/docs
 
 help:
 	@echo "Please use 'make <target>', where <target> is one of the following:"
@@ -57,6 +59,8 @@ help:
 	@echo "  oms-salt-core"
 	@echo "  oms-salt-tcf"
 	@echo "  oms-ui"
+	@echo "  oms-vrc"
+	@echo "  python-oidc"
 	@echo
 	@echo "..each of the following targets are available:"
 	@echo
@@ -495,17 +499,105 @@ oms-ui-doctest:
 
 clean-oms-ui:
 	rm -rf $(BUILDDIR)/oms-ui/*
+oms-vrc-html:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-vrc)"
+	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-vrc) $(BUILDDIR)/html/oms-vrc
+	@echo
+	@echo "Build finished. The html build artifacts are in $(BUILDDIR)/html/oms-vrc."
+oms-vrc-singlehtml:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-vrc)"
+	$(SPHINXBUILD) -b singlehtml $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-vrc) $(BUILDDIR)/singlehtml/oms-vrc
+	@echo
+	@echo "Build finished. The singlehtml build artifacts are in $(BUILDDIR)/singlehtml/oms-vrc."
+oms-vrc-json:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-vrc)"
+	$(SPHINXBUILD) -b json $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-vrc) $(BUILDDIR)/json/oms-vrc
+	@echo
+	@echo "Build finished. The json build artifacts are in $(BUILDDIR)/json/oms-vrc."
+oms-vrc-text:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-vrc)"
+	$(SPHINXBUILD) -b text $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-vrc) $(BUILDDIR)/text/oms-vrc
+	@echo
+	@echo "Build finished. The text build artifacts are in $(BUILDDIR)/text/oms-vrc."
+oms-vrc-man:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-vrc)"
+	$(SPHINXBUILD) -b man $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-vrc) $(BUILDDIR)/man/oms-vrc
+	@echo
+	@echo "Build finished. The man build artifacts are in $(BUILDDIR)/man/oms-vrc."
+oms-vrc-changes:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-vrc)"
+	$(SPHINXBUILD) -b changes $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-vrc) $(BUILDDIR)/changes/oms-vrc
+	@echo
+	@echo "Build finished. The changes build artifacts are in $(BUILDDIR)/changes/oms-vrc."
+oms-vrc-linkcheck:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-vrc)"
+	$(SPHINXBUILD) -b linkcheck $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-vrc) $(BUILDDIR)/linkcheck/oms-vrc
+	@echo
+	@echo "Build finished. The linkcheck build artifacts are in $(BUILDDIR)/linkcheck/oms-vrc."
+oms-vrc-doctest:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-vrc)"
+	$(SPHINXBUILD) -b doctest $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-vrc) $(BUILDDIR)/doctest/oms-vrc
+	@echo
+	@echo "Build finished. The doctest build artifacts are in $(BUILDDIR)/doctest/oms-vrc."
+
+clean-oms-vrc:
+	rm -rf $(BUILDDIR)/oms-vrc/*
+python-oidc-html:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-python-oidc)"
+	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(PROJECT_PATH-python-oidc) $(BUILDDIR)/html/python-oidc
+	@echo
+	@echo "Build finished. The html build artifacts are in $(BUILDDIR)/html/python-oidc."
+python-oidc-singlehtml:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-python-oidc)"
+	$(SPHINXBUILD) -b singlehtml $(ALLSPHINXOPTS) $(PROJECT_PATH-python-oidc) $(BUILDDIR)/singlehtml/python-oidc
+	@echo
+	@echo "Build finished. The singlehtml build artifacts are in $(BUILDDIR)/singlehtml/python-oidc."
+python-oidc-json:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-python-oidc)"
+	$(SPHINXBUILD) -b json $(ALLSPHINXOPTS) $(PROJECT_PATH-python-oidc) $(BUILDDIR)/json/python-oidc
+	@echo
+	@echo "Build finished. The json build artifacts are in $(BUILDDIR)/json/python-oidc."
+python-oidc-text:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-python-oidc)"
+	$(SPHINXBUILD) -b text $(ALLSPHINXOPTS) $(PROJECT_PATH-python-oidc) $(BUILDDIR)/text/python-oidc
+	@echo
+	@echo "Build finished. The text build artifacts are in $(BUILDDIR)/text/python-oidc."
+python-oidc-man:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-python-oidc)"
+	$(SPHINXBUILD) -b man $(ALLSPHINXOPTS) $(PROJECT_PATH-python-oidc) $(BUILDDIR)/man/python-oidc
+	@echo
+	@echo "Build finished. The man build artifacts are in $(BUILDDIR)/man/python-oidc."
+python-oidc-changes:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-python-oidc)"
+	$(SPHINXBUILD) -b changes $(ALLSPHINXOPTS) $(PROJECT_PATH-python-oidc) $(BUILDDIR)/changes/python-oidc
+	@echo
+	@echo "Build finished. The changes build artifacts are in $(BUILDDIR)/changes/python-oidc."
+python-oidc-linkcheck:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-python-oidc)"
+	$(SPHINXBUILD) -b linkcheck $(ALLSPHINXOPTS) $(PROJECT_PATH-python-oidc) $(BUILDDIR)/linkcheck/python-oidc
+	@echo
+	@echo "Build finished. The linkcheck build artifacts are in $(BUILDDIR)/linkcheck/python-oidc."
+python-oidc-doctest:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-python-oidc)"
+	$(SPHINXBUILD) -b doctest $(ALLSPHINXOPTS) $(PROJECT_PATH-python-oidc) $(BUILDDIR)/doctest/python-oidc
+	@echo
+	@echo "Build finished. The doctest build artifacts are in $(BUILDDIR)/doctest/python-oidc."
+
+clean-python-oidc:
+	rm -rf $(BUILDDIR)/python-oidc/*
 
 all:
+	@make oms-docs
 	@make oms-admin-html
 	@make oms-core-html
 	@make oms-deploy-html
-	@make oms-docs
 	@make oms-experimental-html
 	@make oms-kickstart-html
 	@make oms-salt-core-html
 	@make oms-salt-tcf-html
 	@make oms-ui-html
+	@make oms-vrc-html
+	@make python-oidc-html
 
 serve:
 	@grunt --gruntfile Gruntfile.js serve_oms_docs

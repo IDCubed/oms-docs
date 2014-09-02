@@ -59,14 +59,16 @@ target_list = [
 # the list of repos/projects to look for sphinx docs in. these should exist up
 # one level from here (in the directory structure).
 project_list = [
-    'oms-kickstart',
     'oms-admin',
-    'oms-deploy',
     'oms-core',
+    'oms-deploy',
     'oms-experimental',
-    'oms-ui',
+    'oms-kickstart',
     'oms-salt-core',
     'oms-salt-tcf',
+    'oms-ui',
+    'oms-vrc',
+    'python-oidc',
 ]
 
 # build template context dictionary (each variable is available in each template)

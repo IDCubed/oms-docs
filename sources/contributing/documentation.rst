@@ -265,14 +265,16 @@ Let's first review the documentation embedded in our Makefile:
 
    Note that, for each of the following repositories:
 
-     oms-kickstart
      oms-admin
-     oms-deploy
      oms-core
+     oms-deploy
      oms-experimental
-     oms-ui
+     oms-kickstart
      oms-salt-core
      oms-salt-tcf
+     oms-ui
+     oms-vrc
+     python-oidc
 
    ..each of the following targets are available:
 
@@ -306,6 +308,14 @@ Let's first review the documentation embedded in our Makefile:
      SPHINXOPTS:
      SPHINXBUILD:   sphinx-build
      ALLSPHINXOPTS: -d _build/doctrees
+
+
+   In general, you will want to either:
+
+     a) build/host oms-docs, eg: 'make oms-docs serve'
+     b) build/host all doc projects, eg: 'make all serve-all'
+     c) you want to clean first, eg: 'make clean all serve-all'
+     d) build something specific, eg: 'make oms-deploy-linkcheck'
 
 
 Of particular interest are the details about ``make all`` and ``make serve-all``,
@@ -405,14 +415,16 @@ then watching all doc projects, here are the tasks provided:
 
    Available tasks:
      make_clean                  run make clean on build directory/artifacts
-     make_oms-kickstart_html     run sphinx make for oms-kickstart
      make_oms-admin_html         run sphinx make for oms-admin
-     make_oms-deploy_html        run sphinx make for oms-deploy
      make_oms-core_html          run sphinx make for oms-core
+     make_oms-deploy_html        run sphinx make for oms-deploy
      make_oms-experimental_html  run sphinx make for oms-experimental
-     make_oms-ui_html            run sphinx make for oms-ui
+     make_oms-kickstart_html     run sphinx make for oms-kickstart
      make_oms-salt-core_html     run sphinx make for oms-salt-core
      make_oms-salt-tcf_html      run sphinx make for oms-salt-tcf
+     make_oms-ui_html            run sphinx make for oms-ui
+     make_oms-vrc_html           run sphinx make for oms-vrc
+     make_python-oidc_html       run sphinx make for python-oidc
      make_oms_docs               run sphinx build on oms-docs only
      make_all_docs               run sphinx build for all docs
      serve_all_docs              Alias for "connect", "watch" tasks.

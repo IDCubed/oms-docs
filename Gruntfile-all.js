@@ -9,29 +9,25 @@ module.exports = function(grunt) {
             // Also, the param names mean nothing (e.g., index:, test:, etc...)
             options: {
                 livereload: 9001, // automatically reload the browser on file change
-            },oms_kickstart: {
-                files: ['../oms-kickstart/docs/**/*'],
-                tasks: ['make_oms-kickstart_html'],
-            },
-            oms_admin: {
+            },oms_admin: {
                 files: ['../oms-admin/docs/**/*'],
                 tasks: ['make_oms-admin_html'],
-            },
-            oms_deploy: {
-                files: ['../oms-deploy/docs/**/*'],
-                tasks: ['make_oms-deploy_html'],
             },
             oms_core: {
                 files: ['../oms-core/docs/**/*'],
                 tasks: ['make_oms-core_html'],
             },
+            oms_deploy: {
+                files: ['../oms-deploy/docs/**/*'],
+                tasks: ['make_oms-deploy_html'],
+            },
             oms_experimental: {
                 files: ['../oms-experimental/docs/**/*'],
                 tasks: ['make_oms-experimental_html'],
             },
-            oms_ui: {
-                files: ['../oms-ui/docs/**/*'],
-                tasks: ['make_oms-ui_html'],
+            oms_kickstart: {
+                files: ['../oms-kickstart/docs/**/*'],
+                tasks: ['make_oms-kickstart_html'],
             },
             oms_salt_core: {
                 files: ['../oms-salt-core/docs/**/*'],
@@ -40,6 +36,18 @@ module.exports = function(grunt) {
             oms_salt_tcf: {
                 files: ['../oms-salt-tcf/docs/**/*'],
                 tasks: ['make_oms-salt-tcf_html'],
+            },
+            oms_ui: {
+                files: ['../oms-ui/docs/**/*'],
+                tasks: ['make_oms-ui_html'],
+            },
+            oms_vrc: {
+                files: ['../oms-vrc/docs/**/*'],
+                tasks: ['make_oms-vrc_html'],
+            },
+            python_oidc: {
+                files: ['../python-oidc/docs/**/*'],
+                tasks: ['make_python-oidc_html'],
             },
             these_docs: {
                 files: ['sources/**/*'],
@@ -75,32 +83,12 @@ module.exports = function(grunt) {
             done(err);
         });
     });
-    // register a task to build the sphinx docs for oms-kickstart.
-    grunt.registerTask('make_oms-kickstart_html',
-                       'run sphinx make for oms-kickstart',
-                       function () {
-        var done = this.async();
-        require('child_process').exec('make oms-kickstart-html', function (err, stdout) {
-            grunt.log.write(stdout);
-            done(err);
-        });
-    });
     // register a task to build the sphinx docs for oms-admin.
     grunt.registerTask('make_oms-admin_html',
                        'run sphinx make for oms-admin',
                        function () {
         var done = this.async();
         require('child_process').exec('make oms-admin-html', function (err, stdout) {
-            grunt.log.write(stdout);
-            done(err);
-        });
-    });
-    // register a task to build the sphinx docs for oms-deploy.
-    grunt.registerTask('make_oms-deploy_html',
-                       'run sphinx make for oms-deploy',
-                       function () {
-        var done = this.async();
-        require('child_process').exec('make oms-deploy-html', function (err, stdout) {
             grunt.log.write(stdout);
             done(err);
         });
@@ -115,6 +103,16 @@ module.exports = function(grunt) {
             done(err);
         });
     });
+    // register a task to build the sphinx docs for oms-deploy.
+    grunt.registerTask('make_oms-deploy_html',
+                       'run sphinx make for oms-deploy',
+                       function () {
+        var done = this.async();
+        require('child_process').exec('make oms-deploy-html', function (err, stdout) {
+            grunt.log.write(stdout);
+            done(err);
+        });
+    });
     // register a task to build the sphinx docs for oms-experimental.
     grunt.registerTask('make_oms-experimental_html',
                        'run sphinx make for oms-experimental',
@@ -125,12 +123,12 @@ module.exports = function(grunt) {
             done(err);
         });
     });
-    // register a task to build the sphinx docs for oms-ui.
-    grunt.registerTask('make_oms-ui_html',
-                       'run sphinx make for oms-ui',
+    // register a task to build the sphinx docs for oms-kickstart.
+    grunt.registerTask('make_oms-kickstart_html',
+                       'run sphinx make for oms-kickstart',
                        function () {
         var done = this.async();
-        require('child_process').exec('make oms-ui-html', function (err, stdout) {
+        require('child_process').exec('make oms-kickstart-html', function (err, stdout) {
             grunt.log.write(stdout);
             done(err);
         });
@@ -151,6 +149,36 @@ module.exports = function(grunt) {
                        function () {
         var done = this.async();
         require('child_process').exec('make oms-salt-tcf-html', function (err, stdout) {
+            grunt.log.write(stdout);
+            done(err);
+        });
+    });
+    // register a task to build the sphinx docs for oms-ui.
+    grunt.registerTask('make_oms-ui_html',
+                       'run sphinx make for oms-ui',
+                       function () {
+        var done = this.async();
+        require('child_process').exec('make oms-ui-html', function (err, stdout) {
+            grunt.log.write(stdout);
+            done(err);
+        });
+    });
+    // register a task to build the sphinx docs for oms-vrc.
+    grunt.registerTask('make_oms-vrc_html',
+                       'run sphinx make for oms-vrc',
+                       function () {
+        var done = this.async();
+        require('child_process').exec('make oms-vrc-html', function (err, stdout) {
+            grunt.log.write(stdout);
+            done(err);
+        });
+    });
+    // register a task to build the sphinx docs for python-oidc.
+    grunt.registerTask('make_python-oidc_html',
+                       'run sphinx make for python-oidc',
+                       function () {
+        var done = this.async();
+        require('child_process').exec('make python-oidc-html', function (err, stdout) {
             grunt.log.write(stdout);
             done(err);
         });

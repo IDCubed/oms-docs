@@ -52,3 +52,11 @@ for the OMS Virtual Resource Controller (VRC).
 
 :external-doc:`oms-salt-tcf` - System automation formula for the OMS Trusted
 Compute Framework.
+
+
+Other
+~~~~~
+
+:external-doc:`oms-vrc` - OMS Virtual Resource Controller.
+
+:external-doc:`python-oidc` - Python client library to OMS-OIDC.
