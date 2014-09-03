@@ -20,7 +20,7 @@ Let's get started!
 
 
 Starting out with virtualenv
------------
+----------------------------
 
 Set the ``WORKON_HOME`` environment variable:
 
@@ -157,7 +157,7 @@ If you reactivate the virtualenv, you should have access to the
 
 
 Create a django project
------------
+-----------------------
 
 Great, let's get into creating a new django project/webapp - cd to
 ``/var/oms/python/HelloWorld`` then use the ``django-admin.py`` utility:
@@ -350,7 +350,7 @@ database and including the admin models.
 
 
 Create a Todo app module
------------
+------------------------
 
 Let's add some models and create some objects with the admin UI. We will
 first need to create a module/app in our project:
@@ -724,7 +724,7 @@ admin UI and save it <SCREENSHOT>. GREAT!
 
 
 debugging helpers
------------
+-----------------
 
 Ok, let's leave runserver up and do some work in another console. note that if
 you are not familiar with SSH or the console, you can either start a new SSH
@@ -821,7 +821,7 @@ After editing ``sandbox/settings.py``, go back to the first console with
 
 
 Adding a REST API
------------
+-----------------
 
 Note that some tastypie tutorials might suggest putting your API resource
 definitions in ``mymodule/api.py``, but this does not scale well when you get to

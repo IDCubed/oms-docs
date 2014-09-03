@@ -5,7 +5,7 @@
 .. _introduction:
 
 Introduction to the OMS Trusted Compute Framework
-===========================
+=================================================
 
 In this section we will provide an introduction to the Open Mustard Seed Trusted
 Compute Framework (OMS TCF):
