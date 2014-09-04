@@ -10,8 +10,16 @@ OMS Source Code Map - v0.8.6.5
 ==============================
 
 Here is an overview of the source code included in the Open Mustard Seed Release.
-They are ordered as you would generally interact with the source code, if you
-were building an OMS deployment from souce (as opposed to a pre-built VM).
+
+OMS creates the framework for an ecosystem of modules, and instances of OMS
+nodes are living reflections (or different representations) of these ecosystems
+- instances and their constituents are each simultaneously parts of the whole.
+
+Each part aims to be a fully capable holon within the holarchies it chooses
+(or is elected) to be a part of, and documentation is no different. Each
+repository with OMS source code aims to be as self-documented, and complete as
+possible. This is a work in progress, especially as new repositories rapidly
+come online.
 
 
 karma-jasmine-ajax
@@ -52,7 +60,7 @@ oms-core
 
 Core Module Repository - OMS Reference Trusted Application Bundles (TABs) -
 :github-repo:`GitHub<oms-core>` - :external-doc:`Overview Docs <oms-core>` -
-:external-doc:`API Docs <oms-core/api/coreid_registry_tutorial.html>`
+:external-doc:`Inline Docs <oms-core/modules/oms-core.html>`
 
 OMS Trusted Application Bundles (TABs) are often assembled from many small,
 reusable components - the reference TABs included with OMS build on these core
