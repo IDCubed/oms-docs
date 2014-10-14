@@ -13,7 +13,6 @@ This documentation has the following resources:
    Overview <index>
    Introduction <introduction/index>
    Getting Started <get_started/index>
-   OpenID Connect <oidc/index>
    Tutorials <tutorials/index>
    Next Steps <next-steps/index>
    Release Notes <releases/index>

@@ -270,6 +270,7 @@ Let's first review the documentation embedded in our Makefile:
      oms-deploy
      oms-experimental
      oms-kickstart
+     oms-oidc
      oms-salt-core
      oms-salt-tcf
      oms-ui
@@ -420,6 +421,7 @@ then watching all doc projects, here are the tasks provided:
      make_oms-deploy_html        run sphinx make for oms-deploy
      make_oms-experimental_html  run sphinx make for oms-experimental
      make_oms-kickstart_html     run sphinx make for oms-kickstart
+     make_oms-oidc_html          run sphinx make for oms-oidc
      make_oms-salt-core_html     run sphinx make for oms-salt-core
      make_oms-salt-tcf_html      run sphinx make for oms-salt-tcf
      make_oms-ui_html            run sphinx make for oms-ui

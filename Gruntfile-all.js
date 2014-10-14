@@ -29,6 +29,10 @@ module.exports = function(grunt) {
                 files: ['../oms-kickstart/docs/**/*'],
                 tasks: ['make_oms-kickstart_html'],
             },
+            oms_oidc: {
+                files: ['../oms-oidc/docs/**/*'],
+                tasks: ['make_oms-oidc_html'],
+            },
             oms_salt_core: {
                 files: ['../oms-salt-core/docs/**/*'],
                 tasks: ['make_oms-salt-core_html'],
@@ -129,6 +133,16 @@ module.exports = function(grunt) {
                        function () {
         var done = this.async();
         require('child_process').exec('make oms-kickstart-html', function (err, stdout) {
+            grunt.log.write(stdout);
+            done(err);
+        });
+    });
+    // register a task to build the sphinx docs for oms-oidc.
+    grunt.registerTask('make_oms-oidc_html',
+                       'run sphinx make for oms-oidc',
+                       function () {
+        var done = this.async();
+        require('child_process').exec('make oms-oidc-html', function (err, stdout) {
             grunt.log.write(stdout);
             done(err);
         });

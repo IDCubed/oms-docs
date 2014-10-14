@@ -21,6 +21,7 @@ PROJECT_PATH-oms-core = ../oms-core/docs
 PROJECT_PATH-oms-deploy = ../oms-deploy/docs
 PROJECT_PATH-oms-experimental = ../oms-experimental/docs
 PROJECT_PATH-oms-kickstart = ../oms-kickstart/docs
+PROJECT_PATH-oms-oidc = ../oms-oidc/docs
 PROJECT_PATH-oms-salt-core = ../oms-salt-core/docs
 PROJECT_PATH-oms-salt-tcf = ../oms-salt-tcf/docs
 PROJECT_PATH-oms-ui = ../oms-ui/docs
@@ -56,6 +57,7 @@ help:
 	@echo "  oms-deploy"
 	@echo "  oms-experimental"
 	@echo "  oms-kickstart"
+	@echo "  oms-oidc"
 	@echo "  oms-salt-core"
 	@echo "  oms-salt-tcf"
 	@echo "  oms-ui"
@@ -370,6 +372,49 @@ oms-kickstart-doctest:
 
 clean-oms-kickstart:
 	rm -rf $(BUILDDIR)/oms-kickstart/*
+oms-oidc-html:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-oidc)"
+	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-oidc) $(BUILDDIR)/html/oms-oidc
+	@echo
+	@echo "Build finished. The html build artifacts are in $(BUILDDIR)/html/oms-oidc."
+oms-oidc-singlehtml:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-oidc)"
+	$(SPHINXBUILD) -b singlehtml $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-oidc) $(BUILDDIR)/singlehtml/oms-oidc
+	@echo
+	@echo "Build finished. The singlehtml build artifacts are in $(BUILDDIR)/singlehtml/oms-oidc."
+oms-oidc-json:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-oidc)"
+	$(SPHINXBUILD) -b json $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-oidc) $(BUILDDIR)/json/oms-oidc
+	@echo
+	@echo "Build finished. The json build artifacts are in $(BUILDDIR)/json/oms-oidc."
+oms-oidc-text:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-oidc)"
+	$(SPHINXBUILD) -b text $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-oidc) $(BUILDDIR)/text/oms-oidc
+	@echo
+	@echo "Build finished. The text build artifacts are in $(BUILDDIR)/text/oms-oidc."
+oms-oidc-man:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-oidc)"
+	$(SPHINXBUILD) -b man $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-oidc) $(BUILDDIR)/man/oms-oidc
+	@echo
+	@echo "Build finished. The man build artifacts are in $(BUILDDIR)/man/oms-oidc."
+oms-oidc-changes:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-oidc)"
+	$(SPHINXBUILD) -b changes $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-oidc) $(BUILDDIR)/changes/oms-oidc
+	@echo
+	@echo "Build finished. The changes build artifacts are in $(BUILDDIR)/changes/oms-oidc."
+oms-oidc-linkcheck:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-oidc)"
+	$(SPHINXBUILD) -b linkcheck $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-oidc) $(BUILDDIR)/linkcheck/oms-oidc
+	@echo
+	@echo "Build finished. The linkcheck build artifacts are in $(BUILDDIR)/linkcheck/oms-oidc."
+oms-oidc-doctest:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-oidc)"
+	$(SPHINXBUILD) -b doctest $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-oidc) $(BUILDDIR)/doctest/oms-oidc
+	@echo
+	@echo "Build finished. The doctest build artifacts are in $(BUILDDIR)/doctest/oms-oidc."
+
+clean-oms-oidc:
+	rm -rf $(BUILDDIR)/oms-oidc/*
 oms-salt-core-html:
 	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-salt-core)"
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-salt-core) $(BUILDDIR)/html/oms-salt-core
@@ -593,6 +638,7 @@ all:
 	@make oms-deploy-html
 	@make oms-experimental-html
 	@make oms-kickstart-html
+	@make oms-oidc-html
 	@make oms-salt-core-html
 	@make oms-salt-tcf-html
 	@make oms-ui-html

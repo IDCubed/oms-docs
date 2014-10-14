@@ -64,6 +64,7 @@ project_list = [
     'oms-deploy',
     'oms-experimental',
     'oms-kickstart',
+    'oms-oidc',
     'oms-salt-core',
     'oms-salt-tcf',
     'oms-ui',
