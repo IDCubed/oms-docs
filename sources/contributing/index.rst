@@ -33,8 +33,7 @@ OMS. See each section below based on where your contributions will be made:
 .. toctree::
    :maxdepth: 1
 
-   OMS Source Code Map <source_code>
+   OMS Source Code Map </next-steps/source-code>
    Documentation <documentation>
-   OpenID Connect </oidc/developers_guide>
-   Build OMS VM Images <vm_images>
+   Build OMS VM Images </next-steps/build-vm-images>
    Release Process <releases>

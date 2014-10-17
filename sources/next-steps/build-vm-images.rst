@@ -768,5 +768,3 @@ Additional user variables available:
 Given the length of time it takes to complete a minimal/base install of a
 Ubuntu host, it generally makes more sense to use the kickstarted template over
 this one - it is faster to import the existing Ubuntu host and run kickstart.
-
-.. include:: /snippets/get_help_footer.inc

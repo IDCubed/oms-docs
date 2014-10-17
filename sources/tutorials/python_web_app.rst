@@ -7,8 +7,6 @@
 Python Web App
 ==============
 
-.. include:: example_header.inc
-
 The goal of this example is to show you how you can create your own
 TABs using OMS.
 

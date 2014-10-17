@@ -17,8 +17,6 @@ foobar
 Hello World
 ===========
 
-.. include:: example_header.inc
-
 This is the most basic example available for creating an OMS TAB.
 
 **Explanation:**

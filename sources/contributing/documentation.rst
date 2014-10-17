@@ -20,8 +20,8 @@ The end result will be an understanding of the following:
 
 .. note::
 
-   Please see the :oms-docs-git:`oms-docs README <master/README.md>` for
-   additional details on contributing to the oms-docs src/repository.
+   Please see the :github-readme:`oms-docs README <oms-docs>` for additional
+   details on contributing to the oms-docs src/repository.
 
 
 Where to find source code
@@ -214,9 +214,9 @@ In a separate tmux pane/window or console/shell, run the grunt/node dev server:
 Point your browser at http://$ip:9000 to see HTML docs served up by the
 minimal HTTP server (replace *$ip* with the IP of your OMS Host).
 
-At this point, you may want to review the :oms-docs-git:`oms-docs README
-<master/README.md>` for details about restructured text, sphinx, and style
-conventions found in oms-docs.
+At this point, you may want to review the :github-readme:`oms-docs README
+<oms-docs>` for details about restructured text, sphinx, and style conventions
+found in oms-docs.
 
 The next section details how to leverage the build tools included in oms-docs
 to simplify the work in building, reviewing, and updating sphinx doc projects

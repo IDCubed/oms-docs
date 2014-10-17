@@ -73,7 +73,7 @@ extensions = ['sphinxcontrib.httpdomain',
 
 extlinks = {'ticket': ('https://redmine.idhypercubed.org/issues/%s', 'ticket'),
             'github-repo': ('https://github.com/IDCubed/%s', 'github: '),
-            'github-readme': ('https://github.com/IDCubed/%s/#readme', 'github: '),
+            'github-readme': ('https://github.com/IDCubed/%s#readme', 'github: '),
             'external-doc': ('https://docs.openmustardseed.org/%s', ''),
 }
 

@@ -116,7 +116,7 @@ Note a couple of things things:
 
 * The ``path`` key, expects a list of files, though we only specified one.
 * We added a ``tag`` using the ``tags`` key. Note that here, a list is also
-expected.
+  expected.
 
 `Here <http://logstash.net/docs/1.4.2/inputs/file>`_ is some more information
 regarding using files as inputs. You can also ind more information about inputs
@@ -236,7 +236,7 @@ this case, we want to:
 1. Read from the file.
 2. Read from the queue.
 3. Add tags to those messages so we can find them more easily later on form
-Kibana.
+   Kibana.
 
 In order to see what we need to add to the configuration, we need to read the
 Logstash documentation, especially the
