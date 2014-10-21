@@ -16,12 +16,18 @@ ALLSPHINXOPTS   = -d $(BUILDDIR)/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS)
 I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS)
 
 # where to find each of the projects..
+PROJECT_PATH-karma-jasmine-ajax = ../karma-jasmine-ajax/docs
 PROJECT_PATH-oms-admin = ../oms-admin/docs
+PROJECT_PATH-oms-chat = ../oms-chat/docs
 PROJECT_PATH-oms-core = ../oms-core/docs
+PROJECT_PATH-oms-core-ios = ../oms-core-ios/docs
+PROJECT_PATH-oms-core-js = ../oms-core-js/docs
 PROJECT_PATH-oms-deploy = ../oms-deploy/docs
 PROJECT_PATH-oms-experimental = ../oms-experimental/docs
+PROJECT_PATH-oms-inside = ../oms-inside/docs
 PROJECT_PATH-oms-kickstart = ../oms-kickstart/docs
 PROJECT_PATH-oms-oidc = ../oms-oidc/docs
+PROJECT_PATH-oms-root-id = ../oms-root-id/docs
 PROJECT_PATH-oms-salt-core = ../oms-salt-core/docs
 PROJECT_PATH-oms-salt-tcf = ../oms-salt-tcf/docs
 PROJECT_PATH-oms-ui = ../oms-ui/docs
@@ -52,12 +58,18 @@ help:
 	@echo
 	@echo "Note that, for each of the following repositories:"
 	@echo
+	@echo "  karma-jasmine-ajax"
 	@echo "  oms-admin"
+	@echo "  oms-chat"
 	@echo "  oms-core"
+	@echo "  oms-core-ios"
+	@echo "  oms-core-js"
 	@echo "  oms-deploy"
 	@echo "  oms-experimental"
+	@echo "  oms-inside"
 	@echo "  oms-kickstart"
 	@echo "  oms-oidc"
+	@echo "  oms-root-id"
 	@echo "  oms-salt-core"
 	@echo "  oms-salt-tcf"
 	@echo "  oms-ui"
@@ -157,6 +169,49 @@ doctest:
 	$(SPHINXBUILD) -b doctest $(ALLSPHINXOPTS) sources $(BUILDDIR)/doctest
 	@echo "Testing of doctests in the sources finished, look at the " \
 	      "results in $(BUILDDIR)/doctest/output.txt."
+karma-jasmine-ajax-html:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-karma-jasmine-ajax)"
+	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(PROJECT_PATH-karma-jasmine-ajax) $(BUILDDIR)/html/karma-jasmine-ajax
+	@echo
+	@echo "Build finished. The html build artifacts are in $(BUILDDIR)/html/karma-jasmine-ajax."
+karma-jasmine-ajax-singlehtml:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-karma-jasmine-ajax)"
+	$(SPHINXBUILD) -b singlehtml $(ALLSPHINXOPTS) $(PROJECT_PATH-karma-jasmine-ajax) $(BUILDDIR)/singlehtml/karma-jasmine-ajax
+	@echo
+	@echo "Build finished. The singlehtml build artifacts are in $(BUILDDIR)/singlehtml/karma-jasmine-ajax."
+karma-jasmine-ajax-json:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-karma-jasmine-ajax)"
+	$(SPHINXBUILD) -b json $(ALLSPHINXOPTS) $(PROJECT_PATH-karma-jasmine-ajax) $(BUILDDIR)/json/karma-jasmine-ajax
+	@echo
+	@echo "Build finished. The json build artifacts are in $(BUILDDIR)/json/karma-jasmine-ajax."
+karma-jasmine-ajax-text:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-karma-jasmine-ajax)"
+	$(SPHINXBUILD) -b text $(ALLSPHINXOPTS) $(PROJECT_PATH-karma-jasmine-ajax) $(BUILDDIR)/text/karma-jasmine-ajax
+	@echo
+	@echo "Build finished. The text build artifacts are in $(BUILDDIR)/text/karma-jasmine-ajax."
+karma-jasmine-ajax-man:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-karma-jasmine-ajax)"
+	$(SPHINXBUILD) -b man $(ALLSPHINXOPTS) $(PROJECT_PATH-karma-jasmine-ajax) $(BUILDDIR)/man/karma-jasmine-ajax
+	@echo
+	@echo "Build finished. The man build artifacts are in $(BUILDDIR)/man/karma-jasmine-ajax."
+karma-jasmine-ajax-changes:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-karma-jasmine-ajax)"
+	$(SPHINXBUILD) -b changes $(ALLSPHINXOPTS) $(PROJECT_PATH-karma-jasmine-ajax) $(BUILDDIR)/changes/karma-jasmine-ajax
+	@echo
+	@echo "Build finished. The changes build artifacts are in $(BUILDDIR)/changes/karma-jasmine-ajax."
+karma-jasmine-ajax-linkcheck:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-karma-jasmine-ajax)"
+	$(SPHINXBUILD) -b linkcheck $(ALLSPHINXOPTS) $(PROJECT_PATH-karma-jasmine-ajax) $(BUILDDIR)/linkcheck/karma-jasmine-ajax
+	@echo
+	@echo "Build finished. The linkcheck build artifacts are in $(BUILDDIR)/linkcheck/karma-jasmine-ajax."
+karma-jasmine-ajax-doctest:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-karma-jasmine-ajax)"
+	$(SPHINXBUILD) -b doctest $(ALLSPHINXOPTS) $(PROJECT_PATH-karma-jasmine-ajax) $(BUILDDIR)/doctest/karma-jasmine-ajax
+	@echo
+	@echo "Build finished. The doctest build artifacts are in $(BUILDDIR)/doctest/karma-jasmine-ajax."
+
+clean-karma-jasmine-ajax:
+	rm -rf $(BUILDDIR)/karma-jasmine-ajax/*
 oms-admin-html:
 	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-admin)"
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-admin) $(BUILDDIR)/html/oms-admin
@@ -200,6 +255,49 @@ oms-admin-doctest:
 
 clean-oms-admin:
 	rm -rf $(BUILDDIR)/oms-admin/*
+oms-chat-html:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-chat)"
+	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-chat) $(BUILDDIR)/html/oms-chat
+	@echo
+	@echo "Build finished. The html build artifacts are in $(BUILDDIR)/html/oms-chat."
+oms-chat-singlehtml:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-chat)"
+	$(SPHINXBUILD) -b singlehtml $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-chat) $(BUILDDIR)/singlehtml/oms-chat
+	@echo
+	@echo "Build finished. The singlehtml build artifacts are in $(BUILDDIR)/singlehtml/oms-chat."
+oms-chat-json:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-chat)"
+	$(SPHINXBUILD) -b json $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-chat) $(BUILDDIR)/json/oms-chat
+	@echo
+	@echo "Build finished. The json build artifacts are in $(BUILDDIR)/json/oms-chat."
+oms-chat-text:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-chat)"
+	$(SPHINXBUILD) -b text $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-chat) $(BUILDDIR)/text/oms-chat
+	@echo
+	@echo "Build finished. The text build artifacts are in $(BUILDDIR)/text/oms-chat."
+oms-chat-man:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-chat)"
+	$(SPHINXBUILD) -b man $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-chat) $(BUILDDIR)/man/oms-chat
+	@echo
+	@echo "Build finished. The man build artifacts are in $(BUILDDIR)/man/oms-chat."
+oms-chat-changes:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-chat)"
+	$(SPHINXBUILD) -b changes $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-chat) $(BUILDDIR)/changes/oms-chat
+	@echo
+	@echo "Build finished. The changes build artifacts are in $(BUILDDIR)/changes/oms-chat."
+oms-chat-linkcheck:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-chat)"
+	$(SPHINXBUILD) -b linkcheck $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-chat) $(BUILDDIR)/linkcheck/oms-chat
+	@echo
+	@echo "Build finished. The linkcheck build artifacts are in $(BUILDDIR)/linkcheck/oms-chat."
+oms-chat-doctest:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-chat)"
+	$(SPHINXBUILD) -b doctest $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-chat) $(BUILDDIR)/doctest/oms-chat
+	@echo
+	@echo "Build finished. The doctest build artifacts are in $(BUILDDIR)/doctest/oms-chat."
+
+clean-oms-chat:
+	rm -rf $(BUILDDIR)/oms-chat/*
 oms-core-html:
 	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-core)"
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-core) $(BUILDDIR)/html/oms-core
@@ -243,6 +341,92 @@ oms-core-doctest:
 
 clean-oms-core:
 	rm -rf $(BUILDDIR)/oms-core/*
+oms-core-ios-html:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-core-ios)"
+	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-core-ios) $(BUILDDIR)/html/oms-core-ios
+	@echo
+	@echo "Build finished. The html build artifacts are in $(BUILDDIR)/html/oms-core-ios."
+oms-core-ios-singlehtml:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-core-ios)"
+	$(SPHINXBUILD) -b singlehtml $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-core-ios) $(BUILDDIR)/singlehtml/oms-core-ios
+	@echo
+	@echo "Build finished. The singlehtml build artifacts are in $(BUILDDIR)/singlehtml/oms-core-ios."
+oms-core-ios-json:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-core-ios)"
+	$(SPHINXBUILD) -b json $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-core-ios) $(BUILDDIR)/json/oms-core-ios
+	@echo
+	@echo "Build finished. The json build artifacts are in $(BUILDDIR)/json/oms-core-ios."
+oms-core-ios-text:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-core-ios)"
+	$(SPHINXBUILD) -b text $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-core-ios) $(BUILDDIR)/text/oms-core-ios
+	@echo
+	@echo "Build finished. The text build artifacts are in $(BUILDDIR)/text/oms-core-ios."
+oms-core-ios-man:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-core-ios)"
+	$(SPHINXBUILD) -b man $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-core-ios) $(BUILDDIR)/man/oms-core-ios
+	@echo
+	@echo "Build finished. The man build artifacts are in $(BUILDDIR)/man/oms-core-ios."
+oms-core-ios-changes:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-core-ios)"
+	$(SPHINXBUILD) -b changes $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-core-ios) $(BUILDDIR)/changes/oms-core-ios
+	@echo
+	@echo "Build finished. The changes build artifacts are in $(BUILDDIR)/changes/oms-core-ios."
+oms-core-ios-linkcheck:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-core-ios)"
+	$(SPHINXBUILD) -b linkcheck $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-core-ios) $(BUILDDIR)/linkcheck/oms-core-ios
+	@echo
+	@echo "Build finished. The linkcheck build artifacts are in $(BUILDDIR)/linkcheck/oms-core-ios."
+oms-core-ios-doctest:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-core-ios)"
+	$(SPHINXBUILD) -b doctest $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-core-ios) $(BUILDDIR)/doctest/oms-core-ios
+	@echo
+	@echo "Build finished. The doctest build artifacts are in $(BUILDDIR)/doctest/oms-core-ios."
+
+clean-oms-core-ios:
+	rm -rf $(BUILDDIR)/oms-core-ios/*
+oms-core-js-html:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-core-js)"
+	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-core-js) $(BUILDDIR)/html/oms-core-js
+	@echo
+	@echo "Build finished. The html build artifacts are in $(BUILDDIR)/html/oms-core-js."
+oms-core-js-singlehtml:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-core-js)"
+	$(SPHINXBUILD) -b singlehtml $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-core-js) $(BUILDDIR)/singlehtml/oms-core-js
+	@echo
+	@echo "Build finished. The singlehtml build artifacts are in $(BUILDDIR)/singlehtml/oms-core-js."
+oms-core-js-json:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-core-js)"
+	$(SPHINXBUILD) -b json $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-core-js) $(BUILDDIR)/json/oms-core-js
+	@echo
+	@echo "Build finished. The json build artifacts are in $(BUILDDIR)/json/oms-core-js."
+oms-core-js-text:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-core-js)"
+	$(SPHINXBUILD) -b text $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-core-js) $(BUILDDIR)/text/oms-core-js
+	@echo
+	@echo "Build finished. The text build artifacts are in $(BUILDDIR)/text/oms-core-js."
+oms-core-js-man:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-core-js)"
+	$(SPHINXBUILD) -b man $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-core-js) $(BUILDDIR)/man/oms-core-js
+	@echo
+	@echo "Build finished. The man build artifacts are in $(BUILDDIR)/man/oms-core-js."
+oms-core-js-changes:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-core-js)"
+	$(SPHINXBUILD) -b changes $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-core-js) $(BUILDDIR)/changes/oms-core-js
+	@echo
+	@echo "Build finished. The changes build artifacts are in $(BUILDDIR)/changes/oms-core-js."
+oms-core-js-linkcheck:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-core-js)"
+	$(SPHINXBUILD) -b linkcheck $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-core-js) $(BUILDDIR)/linkcheck/oms-core-js
+	@echo
+	@echo "Build finished. The linkcheck build artifacts are in $(BUILDDIR)/linkcheck/oms-core-js."
+oms-core-js-doctest:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-core-js)"
+	$(SPHINXBUILD) -b doctest $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-core-js) $(BUILDDIR)/doctest/oms-core-js
+	@echo
+	@echo "Build finished. The doctest build artifacts are in $(BUILDDIR)/doctest/oms-core-js."
+
+clean-oms-core-js:
+	rm -rf $(BUILDDIR)/oms-core-js/*
 oms-deploy-html:
 	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-deploy)"
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-deploy) $(BUILDDIR)/html/oms-deploy
@@ -329,6 +513,49 @@ oms-experimental-doctest:
 
 clean-oms-experimental:
 	rm -rf $(BUILDDIR)/oms-experimental/*
+oms-inside-html:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-inside)"
+	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-inside) $(BUILDDIR)/html/oms-inside
+	@echo
+	@echo "Build finished. The html build artifacts are in $(BUILDDIR)/html/oms-inside."
+oms-inside-singlehtml:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-inside)"
+	$(SPHINXBUILD) -b singlehtml $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-inside) $(BUILDDIR)/singlehtml/oms-inside
+	@echo
+	@echo "Build finished. The singlehtml build artifacts are in $(BUILDDIR)/singlehtml/oms-inside."
+oms-inside-json:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-inside)"
+	$(SPHINXBUILD) -b json $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-inside) $(BUILDDIR)/json/oms-inside
+	@echo
+	@echo "Build finished. The json build artifacts are in $(BUILDDIR)/json/oms-inside."
+oms-inside-text:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-inside)"
+	$(SPHINXBUILD) -b text $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-inside) $(BUILDDIR)/text/oms-inside
+	@echo
+	@echo "Build finished. The text build artifacts are in $(BUILDDIR)/text/oms-inside."
+oms-inside-man:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-inside)"
+	$(SPHINXBUILD) -b man $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-inside) $(BUILDDIR)/man/oms-inside
+	@echo
+	@echo "Build finished. The man build artifacts are in $(BUILDDIR)/man/oms-inside."
+oms-inside-changes:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-inside)"
+	$(SPHINXBUILD) -b changes $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-inside) $(BUILDDIR)/changes/oms-inside
+	@echo
+	@echo "Build finished. The changes build artifacts are in $(BUILDDIR)/changes/oms-inside."
+oms-inside-linkcheck:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-inside)"
+	$(SPHINXBUILD) -b linkcheck $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-inside) $(BUILDDIR)/linkcheck/oms-inside
+	@echo
+	@echo "Build finished. The linkcheck build artifacts are in $(BUILDDIR)/linkcheck/oms-inside."
+oms-inside-doctest:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-inside)"
+	$(SPHINXBUILD) -b doctest $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-inside) $(BUILDDIR)/doctest/oms-inside
+	@echo
+	@echo "Build finished. The doctest build artifacts are in $(BUILDDIR)/doctest/oms-inside."
+
+clean-oms-inside:
+	rm -rf $(BUILDDIR)/oms-inside/*
 oms-kickstart-html:
 	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-kickstart)"
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-kickstart) $(BUILDDIR)/html/oms-kickstart
@@ -415,6 +642,49 @@ oms-oidc-doctest:
 
 clean-oms-oidc:
 	rm -rf $(BUILDDIR)/oms-oidc/*
+oms-root-id-html:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-root-id)"
+	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-root-id) $(BUILDDIR)/html/oms-root-id
+	@echo
+	@echo "Build finished. The html build artifacts are in $(BUILDDIR)/html/oms-root-id."
+oms-root-id-singlehtml:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-root-id)"
+	$(SPHINXBUILD) -b singlehtml $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-root-id) $(BUILDDIR)/singlehtml/oms-root-id
+	@echo
+	@echo "Build finished. The singlehtml build artifacts are in $(BUILDDIR)/singlehtml/oms-root-id."
+oms-root-id-json:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-root-id)"
+	$(SPHINXBUILD) -b json $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-root-id) $(BUILDDIR)/json/oms-root-id
+	@echo
+	@echo "Build finished. The json build artifacts are in $(BUILDDIR)/json/oms-root-id."
+oms-root-id-text:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-root-id)"
+	$(SPHINXBUILD) -b text $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-root-id) $(BUILDDIR)/text/oms-root-id
+	@echo
+	@echo "Build finished. The text build artifacts are in $(BUILDDIR)/text/oms-root-id."
+oms-root-id-man:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-root-id)"
+	$(SPHINXBUILD) -b man $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-root-id) $(BUILDDIR)/man/oms-root-id
+	@echo
+	@echo "Build finished. The man build artifacts are in $(BUILDDIR)/man/oms-root-id."
+oms-root-id-changes:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-root-id)"
+	$(SPHINXBUILD) -b changes $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-root-id) $(BUILDDIR)/changes/oms-root-id
+	@echo
+	@echo "Build finished. The changes build artifacts are in $(BUILDDIR)/changes/oms-root-id."
+oms-root-id-linkcheck:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-root-id)"
+	$(SPHINXBUILD) -b linkcheck $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-root-id) $(BUILDDIR)/linkcheck/oms-root-id
+	@echo
+	@echo "Build finished. The linkcheck build artifacts are in $(BUILDDIR)/linkcheck/oms-root-id."
+oms-root-id-doctest:
+	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-root-id)"
+	$(SPHINXBUILD) -b doctest $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-root-id) $(BUILDDIR)/doctest/oms-root-id
+	@echo
+	@echo "Build finished. The doctest build artifacts are in $(BUILDDIR)/doctest/oms-root-id."
+
+clean-oms-root-id:
+	rm -rf $(BUILDDIR)/oms-root-id/*
 oms-salt-core-html:
 	@echo "Attempting to build the sphinx docs in $(PROJECT_PATH-oms-salt-core)"
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(PROJECT_PATH-oms-salt-core) $(BUILDDIR)/html/oms-salt-core
@@ -633,12 +903,18 @@ clean-python-oidc:
 
 all:
 	@make oms-docs
+	@make karma-jasmine-ajax-html
 	@make oms-admin-html
+	@make oms-chat-html
 	@make oms-core-html
+	@make oms-core-ios-html
+	@make oms-core-js-html
 	@make oms-deploy-html
 	@make oms-experimental-html
+	@make oms-inside-html
 	@make oms-kickstart-html
 	@make oms-oidc-html
+	@make oms-root-id-html
 	@make oms-salt-core-html
 	@make oms-salt-tcf-html
 	@make oms-ui-html

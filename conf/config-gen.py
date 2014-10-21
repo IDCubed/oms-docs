@@ -59,12 +59,18 @@ target_list = [
 # the list of repos/projects to look for sphinx docs in. these should exist up
 # one level from here (in the directory structure).
 project_list = [
+    'karma-jasmine-ajax',
     'oms-admin',
+    'oms-chat',
     'oms-core',
+    'oms-core-ios',
+    'oms-core-js',
     'oms-deploy',
     'oms-experimental',
+    'oms-inside',
     'oms-kickstart',
     'oms-oidc',
+    'oms-root-id',
     'oms-salt-core',
     'oms-salt-tcf',
     'oms-ui',

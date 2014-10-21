@@ -32,12 +32,18 @@
 import os
 
 REPOS = [
+    'karma-jasmine-ajax',
     'oms-admin',
+    'oms-chat',
     'oms-core',
+    'oms-core-ios',
+    'oms-core-js',
     'oms-deploy',
     'oms-experimental',
+    'oms-inside',
     'oms-kickstart',
     'oms-oidc',
+    'oms-root-id',
     'oms-salt-core',
     'oms-salt-tcf',
     'oms-ui',

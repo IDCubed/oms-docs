@@ -26,8 +26,7 @@ karma-jasmine-ajax
 ------------------
 
 Karma adapter for Jasmine plugin for faking Ajax responses in your tests -
-:github-repo:`GitHub<karma-jasmine-ajax>` -
-:github-readme:`Readme<karma-jasmine-ajax>`
+:github-repo:`GitHub<karma-jasmine-ajax>`
 
 Karma adapter for Jasmine plugin for faking Ajax responses in your tests.
 
@@ -36,8 +35,7 @@ oms-admin
 ---------
 
 Administrative utilities for the OMS Trusted Compute Framework (TCF) -
-:github-repo:`GitHub<oms-admin>` - :github-readme:`Readme<oms-admin>` -
-:external-doc:`Overview Docs <oms-admin>`
+:github-repo:`GitHub<oms-admin>` - :external-doc:`Overview Docs <oms-admin>`
 
 A generic Trusted Compute Framework needs the generic structures for the
 administrative and management tasks - oms-admin aims to build a modular,
@@ -79,7 +77,7 @@ OMS apps and libraries for the iOS platform.
 oms-core-js
 -----------
 Core JavaScript components for OMS -
-:github-repo:`GitHub<oms-core-js>` - :github-readme:`Readme<oms-core-js>`
+:github-repo:`GitHub<oms-core-js>`
 
 OMS JavaScript frameworks, libraries, and other frontend code.
 
@@ -88,8 +86,7 @@ oms-deploy
 ----------
 
 OMS TAB Deployment and System Automation Library -
-:github-repo:`GitHub<oms-deploy>` - :github-readme:`Readme<oms-deploy>` -
-:external-doc:`Overview Docs <oms-deploy>`
+:github-repo:`GitHub<oms-deploy>` - :external-doc:`Overview Docs <oms-deploy>`
 
 Python deployment and system automation library, evolving to cover more territory.
 
@@ -98,7 +95,7 @@ oms-docs
 --------
 
 OMS Trusted Compute Framework (TCF) - Project Documentation -
-:github-repo:`GitHub<oms-docs>` - :github-readme:`Readme<oms-docs>`
+:github-repo:`GitHub<oms-docs>`
 
 The source code to this documentation you are reading - technical documentation
 is easy to manage when seen as code, on par with the rest of the source code to
@@ -121,7 +118,7 @@ oms-inside
 ----------
 
 Module repository for the OMS "Inside" TAB -
-:github-repo:`GitHub<oms-inside>` - :github-readme:`Readme<oms-inside>`
+:github-repo:`GitHub<oms-inside>`
 
 Module repository for the OMS "Inside" TAB.
 
@@ -130,7 +127,7 @@ oms-kickstart
 -------------
 
 Kickstart Open Mustard Seed - To the Cloud we GO! -
-:github-repo:`GitHub<oms-kickstart>` - :github-readme:`Readme<oms-kickstart>` -
+:github-repo:`GitHub<oms-kickstart>` -
 :external-doc:`Overview Docs <oms-kickstart>`
 
 As a holonic system, OMS needs a generic mechanism to support the framework's
@@ -145,8 +142,7 @@ oms-oidc
 --------
 
 OpenID Connect, built for OMS, with support for OMS' CoreID and Personas. -
-:github-repo:`GitHub<oms-oidc>` - :github-readme:`Readme<oms-oidc>` -
-:ref:`OpenID Connect Docs <oidc>`
+:github-repo:`GitHub<oms-oidc>` - :external-doc:`Overview Docs <oms-oidc>`
 
 The MITREid OpenID Connect server, extended to support OMS concept of CoreID
 and Personas. Built in Java, on the Spring Framework, implemented as a Maven
@@ -166,7 +162,8 @@ oms-salt-core
 -------------
 
 Core Salt States for OMS System Automation -
-:github-repo:`GitHub<oms-salt-core>` - :external-doc:`Overview Docs <oms-salt-core>`
+:github-repo:`GitHub<oms-salt-core>` -
+:external-doc:`Overview Docs <oms-salt-core>`
 
 The core of OMS System Automation is built on and around SaltStack, and at the
 core of this stack are a set of salt states and configuration profiles (reclass
@@ -191,8 +188,7 @@ oms-ui
 ------
 
 UI Module Repository for Reference TABs built on OMS -
-:github-repo:`GitHub<oms-ui>` - :github-readme:`Readme<oms-ui>` -
-:external-doc:`Overview Docs <oms-ui>`
+:github-repo:`GitHub<oms-ui>` - :external-doc:`Overview Docs <oms-ui>`
 
 Reusable UIs for OMS reference TABs, built on Bootstrap, jQuery, Django, and
 others.
@@ -210,8 +206,7 @@ python-oidc
 -----------
 
 Python client library to OMS-OIDC -
-:github-repo:`GitHub<python-oidc>` - :github-readme:`Readme<python-oidc>` -
-:external-doc:`Overview Docs <python-oidc>`
+:github-repo:`GitHub<python-oidc>` - :external-doc:`Overview Docs <python-oidc>`
 
 Client library for interacting with an OMS OpenID Connect Server, though this
 Python library ought to work with a MITREid Server as well.

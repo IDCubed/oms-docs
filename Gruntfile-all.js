@@ -9,13 +9,29 @@ module.exports = function(grunt) {
             // Also, the param names mean nothing (e.g., index:, test:, etc...)
             options: {
                 livereload: 9001, // automatically reload the browser on file change
-            },oms_admin: {
+            },karma_jasmine_ajax: {
+                files: ['../karma-jasmine-ajax/docs/**/*'],
+                tasks: ['make_karma-jasmine-ajax_html'],
+            },
+            oms_admin: {
                 files: ['../oms-admin/docs/**/*'],
                 tasks: ['make_oms-admin_html'],
+            },
+            oms_chat: {
+                files: ['../oms-chat/docs/**/*'],
+                tasks: ['make_oms-chat_html'],
             },
             oms_core: {
                 files: ['../oms-core/docs/**/*'],
                 tasks: ['make_oms-core_html'],
+            },
+            oms_core_ios: {
+                files: ['../oms-core-ios/docs/**/*'],
+                tasks: ['make_oms-core-ios_html'],
+            },
+            oms_core_js: {
+                files: ['../oms-core-js/docs/**/*'],
+                tasks: ['make_oms-core-js_html'],
             },
             oms_deploy: {
                 files: ['../oms-deploy/docs/**/*'],
@@ -25,6 +41,10 @@ module.exports = function(grunt) {
                 files: ['../oms-experimental/docs/**/*'],
                 tasks: ['make_oms-experimental_html'],
             },
+            oms_inside: {
+                files: ['../oms-inside/docs/**/*'],
+                tasks: ['make_oms-inside_html'],
+            },
             oms_kickstart: {
                 files: ['../oms-kickstart/docs/**/*'],
                 tasks: ['make_oms-kickstart_html'],
@@ -32,6 +52,10 @@ module.exports = function(grunt) {
             oms_oidc: {
                 files: ['../oms-oidc/docs/**/*'],
                 tasks: ['make_oms-oidc_html'],
+            },
+            oms_root_id: {
+                files: ['../oms-root-id/docs/**/*'],
+                tasks: ['make_oms-root-id_html'],
             },
             oms_salt_core: {
                 files: ['../oms-salt-core/docs/**/*'],
@@ -87,6 +111,16 @@ module.exports = function(grunt) {
             done(err);
         });
     });
+    // register a task to build the sphinx docs for karma-jasmine-ajax.
+    grunt.registerTask('make_karma-jasmine-ajax_html',
+                       'run sphinx make for karma-jasmine-ajax',
+                       function () {
+        var done = this.async();
+        require('child_process').exec('make karma-jasmine-ajax-html', function (err, stdout) {
+            grunt.log.write(stdout);
+            done(err);
+        });
+    });
     // register a task to build the sphinx docs for oms-admin.
     grunt.registerTask('make_oms-admin_html',
                        'run sphinx make for oms-admin',
@@ -97,12 +131,42 @@ module.exports = function(grunt) {
             done(err);
         });
     });
+    // register a task to build the sphinx docs for oms-chat.
+    grunt.registerTask('make_oms-chat_html',
+                       'run sphinx make for oms-chat',
+                       function () {
+        var done = this.async();
+        require('child_process').exec('make oms-chat-html', function (err, stdout) {
+            grunt.log.write(stdout);
+            done(err);
+        });
+    });
     // register a task to build the sphinx docs for oms-core.
     grunt.registerTask('make_oms-core_html',
                        'run sphinx make for oms-core',
                        function () {
         var done = this.async();
         require('child_process').exec('make oms-core-html', function (err, stdout) {
+            grunt.log.write(stdout);
+            done(err);
+        });
+    });
+    // register a task to build the sphinx docs for oms-core-ios.
+    grunt.registerTask('make_oms-core-ios_html',
+                       'run sphinx make for oms-core-ios',
+                       function () {
+        var done = this.async();
+        require('child_process').exec('make oms-core-ios-html', function (err, stdout) {
+            grunt.log.write(stdout);
+            done(err);
+        });
+    });
+    // register a task to build the sphinx docs for oms-core-js.
+    grunt.registerTask('make_oms-core-js_html',
+                       'run sphinx make for oms-core-js',
+                       function () {
+        var done = this.async();
+        require('child_process').exec('make oms-core-js-html', function (err, stdout) {
             grunt.log.write(stdout);
             done(err);
         });
@@ -127,6 +191,16 @@ module.exports = function(grunt) {
             done(err);
         });
     });
+    // register a task to build the sphinx docs for oms-inside.
+    grunt.registerTask('make_oms-inside_html',
+                       'run sphinx make for oms-inside',
+                       function () {
+        var done = this.async();
+        require('child_process').exec('make oms-inside-html', function (err, stdout) {
+            grunt.log.write(stdout);
+            done(err);
+        });
+    });
     // register a task to build the sphinx docs for oms-kickstart.
     grunt.registerTask('make_oms-kickstart_html',
                        'run sphinx make for oms-kickstart',
@@ -143,6 +217,16 @@ module.exports = function(grunt) {
                        function () {
         var done = this.async();
         require('child_process').exec('make oms-oidc-html', function (err, stdout) {
+            grunt.log.write(stdout);
+            done(err);
+        });
+    });
+    // register a task to build the sphinx docs for oms-root-id.
+    grunt.registerTask('make_oms-root-id_html',
+                       'run sphinx make for oms-root-id',
+                       function () {
+        var done = this.async();
+        require('child_process').exec('make oms-root-id-html', function (err, stdout) {
             grunt.log.write(stdout);
             done(err);
         });
